@@ -1,0 +1,72 @@
+.ds-casestudy {
+  display: flex;
+  flex-direction: column;
+  background: var(--ds-bg-raised);
+  border-radius: var(--ds-radius-xs);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    transform var(--ds-duration-base) var(--ds-ease-out),
+    background-color var(--ds-duration-base) var(--ds-ease-out);
+}
+a.ds-casestudy:hover { transform: translateY(-4px); background: var(--ds-bg-sunken); }
+
+.ds-casestudy__media {
+  aspect-ratio: 16 / 10;
+  background: var(--ds-bg-sunken);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.ds-casestudy__media img { width: 100%; height: 100%; object-fit: cover; }
+
+.ds-casestudy__media-placeholder {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-caption);
+  letter-spacing: var(--ds-tracking-wide);
+  text-transform: uppercase;
+  color: var(--ds-fg-subtle);
+}
+
+.ds-casestudy__fields { padding: var(--ds-space-5); display: flex; flex-direction: column; }
+
+.ds-casestudy__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  padding-block: var(--ds-space-4);
+  border-top: var(--ds-border-hairline) solid var(--ds-border-subtle);
+}
+.ds-casestudy__field:first-child { border-top: none; padding-top: 0; }
+
+.ds-casestudy__field-name {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-caption);
+  letter-spacing: var(--ds-tracking-wide);
+  text-transform: uppercase;
+  color: var(--ds-fg-muted);
+}
+
+.ds-casestudy__field-value {
+  font-family: var(--ds-font-sans);
+  font-weight: var(--ds-weight-light);
+  font-size: var(--ds-text-body-lg);
+  line-height: var(--ds-leading-tight);
+  color: var(--ds-fg);
+}
+
+.ds-casestudy__cta {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-4) var(--ds-space-5);
+  border-top: var(--ds-border-hairline) solid var(--ds-border-color);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-body);
+  color: var(--ds-fg);
+  margin-top: auto;
+}
+.ds-casestudy__cta--quiet { color: var(--ds-fg-muted); }
+.ds-casestudy__cta-arrow { transition: transform var(--ds-duration-base) var(--ds-ease-out); }
+a.ds-casestudy:hover .ds-casestudy__cta-arrow { transform: translateX(4px); }

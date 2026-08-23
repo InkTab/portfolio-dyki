@@ -1,0 +1,70 @@
+.ds-navbar {
+  /* Responds to its own width, not the viewport's, so it behaves the same
+     inside a playground canvas as it does full-bleed on the page. */
+  container-type: inline-size;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-5);
+  min-height: var(--ds-bar-height);
+  padding-inline: var(--ds-space-7);
+  background: var(--ds-bg);
+  color: var(--ds-fg);
+  border-bottom: var(--ds-border-hairline) solid var(--ds-border-color);
+}
+
+.ds-navbar__brand { display: flex; align-items: baseline; gap: var(--ds-space-3); }
+
+.ds-navbar__name {
+  font-family: var(--ds-font-display);
+  font-weight: var(--ds-weight-display);
+  font-size: var(--ds-text-title);
+  letter-spacing: var(--ds-tracking-display);
+  text-transform: uppercase;
+}
+
+.ds-navbar__role {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-caption);
+  letter-spacing: var(--ds-tracking-wide);
+  text-transform: uppercase;
+  color: var(--ds-fg-muted);
+}
+
+.ds-navbar__links {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-5);
+}
+.ds-navbar__links > * { white-space: nowrap; }
+
+.ds-navbar__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-5);
+  white-space: nowrap;
+}
+
+.ds-navbar__time {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-tracking-label);
+  color: var(--ds-fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Roomy spacing only once the bar is actually wide. */
+@container (min-width: 900px) {
+  .ds-navbar__links { gap: var(--ds-space-9); }
+}
+
+/* Below 780px the three zones stop fitting on one line: drop the links to
+   their own full-width row underneath. */
+@container (max-width: 780px) {
+  .ds-navbar {
+    flex-wrap: wrap;
+    padding-block: var(--ds-space-3);
+    padding-inline: var(--ds-space-4);
+  }
+  .ds-navbar__links { order: 3; width: 100%; }
+}

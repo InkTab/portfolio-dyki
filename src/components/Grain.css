@@ -1,0 +1,18 @@
+/* Paper grain. Sits above content but never intercepts pointer events. */
+.ds-grain::after,
+.ds-grain-layer {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--ds-grain-texture);
+  background-size: 200px 200px;
+  opacity: var(--ds-grain-opacity);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Applying .ds-grain to a container establishes the positioning context. */
+.ds-grain { position: relative; }
+
+.ds-grain-layer--fixed { position: fixed; }

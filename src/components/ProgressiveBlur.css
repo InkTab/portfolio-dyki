@@ -1,0 +1,85 @@
+/* ProgressiveBlur — blur that ramps across a shape, so one edge stays sharp
+   and the opposite edge dissolves.
+   
+   Each layer blurs whatever is already behind it and is masked to a band
+   further along the axis, so blur compounds from the sharp edge outward.
+   This is a treatment laid over artwork, not artwork itself — it works on an
+   illustration, a photo, or a gradient equally. */
+
+.ds-pblur {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+.ds-pblur__layer {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+/* The ramp maps onto the ARTWORK, while the layers themselves cover the whole
+   host — so blurred pixels have somewhere to spill instead of being clipped
+   hard at the art's edge.
+
+   --ds-pblur-inset is the gap between the host edge and the artwork edge. At 0
+   the host is the artwork. Above 0 the gradient stops are offset by it, so the
+   ramp still starts at the artwork's edge and ends at its far edge no matter
+   how much breathing room the host has around it. */
+.ds-pblur {
+  --in: var(--ds-pblur-inset, 0px);
+  --span: calc(100% - 2 * var(--in));
+}
+
+.ds-pblur__layer:nth-child(1) {
+  backdrop-filter: blur(calc(var(--ds-pblur-base) * 1));
+  -webkit-backdrop-filter: blur(calc(var(--ds-pblur-base) * 1));
+  -webkit-mask-image: linear-gradient(var(--ds-pblur-axis), transparent calc(var(--in)), #000 calc(var(--in) + var(--span) * 0.25));
+          mask-image: linear-gradient(var(--ds-pblur-axis), transparent calc(var(--in)), #000 calc(var(--in) + var(--span) * 0.25));
+}
+.ds-pblur__layer:nth-child(2) {
+  backdrop-filter: blur(calc(var(--ds-pblur-base) * 2));
+  -webkit-backdrop-filter: blur(calc(var(--ds-pblur-base) * 2));
+  -webkit-mask-image: linear-gradient(var(--ds-pblur-axis), transparent calc(var(--in) + var(--span) * 0.25), #000 calc(var(--in) + var(--span) * 0.5));
+          mask-image: linear-gradient(var(--ds-pblur-axis), transparent calc(var(--in) + var(--span) * 0.25), #000 calc(var(--in) + var(--span) * 0.5));
+}
+.ds-pblur__layer:nth-child(3) {
+  backdrop-filter: blur(calc(var(--ds-pblur-base) * 4));
+  -webkit-backdrop-filter: blur(calc(var(--ds-pblur-base) * 4));
+  -webkit-mask-image: linear-gradient(var(--ds-pblur-axis), transparent calc(var(--in) + var(--span) * 0.5), #000 calc(var(--in) + var(--span) * 0.75));
+          mask-image: linear-gradient(var(--ds-pblur-axis), transparent calc(var(--in) + var(--span) * 0.5), #000 calc(var(--in) + var(--span) * 0.75));
+}
+.ds-pblur__layer:nth-child(4) {
+  backdrop-filter: blur(calc(var(--ds-pblur-base) * 8));
+  -webkit-backdrop-filter: blur(calc(var(--ds-pblur-base) * 8));
+  -webkit-mask-image: linear-gradient(var(--ds-pblur-axis), transparent calc(var(--in) + var(--span) * 0.75), #000 calc(100% - var(--in)));
+          mask-image: linear-gradient(var(--ds-pblur-axis), transparent calc(var(--in) + var(--span) * 0.75), #000 calc(100% - var(--in)));
+}
+
+/* Establishes the stacking context the layers blur against.
+   The host may be larger than the artwork — that headroom is what stops the
+   blur being clipped. Set --ds-pblur-inset to the gap so the ramp still tracks
+   the art. */
+.ds-pblur-host { position: relative; isolation: isolate; overflow: hidden; }
+
+/* Radial variant — "to four corners": sharp in the middle, compounding blur
+   outward in every direction. closest-side sizing so 100% is the host edge,
+   minus the inset to land on the artwork edge. */
+.ds-pblur--corners .ds-pblur__layer:nth-child(1) {
+  -webkit-mask-image: radial-gradient(circle closest-side at 50% 50%, transparent 0%, #000 calc((100% - var(--in)) * 0.25));
+          mask-image: radial-gradient(circle closest-side at 50% 50%, transparent 0%, #000 calc((100% - var(--in)) * 0.25));
+}
+.ds-pblur--corners .ds-pblur__layer:nth-child(2) {
+  -webkit-mask-image: radial-gradient(circle closest-side at 50% 50%, transparent calc((100% - var(--in)) * 0.25), #000 calc((100% - var(--in)) * 0.5));
+          mask-image: radial-gradient(circle closest-side at 50% 50%, transparent calc((100% - var(--in)) * 0.25), #000 calc((100% - var(--in)) * 0.5));
+}
+.ds-pblur--corners .ds-pblur__layer:nth-child(3) {
+  -webkit-mask-image: radial-gradient(circle closest-side at 50% 50%, transparent calc((100% - var(--in)) * 0.5), #000 calc((100% - var(--in)) * 0.75));
+          mask-image: radial-gradient(circle closest-side at 50% 50%, transparent calc((100% - var(--in)) * 0.5), #000 calc((100% - var(--in)) * 0.75));
+}
+.ds-pblur--corners .ds-pblur__layer:nth-child(4) {
+  -webkit-mask-image: radial-gradient(circle closest-side at 50% 50%, transparent calc((100% - var(--in)) * 0.75), #000 calc(100% - var(--in)));
+          mask-image: radial-gradient(circle closest-side at 50% 50%, transparent calc((100% - var(--in)) * 0.75), #000 calc(100% - var(--in)));
+}

@@ -1,0 +1,25 @@
+/* The base link is the nav treatment — Albert Sans at body size, ink, no
+   underline until hover. Every other link variant is a departure from this. */
+.ds-link {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-body);
+  font-weight: var(--ds-weight-regular);
+  line-height: var(--ds-leading-normal);
+  letter-spacing: var(--ds-tracking-normal);
+  color: var(--ds-fg);
+  text-decoration: none;
+  text-underline-offset: 2px;
+  transition: color var(--ds-duration-fast) var(--ds-ease-out);
+}
+.ds-link:hover {
+  text-decoration: underline wavy var(--ds-link-underline) 2px;
+}
+.ds-link--muted { color: var(--ds-fg-muted); }
+.ds-link--mono {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-label);
+  letter-spacing: var(--ds-tracking-label);
+  text-transform: uppercase;
+}
+.ds-link--underlined { text-decoration: underline solid currentColor 1px; }
+.ds-link--underlined:hover { text-decoration: underline wavy var(--ds-link-underline) 2px; }

@@ -1,0 +1,747 @@
+/* =========================================================================
+   PLAYGROUND CHROME
+   Deliberately quiet: the docs shell should never compete with the
+   components it is showing. It runs on the ink surface.
+   ========================================================================= */
+
+/* The shell declares data-surface="sand"; repaint the body so overscroll
+   matches rather than showing the root default. */
+body {
+  /* The shell sits one step lighter than a sand canvas, so specimen areas
+     read as distinct panels without needing a heavier border. */
+  background: var(--ds-bg-raised);
+  color: var(--ds-fg);
+}
+.pg {
+  --pg-sidebar-width: 260px;
+  display: grid;
+  grid-template-columns: var(--pg-sidebar-width) minmax(0, 1fr);
+  min-height: 100vh;
+  background: var(--ds-bg-raised);
+  color: var(--ds-fg);
+}
+.pg-skip {
+  position: absolute;
+  left: -9999px;
+  top: var(--ds-space-3);
+  padding: var(--ds-space-2) var(--ds-space-4);
+  background: var(--ds-accent);
+  color: var(--ds-accent-fg);
+  border-radius: var(--ds-radius-xs);
+  z-index: 10;
+}
+.pg-skip:focus { left: var(--ds-space-3); }
+/* ------------------------------- sidebar ------------------------------- */
+.pg-sidebar {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-8);
+  padding: var(--ds-space-6) var(--ds-space-5);
+  border-right: 1px solid var(--ds-border-subtle);
+}
+.pg-sidebar__brand { display: flex; flex-direction: column; gap: var(--ds-space-1); }
+.pg-sidebar__mark {
+  font-family: var(--ds-font-display);
+  font-weight: 200;
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+.pg-sidebar__sub {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-fg-muted);
+}
+.pg-sidebar__version {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-caption);
+  color: var(--ds-fg-subtle);
+  margin-top: var(--ds-space-2);
+}
+.pg-nav { display: flex; flex-direction: column; gap: var(--ds-space-6); }
+.pg-nav__group { display: flex; flex-direction: column; gap: var(--ds-space-2); }
+.pg-nav__group-name {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-fg-subtle);
+  padding-bottom: var(--ds-space-2);
+  border-bottom: 1px solid var(--ds-border-subtle);
+}
+.pg-nav__link {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-body-sm);
+  color: var(--ds-fg-muted);
+  text-decoration: none;
+  padding: var(--ds-space-1) 0;
+  border-left: 2px solid transparent;
+  padding-left: var(--ds-space-3);
+  margin-left: calc(var(--ds-space-3) * -1);
+  transition: color var(--ds-duration-fast) var(--ds-ease-out),
+              border-color var(--ds-duration-fast) var(--ds-ease-out);
+}
+.pg-nav__link:hover { color: var(--ds-fg); }
+.pg-nav__link[aria-current='true'] {
+  color: var(--ds-fg);
+  border-left-color: var(--ds-fg);
+}
+.pg-sidebar__foot {
+  margin-top: auto;
+  font-size: var(--ds-text-caption);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--ds-fg-subtle);
+}
+/* -------------------------------- main --------------------------------- */
+.pg-main { min-width: 0; padding: var(--ds-space-9) var(--ds-space-8) var(--ds-space-9); }
+.pg-masthead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-5);
+  padding-bottom: var(--ds-space-8);
+  border-bottom: 1px solid var(--ds-border-subtle);
+}
+.pg-masthead__head {
+  display: grid;
+  grid-template-columns: repeat(var(--ds-grid-columns), minmax(0, 1fr));
+  column-gap: var(--ds-grid-gutter);
+  row-gap: var(--ds-space-3);
+  align-items: start;
+}
+.pg-masthead__title {
+  grid-column: span 2;
+  font-family: var(--ds-font-display);
+  font-weight: 200;
+  font-size: var(--ds-text-display-lg);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin: 0;
+}
+.pg-masthead__lede {
+  grid-column: span 4;
+  font-size: var(--ds-text-body-lg);
+  font-weight: 300;
+  line-height: var(--ds-leading-tight);
+  color: var(--ds-fg-muted);
+  margin: 0;
+}
+/* ------------------------------- sections ------------------------------ */
+.pg-section {
+  padding-block: var(--ds-space-10);
+  border-bottom: 1px solid var(--ds-border-subtle);
+  scroll-margin-top: var(--ds-space-5);
+}
+/* Editorial two-column row: the title holds the left column, its prose sits in
+   the right. Stops every paragraph from hugging the left edge with dead space
+   beside it. */
+.pg-section__head {
+  display: grid;
+  grid-template-columns: repeat(var(--ds-grid-columns), minmax(0, 1fr));
+  column-gap: var(--ds-grid-gutter);
+  row-gap: var(--ds-space-3);
+  align-items: start;
+  margin-bottom: var(--ds-space-8);
+}
+.pg-section__head > .pg-section__kicker { grid-column: 1 / -1; }
+/* Section heads split 3/3 rather than 2/4. The display face is unbreakable at
+   this size — "Typography" alone needs 319px, and a two-column track is 292px,
+   so a long single-word title would overflow into the gutter. Block and
+   specimen heads keep 2/4 because their titles are 14px mono. */
+.pg-section__head > .pg-section__title { grid-column: span 3; margin: 0; }
+.pg-section__head > .pg-section__lede { grid-column: span 3; }
+.pg-section__kicker {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-fg-subtle);
+}
+.pg-section__title {
+  font-family: var(--ds-font-display);
+  font-weight: 200;
+  font-size: var(--ds-text-display-md);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin: 0;
+}
+.pg-section__lede {
+  font-size: var(--ds-text-body);
+  font-weight: 300;
+  line-height: var(--ds-leading-relaxed);
+  color: var(--ds-fg-muted);
+  margin: 0;
+}
+.pg-section__lede code,
+.pg-masthead__lede code { font-family: var(--ds-font-mono); font-size: 0.9em; color: var(--ds-accent); }
+/* -------------------------------- blocks ------------------------------- */
+.pg-block { margin-bottom: var(--ds-space-9); }
+.pg-block__head {
+  display: grid;
+  grid-template-columns: repeat(var(--ds-grid-columns), minmax(0, 1fr));
+  column-gap: var(--ds-grid-gutter);
+  row-gap: var(--ds-space-2);
+  align-items: baseline;
+  margin-bottom: var(--ds-space-5);
+}
+.pg-block__title {
+  grid-column: span 2;
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-fg);
+  margin: 0;
+}
+.pg-block__note {
+  grid-column: span 4;
+  font-size: var(--ds-text-body-sm);
+  color: var(--ds-fg-muted);
+  margin: 0;
+  line-height: var(--ds-leading-relaxed);
+}
+/* ------------------------------- specimen ------------------------------ */
+.pg-specimen { margin-bottom: var(--ds-space-9); }
+.pg-specimen__head {
+  display: grid;
+  grid-template-columns: repeat(var(--ds-grid-columns), minmax(0, 1fr));
+  column-gap: var(--ds-grid-gutter);
+  row-gap: var(--ds-space-2);
+  align-items: baseline;
+  margin-bottom: var(--ds-space-4);
+}
+.pg-specimen__name {
+  grid-column: span 2;
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-fg);
+  margin: 0;
+}
+.pg-specimen__note {
+  grid-column: span 4;
+  font-size: var(--ds-text-body-sm);
+  color: var(--ds-fg-muted);
+  margin: 0;
+  line-height: var(--ds-leading-relaxed);
+}
+.pg-canvas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-6);
+  padding: var(--ds-space-6);
+  border-radius: var(--ds-radius-xs);
+  border: 1px solid var(--ds-border-subtle);
+  overflow: hidden;
+}
+.pg-canvas--flush { padding: 0; gap: 0; }
+.pg-variants { display: flex; flex-direction: column; gap: var(--ds-space-3); }
+.pg-variants__label {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-fg-subtle);
+}
+.pg-variants__row { display: flex; flex-wrap: wrap; gap: var(--ds-space-3); }
+/* ------------------------------- swatches ------------------------------ */
+.pg-swatches {
+  display: grid;
+  grid-template-columns: repeat(var(--ds-grid-columns), minmax(0, 1fr));
+  column-gap: var(--ds-grid-gutter);
+  row-gap: var(--ds-grid-gutter);
+  row-gap: var(--ds-space-5);
+}
+.pg-swatch { grid-column: span 1; }
+.pg-swatch {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  padding: 0;
+  text-align: left;
+  background: none;
+  border: none;
+}
+.pg-swatch__chip {
+  display: block;
+  height: 64px;
+  border-radius: var(--ds-radius-xs);
+  border: 1px solid var(--ds-border-subtle);
+  transition: transform var(--ds-duration-fast) var(--ds-ease-out);
+}
+.pg-swatch:hover .pg-swatch__chip { transform: translateY(-2px); }
+.pg-swatch__meta { display: flex; flex-direction: column; gap: 2px; }
+.pg-swatch__name {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-caption);
+  color: var(--ds-fg);
+}
+.pg-swatch__value {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-caption);
+  color: var(--ds-fg-subtle);
+}
+.pg-semantic {
+  display: grid;
+  grid-template-columns: repeat(var(--ds-grid-columns), minmax(0, 1fr));
+  column-gap: var(--ds-grid-gutter);
+  row-gap: var(--ds-grid-gutter);
+}
+.pg-semantic__col { grid-column: span 2; }
+.pg-semantic__col {
+  padding: var(--ds-space-5);
+  border-radius: var(--ds-radius-xs);
+  /* The ink column shares the shell's background, so give every column an
+     edge to keep the three readable as separate cards. */
+  border: 1px solid var(--ds-border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-4);
+}
+.pg-semantic__title {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-fg);
+}
+.pg-semantic__group { display: flex; flex-direction: column; gap: var(--ds-space-2); }
+.pg-semantic__group-name {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ds-fg-subtle);
+}
+.pg-semantic__row { display: flex; align-items: center; gap: var(--ds-space-2); }
+.pg-semantic__row code { font-family: var(--ds-font-mono); font-size: var(--ds-text-caption); color: var(--ds-fg-muted); }
+.pg-semantic__chip {
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  border: 1px solid var(--ds-border-subtle);
+  flex: none;
+}
+/* ------------------------------ typography ----------------------------- */
+.pg-families { display: flex; flex-direction: column; }
+.pg-family {
+  display: grid;
+  grid-template-columns: repeat(var(--ds-grid-columns), minmax(0, 1fr));
+  column-gap: var(--ds-grid-gutter);
+  align-items: center;
+  /* A bordered row, not an inset card: padding would give this its own six
+     columns, which would not line up with the page's. */
+  padding-block: var(--ds-space-5);
+  border-top: 1px solid var(--ds-border-subtle);
+}
+.pg-family__meta { display: flex; flex-direction: column; gap: var(--ds-space-1); }
+.pg-family__role {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-fg-subtle);
+}
+.pg-family__name { font-size: var(--ds-text-title); font-weight: 300; }
+.pg-family__css { font-family: var(--ds-font-mono); font-size: var(--ds-text-caption); color: var(--ds-accent); }
+.pg-family__note { font-size: var(--ds-text-body-sm); color: var(--ds-fg-muted); margin: var(--ds-space-2) 0 0; line-height: var(--ds-leading-relaxed); }
+.pg-family__sample { color: var(--ds-fg); line-height: 1.15; overflow-wrap: anywhere; }
+.pg-scale { display: flex; flex-direction: column; }
+.pg-scale__row {
+  display: grid;
+  grid-template-columns: repeat(var(--ds-grid-columns), minmax(0, 1fr));
+  column-gap: var(--ds-grid-gutter);
+  align-items: baseline;
+  padding: var(--ds-space-5) 0;
+  border-top: 1px solid var(--ds-border-subtle);
+}
+.pg-scale__meta { display: flex; flex-direction: column; gap: 2px; }
+.pg-scale__label { font-family: var(--ds-font-mono); font-size: var(--ds-text-caption); text-transform: uppercase; letter-spacing: 0.08em; color: var(--ds-fg); }
+.pg-scale__meta code { font-family: var(--ds-font-mono); font-size: var(--ds-text-caption); color: var(--ds-fg-subtle); }
+.pg-scale__size { font-family: var(--ds-font-mono); font-size: var(--ds-text-caption); color: var(--ds-fg-subtle); }
+.pg-scale__sample { color: var(--ds-fg); overflow-wrap: anywhere; }
+/* -------------------------- space / radius / motion -------------------- */
+.pg-spaces { display: flex; flex-direction: column; gap: var(--ds-space-2); }
+.pg-space {
+  display: grid;
+  grid-template-columns: repeat(var(--ds-grid-columns), minmax(0, 1fr));
+  column-gap: var(--ds-grid-gutter);
+  row-gap: var(--ds-grid-gutter);
+  row-gap: 0;
+  align-items: center;
+}
+.pg-space > * { grid-column: span 2; }
+.pg-space__bar { height: 16px; background: var(--ds-accent); border-radius: 1px; }
+.pg-space code, .pg-radius code, .pg-motion code {
+  font-family: var(--ds-font-mono); font-size: var(--ds-text-caption); color: var(--ds-fg-muted);
+}
+.pg-space__px { font-family: var(--ds-font-mono); font-size: var(--ds-text-caption); color: var(--ds-fg-subtle); }
+.pg-radii {
+  display: grid;
+  grid-template-columns: repeat(var(--ds-grid-columns), minmax(0, 1fr));
+  column-gap: var(--ds-grid-gutter);
+  row-gap: var(--ds-space-5);
+}
+.pg-radius { grid-column: span 1; }
+.pg-radius { display: flex; flex-direction: column; gap: var(--ds-space-2); align-items: flex-start; }
+.pg-radius__box {
+  width: 100%;
+  max-width: 72px;
+  aspect-ratio: 1;
+  background: var(--ds-accent);
+  border: 2px solid var(--ds-border-strong);
+}
+.pg-radius__value { font-family: var(--ds-font-mono); font-size: var(--ds-text-caption); color: var(--ds-fg-subtle); }
+.pg-motion { display: flex; flex-direction: column; }
+.pg-motion__play {
+  align-self: flex-start;
+  margin-bottom: var(--ds-space-5);
+  padding: var(--ds-space-2) var(--ds-space-4);
+  border: 1px solid var(--ds-border-color);
+  border-radius: var(--ds-radius-xs);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-fg);
+  transition: background-color 120ms var(--ds-ease-out);
+}
+.pg-motion__play:hover { background: var(--ds-bg-inset); }
+.pg-motion__group-name {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-fg-subtle);
+  margin-top: var(--ds-space-5);
+  margin-bottom: var(--ds-space-1);
+}
+.pg-motion__group-name:first-of-type { margin-top: 0; }
+.pg-motion__row {
+  display: grid;
+  grid-template-columns: repeat(var(--ds-grid-columns), minmax(0, 1fr));
+  column-gap: var(--ds-grid-gutter);
+  align-items: center;
+  padding: var(--ds-space-4) 0;
+  border-top: 1px solid var(--ds-border-subtle);
+}
+.pg-motion__value { font-family: var(--ds-font-mono); font-size: var(--ds-text-caption); color: var(--ds-accent); }
+.pg-motion__use { font-size: var(--ds-text-body-sm); color: var(--ds-fg-muted); }
+.pg-motion__track {
+  position: relative;
+  height: 12px;
+  background: var(--ds-bg-inset);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.pg-motion__dot {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ds-accent);
+}
+/* ------------------------------- surfaces ------------------------------ */
+.pg-surfaces {
+  display: grid;
+  grid-template-columns: repeat(var(--ds-grid-columns), minmax(0, 1fr));
+  column-gap: var(--ds-grid-gutter);
+  row-gap: var(--ds-grid-gutter);
+}
+.pg-surface-demo { grid-column: span 2; }
+.pg-surface-demo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-6);
+  border-radius: var(--ds-radius-xs);
+  border: 1px solid var(--ds-border-subtle);
+}
+.pg-surface-demo__row { display: flex; flex-wrap: wrap; gap: var(--ds-space-2); margin-top: var(--ds-space-2); }
+/* -------------------------- demo layout helpers ------------------------ */
+.pg-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(var(--ds-grid-columns), minmax(0, 1fr));
+  column-gap: var(--ds-grid-gutter);
+  row-gap: var(--ds-grid-gutter);
+  align-items: stretch;
+}
+.pg-grid-3 > * { grid-column: span 2; }
+.pg-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(var(--ds-grid-columns), minmax(0, 1fr));
+  column-gap: var(--ds-grid-gutter);
+  row-gap: var(--ds-grid-gutter);
+}
+.pg-grid-4 > * { grid-column: span 3; }
+.pg-stack-lg { display: flex; flex-direction: column; gap: var(--ds-space-8); }
+.pg-form {
+  display: grid;
+  grid-template-columns: repeat(var(--ds-grid-columns), minmax(0, 1fr));
+  column-gap: var(--ds-grid-gutter);
+  row-gap: var(--ds-grid-gutter);
+}
+.pg-form > * { grid-column: span 3; }
+/* -------------------------------- footer ------------------------------- */
+.pg-foot {
+  display: flex;
+  justify-content: space-between;
+  padding-top: var(--ds-space-6);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-fg-subtle);
+}
+/* ------------------------------ responsive ----------------------------- */
+@media (max-width: 1023px) {
+  .pg { grid-template-columns: 1fr; }
+  .pg-sidebar {
+    position: static;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--ds-border-subtle);
+  }
+  .pg-nav { flex-direction: row; flex-wrap: wrap; gap: var(--ds-space-6); }
+  .pg-sidebar__foot { margin-top: 0; }
+  .pg-main { padding: var(--ds-space-6) var(--ds-grid-margin); }
+  /* Spans clamp to the 3-column step. Anything that was a minor column
+     (a title, a meta block) keeps one column; anything wider goes full. */
+  .pg-section__head > .pg-section__title,
+  .pg-specimen__name,
+  .pg-block__title,
+  .pg-masthead__title,
+  .pg-family__meta,
+  .pg-scale__meta,
+  .pg-motion__row > code { grid-column: span 3; }
+  .pg-section__head > .pg-section__lede,
+  .pg-specimen__note,
+  .pg-block__note,
+  .pg-masthead__lede,
+  .pg-family__sample,
+  .pg-scale__sample,
+  .pg-motion__value,
+  .pg-motion__use,
+  .pg-motion__track { grid-column: span 3; }
+  .pg-grid-3 > *,
+  .pg-grid-4 > *,
+  .pg-form > *,
+  .pg-semantic__col,
+  .pg-surface-demo { grid-column: span 3; }
+  .pg-space > * { grid-column: span 1; }
+  .pg-rule__label,
+  .pg-rule__text { grid-column: span 3; }
+}
+@media (max-width: 639px) {
+  .pg-section__head > .pg-section__title,
+  .pg-section__head > .pg-section__lede,
+  .pg-specimen__name,
+  .pg-specimen__note,
+  .pg-block__title,
+  .pg-block__note,
+  .pg-masthead__title,
+  .pg-masthead__lede,
+  .pg-family__meta,
+  .pg-family__sample,
+  .pg-scale__meta,
+  .pg-scale__sample,
+  .pg-motion__row > code,
+  .pg-motion__value,
+  .pg-motion__use,
+  .pg-motion__track,
+  .pg-grid-3 > *,
+  .pg-grid-4 > *,
+  .pg-form > *,
+  .pg-semantic__col,
+  .pg-surface-demo,
+  .pg-space > *,
+  .pg-swatch,
+  .pg-rule__label,
+  .pg-rule__text { grid-column: span 1; }
+}
+/* ------------------------- texture & gradients ------------------------- */
+
+/* ------------------------ artwork placeholder -------------------------- */
+/* Stands in for illustration that does not exist yet. Hard edges and strong
+   contrast, so the blur treatment is legible against it. */
+/* The artwork sits inside a larger box: the padding is headroom for the blur
+   to spill into rather than being clipped at the art's edge. Because the
+   padding is uniform, it is also exactly the gap between host and artwork, so
+   it doubles as --ds-pblur-inset and the ramp still tracks the art. */
+.pg-artwork {
+  --pg-artwork-spill: 22px;
+  --ds-pblur-inset: var(--pg-artwork-spill);
+  position: relative;
+  display: inline-flex;
+  align-self: flex-start;
+  padding: var(--pg-artwork-spill);
+}
+.pg-artwork__bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 92px;
+}
+.pg-artwork__bars i {
+  display: block;
+  width: 9px;
+  background: var(--ds-accent);
+  border-radius: 1px;
+}
+.pg-artwork__bars i:nth-child(1) { height: 58%; }
+.pg-artwork__bars i:nth-child(2) { height: 100%; }
+.pg-artwork__bars i:nth-child(3) { height: 42%; }
+.pg-artwork__bars i:nth-child(4) { height: 84%; }
+.pg-artwork__bars i:nth-child(5) { height: 36%; }
+.pg-artwork__bars i:nth-child(6) { height: 68%; }
+/* --------------------------- restraint demo ---------------------------- */
+.pg-restraint {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 300px;
+  padding: var(--ds-space-9) var(--ds-space-6);
+  overflow: hidden;
+}
+.pg-restraint__bloom {
+  position: absolute;
+  right: -60px;
+  bottom: -120px;
+}
+.pg-restraint__body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+  max-width: 46ch;
+}
+.pg-illo-demo { display: flex; flex-direction: column; gap: var(--ds-space-2); }
+/* ------------------------- labelled levels ----------------------------- */
+.pg-level { display: flex; flex-direction: column; gap: var(--ds-space-1); }
+.pg-level__name {
+  margin-top: var(--ds-space-2);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-fg);
+}
+.pg-level__value {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-caption);
+  color: var(--ds-fg-subtle);
+}
+/* ------------------------------- rule ---------------------------------- */
+/* A stated constraint, not a demo. Reads as a note in the margin. */
+/* A stated constraint, not a demo.
+   Symmetrical by construction: rules of equal weight top and bottom rather
+   than a bar down one side, no rounded-on-one-end corners, and no width cap
+   fighting a full-bleed background. The label sits in the title columns and
+   the prose in the body columns, so it carries the same balance as every
+   other row on the page. */
+.pg-rule {
+  display: grid;
+  grid-template-columns: repeat(var(--ds-grid-columns), minmax(0, 1fr));
+  column-gap: var(--ds-grid-gutter);
+  row-gap: var(--ds-space-3);
+  align-items: baseline;
+  padding-block: var(--ds-space-5);
+  border-top: var(--ds-border-thick) solid var(--ds-accent);
+  border-bottom: var(--ds-border-thick) solid var(--ds-accent);
+  margin-bottom: var(--ds-space-9);
+}
+.pg-rule__label {
+  grid-column: span 2;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-accent);
+}
+.pg-rule__marker {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--ds-radius-circle);
+  background: var(--ds-accent);
+  box-shadow: 0 0 10px -1px var(--ds-halo);
+}
+.pg-rule__text {
+  grid-column: span 4;
+  margin: 0;
+  font-size: var(--ds-text-body);
+  line-height: var(--ds-leading-relaxed);
+  color: var(--ds-fg-muted);
+}
+.pg-rule__text strong { color: var(--ds-fg); font-weight: var(--ds-weight-medium); }
+/* ---- row layouts, mapped onto the six columns ---- */
+.pg-family__meta { grid-column: span 2; }
+.pg-family__sample { grid-column: span 4; }
+.pg-scale__meta { grid-column: span 2; }
+.pg-scale__sample { grid-column: span 4; }
+.pg-motion__row > code { grid-column: span 2; }
+.pg-motion__value { grid-column: span 2; }
+.pg-motion__use { grid-column: span 1; }
+.pg-motion__track { grid-column: span 1; }
+/* ------------------------------ grid spec ------------------------------ */
+.pg-gridspec { margin-bottom: var(--ds-space-4); }
+.pg-gridspec__col {
+  display: grid;
+  place-items: center;
+  height: 64px;
+  background: var(--ds-accent-soft);
+  border-radius: var(--ds-radius-xs);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-caption);
+  color: var(--ds-accent-soft-fg);
+}
+.pg-gridspec__span {
+  display: grid;
+  place-items: center;
+  height: 48px;
+  border: 1px solid var(--ds-border-color);
+  border-radius: var(--ds-radius-xs);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-fg-muted);
+}
+/* Grid layout for visual demos, so they spread across the measure rather than
+   packing against the left edge.
+
+   A row with a fixed item count that does not divide into six (the five
+   sharpness levels) sets --pg-variant-columns to its own count, so it fills
+   the measure exactly instead of leaving a dead trailing column. The
+   indirection through --pg-cols matters: --pg-variant-columns arrives as an
+   inline style and would beat any media query, so the breakpoints override
+   --pg-cols from the stylesheet instead. */
+.pg-variants__grid {
+  --pg-cols: var(--pg-variant-columns, var(--ds-grid-columns));
+  display: grid;
+  grid-template-columns: repeat(var(--pg-cols), minmax(0, 1fr));
+  column-gap: var(--ds-grid-gutter);
+  row-gap: var(--ds-space-5);
+}
+.pg-variants__grid > * { grid-column: span var(--pg-variant-span, 1); }
+@media (max-width: 1023px) {
+  .pg-variants__grid { --pg-cols: 3; }
+  .pg-variants__grid > * { grid-column: span 1; }
+}
+@media (max-width: 639px) {
+  .pg-variants__grid { --pg-cols: 1; }
+}

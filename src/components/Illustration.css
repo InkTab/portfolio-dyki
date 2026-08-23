@@ -1,0 +1,46 @@
+/* Illustration — a raster artwork slot with the two blur compositions built in.
+   PNG-first: fixed colour, so the artwork is designed for one surface and an
+   optional second file covers the other. */
+
+.ds-illustration {
+  position: relative;
+  display: block;
+  width: 100%;
+  isolation: isolate;
+}
+
+.ds-illustration__frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+.ds-illustration__img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* When a ratio is set the frame is fixed and the art fills it. */
+.ds-illustration--ratio .ds-illustration__frame { aspect-ratio: var(--ds-illustration-ratio); }
+.ds-illustration--ratio .ds-illustration__img { height: 100%; object-fit: cover; }
+.ds-illustration--contain .ds-illustration__img { object-fit: contain; }
+
+/* Composition B: a bloom sitting behind or beside crisp artwork. */
+.ds-illustration__bloom {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+/* Artwork that must not be clipped by its own frame — a hero PNG whose blur
+   companion bleeds past the edge. */
+.ds-illustration--bleed .ds-illustration__frame { overflow: visible; }
+
+/* The ink variant follows the surface it is placed on, the same way every other
+   component does. Not prefers-color-scheme: this site ships one theme, and ink
+   is a section within it. */
+.ds-illustration__img--ink { display: none; }
+[data-surface='ink'] .ds-illustration--has-ink .ds-illustration__img--ink { display: block; }
+[data-surface='ink'] .ds-illustration--has-ink .ds-illustration__img--light { display: none; }
