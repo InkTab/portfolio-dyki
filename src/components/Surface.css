@@ -1,0 +1,6 @@
+.ds-surface {
+  background: var(--ds-bg);
+  color: var(--ds-fg);
+}
+.ds-surface--pad { padding: var(--ds-space-6); }
+.ds-surface--pad-lg { padding: var(--ds-space-9) var(--ds-space-6); }

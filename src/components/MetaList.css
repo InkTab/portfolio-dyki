@@ -1,0 +1,53 @@
+.ds-metalist {
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+}
+
+.ds-metalist__row {
+  display: grid;
+  gap: var(--ds-space-2) var(--ds-space-5);
+  padding: var(--ds-space-4) 0;
+  border-top: var(--ds-border-hairline) solid var(--ds-border-subtle);
+}
+.ds-metalist__row:last-child { border-bottom: var(--ds-border-hairline) solid var(--ds-border-subtle); }
+
+.ds-metalist--stacked .ds-metalist__row { grid-template-columns: 1fr; }
+
+/* Inline rows sit on the layout grid: term in the first two columns, the
+   description in the remaining four, so a MetaList lines up with every other
+   two-column block on the page. */
+.ds-metalist--inline .ds-metalist__row {
+  grid-template-columns: repeat(var(--ds-grid-columns), minmax(0, 1fr));
+  column-gap: var(--ds-grid-gutter);
+  align-items: baseline;
+}
+.ds-metalist--inline .ds-metalist__term { grid-column: span 2; }
+.ds-metalist--inline .ds-metalist__desc { grid-column: span 4; }
+
+.ds-metalist__term {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-label);
+  letter-spacing: var(--ds-tracking-label);
+  text-transform: uppercase;
+  color: var(--ds-fg-muted);
+  margin: 0;
+}
+
+.ds-metalist__desc {
+  margin: 0;
+  font-family: var(--ds-font-sans);
+  font-weight: var(--ds-weight-light);
+  font-size: var(--ds-text-body-lg);
+  line-height: var(--ds-leading-tight);
+  color: var(--ds-fg);
+}
+
+/* Collapse the label column when the list itself gets narrow. */
+@container (max-width: 640px) {
+  .ds-metalist--inline .ds-metalist__row { grid-template-columns: 1fr; }
+  .ds-metalist--inline .ds-metalist__term,
+  .ds-metalist--inline .ds-metalist__desc { grid-column: span 1; }
+}

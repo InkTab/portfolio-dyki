@@ -1,0 +1,53 @@
+.ds-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-2) var(--ds-space-4);
+  border: var(--ds-border-hairline) solid var(--ds-border-color);
+  border-radius: var(--ds-radius-pill);
+  background: transparent;
+  color: var(--ds-fg);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-label);
+  letter-spacing: var(--ds-tracking-label);
+  text-transform: uppercase;
+  line-height: var(--ds-leading-tight);
+  white-space: nowrap;
+  transition:
+    background-color var(--ds-duration-fast) var(--ds-ease-out),
+    border-color var(--ds-duration-fast) var(--ds-ease-out),
+    box-shadow var(--ds-duration-base) var(--ds-ease-out),
+    color var(--ds-duration-fast) var(--ds-ease-out);
+}
+
+.ds-pill--sm { padding: var(--ds-space-1) var(--ds-space-3); font-size: var(--ds-text-caption); }
+
+.ds-pill--solid,
+.ds-pill--selected {
+  background: var(--ds-accent);
+  border-color: var(--ds-accent);
+  color: var(--ds-accent-fg);
+  /* Same halo as a primary button — an accent-filled control is always lit. */
+  box-shadow: 0 2px 12px -4px var(--ds-halo);
+}
+
+.ds-pill--soft {
+  background: var(--ds-accent-soft);
+  border-color: transparent;
+  color: var(--ds-accent-soft-fg);
+}
+
+.ds-pill--interactive { cursor: pointer; }
+.ds-pill--interactive:hover {
+  border-color: var(--ds-border-strong);
+  background: var(--ds-bg-inset);
+}
+.ds-pill--selected {
+  background: var(--ds-accent);
+  border-color: var(--ds-accent);
+  color: var(--ds-accent-fg);
+}
+.ds-pill--selected:hover {
+  background: var(--ds-accent-hover);
+  border-color: var(--ds-accent-hover);
+}

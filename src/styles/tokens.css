@@ -1,0 +1,279 @@
+/* =========================================================================
+   DYKI DESIGN SYSTEM — TOKENS
+   Primitives extracted from the live dyki.design build, then organised into
+   a semantic layer with three surfaces: violet (brand), sand (light), ink.
+   ========================================================================= */
+
+:root {
+  /* ---------------------------------------------------------------------
+     1. COLOR PRIMITIVES — raw ramps. Never reference these in components;
+        use the semantic tokens in section 2 instead.
+     --------------------------------------------------------------------- */
+
+  /* Violet — the signature electric purple */
+  --ds-violet-50:  #f5f2fd;
+  --ds-violet-100: #e7e0fb;
+  --ds-violet-200: #cabaf7;
+  --ds-violet-300: #9e7ef7;
+  --ds-violet-400: #5e23ff; /* brand / hero background */
+  --ds-violet-500: #4d13ec;
+  --ds-violet-600: #4315c1;
+  --ds-violet-700: #381599;
+  --ds-violet-800: #2c1372;
+  --ds-violet-900: #20104c;
+  --ds-violet-950: #130b28;
+
+  /* Sand — the warm cream that carries text on violet */
+  --ds-sand-50:  #fef9f0;
+  --ds-sand-100: #fff3e0;
+  --ds-sand-200: #ffeccc; /* primary cream */
+  --ds-sand-300: #f8daaa;
+  --ds-sand-400: #f0c175;
+  --ds-sand-500: #e0a442;
+  --ds-sand-600: #bc862f;
+  --ds-sand-700: #8a672e;
+  --ds-sand-800: #624c28;
+  --ds-sand-900: #41341f;
+  --ds-sand-950: #241e14;
+
+  /* Signal. There is deliberately no pure white, black, or neutral grey in
+     this palette — the ramps above cover every light and dark the system
+     needs, and mixing in true neutrals makes the warmth read as a mistake. */
+  --ds-green: #18c445; /* "available for hire" */
+  --ds-red: #d92d20;   /* validation errors only — never decorative */
+  --ds-shadow-tint: rgba(19, 11, 40, 0.1); /* ink, not black */
+
+  /* ---------------------------------------------------------------------
+     3. TYPOGRAPHY
+     --------------------------------------------------------------------- */
+  --ds-font-display: 'NAMU 1600', 'Albert Sans', system-ui, sans-serif;
+  --ds-font-sans: 'Albert Sans', system-ui, -apple-system, sans-serif;
+  --ds-font-mono: 'Roboto Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --ds-weight-display: 200; /* NAMU only ships this weight */
+  --ds-weight-light: 300;
+  --ds-weight-regular: 400;
+  --ds-weight-medium: 500;
+  --ds-weight-bold: 700;
+
+  /* Type scale — fluid where the site scales, fixed where it does not */
+  --ds-text-display-xl: clamp(3.5rem, 9vw, 7rem);    /*  56 → 112 */
+  --ds-text-display-lg: clamp(2.5rem, 6.5vw, 5rem);  /*  40 →  80 */
+  --ds-text-display-md: clamp(2rem, 4vw, 2.875rem);  /*  32 →  46 */
+  --ds-text-display-sm: clamp(1.5rem, 3vw, 2rem);    /*  24 →  32 */
+  --ds-text-title: 1.5rem;    /* 24 */
+  --ds-text-body-lg: 1.25rem; /* 20 */
+  --ds-text-body: 1rem;       /* 16 */
+  --ds-text-body-sm: 0.875rem;/* 14 */
+  --ds-text-label: 0.875rem;  /* 14 — mono, uppercase */
+  --ds-text-caption: 0.75rem; /* 12 */
+
+  --ds-leading-display: 1.1;
+  --ds-leading-tight: 1.2;
+  --ds-leading-normal: 1.4;
+  --ds-leading-relaxed: 1.6;
+
+  --ds-tracking-display: -0.02em;
+  --ds-tracking-tight: -0.01em;
+  --ds-tracking-normal: 0;
+  --ds-tracking-label: 0.02em;
+  --ds-tracking-wide: 0.08em;
+
+  /* ---------------------------------------------------------------------
+     4. SPACE — 4px base
+     --------------------------------------------------------------------- */
+  --ds-space-1: 0.25rem;  /*  4 */
+  --ds-space-2: 0.5rem;   /*  8 */
+  --ds-space-3: 0.75rem;  /* 12 */
+  --ds-space-4: 1rem;     /* 16 */
+  --ds-space-5: 1.5rem;   /* 24 */
+  --ds-space-6: 2rem;     /* 32 */
+  --ds-space-7: 2.625rem; /* 42 */
+  --ds-space-8: 3rem;     /* 48 */
+  --ds-space-9: 4rem;     /* 64 */
+  --ds-space-10: 6rem;    /* 96 */
+  --ds-space-11: 8rem;    /* 128 */
+
+  /* ---------------------------------------------------------------------
+     5. RADIUS / BORDER / ELEVATION
+     --------------------------------------------------------------------- */
+  --ds-radius-none: 0;
+  --ds-radius-xs: 2px;   /* the site's default corner */
+  --ds-radius-sm: 4px;
+  --ds-radius-md: 8px;
+  --ds-radius-pill: 999px;
+  --ds-radius-circle: 50%;
+
+  --ds-border-hairline: 1px;
+  --ds-border-thick: 2px;
+
+  --ds-shadow-sm: 0 1px 2px var(--ds-shadow-tint);
+  --ds-shadow-md: 0 4px 16px var(--ds-shadow-tint);
+  --ds-shadow-lg: 0 16px 48px var(--ds-shadow-tint);
+
+  /* ---------------------------------------------------------------------
+     6. MOTION
+     --------------------------------------------------------------------- */
+  --ds-duration-fast: 120ms;
+  --ds-duration-base: 220ms;
+  --ds-duration-slow: 420ms;
+  --ds-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ds-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ---------------------------------------------------------------------
+     7. LAYOUT
+     --------------------------------------------------------------------- */
+  --ds-container: 1280px;
+  --ds-container-narrow: 880px;
+
+  /* Layout grid. Six columns, 24px gutter, 24px page margin. Everything that
+     lays out in more than one column aligns to this — no ad-hoc track lists. */
+  --ds-grid-columns: 6;
+  --ds-grid-gutter: var(--ds-space-5);
+  --ds-grid-margin: var(--ds-space-5);
+  --ds-gutter: var(--ds-grid-gutter);
+  --ds-bar-height: 60px; /* the site's ticker / nav bar */
+
+  /* ---------------------------------------------------------------------
+     8. TEXTURE
+     A single SVG turbulence tile, reused as paper grain and as the dither
+     that dissolves a gradient's edge. Inline so it costs no request.
+     --------------------------------------------------------------------- */
+  --ds-grain-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --ds-grain-opacity: 0.22;
+
+  /* Bloom defaults — overridden per surface in the semantic layer. */
+  --ds-bloom-size: 320px;
+  --ds-bloom-intensity: 0.9;
+  --ds-bloom-blur: 6px;
+  /* Every gradient in this system is grained. A clean gradient bands on the
+     warm ground and reads as a different material from everything else. */
+  --ds-bloom-grain-min: 0.25;
+}
+
+/* =========================================================================
+   2. SEMANTIC LAYER — surfaces
+   Every component reads only from these. Nest [data-surface] anywhere to
+   re-theme a subtree.
+
+   HIERARCHY: sand and ink are the primaries — the paper and the black.
+   Violet is an ACCENT: it appears as a highlight, a tint, a gradient bloom,
+   or a single full-bleed feature band. It is never the default ground.
+   ========================================================================= */
+
+/* --- SAND — the default. Paper ground, ink text, purple only as accent. --- */
+:root,
+[data-surface='sand'] {
+  --ds-bg: var(--ds-sand-100);
+  --ds-bg-raised: var(--ds-sand-50);
+  --ds-bg-sunken: var(--ds-sand-200);
+  --ds-bg-inset: rgba(19, 11, 40, 0.05);
+
+  --ds-fg: var(--ds-violet-950);
+  --ds-fg-muted: rgba(19, 11, 40, 0.66);
+  --ds-fg-subtle: rgba(19, 11, 40, 0.42);
+  --ds-fg-inverse: var(--ds-sand-50);
+
+  --ds-border-color: rgba(19, 11, 40, 0.18);
+  --ds-border-strong: var(--ds-violet-950);
+  --ds-border-subtle: rgba(19, 11, 40, 0.08);
+
+  --ds-accent: var(--ds-violet-400);
+  --ds-accent-fg: var(--ds-sand-50);
+  --ds-accent-hover: var(--ds-violet-500);
+  /* Tinted fill for cards and cells that should read as accent without
+     shouting — the lavender panels in the reference layout. */
+  --ds-accent-soft: var(--ds-violet-100);
+  --ds-accent-soft-fg: var(--ds-violet-800);
+
+  --ds-focus: var(--ds-violet-400);
+  --ds-link-underline: var(--ds-violet-400);
+
+  /* Halo — the accent bleeding a little past a control's edge. Subtle: it
+     should register as light, not as a shadow. */
+  --ds-halo: rgba(94, 35, 255, 0.3);
+  --ds-danger: var(--ds-red);
+  --ds-danger-border: var(--ds-red);
+
+  /* Gradient blooms read as purple light on paper. */
+  --ds-bloom-core: var(--ds-violet-400);
+  --ds-bloom-halo: var(--ds-violet-300);
+}
+
+/* --- INK — the black. --- */
+[data-surface='ink'] {
+  --ds-bg: var(--ds-violet-950);
+  /* Nothing in the ramp is darker than 950, so on ink both "raised" and
+     "sunken" step lighter — depth here comes from elevation and borders,
+     never from going blacker. */
+  --ds-bg-raised: var(--ds-violet-900);
+  --ds-bg-sunken: var(--ds-violet-900);
+  --ds-bg-inset: rgba(254, 249, 240, 0.07);
+
+  --ds-fg: var(--ds-sand-50);
+  --ds-fg-muted: rgba(254, 249, 240, 0.62);
+  --ds-fg-subtle: rgba(254, 249, 240, 0.4);
+  --ds-fg-inverse: var(--ds-violet-950);
+
+  --ds-border-color: rgba(254, 249, 240, 0.2);
+  --ds-border-strong: var(--ds-sand-50);
+  --ds-border-subtle: rgba(254, 249, 240, 0.1);
+
+  --ds-accent: var(--ds-violet-400);
+  --ds-accent-fg: var(--ds-sand-50);
+  --ds-accent-hover: var(--ds-violet-300);
+  --ds-accent-soft: var(--ds-violet-800);
+  --ds-accent-soft-fg: var(--ds-violet-100);
+
+  --ds-focus: var(--ds-violet-300);
+  --ds-link-underline: var(--ds-violet-300);
+
+  --ds-halo: rgba(94, 35, 255, 0.55);
+  /* Lifted on ink so it clears the dark ground. */
+  --ds-danger: #ff6b5e;
+  --ds-danger-border: #ff6b5e;
+
+  --ds-bloom-core: var(--ds-violet-400);
+  --ds-bloom-halo: var(--ds-violet-600);
+}
+
+/* --- VIOLET — the accent band. Reserved for one full-bleed moment per page
+       (a hero, a CTA). Deliberately not a general-purpose surface. --- */
+[data-surface='violet'] {
+  --ds-bg: var(--ds-violet-400);
+  --ds-bg-raised: var(--ds-violet-500);
+  --ds-bg-sunken: var(--ds-violet-700);
+  --ds-bg-inset: rgba(254, 249, 240, 0.12);
+
+  --ds-fg: var(--ds-sand-50);
+  --ds-fg-muted: rgba(254, 249, 240, 0.75);
+  --ds-fg-subtle: rgba(254, 249, 240, 0.5);
+  --ds-fg-inverse: var(--ds-violet-500);
+
+  --ds-border-color: rgba(254, 249, 240, 0.4);
+  --ds-border-strong: var(--ds-sand-50);
+  --ds-border-subtle: rgba(254, 249, 240, 0.18);
+
+  /* On violet the accent inverts — the light is the highlight. */
+  --ds-accent: var(--ds-sand-50);
+  --ds-accent-fg: var(--ds-violet-500);
+  --ds-accent-hover: var(--ds-sand-100);
+  --ds-accent-soft: rgba(254, 249, 240, 0.16);
+  --ds-accent-soft-fg: var(--ds-sand-50);
+
+  --ds-focus: var(--ds-sand-50);
+  --ds-link-underline: var(--ds-sand-200);
+
+  --ds-halo: rgba(254, 249, 240, 0.4);
+  --ds-danger: #ffd9d4;
+  --ds-danger-border: #ffd9d4;
+
+  --ds-bloom-core: var(--ds-violet-300);
+  --ds-bloom-halo: var(--ds-violet-200);
+}
+
+/* Any element carrying a surface paints its own ground. */
+[data-surface] {
+  background: var(--ds-bg);
+  color: var(--ds-fg);
+}

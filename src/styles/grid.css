@@ -1,0 +1,70 @@
+/* =========================================================================
+   LAYOUT GRID
+   Six columns, 24px gutter, 24px margin.
+
+   The column count steps down at two breakpoints so spans stay meaningful
+   rather than collapsing into slivers:
+
+     ≥1024px   6 columns
+     640–1023  3 columns   (halves cleanly; a 2-span stays a third)
+     <640px    1 column
+
+   Spans clamp at each step. Every multi-column layout in the system uses
+   these classes; nothing declares its own track list.
+   ========================================================================= */
+
+.ds-container {
+  width: 100%;
+  max-width: var(--ds-container);
+  margin-inline: auto;
+  padding-inline: var(--ds-grid-margin);
+}
+
+.ds-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--ds-grid-columns), minmax(0, 1fr));
+  column-gap: var(--ds-grid-gutter);
+  row-gap: var(--ds-grid-row-gap, var(--ds-grid-gutter));
+}
+
+/* Spans ---------------------------------------------------------------- */
+.ds-col-1 { grid-column: span 1; }
+.ds-col-2 { grid-column: span 2; }
+.ds-col-3 { grid-column: span 3; }
+.ds-col-4 { grid-column: span 4; }
+.ds-col-5 { grid-column: span 5; }
+.ds-col-6 { grid-column: span 6; }
+
+/* Explicit starts, for pushing an element into a later column. */
+.ds-col-start-2 { grid-column-start: 2; }
+.ds-col-start-3 { grid-column-start: 3; }
+.ds-col-start-4 { grid-column-start: 4; }
+.ds-col-start-5 { grid-column-start: 5; }
+
+/* The column count lives on :root so every grid in the system steps together,
+   including ones that build their own template from --ds-grid-columns.
+   Spans must clamp with it: a `span 4` inside a 3-column grid would generate an
+   implicit fourth column and break the alignment everything else depends on. */
+@media (max-width: 1023px) {
+  :root { --ds-grid-columns: 3; }
+  .ds-col-1 { grid-column: span 1; }
+  .ds-col-2 { grid-column: span 1; }
+  .ds-col-3 { grid-column: span 3; }
+  .ds-col-4,
+  .ds-col-5,
+  .ds-col-6 { grid-column: span 3; }
+  .ds-col-start-2,
+  .ds-col-start-3,
+  .ds-col-start-4,
+  .ds-col-start-5 { grid-column-start: auto; }
+}
+
+@media (max-width: 639px) {
+  :root { --ds-grid-columns: 1; }
+  .ds-col-1,
+  .ds-col-2,
+  .ds-col-3,
+  .ds-col-4,
+  .ds-col-5,
+  .ds-col-6 { grid-column: span 1; }
+}

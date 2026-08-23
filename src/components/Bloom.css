@@ -1,0 +1,52 @@
+/* Bloom — a decorative gradient shape with a directional falloff: crisp along
+   the leading edge, dissolving along the axis. Grain dithers the fade so it
+   never bands.
+   
+   Use sparingly. One per section at most, and never behind body copy. */
+
+.ds-bloom {
+  position: relative;
+  width: var(--ds-bloom-size);
+  aspect-ratio: var(--ds-bloom-ratio, 1);
+  flex: none;
+  pointer-events: none;
+  border-radius: var(--ds-bloom-radius, var(--ds-radius-circle));
+}
+
+.ds-bloom::before,
+.ds-bloom::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  /* The falloff. Opaque up to --sharpness, then progressively out to nothing.
+     The leading edge keeps the shape's own crisp boundary. */
+  -webkit-mask-image: linear-gradient(
+    var(--ds-bloom-axis),
+    #000 0%,
+    #000 var(--ds-bloom-sharpness),
+    transparent 100%
+  );
+          mask-image: linear-gradient(
+    var(--ds-bloom-axis),
+    #000 0%,
+    #000 var(--ds-bloom-sharpness),
+    transparent 100%
+  );
+}
+
+.ds-bloom::before {
+  background: var(--ds-bloom-core);
+  opacity: var(--ds-bloom-intensity);
+  filter: blur(var(--ds-bloom-blur));
+}
+
+.ds-bloom::after {
+  background-image: var(--ds-grain-texture);
+  background-size: 180px 180px;
+  opacity: var(--ds-bloom-grain, 0.4);
+  mix-blend-mode: overlay;
+}
+
+.ds-bloom--soft { --ds-bloom-intensity: 0.5; --ds-bloom-blur: 18px; }
+.ds-bloom--strong { --ds-bloom-intensity: 1; --ds-bloom-blur: 2px; }

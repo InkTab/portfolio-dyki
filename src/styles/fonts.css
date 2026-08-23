@@ -1,0 +1,12 @@
+/* NAMU 1600 — display face used on dyki.design. Self-hosted from /public/fonts. */
+@font-face {
+  font-family: 'NAMU 1600';
+  src: url('/fonts/NAMU-1600.woff2') format('woff2'),
+       url('/fonts/NAMU-1600.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Albert Sans (text) and Roboto Mono (labels) are loaded from Google Fonts
+   in index.html. */

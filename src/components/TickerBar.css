@@ -1,0 +1,35 @@
+.ds-tickerbar {
+  container-type: inline-size;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  align-items: center;
+  min-height: var(--ds-bar-height);
+  background: var(--ds-bg);
+  color: var(--ds-fg);
+  border-bottom: var(--ds-border-thick) solid var(--ds-border-color);
+}
+
+.ds-tickerbar--bordered { border-top: var(--ds-border-thick) solid var(--ds-border-color); }
+
+.ds-tickerbar__cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-3) var(--ds-space-5);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-label);
+  letter-spacing: var(--ds-tracking-label);
+  text-transform: uppercase;
+  text-align: center;
+  border-left: var(--ds-border-hairline) solid var(--ds-border-color);
+}
+.ds-tickerbar__cell:first-child { border-left: none; }
+
+/* Once the bar itself is narrow, stack the cells instead of squeezing them. */
+@container (max-width: 720px) {
+  .ds-tickerbar { grid-auto-flow: row; grid-auto-columns: auto; }
+  .ds-tickerbar__cell { border-left: none; border-top: var(--ds-border-hairline) solid var(--ds-border-color); }
+  .ds-tickerbar__cell:first-child { border-top: none; }
+}

@@ -1,0 +1,107 @@
+.ds-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-2);
+  font-family: var(--ds-font-mono);
+  font-weight: var(--ds-weight-regular);
+  letter-spacing: var(--ds-tracking-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: var(--ds-radius-xs);
+  border: var(--ds-border-hairline) solid transparent;
+  cursor: pointer;
+  transition:
+    background-color var(--ds-duration-fast) var(--ds-ease-out),
+    color var(--ds-duration-fast) var(--ds-ease-out),
+    border-color var(--ds-duration-fast) var(--ds-ease-out),
+    box-shadow var(--ds-duration-base) var(--ds-ease-out),
+    transform var(--ds-duration-fast) var(--ds-ease-out);
+}
+
+.ds-button:disabled,
+.ds-button[aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ds-button:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+/* --- sizes --- */
+.ds-button--sm { font-size: var(--ds-text-caption); padding: var(--ds-space-2) var(--ds-space-3); }
+.ds-button--md { font-size: var(--ds-text-label); padding: var(--ds-space-3) var(--ds-space-5); }
+.ds-button--lg { font-size: var(--ds-text-label); padding: var(--ds-space-4) var(--ds-space-6); }
+
+/* --- variants --- */
+
+/* The primary action carries a halo: the accent bleeding a little past its own
+   edge, so it reads as lit rather than merely filled. Kept low — at full
+   strength it stops looking like light and starts looking like a glow effect. */
+.ds-button--solid {
+  background: var(--ds-accent);
+  color: var(--ds-accent-fg);
+  border-color: var(--ds-accent);
+  box-shadow: 0 2px 14px -4px var(--ds-halo);
+}
+.ds-button--solid:not(:disabled):hover {
+  background: var(--ds-accent-hover);
+  border-color: var(--ds-accent-hover);
+  box-shadow: 0 4px 22px -4px var(--ds-halo);
+}
+
+/* Secondary actions earn the halo only on hover. */
+.ds-button--outline:not(:disabled):hover {
+  box-shadow: 0 4px 18px -6px var(--ds-halo);
+}
+
+/* A disabled control is not lit. */
+.ds-button:disabled,
+.ds-button[aria-disabled='true'] {
+  box-shadow: none;
+}
+
+.ds-button--outline {
+  background: transparent;
+  color: var(--ds-fg);
+  border-color: var(--ds-border-color);
+}
+.ds-button--outline:not(:disabled):hover {
+  border-color: var(--ds-border-strong);
+  background: var(--ds-bg-inset);
+}
+
+.ds-button--ghost {
+  background: transparent;
+  color: var(--ds-fg);
+  border-color: transparent;
+}
+.ds-button--ghost:not(:disabled):hover {
+  background: var(--ds-bg-inset);
+}
+
+/* Inline text button with a trailing arrow — "Full Report →" */
+.ds-button--link {
+  background: transparent;
+  color: var(--ds-fg);
+  border-color: transparent;
+  padding-inline: 0;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-body);
+  font-weight: var(--ds-weight-regular);
+  letter-spacing: var(--ds-tracking-normal);
+  text-transform: none;
+}
+.ds-button--link:not(:disabled):hover { color: var(--ds-fg-muted); }
+.ds-button--link:not(:disabled):hover .ds-button__arrow { transform: translateX(4px); }
+
+.ds-button--block { width: 100%; }
+
+.ds-button__arrow {
+  transition: transform var(--ds-duration-base) var(--ds-ease-out);
+}
+.ds-button:not(.ds-button--link):not(:disabled):hover .ds-button__arrow {
+  transform: translateX(3px);
+}
