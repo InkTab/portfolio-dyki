@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   border-radius: var(--ds-radius-xs);
-  overflow: hidden;
   transition:
     transform var(--ds-duration-base) var(--ds-ease-out),
     border-color var(--ds-duration-base) var(--ds-ease-out);
@@ -11,19 +10,21 @@
 .ds-card--raised { background: var(--ds-bg-raised); }
 .ds-card--outline {
   background: transparent;
-  border: var(--ds-border-hairline) solid var(--ds-border-color);
+  border: var(--ds-border-hairline) solid var(--ds-border-control);
 }
 .ds-card--flat { background: var(--ds-bg-inset); }
-/* Tinted accent panel — purple as a wash, not a shout. */
+/* Tinted accent panel — purple as a wash, not a shout.
+   Note this is a COLOUR variant only. It used to set cursor: pointer and a
+   hover lift unconditionally, so a static panel promised a click that was
+   never there. Interactivity comes from `interactive` / `href`, never from a
+   colour choice — the two axes are independent. */
 .ds-card--soft {
   background: var(--ds-accent-soft);
   color: var(--ds-accent-soft-fg);
-  cursor: pointer;
 }
-/* The tinted card is the one that responds — it is already marked as the
-   card worth looking at, so it is the one that moves. */
-.ds-card--soft:hover { transform: translateY(-4px); }
 .ds-card--soft .ds-card__footer { border-top-color: currentColor; opacity: 1; }
+/* Tinted AND interactive: it lifts like any other interactive card. */
+.ds-card--soft.ds-card--interactive:hover { transform: translateY(-4px); }
 
 .ds-card--pad { padding: var(--ds-space-5); }
 .ds-card--pad-lg { padding: var(--ds-space-6); }
@@ -31,6 +32,8 @@
 .ds-card--interactive { cursor: pointer; text-decoration: none; color: inherit; }
 .ds-card--interactive:hover { transform: translateY(-4px); }
 .ds-card--interactive.ds-card--outline:hover { border-color: var(--ds-border-strong); }
+
+.ds-card--interactive:focus-visible { outline: var(--ds-border-thick) solid var(--ds-focus); outline-offset: 2px; }
 
 .ds-card__header {
   display: flex;

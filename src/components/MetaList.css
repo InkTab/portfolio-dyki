@@ -41,7 +41,7 @@
   font-family: var(--ds-font-sans);
   font-weight: var(--ds-weight-light);
   font-size: var(--ds-text-body-lg);
-  line-height: var(--ds-leading-tight);
+  line-height: var(--ds-leading-normal);
   color: var(--ds-fg);
 }
 

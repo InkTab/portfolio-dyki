@@ -3,7 +3,7 @@
   align-items: center;
   gap: var(--ds-space-2);
   padding: var(--ds-space-2) var(--ds-space-4);
-  border: var(--ds-border-hairline) solid var(--ds-border-color);
+  border: var(--ds-border-hairline) solid var(--ds-border-control);
   border-radius: var(--ds-radius-pill);
   background: transparent;
   color: var(--ds-fg);
@@ -12,7 +12,6 @@
   letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   line-height: var(--ds-leading-tight);
-  white-space: nowrap;
   transition:
     background-color var(--ds-duration-fast) var(--ds-ease-out),
     border-color var(--ds-duration-fast) var(--ds-ease-out),
@@ -20,7 +19,9 @@
     color var(--ds-duration-fast) var(--ds-ease-out);
 }
 
-.ds-pill--sm { padding: var(--ds-space-1) var(--ds-space-3); font-size: var(--ds-text-caption); }
+ /* 24px floor — WCAG 2.2 SC 2.5.8. */
+.ds-pill { min-height: 32px; }
+.ds-pill--sm { padding: var(--ds-space-1) var(--ds-space-3); font-size: var(--ds-text-caption); min-height: 24px; }
 
 .ds-pill--solid,
 .ds-pill--selected {
@@ -41,11 +42,6 @@
 .ds-pill--interactive:hover {
   border-color: var(--ds-border-strong);
   background: var(--ds-bg-inset);
-}
-.ds-pill--selected {
-  background: var(--ds-accent);
-  border-color: var(--ds-accent);
-  color: var(--ds-accent-fg);
 }
 .ds-pill--selected:hover {
   background: var(--ds-accent-hover);

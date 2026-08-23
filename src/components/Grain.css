@@ -1,4 +1,14 @@
-/* Paper grain. Sits above content but never intercepts pointer events. */
+/* Paper grain. It is the texture of the paper, so it belongs UNDER the ink —
+   not laid over it.
+
+   It used to sit at z-index 2, above content. `mix-blend-mode: overlay` at
+   0.22 over text costs up to 1.5:1 of contrast: --ds-fg-muted measures 6.01:1
+   clean but 4.52:1 under grain in the worst case, which is AA by 0.02 on the
+   12–14px mono tier. Below the content there is no cost at all and the paper
+   still reads as paper.
+
+   Either render <Grain /> inside a positioned container, or add the
+   `.ds-grain` class to that container for the same effect with no extra node. */
 .ds-grain::after,
 .ds-grain-layer {
   content: '';
@@ -9,10 +19,14 @@
   opacity: var(--ds-grain-opacity);
   mix-blend-mode: overlay;
   pointer-events: none;
-  z-index: 2;
+  z-index: var(--ds-z-below);
 }
 
 /* Applying .ds-grain to a container establishes the positioning context. */
 .ds-grain { position: relative; }
 
 .ds-grain-layer--fixed { position: fixed; }
+
+/* Opt-in escape hatch: grain laid OVER its host, for artwork and gradients
+   that should be dithered. Never put text under this. */
+.ds-grain-layer--over { z-index: var(--ds-z-raised); }

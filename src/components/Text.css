@@ -19,7 +19,8 @@
   margin: 0;
 }
 .ds-text--title { font-size: var(--ds-text-title); line-height: var(--ds-leading-tight); }
-.ds-text--lg { font-size: var(--ds-text-body-lg); line-height: var(--ds-leading-tight); }
+ /* Body sizes get body leading. --ds-leading-tight is for headings. */
+.ds-text--lg { font-size: var(--ds-text-body-lg); line-height: var(--ds-leading-normal); }
 .ds-text--md { font-size: var(--ds-text-body); line-height: var(--ds-leading-relaxed); }
 .ds-text--sm { font-size: var(--ds-text-body-sm); line-height: var(--ds-leading-relaxed); }
 

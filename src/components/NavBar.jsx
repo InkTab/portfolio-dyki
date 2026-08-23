@@ -35,15 +35,22 @@ function useLocalTime(timeZone) {
 
 /**
  * NavBar — brand lockup, links, local time, availability status.
- * links: [{ label, href }]
+ *
+ * links:    [{ label, href, current }]
+ * status:   the availability label, e.g. "Available for hire"
+ * statusKind: available | busy | offline — drives the dot colour
+ * place:    what the clock is the local time OF, for the screen-reader prefix
  */
 export function NavBar({
   name = 'Tetiana',
   role = 'Product Designer',
   links = [],
   timeZone = 'America/Toronto',
+  place = 'Toronto',
   time,
   status,
+  statusKind = 'available',
+  label = 'Main',
   className,
   ...rest
 }) {
@@ -52,7 +59,7 @@ export function NavBar({
   const shownTime = time ?? localTime
 
   return (
-    <nav className={cx('ds-navbar', className)} {...rest}>
+    <nav className={cx('ds-navbar', className)} aria-label={label} {...rest}>
       <div className="ds-navbar__brand">
         <span className="ds-navbar__name">{name}</span>
         <span className="ds-navbar__role">{role}</span>
@@ -60,18 +67,30 @@ export function NavBar({
 
       <div className="ds-navbar__links">
         {links.map((link) => (
-          <Link key={link.label} href={link.href}>{link.label}</Link>
+          <Link
+            key={link.label}
+            href={link.href}
+            // Position identifies these as links, so they stay bare until hover.
+            underline="hover"
+            // Announces which page you are on; the CSS marks it visually too,
+            // so the current item is not signalled by colour alone.
+            aria-current={link.current ? 'page' : undefined}
+          >
+            {link.label}
+          </Link>
         ))}
       </div>
 
       <div className="ds-navbar__meta">
         {shownTime && (
           <span className="ds-navbar__time">
-            <span className="ds-visually-hidden">Local time in Toronto: </span>
+            {/* Built from `place`, not hard-coded. This said "Toronto" while
+                timeZone was a prop, so any other zone announced a false city. */}
+            <span className="ds-visually-hidden">Local time in {place}: </span>
             {shownTime}
           </span>
         )}
-        {status && <StatusDot status="available">{status}</StatusDot>}
+        {status && <StatusDot status={statusKind}>{status}</StatusDot>}
       </div>
     </nav>
   )

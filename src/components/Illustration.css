@@ -13,7 +13,7 @@
   position: relative;
   overflow: hidden;
   border-radius: inherit;
-  z-index: 1;
+  z-index: var(--ds-z-base);
 }
 
 .ds-illustration__img {
@@ -31,7 +31,7 @@
 .ds-illustration__bloom {
   position: absolute;
   transform: translate(-50%, -50%);
-  z-index: 0;
+  z-index: var(--ds-z-below);
 }
 
 /* Artwork that must not be clipped by its own frame — a hero PNG whose blur

@@ -90,6 +90,20 @@ Nothing in a component references these directly.
 **Semantic tokens** are what components read: `--ds-bg`, `--ds-fg`, `--ds-accent`,
 `--ds-border-color`. These are redefined per *surface*.
 
+Four of them exist specifically because a single value could not be correct on
+all three surfaces at once:
+
+| Token                  | Why it is split                                                                                              |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `--ds-border-control`  | The edge of an input or an outline button *is* the control, so it must clear 3:1. `--ds-border-color` stays decorative and may sit below that — use it for rules and dividers only. |
+| `--ds-accent-text`     | Violet-400 works as a *fill* on ink but measures 2.86:1 as *type* on it. Accent-coloured text reads this token, which steps to violet-300 on ink. |
+| `--ds-status-*`        | No single green clears 3:1 on sand, ink **and** violet — violet-400 sits mid-luminance, so a green light enough for ink vanishes on it. Each surface names its own step. |
+| `--ds-shadow-tint`     | An ink-tinted shadow on the ink ground is invisible. On ink the shadow is darker than the token suggests; on violet it is warmer. |
+
+`--ds-fg-disabled` / `--ds-bg-disabled` replace blanket `opacity` on disabled
+controls. Fading a whole control fades its label with its fill, so the two keep
+the same ratio to each other — at `opacity: 0.45` that was 1.49:1.
+
 ### Surfaces
 
 Three, and they are **not** equal partners. Sand and ink are the primaries —
@@ -100,6 +114,11 @@ the paper and the black. Violet is an accent.
 | `sand`   | `#fff3e0` | **Primary.** The paper. Default for most of the page.    |
 | `ink`    | `#130b28` | **Primary.** The black. Contrast sections and footers.   |
 | `violet` | `#5e23ff` | **Accent band.** At most one full-bleed moment per page. |
+
+Violet is a mid-luminance ground and has far less headroom than paper or ink:
+the full text ramp does not fit on it. `--ds-fg-subtle` there resolves to
+`--ds-fg-muted` rather than pretending to be a third tier. **A violet band that
+needs three levels of emphasis needs a different ground.**
 
 Purple otherwise shows up in three restrained ways: on primary actions
 (`--ds-accent`), as a tint (`--ds-accent-soft` — the `soft` variants of Card,
@@ -213,24 +232,24 @@ Export specs and naming live in
 | ---------------- | ----------------------------------------------------------- |
 | `Heading` `Text` `Label` | Typography primitives                               |
 | `Button`         | solid / outline / ghost / link, three sizes                 |
-| `Link`           | wavy purple underline on hover                              |
+| `Link`           | underlined at rest; `underline="hover"` for nav rows        |
 | `Pill`           | rounded outline chip; pass `onClick` for a filter toggle    |
 | `Tag`            | small square metadata chip                                  |
 | `StatusDot`      | availability indicator with a pulsing ring                  |
-| `Field`          | labelled input or textarea, with hint and invalid states    |
+| `Field`          | labelled input or textarea; `hint` + announced `error`      |
 | `Surface`        | re-themes its subtree                                       |
 | `Card`           | generic container; raised / outline / flat / soft           |
 | `Grid` / `Col`   | the six-column layout grid                                  |
 | `Illustration`   | artwork slot; PNG + 2x, both blur compositions as props     |
 | `Bloom`          | gradient decoration with a directional falloff              |
 | `ProgressiveBlur`| compounding blur laid over artwork                          |
-| `Grain`          | paper texture overlay                                       |
-| `CaseStudyCard`  | cover + labelled fields + pinned CTA row                    |
+| `Grain`          | paper texture, below content (`over` to flip it)            |
+| `CaseStudyCard`  | cover + title + labelled fields + pinned CTA row            |
 | `MetaList`       | label/value rows                                            |
 | `TraitCard`      | rule-topped column                                          |
 | `SectionHeader`  | mono eyebrow + display title + lede                         |
 | `TickerBar`      | divided stat strip                                          |
-| `NavBar`         | brand lockup, links, live Toronto clock, availability       |
+| `NavBar`         | brand lockup, links, live clock (`timeZone` + `place`), status |
 
 `NavBar`, `TickerBar`, and `MetaList` respond to **their own width** via
 container queries rather than the viewport's, so they lay out correctly inside
@@ -249,7 +268,56 @@ never have it, because a disabled control is not lit.
 - One easing curve for almost everything: `--ds-ease-out`. The playground's
   motion block plays every row simultaneously, because durations are only
   comparable side by side.
-- `Marquee` pauses on hover and stops completely under `prefers-reduced-motion`;
-  its visible text is `aria-hidden` with a readable copy for screen readers.
-- `DotGrid` is decorative and hidden from assistive tech.
-- Focus rings come from `--ds-focus`, which is redefined per surface.
+- All animation collapses under `prefers-reduced-motion`, including the
+  `StatusDot` pulse.
+- Focus rings come from `--ds-focus`, redefined per surface. **Nothing may
+  replace the ring with a border-colour change alone** — `Field` used to, and
+  its focus state was then identical to its hover state.
+- Decorative layers (`Grain`, `Bloom`, `ProgressiveBlur`) are `aria-hidden` and
+  are hidden outright under `forced-colors`.
+- `Grain` sits *below* content. An `overlay` blend over text costs up to 1.5:1
+  of contrast, which the muted tier cannot spare. `<Grain over />` puts it back
+  on top for artwork — never for text.
+- `Link` is **underlined at rest**. Link colour here is the body colour, so the
+  underline is the affordance, not a hover flourish. `underline="hover"` is for
+  rows where position already says "link": nav, footer.
+- `CaseStudyCard` requires a `title`. Only the title is the link — the whole
+  card stays clickable via `::after`, but the accessible name is the title
+  alone rather than the cover alt plus every field plus the CTA.
+- `Field` takes an `error` prop, announced through a `role="alert"` region and
+  marked with a shape as well as a colour. A hint that silently turns red is
+  never spoken.
+- `Button` renders `type="button"` unless told otherwise, so a secondary action
+  dropped into a form does not submit it.
+- The reset strips `list-style` from any classed list, which drops list
+  semantics in Safari/VoiceOver. **Put `role="list"` back** on those.
+
+### Contrast
+
+Every semantic pairing is measured. Current floors, on all three surfaces:
+
+| Tier                              | Floor  |
+| --------------------------------- | ------ |
+| `--ds-fg`, `--ds-fg-muted`        | 4.5:1  |
+| `--ds-fg-subtle`                  | 4.5:1  |
+| `--ds-border-control`, status dots| 3:1    |
+
+`--ds-border-color` is exempt — it is decorative by definition. Anything that
+carries meaning uses `--ds-border-control`.
+
+### Known gaps
+
+- No automated enforcement yet: no ESLint (`eslint-plugin-jsx-a11y` would have
+  caught the missing `type` on `Button`), no axe pass, no contrast test in CI.
+- Body copy is Albert Sans **300** at 16px on a textured ground with
+  `-webkit-font-smoothing: antialiased`. That is three compounding legibility
+  penalties on the default text size; 400 would be the safer body default.
+- The 12px mono tier (`Tag`, `Field` labels, `TraitCard` index) is uppercase
+  with wide tracking — the hardest combination in the system to read, and it
+  carries the metadata.
+- The layout grid is 6 columns, which cannot express quarters, and `col-3`
+  jumps from 50% to 100% at the 3-column step. 12 columns stepping 12 → 6 → 1
+  would be more predictable.
+- Container queries and viewport queries are mixed: `--ds-grid-columns` is
+  redefined on `:root` inside a *viewport* media query while `NavBar`,
+  `TickerBar` and `MetaList` respond to their own width.

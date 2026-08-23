@@ -1,5 +1,8 @@
-/* The base link is the nav treatment — Albert Sans at body size, ink, no
-   underline until hover. Every other link variant is a departure from this. */
+/* The base link is UNDERLINED. Link colour here is the body colour, so the
+   underline is the only thing that marks a link as a link — making it a hover
+   affordance would leave links in prose indistinguishable from the text around
+   them (WCAG 1.4.1), and unreachable for anyone not using a mouse at all.
+   The wavy purple is the hover flourish on top of that, not the whole cue. */
 .ds-link {
   font-family: var(--ds-font-sans);
   font-size: var(--ds-text-body);
@@ -7,7 +10,7 @@
   line-height: var(--ds-leading-normal);
   letter-spacing: var(--ds-tracking-normal);
   color: var(--ds-fg);
-  text-decoration: none;
+  text-decoration: underline solid currentColor 1px;
   text-underline-offset: 2px;
   transition: color var(--ds-duration-fast) var(--ds-ease-out);
 }
@@ -21,5 +24,8 @@
   letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
-.ds-link--underlined { text-decoration: underline solid currentColor 1px; }
-.ds-link--underlined:hover { text-decoration: underline wavy var(--ds-link-underline) 2px; }
+
+/* `underline="hover"` — only where layout already says "these are links":
+   a nav row, a footer column. The wavy underline still arrives on hover. */
+.ds-link--bare { text-decoration: none; }
+.ds-link--bare:hover { text-decoration: underline wavy var(--ds-link-underline) 2px; }

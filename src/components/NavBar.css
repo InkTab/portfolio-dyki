@@ -37,6 +37,11 @@
   gap: var(--ds-space-5);
 }
 .ds-navbar__links > * { white-space: nowrap; }
+/* The current page is marked with a rule, not just a colour shift. */
+.ds-navbar__links [aria-current='page'] {
+  text-decoration: underline solid var(--ds-accent) var(--ds-border-thick);
+  text-underline-offset: 6px;
+}
 
 .ds-navbar__meta {
   display: flex;

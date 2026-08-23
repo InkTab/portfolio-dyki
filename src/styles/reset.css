@@ -14,6 +14,9 @@ p, figure, blockquote, dl, dd, ul, ol {
   margin: 0;
 }
 
+/* Safari + VoiceOver drop list semantics when list-style is none, so a styled
+   list silently stops announcing "list, 3 items". Put role="list" back on any
+   <ul>/<ol> that takes a class — the reset cannot do it for you. */
 ul[class],
 ol[class] {
   list-style: none;
@@ -22,6 +25,7 @@ ol[class] {
 
 body {
   min-height: 100vh;
+  min-height: 100dvh; /* mobile URL bar */
   font-family: var(--ds-font-sans);
   font-size: var(--ds-text-body);
   line-height: var(--ds-leading-normal);
@@ -58,8 +62,10 @@ a {
   color: inherit;
 }
 
+/* One ring, everywhere, in a colour redefined per surface. Nothing in the
+   system may replace this with a border-colour change alone. */
 :focus-visible {
-  outline: 2px solid var(--ds-focus);
+  outline: var(--ds-border-thick) solid var(--ds-focus);
   outline-offset: 2px;
 }
 
@@ -68,6 +74,7 @@ a {
   color: var(--ds-bg);
 }
 
+/* Text-spacing overrides (WCAG 1.4.12) must not clip anything. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -14,7 +14,9 @@
   width: 100%;
   padding: var(--ds-space-3) var(--ds-space-4);
   background: transparent;
-  border: var(--ds-border-hairline) solid var(--ds-border-color);
+  /* The control token, not the decorative one: an input's border is its only
+     boundary, so it has to clear 3:1 (WCAG 1.4.11). */
+  border: var(--ds-border-hairline) solid var(--ds-border-control);
   border-radius: var(--ds-radius-xs);
   color: var(--ds-fg);
   font-family: var(--ds-font-sans);
@@ -26,25 +28,64 @@
 /* Inputs take the accent, not ink — the purple is what marks something as
    interactive throughout the system. */
 .ds-field__control:hover { border-color: var(--ds-accent); }
-.ds-field__control:focus {
+
+/* Focus keeps the system's real ring instead of replacing it with a 1px
+   border. Hover already sets border-color: accent, so a border-only focus
+   state was visually identical to hover — a keyboard user could not tell
+   where focus was. The ring is 2px, offset, and drawn in --ds-focus. */
+.ds-field__control:focus-visible {
+  outline: var(--ds-border-thick) solid var(--ds-focus);
+  outline-offset: 2px;
+  border-color: var(--ds-accent);
+}
+/* Pointer focus keeps the quieter treatment. */
+.ds-field__control:focus:not(:focus-visible) {
   outline: none;
   border-color: var(--ds-accent);
-  box-shadow: inset 0 0 0 1px var(--ds-accent), 0 0 0 3px var(--ds-halo);
+  box-shadow: 0 0 0 3px var(--ds-halo);
 }
-.ds-field__control:disabled { opacity: 0.45; cursor: not-allowed; }
+.ds-field__control:disabled {
+  background: var(--ds-bg-disabled);
+  color: var(--ds-fg-disabled);
+  border-color: transparent;
+  cursor: not-allowed;
+}
 
 textarea.ds-field__control { min-height: 8rem; resize: vertical; }
 
-.ds-field--invalid .ds-field__control { border-color: var(--ds-danger-border); }
-.ds-field--invalid .ds-field__control:focus {
+/* 2px, so the invalid state is not carried by colour alone (WCAG 1.4.1) —
+   a red hairline and a neutral hairline are the same shape. */
+.ds-field--invalid .ds-field__control {
   border-color: var(--ds-danger-border);
-  box-shadow: inset 0 0 0 1px var(--ds-danger-border);
+  border-width: var(--ds-border-thick);
 }
+.ds-field--invalid .ds-field__control:focus-visible { border-color: var(--ds-danger-border); }
 
 .ds-field__hint {
   font-size: var(--ds-text-body-sm);
   color: var(--ds-fg-muted);
 }
-/* Error text was sand-500 on paper — barely legible. Red at full strength,
-   and never the muted foreground. */
-.ds-field--invalid .ds-field__hint { color: var(--ds-danger); }
+/* The live region is inert until it has something to say, so an empty one
+   never leaves a gap in the stack. */
+.ds-field__error:empty { display: none; }
+.ds-field__error {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  font-size: var(--ds-text-body-sm);
+  color: var(--ds-danger);
+}
+/* A second, non-colour cue for the error — 1.4.1 again. */
+.ds-field__error::before {
+  content: '!';
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  border: var(--ds-border-hairline) solid currentColor;
+  border-radius: var(--ds-radius-circle);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-caption);
+  line-height: 1;
+}

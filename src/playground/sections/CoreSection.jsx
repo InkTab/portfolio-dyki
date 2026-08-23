@@ -68,7 +68,7 @@ export function CoreSection() {
         </Variants>
       </Specimen>
 
-      <Specimen name="StatusDot" note="Availability indicator with a pulsing ring. Pulse respects reduced-motion.">
+      <Specimen name="StatusDot" note="Availability indicator with a pulsing ring. Pulse respects reduced-motion, and each state reads its colour from a per-surface token so the dot clears 3:1 on sand, ink and violet alike.">
         <Variants label="Status">
           <StatusDot status="available">Available for hire</StatusDot>
           <StatusDot status="busy">Booked until Q3</StatusDot>
@@ -76,16 +76,19 @@ export function CoreSection() {
         </Variants>
       </Specimen>
 
-      <Specimen name="Link" note="Albert Sans at body size — the nav treatment is the base. Hover for the wavy purple underline.">
+      <Specimen
+        name="Link"
+        note={'Underlined at rest — a link whose colour matches the body text has nothing else to mark it, so the underline is the affordance, not the hover flourish. underline="hover" is for rows where position already says "link": nav, footer.'}
+      >
         <Variants label="Font & tone" align="baseline">
           <Link href="#core">About me</Link>
           <Link href="#core" tone="muted">Case studies</Link>
           <Link href="#core" font="mono">letstalk@dyki.design</Link>
-          <Link href="#core" underlined>Download CV</Link>
+          <Link href="#core" underline="hover">Nav treatment</Link>
         </Variants>
       </Specimen>
 
-      <Specimen name="Field" note="Accent-purple focus, not ink. Errors use the red signal colour so they are actually legible.">
+      <Specimen name="Field" note="Accent-purple focus, not ink. Pass `error` for a validation message: it is announced through a live region and marked with a shape as well as a colour.">
         <div className="pg-form">
           <Field
             label="Name"

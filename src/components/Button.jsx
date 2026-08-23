@@ -18,6 +18,10 @@ export function Button({
   ...rest
 }) {
   const Tag = as || (rest.href ? 'a' : 'button')
+  // A <button> with no type attribute defaults to type="submit", so any
+  // secondary action dropped into a form would submit it. Only real <button>
+  // elements take the attribute, and an explicit `type` still wins.
+  const typeAttr = Tag === 'button' ? { type: 'button' } : null
   return (
     <Tag
       className={cx(
@@ -27,6 +31,7 @@ export function Button({
         block && 'ds-button--block',
         className,
       )}
+      {...typeAttr}
       {...rest}
     >
       {children}

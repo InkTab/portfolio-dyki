@@ -1,0 +1,149 @@
+/* PARKED — not imported, not built, has no effect on the site.
+   The custom cursor was removed on request. To bring it back:
+     1. rename this file to ../cursor.css
+     2. add `import './styles/cursor.css'` to src/main.jsx
+     3. swap the `cursor: pointer` / `cursor: not-allowed` declarations in
+        reset.css, Button.css, Pill.css, Card.css and Field.css back to
+        `var(--ds-cursor-active)` / `var(--ds-cursor-disabled)`
+   cursor.svg, cursor-dark.svg and cursor-active.svg sit alongside this file;
+   cursor-source.svg is the untouched Figma export.
+*/
+
+/* =========================================================================
+   CURSOR
+   The system cursor is replaced with the arrow in ./cursors — one flat shape,
+   no glow. The fill is the only thing that changes.
+
+   These live under src/, not public/, so Vite rewrites the URLs. This project
+   builds with `base: './'` for GitHub Pages, where an absolute /cursors/… path
+   would resolve to the domain root and 404 under /portfolio-dyki/.
+
+     violet #5e23ff   resting, on a light ground
+     sand   #fef9f0   resting, on ink or violet
+     yellow #e8c559   you can act on this — every ground
+     not-allowed      interactive, but currently disabled
+
+   The yellow is not decoration: it is the affordance. It appears exactly when
+   interactivity does, and nowhere else.
+
+   RESTING FILL FOLLOWS THE SURFACE, because one colour cannot serve both
+   grounds. Violet-400 measures 6.06:1 on paper, 2.86:1 on ink, and 1.00:1 on
+   the violet band — where it vanishes into its own background. Ink and violet
+   surfaces swap it for sand-50 (18.10:1 and 6.34:1), riding the same
+   [data-surface] mechanism as every other token in the system.
+
+   THE HAIRLINE INK OUTLINE is what lets the yellow work at all. With no glow
+   behind it, a flat #e8c559 arrow measures 1.52:1 on the sand ground — all but
+   invisible on the surface that carries most of the interactive elements. The
+   outline gives the shape a 17:1 edge whatever the fill, which is also what
+   keeps the cursor readable as it crosses illustrations and blooms. Drop
+   `stroke` from cursors/*.svg for a bare silhouette.
+
+   Hotspot is `2 2` — the arrow's tip in the cropped viewBox.
+
+   THREE LIMITS, on purpose:
+
+   1. Pointer only. Behind `hover: hover and pointer: fine`, so touch devices
+      — which have no cursor and no hover — are untouched.
+   2. `auto` fallback on every declaration. Safari does not support SVG
+      cursors, so it keeps the system arrow rather than showing nothing. The
+      colour distinction is a bonus signal there, never the only one — every
+      interactive element in this system is also marked by shape, underline,
+      or border.
+   3. Dropped entirely under forced-colors, where the OS cursor is the user's
+      own deliberate setting and must not be overridden.
+
+   A custom cursor is a real accessibility cost: it ignores the OS pointer-size
+   and high-visibility-cursor settings that low-vision users rely on. That is
+   why it never carries information on its own.
+
+   cursors/cursor-source.svg keeps the original Figma export for reference.
+   ========================================================================= */
+
+/* Declared unconditionally, so component CSS can say `cursor: var(--ds-cursor-active)`
+   and get the right thing on every device. Outside the pointer media query
+   these resolve to the plain system keywords. */
+:root {
+  --ds-cursor: auto;
+  --ds-cursor-active: pointer;
+  --ds-cursor-disabled: not-allowed;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :root {
+    /* Hotspot 2 2 — the arrow's tip in the cropped viewBox. */
+    --ds-cursor: url('./cursors/cursor.svg') 2 2, auto;
+    --ds-cursor-active: url('./cursors/cursor-active.svg') 2 2, pointer;
+  }
+
+  /* Dark grounds take the sand arrow. Nested, like every other surface token,
+     so an ink band inside a sand page gets it without any extra markup. */
+  [data-surface='ink'],
+  [data-surface='violet'] {
+    --ds-cursor: url('./cursors/cursor-dark.svg') 2 2, auto;
+  }
+
+  html,
+  body {
+    cursor: var(--ds-cursor);
+  }
+
+  /* `var(--ds-cursor)`, NOT `inherit`: inherit would copy the parent's already
+     resolved value, so everything inside an ink band would keep the page's
+     violet arrow. Re-reading the variable lets each element resolve it against
+     the surface it actually sits on. Specificity 0, so every rule below wins. */
+  *,
+  *::before,
+  *::after {
+    cursor: var(--ds-cursor);
+  }
+
+  /* --- yellow: anything you can act on ---------------------------------- */
+  a[href],
+  button,
+  summary,
+  label[for],
+  select,
+  [role='button'],
+  [role='link'],
+  [role='tab'],
+  [role='checkbox'],
+  [role='radio'],
+  [role='switch'],
+  [tabindex]:not([tabindex='-1']),
+  input:not([type='hidden']),
+  textarea,
+  .ds-card--interactive,
+  .ds-casestudy--linked,
+  .ds-pill--interactive {
+    cursor: var(--ds-cursor-active);
+  }
+
+  /* A disabled control is not something you can act on, so it never goes
+     yellow — same reasoning as the halo. It gets `not-allowed` rather than the
+     resting violet, because "you cannot use this" is real information and the
+     resting arrow would not say it. */
+  :disabled,
+  [aria-disabled='true'] {
+    cursor: var(--ds-cursor-disabled);
+  }
+
+  /* Text selection still wants an I-beam: the caret position is real
+     information that a pointer glyph should not hide. Read-only and disabled
+     fields have no caret, so they stay on the resting cursor. */
+  input:not([type='hidden']):not([type='button']):not([type='submit']):not([type='checkbox']):not([type='radio']):not([type='range']):not([readonly]):not(:disabled):hover,
+  textarea:not([readonly]):not(:disabled):hover {
+    cursor: text;
+  }
+}
+
+/* The OS cursor is the user's own setting here. Leave it alone. */
+@media (forced-colors: active) {
+  html,
+  body,
+  *,
+  *::before,
+  *::after {
+    cursor: auto;
+  }
+}

@@ -11,7 +11,7 @@ import { Specimen, Variants } from '../Specimen'
  */
 function BlurredArtwork({ axis, label }) {
   return (
-    <div className="pg-illo-demo">
+    <div className="pg-illo-demo pg-illo-demo--wide">
       <div className="pg-artwork ds-pblur-host">
         <span className="pg-artwork__bars">
           <i /><i /><i /><i /><i /><i />
@@ -41,7 +41,7 @@ export function TextureSection() {
         name="ProgressiveBlur"
         note="Compounding blur across an axis. The sharp edge is where the axis starts. The host carries headroom around the artwork so the blur spills instead of clipping, while the ramp itself still maps to the art's edges."
       >
-        <Variants label="Axis" layout="grid" align="start">
+        <Variants label="Axis" layout="grid" columns={1} align="start">
           <BlurredArtwork axis="to bottom" label="to bottom" />
           <BlurredArtwork axis="to top" label="to top" />
           <BlurredArtwork axis="to right" label="to right" />

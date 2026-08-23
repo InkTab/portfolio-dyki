@@ -27,7 +27,9 @@
   max-width: 56ch;
   font-size: var(--ds-text-body-lg);
   font-weight: var(--ds-weight-light);
-  line-height: var(--ds-leading-tight);
+  /* A lede is a paragraph, not a heading. 1.2 is display leading; prose set
+     that tight is hard work for everyone and worst for dyslexic readers. */
+  line-height: var(--ds-leading-relaxed);
   color: var(--ds-fg-muted);
   margin: 0;
 }

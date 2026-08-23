@@ -7,7 +7,7 @@
 :root {
   /* ---------------------------------------------------------------------
      1. COLOR PRIMITIVES — raw ramps. Never reference these in components;
-        use the semantic tokens in section 2 instead.
+        use the semantic tokens in section 8 instead.
      --------------------------------------------------------------------- */
 
   /* Violet — the signature electric purple */
@@ -38,13 +38,28 @@
 
   /* Signal. There is deliberately no pure white, black, or neutral grey in
      this palette — the ramps above cover every light and dark the system
-     needs, and mixing in true neutrals makes the warmth read as a mistake. */
-  --ds-green: #18c445; /* "available for hire" */
-  --ds-red: #d92d20;   /* validation errors only — never decorative */
-  --ds-shadow-tint: rgba(19, 11, 40, 0.1); /* ink, not black */
+     needs, and mixing in true neutrals makes the warmth read as a mistake.
+
+     Each signal is a THREE-STEP ramp, not one colour. A status dot has to
+     clear 3:1 against whatever it sits on (WCAG 1.4.11), and no single green
+     can do that on paper, on ink, AND on violet — violet-400 sits right in the
+     middle of the luminance range, so a green light enough to read on ink is
+     invisible on it. The semantic layer picks the right step per surface. */
+  --ds-green-dark:  #0f8f2f; /* on sand   — 3.84:1 */
+  --ds-green:       #2fd65c; /* on ink    — 9.85:1 */
+  --ds-green-light: #5ce07f; /* on violet — 3.93:1 */
+
+  --ds-amber-dark:  #a8752a; /* on sand   — 3.65:1 */
+  --ds-amber:       #e0a442; /* on ink    — 8.64:1 */
+  --ds-amber-light: #f0c175; /* on violet — 3.98:1 */
+
+  /* #d92d20 measured 4.41:1 on the paper ground — under AA. Darkened. */
+  --ds-red:       #c92a1e; /* on sand   — 5.00:1 */
+  --ds-red-light: #ff6b5e; /* on ink    — 6.80:1 */
+  --ds-red-pale:  #ffd9d4; /* on violet — 5.10:1 */
 
   /* ---------------------------------------------------------------------
-     3. TYPOGRAPHY
+     2. TYPOGRAPHY
      --------------------------------------------------------------------- */
   --ds-font-display: 'NAMU 1600', 'Albert Sans', system-ui, sans-serif;
   --ds-font-sans: 'Albert Sans', system-ui, -apple-system, sans-serif;
@@ -57,10 +72,14 @@
   --ds-weight-bold: 700;
 
   /* Type scale — fluid where the site scales, fixed where it does not */
-  --ds-text-display-xl: clamp(3.5rem, 9vw, 7rem);    /*  56 → 112 */
-  --ds-text-display-lg: clamp(2.5rem, 6.5vw, 5rem);  /*  40 →  80 */
-  --ds-text-display-md: clamp(2rem, 4vw, 2.875rem);  /*  32 →  46 */
-  --ds-text-display-sm: clamp(1.5rem, 3vw, 2rem);    /*  24 →  32 */
+  /* The middle term carries a rem component on purpose. A pure-vw middle term
+     ignores the user's browser font-size setting entirely (it only responds to
+     page zoom), which fails 1.4.4 for anyone who scales text rather than
+     zooming. Mixing rem + vw keeps the same curve and stays user-scalable. */
+  --ds-text-display-xl: clamp(3.5rem, 2rem + 6.5vw, 7rem);      /*  56 → 112 */
+  --ds-text-display-lg: clamp(2.5rem, 1.5rem + 4.5vw, 5rem);    /*  40 →  80 */
+  --ds-text-display-md: clamp(2rem, 1.4rem + 2.6vw, 2.875rem);  /*  32 →  46 */
+  --ds-text-display-sm: clamp(1.5rem, 1.1rem + 1.8vw, 2rem);    /*  24 →  32 */
   --ds-text-title: 1.5rem;    /* 24 */
   --ds-text-body-lg: 1.25rem; /* 20 */
   --ds-text-body: 1rem;       /* 16 */
@@ -80,7 +99,7 @@
   --ds-tracking-wide: 0.08em;
 
   /* ---------------------------------------------------------------------
-     4. SPACE — 4px base
+     3. SPACE — 4px base
      --------------------------------------------------------------------- */
   --ds-space-1: 0.25rem;  /*  4 */
   --ds-space-2: 0.5rem;   /*  8 */
@@ -88,14 +107,14 @@
   --ds-space-4: 1rem;     /* 16 */
   --ds-space-5: 1.5rem;   /* 24 */
   --ds-space-6: 2rem;     /* 32 */
-  --ds-space-7: 2.625rem; /* 42 */
+  --ds-space-7: 2.5rem;   /* 40 */
   --ds-space-8: 3rem;     /* 48 */
   --ds-space-9: 4rem;     /* 64 */
   --ds-space-10: 6rem;    /* 96 */
   --ds-space-11: 8rem;    /* 128 */
 
   /* ---------------------------------------------------------------------
-     5. RADIUS / BORDER / ELEVATION
+     4. RADIUS / BORDER / ELEVATION
      --------------------------------------------------------------------- */
   --ds-radius-none: 0;
   --ds-radius-xs: 2px;   /* the site's default corner */
@@ -110,9 +129,19 @@
   --ds-shadow-sm: 0 1px 2px var(--ds-shadow-tint);
   --ds-shadow-md: 0 4px 16px var(--ds-shadow-tint);
   --ds-shadow-lg: 0 16px 48px var(--ds-shadow-tint);
+  /* --ds-shadow-tint itself is per-surface: see the semantic layer. An
+     ink-tinted shadow on the ink ground is a shadow you cannot see. */
+
+  /* Stacking. Every layer in the system names its step here rather than
+     inventing a number, so a decoration can never land on top of a menu. */
+  --ds-z-below: -1;    /* paper grain, blooms — behind content */
+  --ds-z-base: 0;
+  --ds-z-raised: 10;   /* treatments laid over artwork */
+  --ds-z-sticky: 100;  /* sticky bars */
+  --ds-z-overlay: 1000;
 
   /* ---------------------------------------------------------------------
-     6. MOTION
+     5. MOTION
      --------------------------------------------------------------------- */
   --ds-duration-fast: 120ms;
   --ds-duration-base: 220ms;
@@ -121,7 +150,7 @@
   --ds-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 
   /* ---------------------------------------------------------------------
-     7. LAYOUT
+     6. LAYOUT
      --------------------------------------------------------------------- */
   --ds-container: 1280px;
   --ds-container-narrow: 880px;
@@ -135,7 +164,7 @@
   --ds-bar-height: 60px; /* the site's ticker / nav bar */
 
   /* ---------------------------------------------------------------------
-     8. TEXTURE
+     7. TEXTURE
      A single SVG turbulence tile, reused as paper grain and as the dither
      that dissolves a gradient's edge. Inline so it costs no request.
      --------------------------------------------------------------------- */
@@ -152,7 +181,7 @@
 }
 
 /* =========================================================================
-   2. SEMANTIC LAYER — surfaces
+   8. SEMANTIC LAYER — surfaces
    Every component reads only from these. Nest [data-surface] anywhere to
    re-theme a subtree.
 
@@ -169,18 +198,31 @@
   --ds-bg-sunken: var(--ds-sand-200);
   --ds-bg-inset: rgba(19, 11, 40, 0.05);
 
-  --ds-fg: var(--ds-violet-950);
-  --ds-fg-muted: rgba(19, 11, 40, 0.66);
-  --ds-fg-subtle: rgba(19, 11, 40, 0.42);
+  --ds-fg: var(--ds-violet-950);          /* 17.31:1 */
+  --ds-fg-muted: rgba(19, 11, 40, 0.66);  /*  6.01:1 */
+  /* Was 0.42 — measured 2.77:1, well under AA. 0.58 is the lowest alpha that
+     still clears 4.5:1 on all three sand grounds (bg, raised, sunken). */
+  --ds-fg-subtle: rgba(19, 11, 40, 0.58); /*  4.57:1 */
   --ds-fg-inverse: var(--ds-sand-50);
+  --ds-fg-disabled: rgba(19, 11, 40, 0.55);
+  --ds-bg-disabled: rgba(19, 11, 40, 0.1);
 
+  /* Two border tokens, not one. --ds-border-color is DECORATIVE — rules,
+     dividers, table lines — and may sit under 3:1. --ds-border-control is the
+     one that carries meaning (the edge of an input, an outline button) and has
+     to clear 3:1 per WCAG 1.4.11. They used to be the same token at 1.48:1,
+     which made an outline button's only affordance invisible to low vision. */
   --ds-border-color: rgba(19, 11, 40, 0.18);
+  --ds-border-control: rgba(19, 11, 40, 0.45); /* 3.03:1 */
   --ds-border-strong: var(--ds-violet-950);
   --ds-border-subtle: rgba(19, 11, 40, 0.08);
 
   --ds-accent: var(--ds-violet-400);
   --ds-accent-fg: var(--ds-sand-50);
   --ds-accent-hover: var(--ds-violet-500);
+  /* The accent used as TEXT rather than as a fill. On sand the two coincide;
+     on ink they cannot — see the ink surface. */
+  --ds-accent-text: var(--ds-violet-400); /* 6.06:1 */
   /* Tinted fill for cards and cells that should read as accent without
      shouting — the lavender panels in the reference layout. */
   --ds-accent-soft: var(--ds-violet-100);
@@ -194,6 +236,12 @@
   --ds-halo: rgba(94, 35, 255, 0.3);
   --ds-danger: var(--ds-red);
   --ds-danger-border: var(--ds-red);
+
+  --ds-status-available: var(--ds-green-dark);
+  --ds-status-busy: var(--ds-amber-dark);
+  --ds-status-offline: var(--ds-fg-subtle);
+
+  --ds-shadow-tint: rgba(19, 11, 40, 0.1);
 
   /* Gradient blooms read as purple light on paper. */
   --ds-bloom-core: var(--ds-violet-400);
@@ -210,18 +258,25 @@
   --ds-bg-sunken: var(--ds-violet-900);
   --ds-bg-inset: rgba(254, 249, 240, 0.07);
 
-  --ds-fg: var(--ds-sand-50);
-  --ds-fg-muted: rgba(254, 249, 240, 0.62);
-  --ds-fg-subtle: rgba(254, 249, 240, 0.4);
+  --ds-fg: var(--ds-sand-50);              /* 18.10:1 */
+  --ds-fg-muted: rgba(254, 249, 240, 0.62);/*  7.28:1 */
+  --ds-fg-subtle: rgba(254, 249, 240, 0.48); /* 4.77:1 — was 0.4 / 3.66:1 */
   --ds-fg-inverse: var(--ds-violet-950);
+  --ds-fg-disabled: rgba(254, 249, 240, 0.5);
+  --ds-bg-disabled: rgba(254, 249, 240, 0.1);
 
   --ds-border-color: rgba(254, 249, 240, 0.2);
+  --ds-border-control: rgba(254, 249, 240, 0.35); /* 3.07:1 */
   --ds-border-strong: var(--ds-sand-50);
   --ds-border-subtle: rgba(254, 249, 240, 0.1);
 
   --ds-accent: var(--ds-violet-400);
   --ds-accent-fg: var(--ds-sand-50);
   --ds-accent-hover: var(--ds-violet-300);
+  /* violet-400 as text on ink measures 2.86:1 — it works as a FILL (the text
+     on top of it is sand) but never as type. Accent-coloured text on ink comes
+     from violet-300 instead. */
+  --ds-accent-text: var(--ds-violet-300); /* 6.13:1 */
   --ds-accent-soft: var(--ds-violet-800);
   --ds-accent-soft-fg: var(--ds-violet-100);
 
@@ -230,8 +285,15 @@
 
   --ds-halo: rgba(94, 35, 255, 0.55);
   /* Lifted on ink so it clears the dark ground. */
-  --ds-danger: #ff6b5e;
-  --ds-danger-border: #ff6b5e;
+  --ds-danger: var(--ds-red-light);
+  --ds-danger-border: var(--ds-red-light);
+
+  --ds-status-available: var(--ds-green);
+  --ds-status-busy: var(--ds-amber);
+  --ds-status-offline: var(--ds-fg-subtle);
+
+  /* A shadow on ink has to be lighter than the ground, not darker. */
+  --ds-shadow-tint: rgba(0, 0, 0, 0.5);
 
   --ds-bloom-core: var(--ds-violet-400);
   --ds-bloom-halo: var(--ds-violet-600);
@@ -245,12 +307,21 @@
   --ds-bg-sunken: var(--ds-violet-700);
   --ds-bg-inset: rgba(254, 249, 240, 0.12);
 
-  --ds-fg: var(--ds-sand-50);
-  --ds-fg-muted: rgba(254, 249, 240, 0.75);
-  --ds-fg-subtle: rgba(254, 249, 240, 0.5);
+  --ds-fg: var(--ds-sand-50); /* 6.34:1 */
+  /* Violet-400 is a mid-luminance ground, so it has far less headroom than
+     paper or ink: the full text ramp does not fit on it. 0.75 measured 4.12:1
+     and 0.5 measured 2.54:1 — both under AA. Muted is lifted to 0.82, and
+     subtle collapses INTO muted rather than pretending to be a third tier.
+     If a violet band needs three levels of emphasis, it needs a different
+     ground. */
+  --ds-fg-muted: rgba(254, 249, 240, 0.82);  /* 4.67:1 */
+  --ds-fg-subtle: var(--ds-fg-muted);
   --ds-fg-inverse: var(--ds-violet-500);
+  --ds-fg-disabled: rgba(254, 249, 240, 0.85);
+  --ds-bg-disabled: rgba(94, 35, 255, 0.5);
 
   --ds-border-color: rgba(254, 249, 240, 0.4);
+  --ds-border-control: rgba(254, 249, 240, 0.62); /* 3.19:1 */
   --ds-border-strong: var(--ds-sand-50);
   --ds-border-subtle: rgba(254, 249, 240, 0.18);
 
@@ -258,6 +329,7 @@
   --ds-accent: var(--ds-sand-50);
   --ds-accent-fg: var(--ds-violet-500);
   --ds-accent-hover: var(--ds-sand-100);
+  --ds-accent-text: var(--ds-sand-50);
   --ds-accent-soft: rgba(254, 249, 240, 0.16);
   --ds-accent-soft-fg: var(--ds-sand-50);
 
@@ -265,8 +337,14 @@
   --ds-link-underline: var(--ds-sand-200);
 
   --ds-halo: rgba(254, 249, 240, 0.4);
-  --ds-danger: #ffd9d4;
-  --ds-danger-border: #ffd9d4;
+  --ds-danger: var(--ds-red-pale);
+  --ds-danger-border: var(--ds-red-pale);
+
+  --ds-status-available: var(--ds-green-light);
+  --ds-status-busy: var(--ds-amber-light);
+  --ds-status-offline: var(--ds-fg-muted);
+
+  --ds-shadow-tint: rgba(19, 11, 40, 0.25);
 
   --ds-bloom-core: var(--ds-violet-300);
   --ds-bloom-halo: var(--ds-violet-200);
@@ -276,4 +354,43 @@
 [data-surface] {
   background: var(--ds-bg);
   color: var(--ds-fg);
+}
+
+/* =========================================================================
+   9. FORCED COLORS (Windows High Contrast)
+   The OS replaces every colour with its own palette and drops background
+   images and box-shadows. Anything in this system whose edge comes from a
+   fill or an inset box-shadow therefore loses it — so those get a real
+   border back, and decoration is hidden outright.
+   ========================================================================= */
+@media (forced-colors: active) {
+  .ds-button,
+  .ds-pill,
+  .ds-tag,
+  .ds-field__control,
+  .ds-card--outline {
+    border: var(--ds-border-hairline) solid ButtonBorder;
+  }
+
+  .ds-button--solid,
+  .ds-pill--solid,
+  .ds-pill--selected,
+  .ds-tag--accent {
+    background: ButtonFace;
+    color: ButtonText;
+    border-color: ButtonText;
+  }
+
+  /* forced-colors keeps outline colours, so the focus ring survives — but
+     it has to stop inheriting a token the OS has overridden. */
+  :focus-visible { outline-color: Highlight; }
+
+  /* Purely decorative layers carry no information. */
+  .ds-grain-layer,
+  .ds-grain::after,
+  .ds-bloom,
+  .ds-pblur { display: none; }
+
+  /* The halo is light, not an edge — it renders as nothing useful here. */
+  .ds-button, .ds-pill { box-shadow: none; }
 }

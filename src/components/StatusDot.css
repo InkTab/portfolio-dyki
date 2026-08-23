@@ -5,7 +5,6 @@
   font-family: var(--ds-font-sans);
   font-size: var(--ds-text-body);
   color: var(--ds-fg);
-  white-space: nowrap;
 }
 
 .ds-status__dot {
@@ -31,6 +30,11 @@
   80%, 100% { transform: scale(1.5); opacity: 0; }
 }
 
-.ds-status--available { --ds-status-color: var(--ds-green); }
-.ds-status--busy { --ds-status-color: var(--ds-sand-500); }
-.ds-status--offline { --ds-status-color: var(--ds-fg-subtle); }
+/* These read the semantic per-surface status tokens rather than a primitive.
+   They used to point at --ds-green / --ds-sand-500 directly, which is both the
+   one place in the system that broke the "components never touch primitives"
+   rule and the reason the dot measured 2.12:1 on paper — a single green cannot
+   clear 3:1 on sand, ink AND violet at once. */
+.ds-status--available { --ds-status-color: var(--ds-status-available); }
+.ds-status--busy { --ds-status-color: var(--ds-status-busy); }
+.ds-status--offline { --ds-status-color: var(--ds-status-offline); }

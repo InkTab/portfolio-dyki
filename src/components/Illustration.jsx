@@ -15,6 +15,11 @@ import './Illustration.css'
  * Note: supplying `srcInk` puts both files in the DOM, so both may be fetched.
  * Only pass it for artwork that genuinely appears on both surfaces.
  *
+ * Pass `width`/`height` (the intrinsic pixel size) OR `ratio`. With neither,
+ * a lazily-loaded image has no reserved box and the page reflows when it
+ * arrives. `alt` defaults to '' — that marks the art DECORATIVE, which is the
+ * safe default but is wrong for anything carrying meaning.
+ *
  *   blur   — Composition A: the artwork itself dissolves along an axis.
  *            Pass `true` for the default, or {axis, strength}.
  *   blurSpill — headroom around the image for blurred pixels to spread into.
@@ -33,6 +38,8 @@ export function Illustration({
   srcInk2x,
   alt = '',
   ratio,
+  width,
+  height,
   fit = 'cover',
   blur = false,
   blurSpill = '0px',
@@ -81,6 +88,8 @@ export function Illustration({
           src={src}
           srcSet={srcSet}
           alt={alt}
+          width={width}
+          height={height}
           loading={loading}
           decoding="async"
         />

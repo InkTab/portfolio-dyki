@@ -580,24 +580,33 @@ body {
    padding is uniform, it is also exactly the gap between host and artwork, so
    it doubles as --ds-pblur-inset and the ramp still tracks the art. */
 .pg-artwork {
-  --pg-artwork-spill: 22px;
+  --pg-artwork-spill: 28px;
   --ds-pblur-inset: var(--pg-artwork-spill);
   position: relative;
-  display: inline-flex;
-  align-self: flex-start;
+  display: flex;
+  /* Full width of the canvas, with height following it. At thumbnail size a
+     four-layer ramp had barely 90px to resolve across — the horizontal axes
+     ("to right", "to left") were the width of a few bars, so the treatment was
+     invisible in the one demo that exists to show it. */
+  width: 100%;
   padding: var(--pg-artwork-spill);
 }
 .pg-artwork__bars {
   display: flex;
   align-items: flex-end;
-  gap: 5px;
-  height: 92px;
+  justify-content: space-between;
+  gap: var(--ds-space-3);
+  width: 100%;
+  /* Scales with the box, floored so a narrow viewport still has a ramp to
+     look at and capped so it does not run away on a wide monitor. */
+  height: clamp(140px, 22vw, 260px);
 }
 .pg-artwork__bars i {
   display: block;
-  width: 9px;
+  flex: 1;
+  min-width: 0;
   background: var(--ds-accent);
-  border-radius: 1px;
+  border-radius: var(--ds-radius-sm);
 }
 .pg-artwork__bars i:nth-child(1) { height: 58%; }
 .pg-artwork__bars i:nth-child(2) { height: 100%; }
@@ -627,6 +636,8 @@ body {
   max-width: 46ch;
 }
 .pg-illo-demo { display: flex; flex-direction: column; gap: var(--ds-space-2); }
+/* Full-measure blur demo: the caption sits under the host, never inside it. */
+.pg-illo-demo--wide { width: 100%; }
 /* ------------------------- labelled levels ----------------------------- */
 .pg-level { display: flex; flex-direction: column; gap: var(--ds-space-1); }
 .pg-level__name {

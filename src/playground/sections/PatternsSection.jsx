@@ -74,15 +74,16 @@ export function PatternsSection() {
             </Card.Header>
             <Card.Body>
               <Heading size="sm" as="h4">Tinted</Heading>
-              <Text size="sm">Accent purple as a wash, and the only card that moves. Use it to pick two or three out of a grid, never all of them.</Text>
+              <Text size="sm">Accent purple as a wash. Use it to pick two or three out of a grid, never all of them. Colour and interactivity are separate axes — add `interactive` if it should also move.</Text>
             </Card.Body>
           </Card>
         </div>
       </Specimen>
 
-      <Specimen name="CaseStudyCard" note="Cover, labelled fields, and a CTA row pinned to the bottom. Omit ctaHref for NDA work.">
+      <Specimen name="CaseStudyCard" note="Cover, heading, labelled fields, and a CTA row pinned to the bottom. Only the title is the link — the whole card stays clickable, but the accessible name is the title alone. Omit ctaHref for NDA work.">
         <div className="pg-grid-3">
           <CaseStudyCard
+            title="Holistic fitness app"
             ctaHref="#patterns"
             cta="Full Report"
             fields={[
@@ -92,6 +93,7 @@ export function PatternsSection() {
             ]}
           />
           <CaseStudyCard
+            title="AI marketing service"
             cta="Ask me in person"
             fields={[
               { name: 'Project type', value: 'AI-Powered Marketing Service' },
@@ -100,6 +102,7 @@ export function PatternsSection() {
             ]}
           />
           <CaseStudyCard
+            title="Quantum chemistry startup"
             cta="Ask me in person"
             fields={[
               { name: 'Project type', value: 'Quantum Chemistry Startup' },

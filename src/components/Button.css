@@ -8,7 +8,10 @@
   letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   text-decoration: none;
-  white-space: nowrap;
+  /* Not `nowrap`: under a user text-spacing stylesheet (1.4.12) or at 200%
+     zoom (1.4.4) a nowrap label overflows with no way to recover. Balanced
+     wrapping keeps short labels on one line anyway. */
+  text-wrap: balance;
   border-radius: var(--ds-radius-xs);
   border: var(--ds-border-hairline) solid transparent;
   cursor: pointer;
@@ -20,9 +23,17 @@
     transform var(--ds-duration-fast) var(--ds-ease-out);
 }
 
+/* Disabled is a colour pair, not a blanket opacity. Fading the whole control
+   fades its label along with its fill, so the two stay at the same ratio to
+   each other — 0.45 opacity measured 1.49:1 between label and fill, which is
+   unreadable. Disabled text is exempt from 1.4.3, but "exempt" is not a reason
+   to make it illegible. */
 .ds-button:disabled,
 .ds-button[aria-disabled='true'] {
-  opacity: 0.45;
+  background: var(--ds-bg-disabled);
+  color: var(--ds-fg-disabled);
+  border-color: transparent;
+  box-shadow: none;
   cursor: not-allowed;
 }
 
@@ -30,10 +41,12 @@
   transform: translateY(1px);
 }
 
-/* --- sizes --- */
-.ds-button--sm { font-size: var(--ds-text-caption); padding: var(--ds-space-2) var(--ds-space-3); }
-.ds-button--md { font-size: var(--ds-text-label); padding: var(--ds-space-3) var(--ds-space-5); }
-.ds-button--lg { font-size: var(--ds-text-label); padding: var(--ds-space-4) var(--ds-space-6); }
+/* --- sizes ---
+   min-height holds the 24px floor from WCAG 2.2 SC 2.5.8 even if a consumer
+   overrides padding or the label wraps to nothing. */
+.ds-button--sm { font-size: var(--ds-text-caption); padding: var(--ds-space-2) var(--ds-space-3); min-height: 24px; }
+.ds-button--md { font-size: var(--ds-text-label); padding: var(--ds-space-3) var(--ds-space-5); min-height: 40px; }
+.ds-button--lg { font-size: var(--ds-text-label); padding: var(--ds-space-4) var(--ds-space-6); min-height: 48px; }
 
 /* --- variants --- */
 
@@ -57,16 +70,12 @@
   box-shadow: 0 4px 18px -6px var(--ds-halo);
 }
 
-/* A disabled control is not lit. */
-.ds-button:disabled,
-.ds-button[aria-disabled='true'] {
-  box-shadow: none;
-}
-
+/* --ds-border-control, not --ds-border-color: on an outline button the border
+   IS the button. At the decorative token's 1.48:1 there was nothing to see. */
 .ds-button--outline {
   background: transparent;
   color: var(--ds-fg);
-  border-color: var(--ds-border-color);
+  border-color: var(--ds-border-control);
 }
 .ds-button--outline:not(:disabled):hover {
   border-color: var(--ds-border-strong);
