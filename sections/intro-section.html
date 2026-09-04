@@ -3,7 +3,32 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@300;400&display=swap">
-<link rel="stylesheet" href="intro-section.css">
+<link rel="stylesheet" href="style.css">
+<script>
+  (function() {
+    var saved = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (saved === 'dark' || (!saved && prefersDark)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  })();
+</script>
+
+<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Toggle theme">
+  <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 16 16" width="16" height="16" fill="none"
+       stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+       aria-hidden="true" focusable="false">
+    <circle cx="8" cy="8" r="3.2"/>
+    <path d="M8 1.5v1.5M8 13v1.5M1.5 8h1.5M13 8h1.5M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M3.4 12.6l1.1-1.1M11.5 4.5l1.1-1.1"/>
+  </svg>
+  <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 16 16" width="16" height="16" fill="none"
+       stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+       aria-hidden="true" focusable="false">
+    <path d="M13.2 9.8A5.6 5.6 0 1 1 6.2 2.8a6.3 6.3 0 0 0 7 7Z"/>
+  </svg>
+</button>
 
 <section class="ia" id="ideas">
   <p class="ia__hint">Hover an idea</p>
@@ -32,7 +57,7 @@
     </div>
     <div class="ia__slot" style="--x:20%;--y:18%">
       <div class="ia__drift" style="--dur:16s;--delay:0s">
-        <a class="ia__idea ia__idea--link" href="#" style="--s:1.12"><span class="ia__label">Holistic fitness app</span><span class="ia__tag">Case study &rarr;</span><span class="ia__spark ia__spark--a" aria-hidden="true" style="--sx:-36px;--sy:20px;--d:.04s">design system</span><span class="ia__spark ia__spark--a" aria-hidden="true" style="--sx:46px;--sy:0px;--d:.12s">branding</span><span class="ia__spark ia__spark--r" aria-hidden="true" style="--sx:10px;--sy:-13px;--d:.2s">research</span><span class="ia__spark ia__spark--l" aria-hidden="true" style="--sx:10px;--sy:-13px;--d:.28s">user testing</span><span class="ia__spark ia__spark--b" aria-hidden="true" style="--sx:-46px;--sy:0px;--d:.36s">marketing</span><span class="ia__spark ia__spark--b" aria-hidden="true" style="--sx:42px;--sy:0px;--d:.44s">prototyping</span></a>
+        <a class="ia__idea ia__idea--link" href="case-study-section.html" style="--s:1.12"><span class="ia__label">Holistic fitness app</span><span class="ia__tag">Case study &rarr;</span><span class="ia__spark ia__spark--a" aria-hidden="true" style="--sx:-36px;--sy:20px;--d:.04s">design system</span><span class="ia__spark ia__spark--a" aria-hidden="true" style="--sx:46px;--sy:0px;--d:.12s">branding</span><span class="ia__spark ia__spark--r" aria-hidden="true" style="--sx:10px;--sy:-13px;--d:.2s">research</span><span class="ia__spark ia__spark--l" aria-hidden="true" style="--sx:10px;--sy:-13px;--d:.28s">user testing</span><span class="ia__spark ia__spark--b" aria-hidden="true" style="--sx:-46px;--sy:0px;--d:.36s">marketing</span><span class="ia__spark ia__spark--b" aria-hidden="true" style="--sx:42px;--sy:0px;--d:.44s">prototyping</span></a>
       </div>
     </div>
     <div class="ia__slot" style="--x:50%;--y:6%">
@@ -47,7 +72,7 @@
     </div>
     <div class="ia__slot" style="--x:74%;--y:24%">
       <div class="ia__drift" style="--dur:15s;--delay:-2s">
-        <a class="ia__idea ia__idea--link" href="#" style="--s:0.95"><span class="ia__label">Quantum chemistry startup website</span><span class="ia__tag">Case study &rarr;</span><span class="ia__spark ia__spark--a" aria-hidden="true" style="--sx:-56px;--sy:0px;--d:.04s">user interviews</span><span class="ia__spark ia__spark--l" aria-hidden="true" style="--sx:0px;--sy:0px;--d:.12s">research</span><span class="ia__spark ia__spark--r" aria-hidden="true" style="--sx:0px;--sy:0px;--d:.2s">pitch deck design</span><span class="ia__spark ia__spark--b" aria-hidden="true" style="--sx:96px;--sy:18px;--d:.28s">website design</span></a>
+        <a class="ia__idea ia__idea--link" href="case-study-section.html" style="--s:0.95"><span class="ia__label">Quantum chemistry startup website</span><span class="ia__tag">Case study &rarr;</span><span class="ia__spark ia__spark--a" aria-hidden="true" style="--sx:-56px;--sy:0px;--d:.04s">user interviews</span><span class="ia__spark ia__spark--l" aria-hidden="true" style="--sx:0px;--sy:0px;--d:.12s">research</span><span class="ia__spark ia__spark--r" aria-hidden="true" style="--sx:0px;--sy:0px;--d:.2s">pitch deck design</span><span class="ia__spark ia__spark--b" aria-hidden="true" style="--sx:96px;--sy:18px;--d:.28s">website design</span></a>
       </div>
     </div>
     <div class="ia__slot" style="--x:7%;--y:68%">
@@ -57,7 +82,7 @@
     </div>
     <div class="ia__slot" style="--x:80%;--y:82%">
       <div class="ia__drift ia__drift--c" style="--dur:14s;--delay:-5s">
-        <a class="ia__idea ia__idea--link" href="#" style="--s:1.06"><span class="ia__label">Supplement checkout fix</span><span class="ia__tag">Case study &rarr;</span><span class="ia__spark ia__spark--a" aria-hidden="true" style="--sx:-32px;--sy:0px;--d:.04s">data analysis</span><span class="ia__spark ia__spark--r" aria-hidden="true" style="--sx:0px;--sy:0px;--d:.12s">UI design</span><span class="ia__spark ia__spark--b" aria-hidden="true" style="--sx:-24px;--sy:0px;--d:.2s">UX design</span></a>
+        <a class="ia__idea ia__idea--link" href="case-study-section.html" style="--s:1.06"><span class="ia__label">Supplement checkout fix</span><span class="ia__tag">Case study &rarr;</span><span class="ia__spark ia__spark--a" aria-hidden="true" style="--sx:-32px;--sy:0px;--d:.04s">data analysis</span><span class="ia__spark ia__spark--r" aria-hidden="true" style="--sx:0px;--sy:0px;--d:.12s">UI design</span><span class="ia__spark ia__spark--b" aria-hidden="true" style="--sx:-24px;--sy:0px;--d:.2s">UX design</span></a>
       </div>
     </div>
     <div class="ia__slot" style="--x:16%;--y:88%">
@@ -67,8 +92,28 @@
     </div>
     <div class="ia__slot" style="--x:52%;--y:86%">
       <div class="ia__drift ia__drift--b" style="--dur:16s;--delay:-6s">
-        <a class="ia__idea ia__idea--link" href="#" style="--s:1.02"><span class="ia__label">Marketing AI service</span><span class="ia__tag">Case study &rarr;</span><span class="ia__spark ia__spark--a" aria-hidden="true" style="--sx:-53px;--sy:0px;--d:.04s">product design</span><span class="ia__spark ia__spark--a" aria-hidden="true" style="--sx:56px;--sy:14px;--d:.12s">design system</span><span class="ia__spark ia__spark--l" aria-hidden="true" style="--sx:0px;--sy:0px;--d:.2s">research</span><span class="ia__spark ia__spark--r" aria-hidden="true" style="--sx:0px;--sy:0px;--d:.28s">branding</span><span class="ia__spark ia__spark--b" aria-hidden="true" style="--sx:-19px;--sy:0px;--d:.36s">user testing</span></a>
+        <a class="ia__idea ia__idea--link" href="case-study-section.html" style="--s:1.02"><span class="ia__label">Marketing AI service</span><span class="ia__tag">Case study &rarr;</span><span class="ia__spark ia__spark--a" aria-hidden="true" style="--sx:-53px;--sy:0px;--d:.04s">product design</span><span class="ia__spark ia__spark--a" aria-hidden="true" style="--sx:56px;--sy:14px;--d:.12s">design system</span><span class="ia__spark ia__spark--l" aria-hidden="true" style="--sx:0px;--sy:0px;--d:.2s">research</span><span class="ia__spark ia__spark--r" aria-hidden="true" style="--sx:0px;--sy:0px;--d:.28s">branding</span><span class="ia__spark ia__spark--b" aria-hidden="true" style="--sx:-19px;--sy:0px;--d:.36s">user testing</span></a>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  (function() {
+    var toggle = document.getElementById('theme-toggle');
+    if (!toggle) return;
+    function updateLabel() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+      toggle.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+    updateLabel();
+    toggle.addEventListener('click', function() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      var nextTheme = isDark ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', nextTheme);
+      try { localStorage.setItem('theme', nextTheme); } catch(e) {}
+      updateLabel();
+    });
+  })();
+</script>
