@@ -1,0 +1,377 @@
+/* ============ base ============ */
+*{box-sizing:border-box}
+body{margin:0;background:#FFFFFF;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid #111316;outline-offset:3px}
+
+/* ============ the page ============ */
+/* a case study reads sideways: one viewport-tall track, panels laid left to right,
+   and the method running out along a horizontal thread at the end of it */
+.cs{
+  --paper:#FFFFFF;
+  --ink:#111316;
+  /* the same greys as the field this page is opened from -- no new values, so the
+     ratios already measured there still hold: body under 24px needs 4.5:1, rules 3:1 */
+  --ghost:#767676;        /* reading copy — 4.54:1 */
+  --ghost-link:#575757;   /* a link at rest, a step darker than the prose around it — 7.21:1 */
+  --rule-link:#8C8C8C;    /* hairlines, the thread, panel edges, image frames — 3.36:1 */
+  --tag:#6E6E6E;          /* mono metadata, captions, kickers — 5.10:1 */
+  --woke:#2E2E2E;         /* how far a non-link darkens on hover — 13.64:1 */
+  /* one marker swipe, reused: denser in the middle, thinning at both ends, off-square.
+     the page reads left to right, so the stroke stays on its horizontal axis throughout */
+  --marker:linear-gradient(101deg,
+    rgba(255,214,10,0) 0%,rgba(255,214,10,.75) 2.5%,
+    rgba(255,214,10,.92) 34%,rgba(255,214,10,.86) 68%,
+    rgba(255,214,10,.7) 97.5%,rgba(255,214,10,0) 100%);
+  --pad-x:clamp(40px,6vw,116px);   /* the gutter on both sides of every panel */
+  --pad-y:clamp(44px,9vh,112px);   /* the floor stays low on a short window, not the minimum */
+
+  height:100dvh;
+  display:flex;align-items:stretch;
+  overflow-x:auto;overflow-y:hidden;   /* the article is the scroller; the document never moves */
+  /* deliberately unsnapped: the panels are four different widths and the timeline is
+     wider than the window, so any snap point lands the reader mid-sentence rather than
+     at a boundary. scroll-behavior stays instant for the same reason -- a wheel already
+     arrives in small steps, and animating each one reads as lag. */
+  overscroll-behavior-x:contain;
+  background:var(--paper);color:var(--ghost);
+  font-family:"IBM Plex Sans",system-ui,sans-serif;font-weight:300;
+}
+/* every panel is exactly as tall as the window and as wide as its content needs */
+.cs__hook,.cs__block,.cs__flow{
+  position:relative;z-index:2;
+  flex:0 0 auto;height:100%;
+  display:grid;align-content:center;
+  padding:var(--pad-y) var(--pad-x);
+}
+/* sideways, the hairline that separated bands stands up and becomes the seam between them */
+.cs__block,.cs__flow{border-left:1px solid var(--rule-link)}
+/* the rail is fixed over the right edge, so the last panel needs somewhere to end that
+   is not underneath it. a trailing margin on the final flex item, which every browser
+   counts in scrollWidth -- trailing padding on a scroll container does not survive Safari. */
+.cs > :last-child{margin-right:var(--rail-w)}
+
+/* shared voices ------------------------------------------------------------ */
+/* mono is for technical metadata only: kickers, keys, tags, captions, hints, metrics */
+.cs__eyebrow,.cs__kicker,.cs__meta-key,.cs__symptom-key,.cs__metric-label,
+.cs__step-num,.cs__step-tags,.cs__shot-cap,.cs__flow-hint,
+.cs__scroll-label{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  text-transform:uppercase;letter-spacing:.2em;
+  font-size:12px;   /* mono metadata is the one scale that stays in static pixels */
+}
+.cs__prose,.cs__step-text,.cs__symptom-val,.cs__meta-val{color:var(--ghost);font-weight:300}
+.cs__prose,.cs__step-text,.cs__symptom-val,.cs__hook-sub{text-wrap:pretty}
+.cs__meta-val,.cs__step-num,.cs__metric-num{font-variant-numeric:tabular-nums}
+.cs__kicker,.cs__flow-hint{margin:0;color:var(--tag);font-weight:400}
+
+/* ============ 1. the hook ============ */
+.cs__hook{width:min(92vw,980px)}
+
+.cs__eyebrow{margin:0 0 clamp(22px,3.6vh,38px);color:var(--tag)}
+.cs__hook-line{
+  font-family:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif;font-weight:800;
+  font-size:clamp(2.1rem,4.6vw,4.1rem);line-height:1.02;letter-spacing:-.03em;
+  margin:0;color:var(--ink);text-wrap:balance;
+}
+.cs__hook-sub{
+  margin:clamp(24px,4vh,42px) 0 0;max-width:56ch;
+  font-size:clamp(1rem,1.5vw,1.2rem);line-height:1.55;color:var(--ghost);
+}
+/* the facts a reader scans before reading a word of prose */
+.cs__meta,.cs__facts{
+  display:flex;flex-wrap:wrap;gap:clamp(24px,3vw,58px);
+  margin:clamp(36px,6vh,64px) 0 0;padding:clamp(22px,3vh,32px) 0 0;
+  border-top:1px solid var(--rule-link);
+}
+.cs__meta-pair{margin:0}
+.cs__meta-key{margin:0 0 7px;color:var(--tag)}
+.cs__meta-val{margin:0;font-size:clamp(.95rem,1.2vw,1.05rem);line-height:1.4}
+/* the cue points the way the page goes, which is no longer down */
+.cs__scroll{
+  position:absolute;left:var(--pad-x);bottom:clamp(26px,5vh,52px);
+  display:flex;align-items:center;gap:12px;margin:0;color:var(--tag);
+}
+.cs__scroll-rule{display:block;width:clamp(34px,5vw,64px);height:1px;background:var(--rule-link)}
+.cs__scroll-arrow{font-size:13px;line-height:1;margin-left:-6px}
+
+/* ============ 2 & 3. client, problem, and impact ============ */
+.cs__block{width:min(88vw,680px)}
+.cs__block--problem{width:min(88vw,740px)}
+.cs__block--impact{width:min(88vw,720px)}
+.cs__block .cs__kicker{margin-bottom:clamp(20px,3.2vh,34px)}
+.cs__lede{margin:0;font-size:clamp(1.15rem,1.7vw,1.4rem);line-height:1.5;color:var(--ghost)}
+.cs__prose{margin:clamp(17px,2.4vh,26px) 0 0;font-size:clamp(1rem,1.2vw,1.08rem);line-height:1.65}
+
+/* a client is a place you can go: the same resting signals as any other link on the site */
+.cs__link{color:var(--ghost-link);font-weight:400;text-decoration:none;cursor:pointer}
+.cs__link-label{
+  display:inline;
+  -webkit-box-decoration-break:clone;
+  box-decoration-break:clone;
+  border-bottom:1px solid var(--rule-link);padding-bottom:2px;
+  background-image:var(--marker);background-repeat:no-repeat;
+  background-position:right center;background-size:0% 92%;
+  transition:border-color .3s,background-size .34s cubic-bezier(.2,.7,.3,1);
+}
+.cs__link:hover,.cs__link:focus-visible{color:var(--ink);transition:color .1s ease .18s}
+.cs__link:hover .cs__link-label,
+.cs__link:focus-visible .cs__link-label{background-size:100% 92%;border-bottom-color:var(--ink)}
+.cs__link:hover .cs__row,
+.cs__link:focus-visible .cs__row{
+  background-size:100% 92%;
+  border-bottom-color:var(--ink);
+  color:var(--ink);
+  transition:border-color .3s var(--d,0s),
+             color .1s ease calc(var(--d,0s) + .18s),
+             background-size .34s cubic-bezier(.2,.7,.3,1) var(--d,0s);
+}
+
+/* the problem in the client's own words, set as the lead of the panel */
+.cs__statement{
+  font-family:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif;font-weight:800;
+  font-size:clamp(1.45rem,2.6vw,2.15rem);line-height:1.08;letter-spacing:-.02em;
+  margin:0;color:var(--ink);text-wrap:balance;
+}
+.cs__symptoms{
+  list-style:none;margin:clamp(30px,4.6vh,52px) 0 0;padding:0;
+  border-top:1px solid var(--rule-link);
+}
+.cs__symptom{
+  display:grid;grid-template-columns:minmax(0,clamp(92px,10vw,132px)) minmax(0,1fr);
+  gap:clamp(14px,2vw,26px);
+  padding:clamp(15px,2.2vh,23px) 0;border-bottom:1px solid var(--rule-link);
+}
+.cs__symptom-key{color:var(--tag);padding-top:.28em}   /* mono sits high; drop it onto the prose baseline */
+.cs__symptom-val{font-size:clamp(.96rem,1.15vw,1.04rem);line-height:1.55}
+
+/* ============ 5. impact metrics ============ */
+.cs__metrics{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(16px,2.4vw,36px);
+  margin:clamp(28px,4.2vh,48px) 0 clamp(24px,3.6vh,40px);
+  padding:clamp(20px,2.8vh,30px) 0 0;
+  border-top:1px solid var(--rule-link);
+}
+.cs__metric{margin:0}
+.cs__metric-num{
+  font-family:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif;font-weight:800;
+  font-size:clamp(2rem,3.5vw,3.2rem);line-height:1;letter-spacing:-.03em;
+  color:var(--ink);margin:0 0 6px;
+}
+.cs__metric-label{margin:0;color:var(--tag);line-height:1.4}
+
+/* ============ 4. the timeline ============ */
+.cs__flow{
+  /* the artwork zone is derived from the step width, so one number sets the whole band.
+     it is also capped in vh: on a short window the images shrink instead of clipping. */
+  --step-w:clamp(280px,28vw,400px);
+  --art-h:min(calc(var(--step-w) * .7),34vh);
+  --art-zone:calc(var(--art-h) + 84px);   /* image, its caption, and the gap above the thread */
+  align-content:center;
+}
+.cs__flow-header{
+  display:flex;align-items:center;gap:14px;
+  margin:0 0 clamp(28px,4.5vh,52px);   /* gives generous optical clearance above step 01 artwork */
+}
+.cs__flow-rule{width:22px;height:1px;background:var(--rule-link)}
+
+.cs__steps{
+  list-style:none;margin:0;padding:var(--art-zone) 0 0;
+  position:relative;display:flex;align-items:start;
+  gap:clamp(40px,4.6vw,88px);
+}
+/* the thread the whole method hangs off, running on past the last step */
+.cs__steps::before{
+  content:"";position:absolute;top:var(--art-zone);height:1px;
+  left:0;right:calc(-1 * clamp(20px,3vw,56px));   /* stays inside the panel's own right gutter */
+  background:var(--rule-link);
+}
+.cs__step{
+  position:relative;flex:0 0 auto;width:var(--step-w);
+  padding-top:clamp(24px,3.8vh,40px);
+  cursor:help;   /* it opens something about the step; it does not navigate */
+}
+.cs__step:hover,.cs__step:focus-visible,.cs__step.is-active{z-index:4}
+/* the node where this step meets the thread */
+.cs__step::before{
+  content:"";position:absolute;left:0;top:0;width:7px;height:7px;margin-top:-3px;
+  border-radius:50%;background:var(--rule-link);
+  transition:background-color .3s;
+}
+.cs__step:hover::before,.cs__step:focus-visible::before,.cs__step.is-active::before{background:var(--ink)}
+
+/* the number carries the affordance: dashed at rest, struck by the marker on arrival */
+.cs__step-num{
+  display:inline-block;color:var(--tag);
+  border-bottom:1px dashed var(--rule-link);
+  /* padding gives the stroke something to cover; the matching negative margins
+     keep the number where it sat, so nothing in the column moves */
+  padding:.34em .25em .3em .45em;margin:-.34em -.25em -.3em -.45em;
+  /* .2em of that right padding is the space letter-spacing hangs off the last glyph */
+  background-image:var(--marker);background-repeat:no-repeat;
+  background-position:right center;background-size:0% 100%;
+  transition:color .14s ease,border-color .3s,
+             background-size .34s cubic-bezier(.2,.7,.3,1);
+}
+.cs__step:hover .cs__step-num,
+.cs__step:focus-visible .cs__step-num,
+.cs__step.is-active .cs__step-num{
+  color:var(--ink);border-bottom-color:var(--ink);background-size:100% 100%;
+  transition:color .1s ease .18s,border-color .3s,
+             background-size .34s cubic-bezier(.2,.7,.3,1);
+}
+.cs__step-body{margin-top:clamp(16px,2.6vh,26px)}
+.cs__step-title{
+  font-family:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif;font-weight:800;
+  font-size:clamp(1.15rem,1.7vw,1.5rem);line-height:1.08;letter-spacing:-.02em;
+  margin:0;color:var(--ink);text-wrap:balance;
+}
+.cs__step-text{margin:clamp(9px,1.4vh,14px) 0 0;font-size:clamp(.95rem,1.1vw,1.02rem);line-height:1.6}
+.cs__step-tags{margin:clamp(11px,1.7vh,16px) 0 0;color:var(--tag);letter-spacing:.16em}
+
+/* the artwork rises out of the thread into the band reserved above it. it is absolute
+   and pinned by its top, so a caption that runs to two lines grows down into the gap
+   rather than up out of a window that does not scroll vertically. */
+.cs__shot{
+  position:absolute;z-index:6;
+  left:0;top:calc(-1 * var(--art-zone));width:100%;margin:0;
+  opacity:0;transform:translateY(8px);   /* it travels in along the axis it rises on */
+  pointer-events:none;                   /* a floating panel never eats the pointer below it */
+  transition:opacity .26s ease,transform .26s cubic-bezier(.2,.7,.3,1);
+}
+.cs__step:hover .cs__shot,
+.cs__step:focus-visible .cs__shot,
+.cs__step.is-active .cs__shot{
+  opacity:1;transform:translateY(0);
+}
+.cs__shot-img{
+  display:block;width:100%;height:var(--art-h);
+  object-fit:contain;   /* contain, not cover: a design artefact must not be cropped by the frame */
+  background:var(--paper);   /* opaque, so a transparent asset never shows the panel behind it */
+  border:1px solid var(--rule-link);
+}
+.cs__shot-cap{margin:11px 0 0;color:var(--tag);letter-spacing:.16em;line-height:1.5}
+
+/* ============ 6. next project ============ */
+.cs__next{
+  position:relative;z-index:2;
+  flex:0 0 auto;height:100%;
+  display:grid;align-content:center;
+  padding:var(--pad-y) var(--pad-x);
+  border-left:1px solid var(--rule-link);
+  width:min(88vw,560px);
+}
+.cs__next .cs__eyebrow{margin-bottom:clamp(16px,2.8vh,28px)}
+.cs__next-link{
+  display:inline-block;
+  color:var(--ink);text-decoration:none;
+  margin:0;
+  line-height:1.32;
+}
+.cs__next-title{
+  display:inline;
+  font-family:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif;font-weight:800;
+  font-size:clamp(1.6rem,2.8vw,2.5rem);line-height:1.28;letter-spacing:-.02em;
+}
+/* each row is an independent highlighter stroke, animated with deliberate human delay */
+.cs__row{
+  display:inline;
+  -webkit-box-decoration-break:clone;
+  box-decoration-break:clone;
+  border-bottom:1px solid var(--rule-link);padding-bottom:2px;
+  padding-inline:.16em .1em;margin-inline:-.16em -.1em;
+  background-image:var(--marker);background-repeat:no-repeat;
+  background-position:right center;background-size:0% 86%;
+  /* on exit: collapse simultaneously with zero delay across all lines */
+  transition:border-color .3s,
+             color .14s ease,
+             background-size .34s cubic-bezier(.2,.7,.3,1);
+}
+.cs__next-link:hover .cs__row,
+.cs__next-link:focus-visible .cs__row{
+  background-size:100% 86%;
+  border-bottom-color:var(--ink);
+  color:var(--ink);
+  /* on hover: reveal line by line with staggered delay per row */
+  transition:border-color .3s var(--d,0s),
+             color .1s ease calc(var(--d,0s) + .18s),
+             background-size .34s cubic-bezier(.2,.7,.3,1) var(--d,0s);
+}
+/* fallback if text is not wrapped in .cs__row */
+.cs__next-title:not(:has(.cs__row)){
+  border-bottom:1px solid var(--rule-link);padding-bottom:2px;
+  padding-inline:.16em .1em;margin-inline:-.16em -.1em;
+  -webkit-box-decoration-break:clone;
+  box-decoration-break:clone;
+  background-image:var(--marker);background-repeat:no-repeat;
+  background-position:right center;background-size:0% 86%;
+  transition:border-color .3s,background-size .34s cubic-bezier(.2,.7,.3,1);
+}
+.cs__next-link:hover .cs__next-title:not(:has(.cs__row)),
+.cs__next-link:focus-visible .cs__next-title:not(:has(.cs__row)){
+  background-size:100% 86%;border-bottom-color:var(--ink);
+}
+.cs__next-arrow{
+  display:inline-block;
+  font-size:clamp(1.4rem,2.2vw,2rem);line-height:1;
+  margin-left:clamp(10px,1.4vw,16px);
+  vertical-align:baseline;
+  transition:transform .3s cubic-bezier(.2,.7,.3,1);
+}
+.cs__next-link:hover .cs__next-arrow,
+.cs__next-link:focus-visible .cs__next-arrow{
+  transform:translateX(6px);
+}
+
+/* ============ responsive ============ */
+/* below the breakpoint the sideways track is unusable: it lies back down into
+   ordinary document flow and the page scrolls the way the phone expects */
+@media (max-width:960px){
+  .cs{
+    height:auto;display:block;overflow:visible;
+    overscroll-behavior-x:auto;
+  }
+  .cs > :last-child{margin-right:0}   /* the rail is a bar in the flow now, not an edge */
+  .cs__hook,.cs__block,.cs__flow,.cs__next{
+    width:auto;height:auto;display:block;
+    padding:clamp(62px,10vh,104px) clamp(22px,6vw,52px);
+  }
+  .cs__scroll{display:none}   /* it pointed along a track that no longer exists */
+  /* the seam between panels lies down with them */
+  .cs__block,.cs__flow,.cs__next{border-left:0;border-top:1px solid var(--rule-link)}
+  .cs__symptom{grid-template-columns:minmax(0,1fr);gap:6px}
+  .cs__symptom-key{padding-top:0}
+  .cs__metrics{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:24px}
+  .cs__flow-header{margin-bottom:clamp(20px,3vh,32px)}
+  .cs__flow-hint,.cs__flow-rule{display:none}   /* down here the artwork is already open */
+  /* the thread stands back up and the steps hang off it in a column */
+  .cs__steps{display:block;padding:0;position:relative}
+  .cs__steps::before{
+    top:.5em;bottom:.5em;left:0;right:auto;width:1px;height:auto;
+  }
+  .cs__step{
+    width:auto;padding:0 0 clamp(52px,7.5vh,84px) clamp(22px,5vw,34px);
+  }
+  .cs__step:last-child{padding-bottom:0}
+  .cs__step::before{top:.55em;margin-top:0;margin-left:-3px}
+  /* no band above to rise into: the artwork rejoins the flow under its own step */
+  .cs__shot{
+    position:static;width:100%;max-width:520px;height:auto;
+    margin:clamp(16px,2.4vh,22px) 0 0;
+    opacity:1;transform:none;
+  }
+  .cs__shot-img{height:auto}
+}
+
+/* nothing to hover with. sideways, each step's artwork sits over its own column and
+   overlaps nothing, so it can simply stand open where it is. */
+@media (hover:none){
+  .cs__step{cursor:default}
+  .cs__shot{opacity:1;transform:translateY(0)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.001s!important;animation-duration:.001s!important}
+}

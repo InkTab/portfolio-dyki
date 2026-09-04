@@ -116,6 +116,8 @@ a{color:inherit}
    that wraps -- and the border-bottom, painted after it, keeps the underline */
 .ia__idea--link .ia__label{
   border-bottom-color:var(--rule-link);
+  -webkit-box-decoration-break:clone;
+  box-decoration-break:clone;
   background-image:var(--marker);background-repeat:no-repeat;
   background-position:right center;background-size:0% 86%;   /* pulled in from the right */
   transition:border-color .3s,background-size .3s cubic-bezier(.2,.7,.3,1);
