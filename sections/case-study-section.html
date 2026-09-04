@@ -3,19 +3,43 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@300;400&display=swap">
-<link rel="stylesheet" href="rail.css">
-<link rel="stylesheet" href="case-study-section.css">
+<link rel="stylesheet" href="style.css">
+<script>
+  (function() {
+    var saved = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (saved === 'dark' || (!saved && prefersDark)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  })();
+</script>
+
+<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Toggle theme">
+  <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 16 16" width="16" height="16" fill="none"
+       stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+       aria-hidden="true" focusable="false">
+    <circle cx="8" cy="8" r="3.2"/>
+    <path d="M8 1.5v1.5M8 13v1.5M1.5 8h1.5M13 8h1.5M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M3.4 12.6l1.1-1.1M11.5 4.5l1.1-1.1"/>
+  </svg>
+  <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 16 16" width="16" height="16" fill="none"
+       stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+       aria-hidden="true" focusable="false">
+    <path d="M13.2 9.8A5.6 5.6 0 1 1 6.2 2.8a6.3 6.3 0 0 0 7 7Z"/>
+  </svg>
+</button>
 
 <!-- Case study template -->
 <!-- the shared rail: same component as the intro section, fixed to the window so it
      rides along the sideways track instead of scrolling off the end of it -->
 <nav class="rail" aria-label="Section links">
   <div class="rail__main">
-    <a class="rail__link" href="#ideas">Home</a>
+    <a class="rail__link" href="intro-section.html">Home</a>
     <span class="rail__rule" aria-hidden="true"></span>
-    <a class="rail__link" href="#about">About me</a>
+    <a class="rail__link" href="intro-section.html#about">About me</a>
     <span class="rail__rule" aria-hidden="true"></span>
-    <a class="rail__link" href="#contact">Contact</a>
+    <a class="rail__link" href="intro-section.html#contact">Contact</a>
   </div>
   <a class="rail__cv" href="#cv" aria-label="Download CV">
     <span class="rail__cv-label">CV</span>
@@ -234,7 +258,7 @@
   <!-- ============ 6. next project ============ -->
   <section class="cs__next" aria-labelledby="cs-next">
     <p class="cs__eyebrow" id="cs-next">Next case study</p>
-    <a class="cs__next-link" href="#">
+    <a class="cs__next-link" href="intro-section.html">
       <span class="cs__next-title" data-multiline>Quantum chemistry startup website</span>
       <span class="cs__next-arrow" aria-hidden="true">&rarr;</span>
     </a>
@@ -331,4 +355,24 @@
     resizeTimer = setTimeout(refreshMultilines, 80);
   });
 })();
+</script>
+
+<script>
+  (function() {
+    var toggle = document.getElementById('theme-toggle');
+    if (!toggle) return;
+    function updateLabel() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+      toggle.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+    updateLabel();
+    toggle.addEventListener('click', function() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      var nextTheme = isDark ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', nextTheme);
+      try { localStorage.setItem('theme', nextTheme); } catch(e) {}
+      updateLabel();
+    });
+  })();
 </script>
