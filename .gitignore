@@ -141,3 +141,12 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Local design notes
+DESIGN.md
+CLAUDE.md
+
+# Claude Code — session scratch (agent worktrees, local overrides).
+# launch.json stays tracked: it is how this project's preview server starts.
+.claude/worktrees/
+.claude/settings.local.json
