@@ -1,0 +1,189 @@
+<!doctype html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found &mdash; Taya The Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@300;400&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>
+  (function() {
+    var saved = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (saved === 'dark' || (!saved && prefersDark)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  })();
+</script>
+
+<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Toggle theme">
+  <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 16 16" width="16" height="16" fill="none"
+       stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+       aria-hidden="true" focusable="false">
+    <circle cx="8" cy="8" r="3.2"/>
+    <path d="M8 1.5v1.5M8 13v1.5M1.5 8h1.5M13 8h1.5M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M3.4 12.6l1.1-1.1M11.5 4.5l1.1-1.1"/>
+  </svg>
+  <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 16 16" width="16" height="16" fill="none"
+       stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+       aria-hidden="true" focusable="false">
+    <path d="M13.2 9.8A5.6 5.6 0 1 1 6.2 2.8a6.3 6.3 0 0 0 7 7Z"/>
+  </svg>
+</button>
+
+<!-- GitHub Pages serves this file for any path it cannot resolve. Links stay
+     RELATIVE, not root-relative: this is a project site published under
+     /portfolio-dyki/, so a leading "/" would resolve against the wrong root.
+     The trade-off is depth — a miss one segment deep (/portfolio-dyki/typo)
+     resolves these correctly, a deeper one would not, and the site is flat. -->
+<nav class="rail" aria-label="Section links">
+  <div class="rail__main">
+    <a class="rail__link" href="index.html">Home</a>
+    <span class="rail__rule" aria-hidden="true"></span>
+    <a class="rail__link" href="about-section.html">About me</a>
+    <span class="rail__rule" aria-hidden="true"></span>
+    <a class="rail__link" href="index.html#contact">Contact</a>
+  </div>
+  <a class="rail__cv" href="#cv" aria-label="Download CV">
+    <span class="rail__cv-label">CV</span>
+    <svg class="rail__cv-icon" viewBox="0 0 16 16" width="15" height="15" fill="none"
+         stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+         aria-hidden="true" focusable="false">
+      <path d="M8 1.7v8.1"/><path d="M4.7 6.5 8 9.8l3.3-3.3"/>
+      <path d="M2.2 12.2v1.3c0 .4.4.8.8.8h10c.4 0 .8-.4.8-.8v-1.3"/>
+    </svg>
+  </a>
+</nav>
+
+<main class="nf">
+  <div class="nf__core">
+    <p class="nf__eyebrow">Error 404 &mdash; page not found</p>
+    <h1 class="nf__title">This page rolled a natural&nbsp;1.</h1>
+    <p class="nf__body">Whatever you were looking for isn&rsquo;t at this address &mdash; a stale link, a typo, or something I have since moved. You can <a class="nf__link" href="index.html">go back to the homepage</a>, or take the consolation prize below.</p>
+  </div>
+
+  <div class="nf__roller">
+    <!-- A real button: it commits an action, so it is focusable and keyboard
+         operable without a tabindex or a synthetic key handler. -->
+    <button class="nf__die" id="nf-die" type="button" aria-label="Roll the die for a fact about me">
+      <svg class="nf__die-svg" viewBox="0 0 100 100" width="120" height="120" aria-hidden="true" focusable="false">
+        <!-- Icosahedron read flat: hexagon silhouette, the face you rolled in the
+             middle, and three spokes to the outer vertices. -->
+        <g class="nf__die-face">
+          <path d="M50 4 89.8 27 89.8 73 50 96 10.2 73 10.2 27Z"/>
+          <path d="M50 22 74 64 26 64Z"/>
+          <path d="M50 22V4"/><path d="M74 64l15.8 9"/><path d="M26 64l-15.8 9"/>
+        </g>
+        <!-- dx returns half the trailing space that mono tracking adds after the
+             final glyph, so the numeral sits optically centred (DESIGN §3.8). -->
+        <text class="nf__die-num" id="nf-die-num" x="50" y="54" dx="0.08em"
+              text-anchor="middle" dominant-baseline="middle">20</text>
+      </svg>
+      <span class="nf__die-label">Roll for a fact</span>
+    </button>
+
+    <div class="nf__stage">
+      <p class="nf__fact nf__fact--prompt" id="nf-fact" role="status" aria-live="polite">Twenty facts about me, one die. Roll it.</p>
+    </div>
+  </div>
+</main>
+
+<script>
+  (function() {
+    var toggle = document.getElementById('theme-toggle');
+    if (!toggle) return;
+    function updateLabel() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+      toggle.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+    updateLabel();
+    toggle.addEventListener('click', function() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      var nextTheme = isDark ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', nextTheme);
+      try { localStorage.setItem('theme', nextTheme); } catch(e) {}
+      updateLabel();
+    });
+  })();
+</script>
+
+<script>
+  (function() {
+    /* ------------------------------------------------------------------
+       TAYA — WRITE YOUR FACTS HERE.
+
+       Twenty slots, one per face of the die: face 1 shows FACTS[0], face 20
+       shows FACTS[19]. Every line below is a PLACEHOLDER prompt, not a fact
+       about you — replace all twenty before this page goes live.
+
+       Keep each one under roughly 130 characters. The fact panel reserves its
+       height in advance so the page never jumps when a fact swaps, and a
+       longer line will overflow that reserved box on a narrow phone.
+       ------------------------------------------------------------------ */
+    var FACTS = [
+      'Replace me: where you grew up, and where you live now.',
+      'Replace me: the first thing you ever designed.',
+      'Replace me: a job you had before design.',
+      'Replace me: the tabletop game you will always say yes to.',
+      'Replace me: a language you speak, and how you picked it up.',
+      'Replace me: the design rule you break on purpose.',
+      'Replace me: something you collect.',
+      'Replace me: your most-used keyboard shortcut.',
+      'Replace me: a hobby nobody expects from a product designer.',
+      'Replace me: the project you are proudest of that never shipped.',
+      'Replace me: what is playing while you work.',
+      'Replace me: a piece of software you genuinely love.',
+      'Replace me: the worst design advice you were ever given.',
+      'Replace me: something you are learning right now.',
+      'Replace me: your order at the coffee place.',
+      'Replace me: a place you want to work from for a month.',
+      'Replace me: the book you hand to new designers.',
+      'Replace me: a small thing that makes you irrationally happy.',
+      'Replace me: what you wanted to be at ten years old.',
+      'Replace me: the natural 20 — save your best fact for this one.'
+    ];
+
+    var die  = document.getElementById('nf-die');
+    var num  = document.getElementById('nf-die-num');
+    var fact = document.getElementById('nf-fact');
+    if (!die || !num || !fact) return;
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var SPIN = 340;          /* matches the .34s accent tempo of nfTumble */
+    var last = 0;            /* 0 is not a face, so the first roll is unconstrained */
+    var flicker = null;
+
+    function face() { return 1 + Math.floor(Math.random() * FACTS.length); }
+
+    function roll() {
+      /* Ignore clicks landing mid-spin: a second roll would clear the first
+         one's timer and strand the die in its rolling state. */
+      if (die.getAttribute('data-rolling') === 'true') return;
+
+      var result = face();
+      while (result === last) result = face();  /* never repeat a fact back to back */
+      last = result;
+
+      die.setAttribute('data-rolling', 'true');
+      fact.setAttribute('data-swapping', 'true');
+
+      /* Cycling the face while the die is in the air sells the tumble. Skipped
+         under reduced motion, where the roll resolves immediately. */
+      if (!reduce) {
+        flicker = setInterval(function() { num.textContent = face(); }, 45);
+      }
+
+      setTimeout(function() {
+        if (flicker) { clearInterval(flicker); flicker = null; }
+        num.textContent = result;
+        fact.textContent = FACTS[result - 1];
+        fact.classList.remove('nf__fact--prompt');
+        fact.removeAttribute('data-swapping');
+        die.removeAttribute('data-rolling');
+      }, reduce ? 0 : SPIN);
+    }
+
+    die.addEventListener('click', roll);
+  })();
+</script>
