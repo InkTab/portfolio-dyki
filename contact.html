@@ -1,0 +1,126 @@
+<!doctype html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact &mdash; Taya The Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@300;400&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>
+  (function() {
+    var saved = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (saved === 'dark' || (!saved && prefersDark)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  })();
+</script>
+
+<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Toggle theme">
+  <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 16 16" width="16" height="16" fill="none"
+       stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+       aria-hidden="true" focusable="false">
+    <circle cx="8" cy="8" r="3.2"/>
+    <path d="M8 1.5v1.5M8 13v1.5M1.5 8h1.5M13 8h1.5M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M3.4 12.6l1.1-1.1M11.5 4.5l1.1-1.1"/>
+  </svg>
+  <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 16 16" width="16" height="16" fill="none"
+       stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+       aria-hidden="true" focusable="false">
+    <path d="M13.2 9.8A5.6 5.6 0 1 1 6.2 2.8a6.3 6.3 0 0 0 7 7Z"/>
+  </svg>
+</button>
+
+<nav class="rail" aria-label="Section links">
+  <div class="rail__main">
+    <a class="rail__link" href="index.html">Home</a>
+    <span class="rail__rule" aria-hidden="true"></span>
+    <a class="rail__link" href="about-section.html">About me</a>
+    <span class="rail__rule" aria-hidden="true"></span>
+    <a class="rail__link rail__link--active" href="contact.html" aria-current="page">Contact</a>
+  </div>
+  <a class="rail__cv" href="#cv" aria-label="Download CV">
+    <span class="rail__cv-label">CV</span>
+    <svg class="rail__cv-icon" viewBox="0 0 16 16" width="15" height="15" fill="none"
+         stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+         aria-hidden="true" focusable="false">
+      <path d="M8 1.7v8.1"/><path d="M4.7 6.5 8 9.8l3.3-3.3"/>
+      <path d="M2.2 12.2v1.3c0 .4.4.8.8.8h10c.4 0 .8-.4.8-.8v-1.3"/>
+    </svg>
+  </a>
+</nav>
+
+<main class="ct">
+  <p class="ct__hint">Hover a channel</p>
+
+  <div class="ct__stage">
+    <div class="ct__core">
+      <h1 class="ct__lead">Let&rsquo;s talk about what you&rsquo;re building</h1>
+      <p class="ct__sub">Email is the fastest way in. The rest is where the work lives.</p>
+    </div>
+
+    <!-- Every item is a real destination, so each is an <a> and carries the
+         intro's link treatment. The external profiles open in a new tab so the
+         site is not lost behind them; each says so in its aria-label, because
+         the handle only appears on hover and has no room for the note.
+         Coordinates, scale and drift cadence ride in as inline custom
+         properties — structure stays in the stylesheet (DESIGN §6). -->
+    <div class="ct__slot" style="--x:20%;--y:16%">
+      <div class="ct__drift" style="--dur:16s;--delay:0s">
+        <a class="ct__channel" href="mailto:tetiana.burlachenko@gmail.com" style="--s:1.12"><span class="ct__label">Email</span><span class="ct__tag">tetiana.burlachenko@gmail.com</span></a>
+      </div>
+    </div>
+
+    <div class="ct__slot" style="--x:78%;--y:13%">
+      <div class="ct__drift ct__drift--b" style="--dur:13s;--delay:-4s">
+        <a class="ct__channel" href="https://www.behance.net/tetianaburlachenko"
+           target="_blank" rel="noopener noreferrer" style="--s:1.02"
+           aria-label="Behance — behance.net/tetianaburlachenko (opens in a new tab)"><span class="ct__label">Behance</span><span class="ct__tag">behance.net/tetianaburlachenko</span></a>
+      </div>
+    </div>
+
+    <div class="ct__slot" style="--x:84%;--y:63%">
+      <div class="ct__drift ct__drift--c" style="--dur:18s;--delay:-7s">
+        <a class="ct__channel" href="https://www.instagram.com/tb_dyki"
+           target="_blank" rel="noopener noreferrer" style="--s:1.0"
+           aria-label="Instagram — instagram.com/tb_dyki (opens in a new tab)"><span class="ct__label">Instagram</span><span class="ct__tag">instagram.com/tb_dyki</span></a>
+      </div>
+    </div>
+
+    <div class="ct__slot" style="--x:15%;--y:68%">
+      <div class="ct__drift" style="--dur:15s;--delay:-2s">
+        <a class="ct__channel" href="https://medium.com/@tayadyki"
+           target="_blank" rel="noopener noreferrer" style="--s:1.04"
+           aria-label="Medium — medium.com/@tayadyki (opens in a new tab)"><span class="ct__label">Medium</span><span class="ct__tag">medium.com/@tayadyki</span></a>
+      </div>
+    </div>
+
+    <div class="ct__slot" style="--x:48%;--y:84%">
+      <div class="ct__drift ct__drift--b" style="--dur:17s;--delay:-9s">
+        <a class="ct__channel" href="https://dribbble.com/dyki_design"
+           target="_blank" rel="noopener noreferrer" style="--s:1.06"
+           aria-label="Dribbble — dribbble.com/dyki_design (opens in a new tab)"><span class="ct__label">Dribbble</span><span class="ct__tag">dribbble.com/dyki_design</span></a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  (function() {
+    var toggle = document.getElementById('theme-toggle');
+    if (!toggle) return;
+    function updateLabel() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+      toggle.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+    updateLabel();
+    toggle.addEventListener('click', function() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      var nextTheme = isDark ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', nextTheme);
+      try { localStorage.setItem('theme', nextTheme); } catch(e) {}
+      updateLabel();
+    });
+  })();
+</script>

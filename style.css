@@ -1319,6 +1319,107 @@ a { color: inherit; }
   font-size: .92rem; line-height: 1.5; color: var(--ghost);
 }
 
+
+/* ============ 10. Contact Section (.ct) ============ */
+/* The intro's floating canvas, reused as a set of routes: the five channels
+   drift around a centred core the same way the ideas do on Home. Every item is
+   a real destination, so each carries the intro's link treatment rather than
+   its caption treatment — marker stroke across the label, and the handle
+   revealed beneath it on hover. The drift keyframes are the shared motion
+   primitive declared with the intro section (iaDriftA/B/C), so the cadence and
+   the ±13px envelope stay the system's rather than this section's (DESIGN §5). */
+.ct {
+  min-height: 100vh; display: grid; position: relative; overflow: hidden;
+  background: var(--paper); color: var(--ink);
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  align-content: center;
+  padding: clamp(56px, 9vh, 110px) clamp(18px, 3vw, 56px);
+  padding-right: clamp(92px, 7vw, 124px);   /* clearance for fixed rail */
+  transition: background-color .3s ease, color .3s ease;
+}
+.ct__hint {
+  position: absolute; top: clamp(26px, 5vh, 52px); left: 50%; transform: translateX(-50%); z-index: 4;
+  margin: 0;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--tag);
+}
+.ct__stage {
+  position: relative; z-index: 2;
+  width: 100%; max-width: 1360px; margin: 0 auto;
+  min-height: clamp(460px, 68vh, 660px);
+  display: grid; place-items: center;
+}
+.ct__core {
+  position: relative; z-index: 3; text-align: center; max-width: min(700px, 100%);
+}
+/* Diffuses any channel that drifts under the display type. The wash follows the
+   ground rather than staying white, or it would burn a spotlight into dark mode
+   (DESIGN §9.3). */
+.ct__core::before {
+  content: ""; position: absolute; inset: -34% -16%; z-index: -1; pointer-events: none;
+  background: radial-gradient(closest-side, var(--paper) 54%, rgba(248,247,255,0) 100%);
+}
+[data-theme="dark"] .ct__core::before {
+  background: radial-gradient(closest-side, #111316 54%, rgba(17,19,22,0) 100%);
+}
+.ct__lead {
+  font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif; font-weight: 800;
+  font-size: clamp(2.15rem, 4.9vw, 3.5rem); line-height: 1.02; letter-spacing: -.03em;
+  margin: 0; color: var(--ink); text-wrap: balance;
+}
+.ct__sub {
+  margin: clamp(10px, 1.6vw, 16px) 0 0;
+  font-size: clamp(.95rem, 1.3vw, 1.06rem); font-weight: 300; line-height: 1.5;
+  color: var(--ghost); text-wrap: balance;
+}
+
+.ct__slot { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -50%); z-index: 2; }
+.ct__slot:hover, .ct__slot:focus-within { z-index: 4; }
+.ct__drift {
+  animation: iaDriftA var(--dur, 15s) var(--delay, 0s) ease-in-out infinite alternate;
+  will-change: transform;
+}
+.ct__drift--b { animation-name: iaDriftB; }
+.ct__drift--c { animation-name: iaDriftC; }
+.ct__drift:hover, .ct__drift:has(:focus-visible) { animation-play-state: paused; }
+
+.ct__channel {
+  position: relative; display: block; text-decoration: none; white-space: nowrap; cursor: pointer;
+  color: var(--ghost-link); font-weight: 400;
+  font-size: calc(var(--s, 1) * clamp(.95rem, 1.5vw, 1.2rem)); line-height: 1.2;
+  transition: color .3s, transform .3s;
+}
+.ct__channel:hover, .ct__channel:focus-visible { color: var(--ink); transform: scale(1.05); }
+
+.ct__label {
+  border-bottom: 1px solid var(--rule-link); padding-bottom: 3px;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  background-image: var(--marker); background-repeat: no-repeat;
+  background-position: right center; background-size: 0% 86%;
+  transition: border-color .3s, background-size .3s cubic-bezier(.2,.7,.3,1);
+}
+.ct__channel:hover .ct__label,
+.ct__channel:focus-visible .ct__label {
+  background-size: 100% 86%;
+  border-bottom-color: var(--marker-ink, #111316);
+  color: var(--marker-ink, #111316);
+}
+/* The handle is the destination rather than decoration, so it reveals beneath
+   the label on an absolute box — the composition never reflows to make room
+   for it (DESIGN §4). Lowercase in the markup and uppercased here, so a reader
+   copying the address out of the page gets the address, not the styling. */
+.ct__tag {
+  position: absolute; top: 100%; left: 50%; margin-top: 8px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace; font-style: normal;
+  font-size: 12px; letter-spacing: .2em; text-transform: uppercase; white-space: nowrap;
+  padding-left: .2em; color: var(--tag); opacity: 0; transform: translate(-50%, -5px);
+  transition: opacity .3s, transform .3s;
+}
+.ct__channel:hover .ct__tag,
+.ct__channel:focus-visible .ct__tag {
+  opacity: 1; transform: translate(-50%, 0); color: var(--ink);
+}
+
 @media (max-width: 960px) {
 
   /* One page gutter for every section and for the horizontal rail, so the bar
@@ -1527,6 +1628,37 @@ a { color: inherit; }
      132-character fact measures 72px at 375px wide, so this clears the
      documented ceiling with room to spare without stranding empty rule. */
   .nf__stage { min-height: clamp(88px, 13vh, 112px); }
+
+  /* Contact Section */
+  /* Same reflow as the intro: the spatial scatter becomes a document-flow list
+     and the drift stops, because neither survives a 375px column. */
+  .ct {
+    min-height: 0;
+    padding-inline: var(--gutter);
+    /* The rail lies down into a bar at the top of the document here, so the
+       trailing clearance the wide canvas reserved is no longer needed. */
+    padding-right: var(--gutter);
+    /* The rail's own top margin already supplies the theme-toggle clearance. */
+    padding-top: 0;
+    align-content: start;
+  }
+  .ct__stage { min-height: 0; display: block; justify-items: start; }
+  .ct__core { max-width: none; text-align: left; margin: 0 0 clamp(30px, 6vh, 46px); }
+  .ct__core::before { display: none; }
+  .ct__hint { display: none; }
+  .ct__lead { font-size: clamp(1.75rem, 7.4vw, 2.6rem); line-height: 1.06; }
+  .ct__slot { position: static; transform: none; margin: 0 0 26px; }
+  .ct__drift { animation: none; }
+  .ct__channel { white-space: normal; font-size: calc(var(--s, 1) * 1.06rem); }
+  /* The handle is no longer a hover reveal here — it is the row's second line,
+     so it takes its place in flow. The longest is a 29-character address, which
+     at this tracking outruns a 375px column, and mono is allowed to wrap below
+     the breakpoint (DESIGN §7). */
+  .ct__tag {
+    position: static; display: block; margin-top: 6px;
+    opacity: 1; transform: none;
+    white-space: normal; overflow-wrap: anywhere;
+  }
 }
 
 /* Touch devices */
@@ -1534,7 +1666,7 @@ a { color: inherit; }
   .theme-toggle { min-width: 44px; min-height: 44px; }
   .ia__idea { color: var(--ghost); }
   .ia__idea--link { color: var(--ghost-link); }
-  .ia__tag { opacity: 1; }
+  .ia__tag, .ct__tag { opacity: 1; }
   .cs__step { cursor: default; }
   .cs__shot { opacity: 1; transform: translateY(0); }
   /* The chart's art column holds one panel at a time, so it cannot simply be
@@ -1550,7 +1682,7 @@ a { color: inherit; }
    960px the tag is a static block in document flow, where the centring offset
    would drag it off the left edge — so it is scoped to the wide layout only. */
 @media (hover: none) and (min-width: 961px) {
-  .ia__tag { transform: translate(-50%, 0); }
+  .ia__tag, .ct__tag { transform: translate(-50%, 0); }
 }
 
 /* Reduced motion */
@@ -1559,7 +1691,7 @@ a { color: inherit; }
     transition-duration: .001s !important;
     animation-duration: .001s !important;
   }
-  .ia__drift { animation: none !important; }
+  .ia__drift, .ct__drift { animation: none !important; }
   .am__thread-base, .am__scroll-hint-arrow { animation: none !important; }
   /* A 0.001s spin is a single jarring jump frame; the roll still
      resolves, it simply lands without tumbling. */
