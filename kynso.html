@@ -1,0 +1,623 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kynso &mdash; holistic fitness app case study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@300;400&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>
+  (function() {
+    var saved = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (saved === 'dark' || (!saved && prefersDark)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  })();
+</script>
+
+<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Toggle theme">
+  <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 16 16" width="16" height="16" fill="none"
+       stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+       aria-hidden="true" focusable="false">
+    <circle cx="8" cy="8" r="3.2"/>
+    <path d="M8 1.5v1.5M8 13v1.5M1.5 8h1.5M13 8h1.5M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M3.4 12.6l1.1-1.1M11.5 4.5l1.1-1.1"/>
+  </svg>
+  <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 16 16" width="16" height="16" fill="none"
+       stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+       aria-hidden="true" focusable="false">
+    <path d="M13.2 9.8A5.6 5.6 0 1 1 6.2 2.8a6.3 6.3 0 0 0 7 7Z"/>
+  </svg>
+</button>
+
+<!-- Kynso case study -->
+<!-- the shared rail: same component as the intro section, fixed to the window so it
+     rides along the sideways track instead of scrolling off the end of it -->
+<nav class="rail" aria-label="Section links">
+  <div class="rail__main">
+    <a class="rail__link" href="index.html">Home</a>
+    <span class="rail__rule" aria-hidden="true"></span>
+    <a class="rail__link" href="about-section.html">About me</a>
+    <span class="rail__rule" aria-hidden="true"></span>
+    <a class="rail__link" href="index.html#contact">Contact</a>
+  </div>
+  <a class="rail__cv" href="#cv" aria-label="Download CV">
+    <span class="rail__cv-label">CV</span>
+    <svg class="rail__cv-icon" viewBox="0 0 16 16" width="15" height="15" fill="none"
+         stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+         aria-hidden="true" focusable="false">
+      <path d="M8 1.7v8.1"/><path d="M4.7 6.5 8 9.8l3.3-3.3"/>
+      <path d="M2.2 12.2v1.3c0 .4.4.8.8.8h10c.4 0 .8-.4.8-.8v-1.3"/>
+    </svg>
+  </a>
+</nav>
+
+<article class="cs" role="region" aria-label="Kynso case study" aria-labelledby="cs-title" tabindex="0">
+
+  <!-- ============ 1. the hook ============ -->
+  <header class="cs__hook">
+    <p class="cs__eyebrow">Case study &mdash; Kynso</p>
+
+    <h1 class="cs__hook-line" id="cs-title">Four apps could tell you what you did. Kynso had to tell you what to do next.</h1>
+
+    <p class="cs__hook-sub">A holistic fitness app that reads training, sleep, food and mood as one signal.
+      Twelve weeks from an empty name to a shipped product, a brand and a launch.</p>
+
+    <dl class="cs__meta">
+      <div class="cs__meta-pair">
+        <dt class="cs__meta-key">Role</dt>
+        <dd class="cs__meta-val">Product designer, brand lead</dd>
+      </div>
+      <div class="cs__meta-pair">
+        <dt class="cs__meta-key">Year</dt>
+        <dd class="cs__meta-val">2025</dd>
+      </div>
+      <div class="cs__meta-pair">
+        <dt class="cs__meta-key">Duration</dt>
+        <dd class="cs__meta-val">12 weeks</dd>
+      </div>
+      <div class="cs__meta-pair">
+        <dt class="cs__meta-key">Team</dt>
+        <dd class="cs__meta-val">1 designer, 2 engineers, 1 founder</dd>
+      </div>
+    </dl>
+
+    <p class="cs__scroll" aria-hidden="true">
+      <span class="cs__scroll-label">Scroll</span>
+      <span class="cs__scroll-rule"></span>
+      <span class="cs__scroll-arrow">&rarr;</span>
+    </p>
+  </header>
+
+  <!-- ============ 2. the client ============ -->
+  <section class="cs__block" aria-labelledby="cs-client">
+    <h2 class="cs__kicker" id="cs-client">The client</h2>
+    <div class="cs__block-body">
+      <p class="cs__lede">Kynso is an independent wellness studio putting its coaching method into
+        its first consumer product.</p>
+      <p class="cs__prose">The founder had eight years of in-person coaching behind them and a waiting
+        list they could not serve. The method was already simple: four inputs a day, one weekly
+        check-in, one instruction at the end of it. What did not exist was anything else &mdash; no name,
+        no interface, no audience beyond the studio&rsquo;s own hundred-odd clients.</p>
+
+      <dl class="cs__facts">
+        <div class="cs__meta-pair">
+          <dt class="cs__meta-key">Industry</dt>
+          <dd class="cs__meta-val">Health &amp; fitness</dd>
+        </div>
+        <div class="cs__meta-pair">
+          <dt class="cs__meta-key">Stage</dt>
+          <dd class="cs__meta-val">Pre-seed</dd>
+        </div>
+        <div class="cs__meta-pair">
+          <dt class="cs__meta-key">Surface</dt>
+          <dd class="cs__meta-val">iOS first, Android to follow</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ 3. the problem ============ -->
+  <section class="cs__block cs__block--problem" aria-labelledby="cs-problem">
+    <h2 class="cs__kicker" id="cs-problem">The problem</h2>
+    <div class="cs__block-body">
+      <p class="cs__statement">The brief asked for a tracker. Tracking was the one thing the market
+        already did well.</p>
+      <p class="cs__prose">Every competitor could log a workout, a meal and seven hours of sleep, and
+        every one of them handed the reading back as a chart. The studio&rsquo;s clients were not short of
+        data; they were short of a verdict. So the work was reframed before a single screen was drawn:
+        not how to capture four kinds of input, but how to spend them on one instruction a person could
+        act on before breakfast.</p>
+
+      <ul class="cs__symptoms">
+        <li class="cs__symptom">
+          <span class="cs__symptom-key">Signal</span>
+          <span class="cs__symptom-val">Nine of twelve interviewed clients had abandoned a fitness app
+            inside a month, and every one of them still owned it.</span>
+        </li>
+        <li class="cs__symptom">
+          <span class="cs__symptom-key">Constraint</span>
+          <span class="cs__symptom-val">Two engineers, one release window, and a coaching method that
+            could be translated but not edited.</span>
+        </li>
+        <li class="cs__symptom">
+          <span class="cs__symptom-key">Unknown</span>
+          <span class="cs__symptom-val">Whether people would give four inputs a day to an app that
+            gives back a single sentence.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 4. the plan ============ -->
+  <!-- Three tracks on one lane. Each box carries its own name and takes its span from
+       position alone. The product design line holds the stage by default; pressing
+       branding or marketing folds it away and unfolds that track's own steps in its
+       place, so the chart never grows a second column of detail. -->
+  <section class="gt" id="track-product" aria-labelledby="cs-plan">
+    <div class="cs__flow-header">
+      <h2 class="cs__kicker" id="cs-plan">How it got built</h2>
+      <span class="cs__flow-rule" aria-hidden="true"></span>
+      <p class="cs__flow-hint">Hover a track</p>
+    </div>
+
+    <div class="gt__frame">
+      <ul class="gt__chart">
+
+      <li class="gt__track gt__track--aside">
+        <button class="gt__bar gt__bar--aside gt__toggle" type="button"
+                data-group="branding" aria-expanded="false" aria-controls="gt-group-branding"
+                aria-describedby="gt-shot-branding" style="--from:1;--to:5">
+          <span class="gt__name">Branding</span>
+          <span class="gt__toggle-mark" aria-hidden="true"></span>
+        </button>
+      </li>
+
+        <!-- One reserved stage. The three groups stack in a single grid cell, so the
+             chart cannot reflow when one is swapped for another; only the group
+             itself folds. -->
+        <li class="gt__stage" data-open="product">
+      <ul class="gt__group gt__group--product is-open" id="gt-group-product" data-group="product">
+        <li class="gt__track gt__track--lead" style="--d:0s">
+          <span class="gt__name">Product design</span>
+          <span class="gt__bracket" style="--from:1;--to:13" aria-hidden="true"></span>
+        </li>
+
+        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-research" style="--d:0.08s">
+          <span class="gt__bar gt__bar--phase" style="--from:1;--to:5">
+            <span class="gt__num">01</span>
+            <span class="gt__name">Research</span>
+          </span>
+        </li>
+
+        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-prototyping" style="--d:0.16s">
+          <span class="gt__bar gt__bar--phase" style="--from:4;--to:8">
+            <span class="gt__num">02</span>
+            <span class="gt__name">Prototyping</span>
+          </span>
+        </li>
+
+        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-testing" style="--d:0.24s">
+          <span class="gt__bar gt__bar--phase" style="--from:7;--to:10">
+            <span class="gt__num">03</span>
+            <span class="gt__name">Testing</span>
+          </span>
+        </li>
+
+        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-system" style="--d:0.32s">
+          <span class="gt__bar gt__bar--phase" style="--from:8;--to:13">
+            <span class="gt__num">04</span>
+            <span class="gt__name">Design system</span>
+          </span>
+        </li>
+      </ul>
+
+      <ul class="gt__group gt__group--branding" id="gt-group-branding" data-group="branding">
+        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-b-research" style="--d:0.00s">
+          <span class="gt__bar gt__bar--phase" style="--from:1;--to:5">
+            <span class="gt__num">01</span>
+            <span class="gt__name">Market research</span>
+          </span>
+        </li>
+
+        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-b-naming" style="--d:0.08s">
+          <span class="gt__bar gt__bar--phase" style="--from:4;--to:8">
+            <span class="gt__num">02</span>
+            <span class="gt__name">Naming</span>
+          </span>
+        </li>
+
+        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-b-logo" style="--d:0.16s">
+          <span class="gt__bar gt__bar--phase" style="--from:6;--to:10">
+            <span class="gt__num">03</span>
+            <span class="gt__name">Logo</span>
+          </span>
+        </li>
+
+        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-b-concept" style="--d:0.24s">
+          <span class="gt__bar gt__bar--phase" style="--from:8;--to:12">
+            <span class="gt__num">04</span>
+            <span class="gt__name">Design concept</span>
+          </span>
+        </li>
+
+        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-b-guidelines" style="--d:0.32s">
+          <span class="gt__bar gt__bar--phase" style="--from:9;--to:13">
+            <span class="gt__num">05</span>
+            <span class="gt__name">Brand guidelines</span>
+          </span>
+        </li>
+      </ul>
+
+      <ul class="gt__group gt__group--marketing" id="gt-group-marketing" data-group="marketing">
+        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-m-positioning" style="--d:0.00s">
+          <span class="gt__bar gt__bar--phase" style="--from:1;--to:5">
+            <span class="gt__num">01</span>
+            <span class="gt__name">Positioning</span>
+          </span>
+        </li>
+
+        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-m-waitlist" style="--d:0.08s">
+          <span class="gt__bar gt__bar--phase" style="--from:3;--to:7">
+            <span class="gt__num">02</span>
+            <span class="gt__name">Waitlist page</span>
+          </span>
+        </li>
+
+        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-m-listing" style="--d:0.16s">
+          <span class="gt__bar gt__bar--phase" style="--from:5;--to:9">
+            <span class="gt__num">03</span>
+            <span class="gt__name">Store listing</span>
+          </span>
+        </li>
+
+        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-m-content" style="--d:0.24s">
+          <span class="gt__bar gt__bar--phase" style="--from:7;--to:11">
+            <span class="gt__num">04</span>
+            <span class="gt__name">Content plan</span>
+          </span>
+        </li>
+
+        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-m-launch" style="--d:0.32s">
+          <span class="gt__bar gt__bar--phase" style="--from:10;--to:13">
+            <span class="gt__num">05</span>
+            <span class="gt__name">Launch</span>
+          </span>
+        </li>
+      </ul>
+        </li>
+
+      <li class="gt__track gt__track--aside">
+        <button class="gt__bar gt__bar--aside gt__toggle" type="button"
+                data-group="marketing" aria-expanded="false" aria-controls="gt-group-marketing"
+                aria-describedby="gt-shot-marketing" style="--from:9;--to:13">
+          <span class="gt__name">Marketing</span>
+          <span class="gt__toggle-mark" aria-hidden="true"></span>
+        </button>
+      </li>
+
+      </ul>
+
+      <!-- The art layer sits outside the chart on purpose: a folding group carries a
+           transform, which would capture any absolutely positioned artwork inside it. -->
+      <div class="gt__art">
+        <figure class="gt__shot" id="gt-shot-branding" role="tooltip">
+          <img class="gt__shot-img" src="placeholders/step-01.svg" alt="Wordmark studies and brand type specimen">
+          <figcaption class="gt__shot-cap">Branding
+            <span class="gt__shot-note">Name, wordmark, type and voice, settled early so the product had something to be designed in. Open the track for its five steps.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gt__shot is-active" id="gt-shot-research" role="tooltip">
+          <img class="gt__shot-img" src="placeholders/step-02.svg" alt="Interview synthesis board and abandonment timeline">
+          <figcaption class="gt__shot-cap">Research
+            <span class="gt__shot-note">Twelve client interviews and four competitor teardowns. The finding that reframed the brief: people quit at the chart, not at the logging.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gt__shot" id="gt-shot-prototyping" role="tooltip">
+          <img class="gt__shot-img" src="placeholders/step-03.svg" alt="Low-fidelity daily check-in flow and one-card home screen">
+          <figcaption class="gt__shot-cap">Prototyping
+            <span class="gt__shot-note">Three routes to the same daily reading, drawn cheap enough to be wrong. The one-card home screen came out of the second.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gt__shot" id="gt-shot-testing" role="tooltip">
+          <img class="gt__shot-img" src="placeholders/step-05.svg" alt="Moderated testing notes and two-week diary study results">
+          <figcaption class="gt__shot-cap">Testing
+            <span class="gt__shot-note">Eight moderated sessions and a two-week diary study. Input dropped from four taps to one gesture after the first round.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gt__shot" id="gt-shot-system" role="tooltip">
+          <img class="gt__shot-img" src="placeholders/step-04.svg" alt="Component library, tokens and state documentation">
+          <figcaption class="gt__shot-cap">Design system
+            <span class="gt__shot-note">Tokens, thirty-one components and every empty and error state documented, so two engineers could build without asking.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gt__shot" id="gt-shot-marketing" role="tooltip">
+          <img class="gt__shot-img" src="placeholders/step-01.svg" alt="Waitlist landing page and App Store listing studies">
+          <figcaption class="gt__shot-cap">Marketing
+            <span class="gt__shot-note">The launch, built on research the product had already paid for. Open the track for its five steps.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gt__shot" id="gt-shot-b-research" role="tooltip">
+          <img class="gt__shot-img" src="placeholders/step-02.svg" alt="Category teardown and name candidate screening">
+          <figcaption class="gt__shot-cap">Market research
+            <span class="gt__shot-note">Category teardown, and eleven name candidates screened against what the studio&rsquo;s clients already called the method.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gt__shot" id="gt-shot-b-naming" role="tooltip">
+          <img class="gt__shot-img" src="placeholders/step-01.svg" alt="Name candidate shortlist and trademark checks">
+          <figcaption class="gt__shot-cap">Naming
+            <span class="gt__shot-note">Kynso chosen for being short, unclaimed and unmetaphorical &mdash; no roots, no leaves, no mountains.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gt__shot" id="gt-shot-b-logo" role="tooltip">
+          <img class="gt__shot-img" src="placeholders/step-04.svg" alt="Wordmark construction and icon grid">
+          <figcaption class="gt__shot-cap">Logo
+            <span class="gt__shot-note">Drawn from the app&rsquo;s own type at a single weight, so the icon and the interface never disagree.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gt__shot" id="gt-shot-b-concept" role="tooltip">
+          <img class="gt__shot-img" src="placeholders/step-03.svg" alt="Design concept boards and accent studies">
+          <figcaption class="gt__shot-cap">Design concept
+            <span class="gt__shot-note">Paper, one ink, one accent. The concept the product was designed in rather than dressed in afterwards.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gt__shot" id="gt-shot-b-guidelines" role="tooltip">
+          <img class="gt__shot-img" src="placeholders/step-05.svg" alt="Brand guideline spreads: voice, type scale, accent rules">
+          <figcaption class="gt__shot-cap">Brand guidelines
+            <span class="gt__shot-note">Voice, type scale and accent rules written down before the first screen, so the copy had a register to be written in.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gt__shot" id="gt-shot-m-positioning" role="tooltip">
+          <img class="gt__shot-img" src="placeholders/step-03.svg" alt="Positioning statement and message testing grid">
+          <figcaption class="gt__shot-cap">Positioning
+            <span class="gt__shot-note">One line, argued from the interviews: the app that ends the day with an instruction, not a chart.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gt__shot" id="gt-shot-m-waitlist" role="tooltip">
+          <img class="gt__shot-img" src="placeholders/step-01.svg" alt="Waitlist landing page wireframe and copy">
+          <figcaption class="gt__shot-cap">Waitlist page
+            <span class="gt__shot-note">One page, one promise, one field &mdash; live three weeks before the build was finished.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gt__shot" id="gt-shot-m-listing" role="tooltip">
+          <img class="gt__shot-img" src="placeholders/step-04.svg" alt="App Store listing screenshots and caption order">
+          <figcaption class="gt__shot-cap">Store listing
+            <span class="gt__shot-note">Screenshots ordered as an argument rather than a tour, opening on the daily reading.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gt__shot" id="gt-shot-m-content" role="tooltip">
+          <img class="gt__shot-img" src="placeholders/step-02.svg" alt="Eight-week content calendar drafted from interview language">
+          <figcaption class="gt__shot-cap">Content plan
+            <span class="gt__shot-note">Eight weeks of founder-led posts drafted from interview language verbatim.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="gt__shot" id="gt-shot-m-launch" role="tooltip">
+          <img class="gt__shot-img" src="placeholders/step-05.svg" alt="Cohort release schedule and first-week review tracking">
+          <figcaption class="gt__shot-cap">Launch
+            <span class="gt__shot-note">The waitlist opened in cohorts, so the first week of reviews came from people the method already fit.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. the impact ============ -->
+  <section class="cs__block cs__block--impact" aria-labelledby="cs-impact">
+    <h2 class="cs__kicker" id="cs-impact">The impact</h2>
+    <div class="cs__block-body">
+      <p class="cs__statement">Kynso shipped in week twelve and kept a third of its first cohort past
+        the month where the category loses them.</p>
+
+      <dl class="cs__metrics">
+        <div class="cs__metric">
+          <dt class="cs__metric-num">34%</dt>
+          <dd class="cs__metric-label">Week-four retention</dd>
+        </div>
+        <div class="cs__metric">
+          <dt class="cs__metric-num">1:04</dt>
+          <dd class="cs__metric-label">Median daily session</dd>
+        </div>
+        <div class="cs__metric">
+          <dt class="cs__metric-num">31</dt>
+          <dd class="cs__metric-label">Components handed off</dd>
+        </div>
+      </dl>
+
+      <p class="cs__prose">The daily session is the number I care about: a minute is what the method
+        was always worth, and every design decision after week seven was an argument for spending less
+        of the user&rsquo;s time, not more of it. The system outlived the launch &mdash; the Android build was
+        assembled from it without a designer in the room.</p>
+    </div>
+  </section>
+
+  <!-- ============ 6. next project ============ -->
+  <section class="cs__next" aria-labelledby="cs-next">
+    <p class="cs__eyebrow" id="cs-next">Next case study</p>
+    <a class="cs__next-link" href="case-study-section.html">
+      <span class="cs__next-title" data-multiline>Quantum chemistry startup website</span>
+      <span class="cs__next-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+  </section>
+
+</article>
+
+<script>
+(function(){
+  var page = document.querySelector('.cs');
+  if(!page) return;
+
+  /* a trackpad swipe already arrives as deltaX and is left alone; a mouse wheel only
+     ever reports deltaY, so on the horizontal layout it has to be turned by hand.
+     below the breakpoint the page stacks and scrolls down again -- the guard on
+     scrollWidth is what tells the two layouts apart, so it needs no media query. */
+  page.addEventListener('wheel', function(e){
+    if(page.scrollWidth <= page.clientWidth) return;
+    if(Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    e.preventDefault();
+    page.scrollLeft += e.deltaY;
+  }, {passive: false});
+
+  /* keyboard arrow horizontal scrolling when the container is focused */
+  page.addEventListener('keydown', function(e){
+    if(page.scrollWidth <= page.clientWidth) return;
+    if(e.key === 'ArrowRight' || e.key === 'PageDown'){
+      page.scrollBy({left: 320, behavior: 'smooth'});
+    } else if(e.key === 'ArrowLeft' || e.key === 'PageUp'){
+      page.scrollBy({left: -320, behavior: 'smooth'});
+    }
+  });
+
+  /* The chart's art column holds one panel at a time, so exactly one track is
+     active at any moment; the first phase holds it until another is pointed at,
+     focused or -- on a touch screen, where there is no hover -- tapped. The
+     artwork lives outside the chart, so the active track and its panel are
+     matched here by the id the track already names in aria-describedby. */
+  var chart = document.querySelector('.gt');
+  if (chart) {
+    var stage  = chart.querySelector('.gt__stage');
+    var tracks = Array.prototype.slice.call(
+                   chart.querySelectorAll('.gt__track--phase, .gt__track--aside'));
+    var shots  = Array.prototype.slice.call(chart.querySelectorAll('.gt__shot'));
+
+    function panelFor(track){
+      var src = track.hasAttribute('aria-describedby')
+                  ? track : track.querySelector('[aria-describedby]');
+      return src ? document.getElementById(src.getAttribute('aria-describedby')) : null;
+    }
+    function activate(track){
+      if (!track) return;
+      tracks.forEach(function(t){ t.classList.remove('is-active'); });
+      shots.forEach(function(p){ p.classList.remove('is-active'); });
+      track.classList.add('is-active');
+      var panel = panelFor(track);
+      if (panel) panel.classList.add('is-active');
+    }
+
+    tracks.forEach(function(track){
+      track.addEventListener('mouseenter', function(){ activate(track); });
+      track.addEventListener('focusin', function(){ activate(track); });
+      /* an aside row is a disclosure button, and its own handler below decides
+         what a press should leave showing -- so it is left off the click path */
+      if (!track.classList.contains('gt__track--aside')) {
+        track.addEventListener('click', function(){ activate(track); });
+      }
+    });
+
+    /* Pressing branding or marketing folds the product line away and unfolds that
+       track's own steps into the same stage; pressing it again folds the product
+       line back. Only one may be open, since all three share the one region. */
+    var toggles = Array.prototype.slice.call(chart.querySelectorAll('.gt__toggle'));
+    var groups  = Array.prototype.slice.call(chart.querySelectorAll('.gt__group'));
+
+    function openGroup(key){
+      stage.setAttribute('data-open', key);
+      groups.forEach(function(g){
+        g.classList.toggle('is-open', g.getAttribute('data-group') === key);
+      });
+      toggles.forEach(function(b){
+        b.setAttribute('aria-expanded', String(b.getAttribute('data-group') === key));
+      });
+    }
+
+    toggles.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var key = btn.getAttribute('data-group');
+        var wasOpen = stage.getAttribute('data-open') === key;
+        openGroup(wasOpen ? 'product' : key);
+        /* opening hands the art slot to the track you pressed; closing hands it
+           back to the first phase of the product line */
+        activate(wasOpen
+          ? chart.querySelector('.gt__group--product .gt__track--phase')
+          : btn.closest('.gt__track'));
+      });
+    });
+  }
+
+  /* multiline staggered highlight: splits wrapped text into rows with incremental transition delays */
+  function splitMultiline(el){
+    if(!el) return;
+    if(!el._rawText){
+      el._rawText = el.textContent.trim();
+    }
+    var words = el._rawText.split(/\s+/);
+    if(words.length <= 1) return;
+
+    el.innerHTML = words.map(function(w){
+      return '<span class="cs__word-measure" style="display:inline">' + w + '</span>';
+    }).join(' ');
+
+    var spans = el.querySelectorAll('.cs__word-measure');
+    var lines = [];
+    var currentLine = [];
+    var lastTop = null;
+
+    for(var i = 0; i < spans.length; i++){
+      var top = Math.round(spans[i].offsetTop);
+      if(lastTop === null || Math.abs(top - lastTop) < 6){
+        currentLine.push(words[i]);
+      } else {
+        lines.push(currentLine.join(' '));
+        currentLine = [words[i]];
+      }
+      lastTop = top;
+    }
+    if(currentLine.length){
+      lines.push(currentLine.join(' '));
+    }
+
+    el.innerHTML = lines.map(function(line, idx){
+      var delay = (idx * 0.22).toFixed(2);
+      return '<span class="cs__row" style="--row-idx:' + idx + ';--d:' + delay + 's">' + line + '</span>';
+    }).join(' ');
+  }
+
+  var multilineEls = Array.prototype.slice.call(document.querySelectorAll('[data-multiline]'));
+  function refreshMultilines(){
+    multilineEls.forEach(splitMultiline);
+  }
+  refreshMultilines();
+  if(document.fonts && document.fonts.ready){
+    document.fonts.ready.then(refreshMultilines);
+  }
+  var resizeTimer;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(refreshMultilines, 80);
+  });
+})();
+</script>
+
+<script>
+  (function() {
+    var toggle = document.getElementById('theme-toggle');
+    if (!toggle) return;
+    function updateLabel() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+      toggle.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+    updateLabel();
+    toggle.addEventListener('click', function() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      var nextTheme = isDark ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', nextTheme);
+      try { localStorage.setItem('theme', nextTheme); } catch(e) {}
+      updateLabel();
+    });
+  })();
+</script>

@@ -66,18 +66,12 @@
     <!-- A real button: it commits an action, so it is focusable and keyboard
          operable without a tabindex or a synthetic key handler. -->
     <button class="nf__die" id="nf-die" type="button" aria-label="Roll the die for a fact about me">
-      <svg class="nf__die-svg" viewBox="0 0 100 100" width="120" height="120" aria-hidden="true" focusable="false">
-        <!-- Icosahedron read flat: hexagon silhouette, the face you rolled in the
-             middle, and three spokes to the outer vertices. -->
-        <g class="nf__die-face">
-          <path d="M50 4 89.8 27 89.8 73 50 96 10.2 73 10.2 27Z"/>
-          <path d="M50 22 74 64 26 64Z"/>
-          <path d="M50 22V4"/><path d="M74 64l15.8 9"/><path d="M26 64l-15.8 9"/>
-        </g>
+      <svg class="nf__die-svg" viewBox="0 0 340 387" width="120" height="137" aria-hidden="true" focusable="false">
+        <path class="nf__die-path" fill="currentColor" d="M168.872 0.601737C170.54 -0.207654 172.491 -0.20022 174.152 0.622245L174.504 0.810721L333.747 93.259L334.62 92.9387L335.007 93.9904L337.013 95.1554C338.862 96.229 340 98.2058 340 100.344V287.532C340 288.958 339.492 290.309 338.607 291.37C337.754 293.271 335.932 294.712 333.624 294.902L333.124 294.943L174.468 385.604C172.638 386.649 170.393 386.658 168.555 385.626L3.06348 292.754C1.17149 291.692 4.39343e-05 289.691 0 287.522V100.355C0.000165728 98.1996 1.15618 96.2092 3.02832 95.1418L168.52 0.787284L168.872 0.601737ZM168 376.141V309.236L24.499 295.61L168 376.141ZM176 307.876V375.513L314.284 296.493L176 307.876ZM10.3047 286.225L164.956 300.91L75.623 131.501L10.3047 286.225ZM179.743 299.541L330.264 287.151L267.748 131.782L179.743 299.541ZM171.99 297.099L261.385 126.693H82.1318L171.99 297.099ZM8 271.116L69.665 125.045L8 103.177V271.116ZM273.25 124.024L332 270.034V102.424L273.25 124.024ZM83.5479 118.625L259.129 117.257L172.479 10.9963L83.5479 118.625ZM15.3809 97.3068L73.8652 118.046C74.0706 117.629 74.3305 117.223 74.6494 116.837L157.949 16.0217L15.3809 97.3068ZM267.965 115.434C268.391 115.956 268.71 116.514 268.932 117.088L323.992 96.8449L188.812 18.3683L267.965 115.434Z"/>
         <!-- dx returns half the trailing space that mono tracking adds after the
              final glyph, so the numeral sits optically centred (DESIGN §3.8). -->
-        <text class="nf__die-num" id="nf-die-num" x="50" y="54" dx="0.08em"
-              text-anchor="middle" dominant-baseline="middle">20</text>
+        <text class="nf__die-num" id="nf-die-num" x="172" y="188" dx="0.08em"
+              text-anchor="middle" dominant-baseline="central">20</text>
       </svg>
       <span class="nf__die-label">Roll for a fact</span>
     </button>
