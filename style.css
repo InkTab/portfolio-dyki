@@ -908,7 +908,185 @@ a { color: inherit; }
   50% { transform: translateY(4px); }
 }
 
-/* ============ 8. Responsive Adaptations ============ */
+/* ============ 8. Not Found Section (.nf) ============ */
+/* The 404 page. A d20 is the one place in the system where a *random* reveal is
+   the point, so the fact panel is a live region rather than a hover disclosure:
+   the roll is committed by click, and its result has to reach a screen reader. */
+.nf {
+  position: relative; z-index: 2;
+  min-height: 100vh;
+  display: grid; align-content: center;
+  gap: clamp(38px, 6vh, 62px);
+  padding: clamp(60px, 10vh, 110px) clamp(28px, 7vw, 96px);
+  /* Reserve the rail's own width on the trailing edge (DESIGN §Layout Tokens). */
+  padding-right: calc(var(--rail-w) + clamp(28px, 7vw, 96px));
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+}
+.nf__core { max-width: 46ch; }
+
+.nf__eyebrow {
+  margin: 0 0 clamp(14px, 2.4vh, 22px);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--tag);
+}
+.nf__title {
+  margin: 0 0 clamp(16px, 2.6vh, 26px);
+  font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.1rem, 5.4vw, 4rem);
+  line-height: 1.04; letter-spacing: -.03em;
+  text-wrap: balance;
+  color: var(--ink);
+}
+.nf__body {
+  margin: 0;
+  font-weight: 300;
+  font-size: clamp(1rem, 1.5vw, 1.12rem);
+  line-height: 1.6;
+  color: var(--ghost);
+}
+
+/* Resting affordance: one step darker than body copy, one weight heavier, and
+   underlined before interaction. The marker then strikes it left-ward on hover. */
+.nf__link {
+  font-weight: 400;
+  color: var(--ghost-link);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-link);
+  text-underline-offset: 3px;
+  cursor: pointer;
+  display: inline;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background-image: var(--marker);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 0% 86%;
+  transition: background-size .34s cubic-bezier(.2,.7,.3,1),
+              color .14s ease,
+              text-decoration-color .14s ease;
+}
+.nf__link:hover,
+.nf__link:focus-visible {
+  background-size: 100% 86%;
+  text-decoration-color: transparent;
+  color: var(--marker-ink, #111316);
+  transition: background-size .34s cubic-bezier(.2,.7,.3,1),
+              color .1s ease .18s,
+              text-decoration-color .1s ease .18s;
+}
+
+/* --- the die --- */
+.nf__roller {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(22px, 4vw, 46px);
+  max-width: 62ch;
+}
+.nf__die {
+  /* A button, not a link: it commits a roll rather than routing (DESIGN §4). */
+  cursor: pointer;
+  display: grid; justify-items: center; gap: 13px;
+  padding: 6px; border: none; background: transparent;
+  /* Resting affordance (DESIGN §1.3): the die is the page's primary control,
+     so it rests at the interactive token rather than the hairline token —
+     --rule-link's 3:1 is a floor for borders, not for something to click. */
+  color: var(--ghost-link);
+  transition: color .3s ease;
+}
+.nf__die:hover,
+.nf__die:focus-visible {
+  /* --woke is the ceiling for non-navigational hover; --ink stays reserved
+     for routes and headings (DESIGN §1.2). */
+  color: var(--woke);
+}
+.nf__die:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+.nf__die-svg {
+  display: block;
+  width: clamp(96px, 13vw, 132px); height: auto;
+  transform-origin: 50% 50%;
+  will-change: transform;
+  transition: transform .3s cubic-bezier(.2,.7,.3,1);
+}
+.nf__die:hover .nf__die-svg,
+.nf__die:focus-visible .nf__die-svg { transform: scale(1.05); }
+/* A rolling die reads as a tumble, so the spin runs at the accent tempo and
+   the face number is swapped mid-flight by script. */
+.nf__die[data-rolling="true"] .nf__die-svg { animation: nfTumble .34s cubic-bezier(.2,.7,.3,1); }
+@keyframes nfTumble {
+  from { transform: rotate(0deg) scale(1); }
+  60%  { transform: rotate(228deg) scale(1.05); }
+  to   { transform: rotate(360deg) scale(1); }
+}
+.nf__die-face { stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.nf__die-num {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 13px; font-weight: 700; letter-spacing: .16em;
+  fill: currentColor;
+}
+
+.nf__die-label {
+  position: relative;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--tag);
+  /* Mono tracking leaves trailing space after the last glyph; half of it back
+     on the left re-centres the label under the die (DESIGN §3.8). */
+  padding-left: .18em;
+  white-space: nowrap;
+  transition: color .14s ease;
+}
+.nf__die-label::before {
+  content: ""; position: absolute; z-index: -1; inset: -3px -6px;
+  background: var(--marker);
+  border-radius: 3px 9px 4px 7px;
+  transform-origin: right;
+  transform: rotate(-.45deg) skewX(-2.5deg) scaleX(0);
+  transition: transform .34s cubic-bezier(.2,.7,.3,1);
+}
+.nf__die:hover .nf__die-label,
+.nf__die:focus-visible .nf__die-label {
+  color: var(--marker-ink, #111316);
+  transition: color .1s ease .18s;
+}
+.nf__die:hover .nf__die-label::before,
+.nf__die:focus-visible .nf__die-label::before {
+  transform: rotate(-.45deg) skewX(-2.5deg) scaleX(1);
+}
+
+/* --- the fact --- */
+/* The stage reserves its height up front and the fact is absolutely positioned
+   inside it, so swapping a short fact for a long one never reflows the page
+   (DESIGN §4, zero layout shift). Keep facts under ~130 characters: past that
+   they outgrow the reserved box on a narrow viewport. */
+.nf__stage {
+  position: relative;
+  isolation: isolate;
+  min-height: clamp(96px, 15vh, 124px);
+  border-left: 1px solid var(--rule-link);
+  padding-left: clamp(16px, 2.4vw, 26px);
+  display: flex; align-items: center;
+}
+.nf__fact {
+  position: absolute;
+  left: clamp(16px, 2.4vw, 26px); right: 0;
+  margin: 0;
+  font-weight: 300;
+  font-size: clamp(1rem, 1.45vw, 1.14rem);
+  line-height: 1.5;
+  color: var(--ghost);
+  opacity: 1; transform: translateY(0);
+  transition: opacity .26s ease, transform .26s cubic-bezier(.2,.7,.3,1);
+}
+/* Script flips this while the die is mid-air, so the outgoing fact clears the
+   stage before the incoming one travels in. */
+.nf__fact[data-swapping="true"] { opacity: 0; transform: translateY(7px); }
+.nf__fact--prompt { color: var(--tag); }
+
+/* ============ 9. Responsive Adaptations ============ */
 @media (max-width: 960px) {
 
   /* One page gutter for every section and for the horizontal rail, so the bar
@@ -1077,6 +1255,28 @@ a { color: inherit; }
      Squashed to one column it collapses into a ~100px squiggle laid straight
      over the body copy, so it is dropped rather than downscaled. */
   .am__continuous-thread { display: none; }
+
+  /* Not Found Section */
+  .nf {
+    min-height: 0;
+    padding-inline: var(--gutter);
+    /* The rail lies down into a bar at the top of the document here, so the
+       trailing clearance the wide canvas reserved is no longer needed. */
+    padding-right: var(--gutter);
+    /* The rail's own top margin already supplies the theme-toggle clearance. */
+    padding-top: 0;
+    align-content: start;
+    gap: clamp(30px, 5vh, 44px);
+  }
+  /* The die stops sitting beside its fact: in a phone-width column the fact
+     would be squeezed too narrow to read, so it drops beneath the die. */
+  .nf__roller { grid-template-columns: minmax(0, 1fr); gap: clamp(20px, 4vh, 30px); }
+  .nf__die { justify-items: start; }
+  /* The same fact wraps to more rows in a narrow column, so the reserved box
+     grows with it — the stage must still never reflow when a fact swaps. A
+     132-character fact measures 72px at 375px wide, so this clears the
+     documented ceiling with room to spare without stranding empty rule. */
+  .nf__stage { min-height: clamp(88px, 13vh, 112px); }
 }
 
 /* Touch devices */
@@ -1087,6 +1287,9 @@ a { color: inherit; }
   .ia__tag { opacity: 1; }
   .cs__step { cursor: default; }
   .cs__shot { opacity: 1; transform: translateY(0); }
+  /* No hover to confirm the die is live, so its label carries full
+     metadata contrast at rest instead of waiting for a pointer. */
+  .nf__die-label { color: var(--woke); }
 }
 
 /* Touch on a wide canvas keeps the tag optically centred under its idea. Below
@@ -1104,4 +1307,7 @@ a { color: inherit; }
   }
   .ia__drift { animation: none !important; }
   .am__thread-base, .am__scroll-hint-arrow { animation: none !important; }
+  /* A 0.001s spin is a single jarring jump frame; the roll still
+     resolves, it simply lands without tumbling. */
+  .nf__die[data-rolling="true"] .nf__die-svg { animation: none !important; }
 }
