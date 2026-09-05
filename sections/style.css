@@ -619,16 +619,319 @@ a { color: inherit; }
   transform: translateX(6px);
 }
 
-/* ============ 7. Responsive Adaptations ============ */
+/* ============ 7. About Me Section (.am) ============ */
+:root {
+  --marble-base: #EDEBF4;
+  --marble-light: #F7F6FB;
+  --marble-shade: #DAD7E4;
+  --marble-deep: #C3BFD2;
+  --marble-vein: rgba(17, 19, 22, 0.16);
+  --marble-glow: rgba(255, 214, 10, 0.28);
+}
+:root[data-theme="dark"],
+[data-theme="dark"] {
+  --marble-base: #1C1E24;
+  --marble-light: #2A2D36;
+  --marble-shade: #14161A;
+  --marble-deep: #0D0E11;
+  --marble-vein: rgba(255, 255, 255, 0.16);
+  --marble-glow: rgba(255, 214, 10, 0.42);
+}
+
+.am-viewport {
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-y: contain;
+  background: var(--paper);
+  color: var(--ink);
+  position: relative;
+}
+
+.am__screen {
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: grid;
+  /* Zero floors, not 270/320/270: the fixed minimums exceeded the available
+     track space between 961px and ~1045px, and `overflow: hidden` clipped the
+     professional column off the left edge instead of letting it narrow. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.22fr) minmax(0, 1fr);
+  align-items: center;
+  justify-content: center;
+  padding: clamp(24px, 4vh, 44px) clamp(24px, 3.8vw, 56px);
+  padding-right: calc(var(--rail-w) + clamp(20px, 3vw, 44px));
+  gap: clamp(20px, 3.2vw, 52px);
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Left (Professional) & Right (Personal) Columns */
+.am__col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+.am__pro { text-align: left; }
+.am__personal { text-align: left; }
+
+.am__kicker {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--tag);
+  margin: 0 0 clamp(8px, 1.6vh, 14px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.am__kicker-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--rule-link);
+  display: inline-block;
+}
+
+.am__title {
+  font-family: "Bricolage Grotesque", ui-sans-serif, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.4rem, 2.2vw, 2.15rem);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  margin: 0 0 clamp(12px, 2vh, 18px);
+  color: var(--ink);
+}
+
+.am__body {
+  font-family: "IBM Plex Sans", ui-sans-serif, sans-serif;
+  font-weight: 300;
+  font-size: clamp(.88rem, 1.02vw, 1.01rem);
+  line-height: 1.62;
+  color: var(--ghost);
+  margin: 0 0 clamp(14px, 2.2vh, 22px);
+}
+.am__body p { margin: 0 0 10px; }
+.am__body p:last-child { margin-bottom: 0; }
+
+.am__link {
+  font-weight: 400;
+  color: var(--ghost-link);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-link);
+  text-underline-offset: 3px;
+  position: relative;
+  cursor: pointer;
+  display: inline;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background-image: var(--marker);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 0% 86%;
+  transition: color .14s ease, background-size .34s cubic-bezier(.2,.7,.3,1), text-decoration-color .2s ease;
+}
+.am__link:hover,
+.am__link:focus-visible {
+  background-size: 100% 86%;
+  text-decoration-color: transparent;
+  color: var(--marker-ink, #111316);
+}
+
+/* Stage dateline, centred above the sculpture. One range per stage rather than
+   one per column: the professional and personal columns narrate the same span
+   of time from two angles, so the date belongs to the stage, not to a column.
+   Static-px mono metadata, the sole exception to fluid scaling (DESIGN §3.7). */
+.am__year {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--tag);
+  text-align: center;
+  /* Tracking leaves a trailing space after the final glyph; nudge right to
+     restore optical centring (DESIGN §3.8). */
+  padding-left: .18em;
+  margin: 0 0 clamp(10px, 1.8vh, 18px);
+}
+
+/* Personal Vignette / Situation Card */
+.am__card {
+  border-left: 2px solid var(--rule-link);
+  padding: 10px 14px;
+  margin-top: clamp(8px, 1.4vh, 14px);
+  background: rgba(128, 128, 128, 0.04);
+  border-radius: 0 3px 3px 0;
+  transition: border-color .2s ease;
+}
+.am__card:hover {
+  border-left-color: var(--ink);
+}
+.am__card-label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--tag);
+  margin-bottom: 5px;
+  display: block;
+}
+.am__card-quote {
+  font-family: "IBM Plex Sans", ui-sans-serif, sans-serif;
+  font-style: italic;
+  font-size: clamp(.82rem, .94vw, .92rem);
+  line-height: 1.5;
+  color: var(--ghost);
+  margin: 0;
+}
+
+/* Center Column: Marble Sculpture Stage */
+.am__sculpture {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+.am__sculpture-box {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.am__sculpture-img {
+  width: 100%;
+  height: auto;
+  max-height: clamp(300px, 54vh, 480px);
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 14px 28px rgba(0,0,0,0.08));
+  transition: transform .4s cubic-bezier(.2,.7,.3,1), filter .4s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+[data-theme="dark"] .am__sculpture-img {
+  filter: drop-shadow(0 16px 36px rgba(0,0,0,0.65)) brightness(.96) contrast(1.04);
+}
+.am__sculpture-box:hover .am__sculpture-img {
+  transform: scale(1.025);
+}
+
+/* Continuous Flowing Yellow Line (Layered for 3D Depth) */
+.am__continuous-thread {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: clamp(24px, 3.8vw, 56px);
+  right: calc(var(--rail-w) + clamp(20px, 3vw, 44px));
+  width: calc(100% - clamp(24px, 3.8vw, 56px) - var(--rail-w) - clamp(20px, 3vw, 44px));
+  height: 400vh;
+  height: 400dvh;
+  pointer-events: none;
+  overflow: visible;
+}
+.am__continuous-thread--behind {
+  z-index: 1;
+}
+.am__continuous-thread--front {
+  z-index: 3;
+}
+
+.am__thread-base {
+  fill: none;
+  stroke: #FFD60A;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 5px rgba(255, 214, 10, 0.65));
+  will-change: transform;
+}
+
+/* Stage Metadata Label */
+.am__stage-meta {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--tag);
+  margin-top: clamp(10px, 1.8vh, 18px);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.am__stage-pill {
+  border: 1px solid var(--rule-link);
+  padding: 2px 7px;
+  border-radius: 2px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* Scroll Hint (Bottom Right) */
+.am__scroll-hint {
+  position: fixed;
+  z-index: 4;
+  bottom: clamp(20px, 3.2vh, 32px);
+  right: calc(var(--rail-w) + clamp(16px, 2.5vw, 32px));
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--tag);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+  opacity: .85;
+  transition: opacity .4s ease;
+}
+.am__scroll-hint-arrow {
+  display: inline-block;
+  animation: amHintBounce 1.8s ease-in-out infinite;
+}
+@keyframes amHintBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* ============ 8. Responsive Adaptations ============ */
 @media (max-width: 960px) {
+
+  /* One page gutter for every section and for the horizontal rail, so the bar
+     shares a left edge with the copy beneath it on Home, About and Case Study
+     alike. Previously each section set its own (18 / 20 / 22.5px) against a
+     rail margin of 16px, so the menu sat at a different inset on every page. */
+  :root { --gutter: clamp(18px, 5vw, 40px); }
+
   /* Rail layout */
   .rail,
   .ia__rail {
-    position: static; width: fit-content;
-    display: flex; flex-direction: row; align-items: center;
-    gap: 18px;
-    margin: clamp(18px, 3vh, 28px) clamp(18px, 5vw, 40px) clamp(24px, 4vh, 36px);
-    padding: clamp(11px, 1.8vh, 15px) clamp(15px, 4vw, 19px);
+    /* Spans the full gutter width, so the bar shares both edges with the copy
+       beneath it rather than sitting as a shrink-wrapped block on the left. */
+    position: static; width: auto;
+    max-width: 100%;
+    display: flex; flex-direction: row; flex-wrap: wrap;
+    align-items: center;
+    gap: clamp(10px, 2.5vw, 16px);
+    /* Top clearance tracks the theme toggle's own offset plus its 44px touch
+       target and a gap, so the toggle's tap area never lands on the bar — a
+       flat 8.5vh let them collide at 667px-tall viewports. */
+    margin: calc(clamp(20px, 3vh, 32px) + 52px) var(--gutter) clamp(20px, 3vh, 32px);
+    padding: clamp(9px, 1.5vh, 13px) clamp(12px, 3vw, 18px);
   }
   [data-theme="dark"] .rail,
   [data-theme="dark"] .ia__rail {
@@ -636,11 +939,26 @@ a { color: inherit; }
     border: 1px solid var(--rule-link, #5F6368);
   }
   .rail__link,
-  .ia__rail-link { writing-mode: horizontal-tb; }
+  .ia__rail-link {
+    writing-mode: horizontal-tb;
+    font-size: clamp(11px, 2.8vw, 13px);
+  }
+  /* Takes the whole bar and spreads the routes across it, so the run of links
+     reads edge to edge instead of clustering in the middle. */
   .rail__main,
-  .ia__rail-main { flex-direction: row; }
+  .ia__rail-main {
+    flex: 1;
+    flex-direction: row; flex-wrap: wrap; justify-content: space-between;
+    gap: clamp(10px, 2.5vw, 16px);
+  }
+  /* Mono tracking reserves trailing space after the final glyph; letting these
+     shrink would clip it, so they hold their intrinsic width and wrap instead. */
+  .rail__link, .rail__rule,
+  .ia__rail-link, .ia__rail-rule { flex-shrink: 0; }
+  /* The CV download is dropped on mobile at the owner's request. Note this
+     leaves no route to the CV below 960px — the desktop rail is its only home. */
   .rail__cv,
-  .ia__rail-cv { flex-direction: row; gap: 8px; }
+  .ia__rail-cv { display: none; }
   .rail__link::before, .rail__cv::before,
   .ia__rail-link::before, .ia__rail-cv::before {
     background: var(--marker);
@@ -655,14 +973,36 @@ a { color: inherit; }
     transform: rotate(-.45deg) skewX(-2.5deg) scaleX(1);
   }
   .rail__rule,
-  .ia__rail-rule { width: 18px; height: 1px; }
+  .ia__rail-rule { width: clamp(10px, 2vw, 18px); height: 1px; }
+  /* The intro's rail is nested inside .ia, so the section padding already
+     supplies its inset; its own side margin on top of that would inset it a
+     second time and break alignment with the body-level .rail. */
+  .ia__rail { margin-inline: 0; }
 
   /* Intro Section */
   .ia__stage { min-height: 0; display: block; justify-items: start; }
   .ia__core { max-width: none; text-align: left; margin: 0 0 clamp(30px, 6vh, 46px); }
   .ia__core::before { display: none; }
   .ia__hint { display: none; }
-  .ia { padding-right: clamp(18px, 3vw, 56px); }
+  .ia {
+    padding-inline: var(--gutter);
+    /* The rail's own top margin supplies the toggle clearance here, so the
+       section's centring padding would only stack a second empty band. */
+    padding-top: 0;
+    /* The ideas become a document-flow list that outgrows the 100vh minimum;
+       centring it then bleeds the rail off the top edge, where overflow:hidden
+       would clip it. Anchor the flow to the top instead. */
+    align-content: start;
+  }
+  /* nowrap exists to keep the spark reveals from breaking mid-trigger; the
+     sparks are suppressed below, so the display lead may wrap freely instead
+     of overflowing a 375px canvas. */
+  .ia__nb { white-space: normal; }
+  .ia__word {
+    white-space: normal;
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  }
+  .ia__lead { font-size: clamp(1.75rem, 7.4vw, 2.6rem); line-height: 1.06; }
   .ia__slot { position: static; transform: none; margin: 0 0 26px; }
   .ia__drift { animation: none; }
   .ia__idea { white-space: normal; font-size: calc(var(--s, 1) * 1.06rem); }
@@ -679,7 +1019,7 @@ a { color: inherit; }
   .cs > :last-child { margin-right: 0; }
   .cs__hook, .cs__block, .cs__flow, .cs__next {
     width: auto; height: auto; display: block;
-    padding: clamp(62px, 10vh, 104px) clamp(22px, 6vw, 52px);
+    padding: clamp(62px, 10vh, 104px) var(--gutter);
   }
   .cs__scroll { display: none; }
   .cs__block, .cs__flow, .cs__next { border-left: 0; border-top: 1px solid var(--rule-link); }
@@ -703,6 +1043,40 @@ a { color: inherit; }
     opacity: 1; transform: none;
   }
   .cs__shot-img { height: auto; }
+
+  /* About Me Section */
+  .am-viewport {
+    height: auto;
+    overflow-y: visible;
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+  }
+  .am__screen {
+    height: auto;
+    min-height: 0;
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(40px, 6vh, 64px) var(--gutter);
+    gap: clamp(24px, 3.5vh, 36px);
+  }
+  .am__sculpture {
+    order: -1;
+    width: 100%;
+  }
+  .am__sculpture-box {
+    max-width: 280px;
+  }
+  .am__scroll-hint {
+    display: none;
+  }
+  /* The thread's path is authored to weave between the three desktop columns.
+     Squashed to one column it collapses into a ~100px squiggle laid straight
+     over the body copy, so it is dropped rather than downscaled. */
+  .am__continuous-thread { display: none; }
 }
 
 /* Touch devices */
@@ -710,9 +1084,16 @@ a { color: inherit; }
   .theme-toggle { min-width: 44px; min-height: 44px; }
   .ia__idea { color: var(--ghost); }
   .ia__idea--link { color: var(--ghost-link); }
-  .ia__tag { opacity: 1; transform: translate(-50%, 0); }
+  .ia__tag { opacity: 1; }
   .cs__step { cursor: default; }
   .cs__shot { opacity: 1; transform: translateY(0); }
+}
+
+/* Touch on a wide canvas keeps the tag optically centred under its idea. Below
+   960px the tag is a static block in document flow, where the centring offset
+   would drag it off the left edge — so it is scoped to the wide layout only. */
+@media (hover: none) and (min-width: 961px) {
+  .ia__tag { transform: translate(-50%, 0); }
 }
 
 /* Reduced motion */
@@ -722,5 +1103,5 @@ a { color: inherit; }
     animation-duration: .001s !important;
   }
   .ia__drift { animation: none !important; }
-  .theme-toggle, .theme-toggle * { transition-duration: .001s !important; }
+  .am__thread-base, .am__scroll-hint-arrow { animation: none !important; }
 }
