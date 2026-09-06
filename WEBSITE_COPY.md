@@ -224,29 +224,29 @@ CV Badge: CV
 #### Left Column (Professional)
 * **Kicker:** `Professional // 01 // Substrate` (32 chars)
   * *Limit:* **20 – 35 chars** (Mono 11px uppercase)
-  * *Your revised copy:* `Professional // 01 // Substrate`
+  * *Your revised copy:* `Pre-career`
 * **Title:** `Curiosity as raw material` (25 chars)
   * *Limit:* **18 – 35 chars** (Bricolage 800 display, 1–2 lines max)
   * *Your revised copy:* `Curiosity as raw material`
 * **Paragraph 1:**
   * *Current:* `Before design systems, components, and polished interactions, there is the uncarved block: an appetite for understanding how complex structures function under pressure.` (174 chars)
   * *Limit:* **140 – 190 chars** (~20–28 words)
-  * *Your revised copy:* `Before design systems, components, and polished interactions, there is the uncarved block: an appetite for understanding how complex structures function under pressure.`
+  * *Your revised copy:* `Before design systems, components, and polished interactions, there is the uncarved block: an appetite for understanding how complex structures function`
 * **Paragraph 2:**
   * *Current:* `My foundation began at the intersection of business strategy, analytical modeling, and user intent. I learned early that every durable digital product is grounded in organizational constraints and human habit.` (208 chars)
   * *Limit:* **160 – 220 chars** (~25–35 words)
-  * *Your revised copy:* `My foundation began at the intersection of business strategy, analytical modeling, and user intent. I learned early that every durable digital product is grounded in organizational constraints and human habit.`
+  * *Your revised copy:* `Early business classes and high school in the US pushed me to question everything. I became obsessed with why systems function as they do, always dreaming up ways to make them better.`
 
 #### Center Column (Marble Sculpture Meta)
 * **Year Range:** `YYYY – YYYY` (11 chars placeholder)
   * *Limit:* **9 – 12 chars** (e.g. `2016 – 2018`)
-  * *Your revised copy:* `YYYY – YYYY`
+  * *Your revised copy:* `1999 – 2012`
 * **Stage Pill:** `STAGE 01` (8 chars)
   * *Limit:* **8 chars** (Fixed identifier)
   * *Your revised copy:* `STAGE 01`
 * **Stage Name:** `The Unhewn Monolith` (19 chars)
   * *Limit:* **14 – 24 chars**
-  * *Your revised copy:* `The Unhewn Monolith`
+  * *Your revised copy:* `Unhewn Monolith`
 * **Image Accessibility Alt Text:** `Raw marble quarry block with rough split textures and grain` (60 chars)
   * *Your revised copy:* `Raw marble quarry block with rough split textures and grain`
 
@@ -256,15 +256,15 @@ CV Badge: CV
   * *Your revised copy:* `Personal // 01 // Origins`
 * **Title:** `Taking apart clockworks & maps` (30 chars)
   * *Limit:* **18 – 35 chars**
-  * *Your revised copy:* `Taking apart clockworks & maps`
+  * *Your revised copy:* `Finding the chisel`
 * **Paragraph 1:**
   * *Current:* `Growing up, nothing stayed assembled for long. Mechanical alarms, cassette recorders, and bicycle gears were disassembled to study escapement wheels, springs, and friction points.` (176 chars)
   * *Limit:* **140 – 190 chars**
-  * *Your revised copy:* `Growing up, nothing stayed assembled for long. Mechanical alarms, cassette recorders, and bicycle gears were disassembled to study escapement wheels, springs, and friction points.`
+  * *Your revised copy:* `Born in Odesa, Ukraine, I lived inside stories—reading street signs, building imaginary worlds, and writing. When given the chance to study in Hawaii, the only answer was yes.`
 * **Paragraph 2:**
   * *Current:* `Parallel to machinery was an obsession with tabletop strategy rules, hand-drawn cartography, and tactical puzzles—spaces where transparent logic generates unexpected creative narratives.` (187 chars)
   * *Limit:* **150 – 210 chars**
-  * *Your revised copy:* `Parallel to machinery was an obsession with tabletop strategy rules, hand-drawn cartography, and tactical puzzles—spaces where transparent logic generates unexpected creative narratives.`
+  * *Your revised copy:* `I wrote poetry, ran chemistry experiments, and stayed relentlessly curious about how things work. Living across different cultures expanded that imagination even further.`
 * **Card Label:** `Early Premise` (13 chars)
   * *Limit:* **10 – 20 chars** (Mono 11px uppercase)
   * *Your revised copy:* `Early Premise`
@@ -280,23 +280,23 @@ CV Badge: CV
 #### Left Column (Professional)
 * **Kicker:** `Professional // 02 // Reduction` (32 chars)
   * *Limit:* **20 – 35 chars**
-  * *Your revised copy:* `Professional // 02 // Reduction`
+  * *Your revised copy:* `Professional`
 * **Title:** `Knocking off the excess` (23 chars)
   * *Limit:* **18 – 35 chars**
   * *Your revised copy:* `Knocking off the excess`
 * **Paragraph 1:**
   * *Current:* `Transitioning from pure strategy into production product design was a lesson in physical reduction. Great software is not accumulated; it is carved out by ruthless elimination of non-essential weight.` (202 chars)
   * *Limit:* **150 – 210 chars**
-  * *Your revised copy:* `Transitioning from pure strategy into production product design was a lesson in physical reduction. Great software is not accumulated; it is carved out by ruthless elimination of non-essential weight.`
+  * *Your revised copy:* `A computer science foundation gave way to design school in Poland. I experimented across sculpture, video, and branding before zeroing in on digital products—stripping away everything that didn’t fit.`
 * **Paragraph 2:**
   * *Current:* `This phase was forged in high-tempo sprints: rapid wireframing, sitting beside users through confusing error states, and learning that subtractive design reveals clarity faster than additive decoration.` (204 chars)
   * *Limit:* **150 – 210 chars**
-  * *Your revised copy:* `This phase was forged in high-tempo sprints: rapid wireframing, sitting beside users through confusing error states, and learning that subtractive design reveals clarity faster than additive decoration.`
+  * *Your revised copy:* `Freelancing took off overnight. I hired a classmate, ran client comms, and delivered identities and packaging under relentless standards. I led early, burned bright, and learned the cost of brute force.`
 
 #### Center Column (Marble Sculpture Meta)
 * **Year Range:** `YYYY – YYYY` (11 chars placeholder)
   * *Limit:* **9 – 12 chars** (e.g. `2018 – 2021`)
-  * *Your revised copy:* `YYYY – YYYY`
+  * *Your revised copy:* `2013 – 2021`
 * **Stage Pill:** `STAGE 02` (8 chars)
   * *Limit:* **8 chars**
   * *Your revised copy:* `STAGE 02`
@@ -309,25 +309,25 @@ CV Badge: CV
 #### Right Column (Personal)
 * **Kicker:** `Personal // 02 // Movement` (25 chars)
   * *Limit:* **18 – 32 chars**
-  * *Your revised copy:* `Personal // 02 // Movement`
+  * *Your revised copy:* `Personal`
 * **Title:** `Relocations, cameras & clay` (26 chars)
   * *Limit:* **18 – 35 chars**
-  * *Your revised copy:* `Relocations, cameras & clay`
+  * *Your revised copy:* `New languages & raw momentum`
 * **Paragraph 1:**
   * *Current:* `Packed life into two suitcases and navigated new cities, languages, and creative scenes. Picked up street photography with a fixed 35mm lens—training the eye to anticipate composition before raising the viewfinder.` (216 chars)
   * *Limit:* **160 – 220 chars**
-  * *Your revised copy:* `Packed life into two suitcases and navigated new cities, languages, and creative scenes. Picked up street photography with a fixed 35mm lens—training the eye to anticipate composition before raising the viewfinder.`
+  * *Your revised copy:* `Reconnecting with my roots led me home to Ukraine, then outward to Poland. Accepted into art school without knowing a word of Polish, I threw myself into the deep end and reached B2 fluency in two months flat.`
 * **Paragraph 2:**
   * *Current:* `In ceramic workshops, I threw stoneware bowls on high-speed kick wheels. Clay taught me immediate sensory feedback: pull the wall too fast and the whole cylinder collapses.` (172 chars)
   * *Limit:* **140 – 190 chars**
-  * *Your revised copy:* `In ceramic workshops, I threw stoneware bowls on high-speed kick wheels. Clay taught me immediate sensory feedback: pull the wall too fast and the whole cylinder collapses.`
+  * *Your revised copy:* `I lived in creative overdrive—making sculptures, music, and video by day, doing client work by night. The hunger to master every medium was exhilarating, until the pace caught up.`
 * **Card Label:** `Studio Discovery` (16 chars)
   * *Limit:* **10 – 20 chars**
-  * *Your revised copy:* `Studio Discovery`
+  * *Your revised copy:* `HARD-WON CLARITY`
 * **Card Quote:**
   * *Current:* `“Clay collapses when you rush the center; stone shatters when you strike against the natural grain.”` (99 chars)
   * *Limit:* **70 – 120 chars**
-  * *Your revised copy:* `“Clay collapses when you rush the center; stone shatters when you strike against the natural grain.”`
+  * *Your revised copy:* `“Striking hard shapes the stone fast, but without rhythm and patience, you only break the tool.”`
 
 ---
 
@@ -336,23 +336,23 @@ CV Badge: CV
 #### Left Column (Professional)
 * **Kicker:** `Professional // 03 // Scale & Systems` (38 chars)
   * *Limit:* **20 – 38 chars**
-  * *Your revised copy:* `Professional // 03 // Scale & Systems`
+  * *Your revised copy:* `Professional`
 * **Title:** `Sculpting from 1 to 1000` (24 chars)
   * *Limit:* **18 – 35 chars**
-  * *Your revised copy:* `Sculpting from 1 to 1000`
+  * *Your revised copy:* `Solo craft to living systems`
 * **Paragraph 1:**
   * *Current:* `Scaling digital products requires an entirely different finesse: harmonizing multi-tier design systems, maintaining typographic discipline across platforms, and uniting engineering with strategic business targets.` (217 chars)
   * *Limit:* **160 – 220 chars**
-  * *Your revised copy:* `Scaling digital products requires an entirely different finesse: harmonizing multi-tier design systems, maintaining typographic discipline across platforms, and uniting engineering with strategic business targets.`
+  * *Your revised copy:* `At Propaganda Solutions, I shifted from shaping perception through marketing into architecting web products. When the team condensed to just me, I took full ownership of the agency's digital design pipeline.`
 * **Paragraph 2:**
   * *Current:* `At this altitude, design is about creating self-sustaining gravity. I build resilient token architectures, clear documentation patterns, and interfaces that feel as responsive as physical instruments.` (201 chars)
   * *Limit:* **150 – 210 chars**
-  * *Your revised copy:* `At this altitude, design is about creating self-sustaining gravity. I build resilient token architectures, clear documentation patterns, and interfaces that feel as responsive as physical instruments.`
+  * *Your revised copy:* `Running solo meant owning the entire spectrum—from brand positioning to web architecture. I helped reshape the agency's identity while delivering digital products that balanced business goals with fine craft.`
 
 #### Center Column (Marble Sculpture Meta)
 * **Year Range:** `YYYY – YYYY` (11 chars placeholder)
   * *Limit:* **9 – 12 chars** (e.g. `2021 – 2023`)
-  * *Your revised copy:* `YYYY – YYYY`
+  * *Your revised copy:* `2021 – 2025`
 * **Stage Pill:** `STAGE 03` (8 chars)
   * *Limit:* **8 chars**
   * *Your revised copy:* `STAGE 03`
@@ -365,25 +365,25 @@ CV Badge: CV
 #### Right Column (Personal)
 * **Kicker:** `Personal // 03 // Tempo & Rituals` (32 chars)
   * *Limit:* **18 – 34 chars**
-  * *Your revised copy:* `Personal // 03 // Tempo & Rituals`
+  * *Your revised copy:* `Personal`
 * **Title:** `Long-distance miles & pour-overs` (31 chars)
   * *Limit:* **18 – 35 chars**
-  * *Your revised copy:* `Long-distance miles & pour-overs`
+  * *Your revised copy:* `Village stillness & worldbuilding`
 * **Paragraph 1:**
   * *Current:* `Endurance running reshaped how I think about focus. Preparing for 26.2-mile races taught me pacing: the distinction between sprint-induced burnout and steady, compounding velocity.` (182 chars)
   * *Limit:* **140 – 200 chars**
-  * *Your revised copy:* `Endurance running reshaped how I think about focus. Preparing for 26.2-mile races taught me pacing: the distinction between sprint-induced burnout and steady, compounding velocity.`
+  * *Your revised copy:* `After burnout, I closed my laptop to travel and reset. When war escalated, living in quiet Ukrainian villages taught me the deep power of slowness before I finally made my way back home to Odesa.`
 * **Paragraph 2:**
   * *Current:* `Morning ritual: weighing washed Ethiopian beans to the tenth of a gram, controlling water temperature, and collecting out-of-print Swiss graphic design journals from the 1960s.` (177 chars)
   * *Limit:* **140 – 195 chars**
-  * *Your revised copy:* `Morning ritual: weighing washed Ethiopian beans to the tenth of a gram, controlling water temperature, and collecting out-of-print Swiss graphic design journals from the 1960s.`
+  * *Your revised copy:* `In Odesa, I co-founded a D&D club that outgrew two spaces. Crafting campaigns showed me that worldbuilding and product design share the same truth: both rely on clear systems and player agency.`
 * **Card Label:** `Pacing Philosophy` (17 chars)
   * *Limit:* **10 – 20 chars**
-  * *Your revised copy:* `Pacing Philosophy`
+  * *Your revised copy:* `SYSTEMS OF PLAY`
 * **Card Quote:**
   * *Current:* `“Miles 18 through 22 feel just like complex software refactoring: calm breath, steady cadence, no sudden panic.”` (112 chars)
   * *Limit:* **70 – 120 chars**
-  * *Your revised copy:* `“Miles 18 through 22 feel just like complex software refactoring: calm breath, steady cadence, no sudden panic.”`
+  * *Your revised copy:* `“Designing a product is just worldbuilding: craft the rules, honor the player's agency, and let the story unfold.”`
 
 ---
 
@@ -392,27 +392,27 @@ CV Badge: CV
 #### Left Column (Professional)
 * **Kicker:** `Professional // 04 // Horizon` (30 chars)
   * *Limit:* **20 – 35 chars**
-  * *Your revised copy:* `Professional // 04 // Horizon`
+  * *Your revised copy:* `Professional`
 * **Title:** `Instruments for human thought` (29 chars)
   * *Limit:* **18 – 35 chars**
-  * *Your revised copy:* `Instruments for human thought`
+  * *Your revised copy:* `Instruments for human agency`
 * **Paragraph 1:**
   * *Current:* `The polished form is not static; it is an active instrument. Today, my focus is directed toward high-agency interfaces: AI collaborative workflows, spatial software, and tools that expand human curiosity rather than deplete attention.` (235 chars)
   * *Limit:* **160 – 235 chars**
-  * *Your revised copy:* `The polished form is not static; it is an active instrument. Today, my focus is directed toward high-agency interfaces: AI collaborative workflows, spatial software, and tools that expand human curiosity rather than deplete attention.`
+  * *Your revised copy:* `Today, I build at the edge of human agency and AI orchestration. Co-founding a fitness app gave me the canvas to design without constraints, turning autonomous tools into creative extensions of product intent.`
 * **Paragraph 2 (includes case study link):**
   * *Current:* `I partner with ambitious teams to bring complex 0-to-1 concepts into crisp, tangible reality. Explore how I apply this craft in the Holistic fitness app case study →` (167 chars)
   * *Limit:* **130 – 185 chars**
-  * *Your revised copy:* `I partner with ambitious teams to bring complex 0-to-1 concepts into crisp, tangible reality. Explore how I apply this craft in the Holistic fitness app case study →`
+  * *Your revised copy:* `I bring ambitious 0-to-1 ideas into crisp, living software. Explore how I translate systems and craft in the Holistic fitness app case study →`
 
 #### Center Column (Marble Sculpture Meta)
 * **Year Range:** `YYYY – NOW` (10 chars placeholder)
   * *Limit:* **9 – 12 chars** (e.g. `2024 – NOW`)
-  * *Your revised copy:* `YYYY – NOW`
+  * *Your revised copy:* `2025 – NOW`
 * **Stage Pill:** `STAGE 04` (8 chars)
   * *Limit:* **8 chars**
   * *Your revised copy:* `STAGE 04`
-* **Stage Name:** `The Polished Monument` (21 chars)
+* **Stage Name:** `Polished Monument` (21 chars)
   * *Limit:* **14 – 24 chars**
   * *Your revised copy:* `The Polished Monument`
 * **Image Accessibility Alt Text:** `Polished classical marble bust on plinth` (40 chars)
@@ -421,25 +421,25 @@ CV Badge: CV
 #### Right Column (Personal)
 * **Kicker:** `Personal // 04 // Dialogue` (25 chars)
   * *Limit:* **18 – 32 chars**
-  * *Your revised copy:* `Personal // 04 // Dialogue`
+  * *Your revised copy:* `Personal`
 * **Title:** `Never finished, always curious` (30 chars)
   * *Limit:* **18 – 35 chars**
-  * *Your revised copy:* `Never finished, always curious`
+  * *Your revised copy:* `Puppeteering worlds & agents`
 * **Paragraph 1:**
   * *Current:* `A statue is finished when the sculptor steps away, but a designer's craft is constantly reconstituted by every conversation, collaborator, and new challenge encountered.` (170 chars)
   * *Limit:* **140 – 190 chars**
-  * *Your revised copy:* `A statue is finished when the sculptor steps away, but a designer's craft is constantly reconstituted by every conversation, collaborator, and new challenge encountered.`
+  * *Your revised copy:* `Leaving home gave me room to heal and reset. Knowing how little I knew, I dove into books and film, realizing that narrative structure and product architecture share the exact same DNA.`
 * **Paragraph 2:**
   * *Current:* `Outside design: collecting fountain pens, exploring brutalist architecture, and brewing conversations over great coffee. Always open to collaborate with teams that care obsessively about substance.` (200 chars)
   * *Limit:* **150 – 210 chars**
-  * *Your revised copy:* `Outside design: collecting fountain pens, exploring brutalist architecture, and brewing conversations over great coffee. Always open to collaborate with teams that care obsessively about substance.`
+  * *Your revised copy:* `Physical discipline grounded my day-to-day focus. Today, whether steering campaigns at the game table or orchestrating AI agent workflows, I design responsive environments where people and software thrive.`
 * **Card Label:** `Open Channel` (12 chars)
   * *Limit:* **10 – 20 chars**
-  * *Your revised copy:* `Open Channel`
+  * *Your revised copy:* `SYSTEMIC LEVERAGE`
 * **Card Quote:**
   * *Current:* `“Reach out about early-stage ideas, typography disputes, or where to find the finest double-shot espresso.”` (106 chars)
   * *Limit:* **70 – 120 chars**
-  * *Your revised copy:* `“Reach out about early-stage ideas, typography disputes, or where to find the finest double-shot espresso.”`
+  * *Your revised copy:* `“Whether leading a campaign or directing AI agents, the goal holds: build clear systems that give others full agency.”`
 
 ---
 
