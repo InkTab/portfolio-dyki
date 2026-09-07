@@ -9,7 +9,7 @@ This document compiles **every user-facing text element across all 5 pages of th
 2. [Page 1: index.html (Homepage / Interactive Ideas Canvas)](#page-1-indexhtml--homepage--ideas-canvas)
 3. [Page 2: about-section.html (About Me — The Marble & The Thread)](#page-2-about-sectionhtml--about-me)
 4. [Page 3: kynso.html (Case Study — Kynso Holistic Fitness App)](#page-3-kynsohtml--case-study-kynso)
-5. [Page 4: case-study-section.html (Case Study Template / Generic E-Commerce)](#page-4-case-study-sectionhtml--case-study-template)
+5. [Page 4: supplement.html (Case Study — Supplement Checkout Fix)](#page-4-supplementhtml--case-study-supplement-checkout-fix)
 6. [Page 5: 404.html (Error 404 — D20 Fact Roller)](#page-5-404html--error-404-page)
 7. [Quick Reference: Character Limits Summary Table](#quick-reference-character-limits-summary-table)
 
@@ -90,7 +90,7 @@ This document compiles **every user-facing text element across all 5 pages of th
   * *Label:* `ADHD todo list` (14 chars) | *Limit:* 12 – 30 chars
   * *Tag:* `Prototype` (9 chars) | *Limit:* 8 – 16 chars
 
-* **Idea 6 (Coordinates: 80% / 82% — links to `case-study-section.html`):**
+* **Idea 6 (Coordinates: 80% / 82% — links to `supplement.html`):**
   * *Label:* `Supplement checkout fix` (23 chars) | *Limit:* 15 – 30 chars
   * *Tag:* `Case study →` (12 chars) | *Limit:* 10 – 16 chars
   * *Sparks:* `data analysis`, `UI design`, `UX design`
@@ -325,46 +325,44 @@ This document compiles **every user-facing text element across all 5 pages of th
 
 ---
 
-# Page 4: `case-study-section.html` — Case Study Template
-
-*Standard case study layout for E-Commerce / Checkout optimization.*
+# Page 4: `supplement.html` — Case Study: Supplement Checkout Fix
 
 ### Page Metadata
-* **Browser Tab Title:** `Case study — template` (21 chars) | *Limit:* 20 – 50 chars
+* **Browser Tab Title:** `Case study — Supplement` (23 chars) | *Limit:* 20 – 50 chars
 
 ---
 
 ### Section 1: The Hook
-* **Eyebrow:** `Case study — 01` (16 chars) | *Limit:* 12 – 24 chars
-* **Hook Line (H1):** `Checkout lost four of every five carts. Six weeks later it lost one.` (67 chars) | *Limit:* 55 – 90 chars
-* **Hook Subtitle:** `One sentence of context: the product, the surface, and the stake. Keep it to a single breath — the detail belongs further down.` (130 chars) | *Limit:* 100 – 170 chars
+* **Eyebrow:** `Case study — 01` (15 chars) | *Limit:* 12 – 24 chars
+* **Hook Line (H1):** `Initial orders plummeted 80%, but retained customers grew by 80%.` (65 chars) | *Limit:* 55 – 90 chars
+* **Hook Subtitle:** `A premium supplement brand blamed their design for bad sales, but a deceptive free trial was actually driving a 90% product return rate.` (138 chars) | *Limit:* 100 – 170 chars
 * **Metadata Facts:**
-  * **Role:** `Product designer` (16 chars) | *Limit:* 12 – 30 chars
-  * **Year:** `2025` (4 chars) | *Limit:* 4 – 9 chars
-  * **Duration:** `6 weeks` (7 chars) | *Limit:* 6 – 15 chars
-  * **Team:** `1 designer, 2 engineers, 1 PM` (28 chars) | *Limit:* 18 – 40 chars
+  * **Role:** `UI/UX Designer` (14 chars) | *Limit:* 12 – 30 chars
+  * **Year:** `2023` (4 chars) | *Limit:* 4 – 9 chars
+  * **Duration:** `4 months` (8 chars) | *Limit:* 6 – 15 chars
+  * **Team:** `Agency team, Client CEO` (23 chars) | *Limit:* 18 – 40 chars
 
 ---
 
 ### Section 2: The Client
 * **Section Kicker:** `The client` (10 chars)
-* **Lede Statement:** `Client name sells what they sell to who buys it.` (48 chars) | *Limit:* 45 – 100 chars
-* **Prose:** `Two or three sentences on the business as it stood when the work started: size, stage, how they made money, and what they had already tried. Written for someone who has never heard of them.` (191 chars) | *Limit:* 160 – 320 chars
+* **Lede Statement:** `They sell premium, certified supplements to an older demographic.` (65 chars) | *Limit:* 45 – 100 chars
+* **Prose:** `The client offered high-priced supplements backed by real certifications. They came to us with stagnant sales, convinced a visual redesign would fix things. They used a free trial model to acquire users, aiming to boost revenue without changing the offer.` (256 chars) | *Limit:* 160 – 320 chars
 * **Facts:**
-  * **Industry:** `Direct-to-consumer retail` (26 chars) | *Limit:* 12 – 30 chars
-  * **Stage:** `Series A` (8 chars) | *Limit:* 6 – 18 chars
-  * **Surface:** `Responsive web` (14 chars) | *Limit:* 10 – 30 chars
+  * **Industry:** `Health & Wellness eComm` (23 chars) | *Limit:* 12 – 30 chars
+  * **Stage:** `Established SMB` (15 chars) | *Limit:* 6 – 18 chars
+  * **Surface:** `Shopify Web` (11 chars) | *Limit:* 10 – 30 chars
 
 ---
 
 ### Section 3: The Problem
 * **Section Kicker:** `The problem` (11 chars)
-* **Problem Statement:** `State the problem as the client stated it, in their words, before you reframed it.` (85 chars) | *Limit:* 60 – 100 chars
-* **Prose:** `Then the paragraph that says what was actually going on underneath — the gap between the brief you were handed and the problem you found. This is where a reader decides whether you think or just execute.` (206 chars) | *Limit:* 180 – 360 chars
+* **Problem Statement:** `"Our site looks outdated. We need a modern redesign to increase our product sales."` (84 chars) | *Limit:* 60 – 100 chars
+* **Prose:** `They didn't have a design problem; they had a deceptive checkout. Customers clicked 'try for free' but were secretly enrolled in an opt-out subscription. They'd get billed later and return it. We built a beautiful new site, but it didn't fix the core lie driving a 90% return rate.` (285 chars) | *Limit:* 180 – 360 chars
 * **Symptoms (3 Diagnoses):**
-  * **Signal:** `The number, quote, or ticket volume that made it undeniable.` (61 chars) | *Limit:* 50 – 140 chars
-  * **Constraint:** `The thing you could not change: budget, stack, deadline, brand.` (64 chars) | *Limit:* 50 – 140 chars
-  * **Unknown:** `The question nobody could answer at the start.` (45 chars) | *Limit:* 40 – 130 chars
+  * **Signal:** `A massive 90% return rate buried in Shopify data, costing them double in shipping.` (82 chars) | *Limit:* 50 – 140 chars
+  * **Constraint:** `We were initially hired just to reskin the landing pages and product catalog.` (78 chars) | *Limit:* 50 – 140 chars
+  * **Unknown:** `Would an honest checkout kill their acquisition numbers completely?` (67 chars) | *Limit:* 40 – 130 chars
 
 ---
 
@@ -375,47 +373,47 @@ This document compiles **every user-facing text element across all 5 pages of th
   * *Kicker:* `How it got solved` (17 chars)
   * *Hint:* `Hover a step` (12 chars)
 * **Step 01:**
-  * **Title:** `Named the real question` (23 chars) | *Limit:* 20 – 45 chars
-  * **Text:** `What you did, in two sentences, and what it changed about the next step. Verbs, not nouns.` (90 chars) | *Limit:* 70 – 130 chars
-  * **Tags:** `Stakeholder interviews · Analytics review` (41 chars) | *Limit:* 25 – 55 chars
-  * **Figcaption:** `Initial stakeholder alignment and friction mapping` (51 chars) | *Limit:* 35 – 70 chars
+  * **Title:** `Redesigned the catalogue` (24 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `I built the requested educational pages first. It improved the promise but didn't stop the returns.` (99 chars) | *Limit:* 70 – 130 chars
+  * **Tags:** `UI Redesign · Product Pages` (27 chars) | *Limit:* 25 – 55 chars
+  * **Figcaption:** `Unified catalog highlighting product certifications` (51 chars) | *Limit:* 35 – 70 chars
 * **Step 02:**
-  * **Title:** `Went and watched people fail` (27 chars) | *Limit:* 20 – 45 chars
-  * **Text:** `What you did, in two sentences, and what it changed about the next step. Verbs, not nouns.` (90 chars) | *Limit:* 70 – 130 chars
-  * **Tags:** `Moderated testing · Session replay` (34 chars) | *Limit:* 25 – 55 chars
-  * **Figcaption:** `User session recording audit and drop-off points` (48 chars) | *Limit:* 35 – 70 chars
+  * **Title:** `Uncovered the real P&L issue` (28 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `I dug into their Shopify data and session recordings. I found a 90% return rate tied to the trial.` (98 chars) | *Limit:* 70 – 130 chars
+  * **Tags:** `Data Analysis · Session Replays` (31 chars) | *Limit:* 25 – 55 chars
+  * **Figcaption:** `Reviewing Shopify return rates and hidden checkout terms` (56 chars) | *Limit:* 35 – 70 chars
 * **Step 03:**
-  * **Title:** `Drew the cheapest version that could be wrong` (44 chars) | *Limit:* 25 – 55 chars
-  * **Text:** `What you did, in two sentences, and what it changed about the next step. Verbs, not nouns.` (90 chars) | *Limit:* 70 – 130 chars
-  * **Tags:** `Flows · Low-fidelity wireframes` (31 chars) | *Limit:* 25 – 55 chars
-  * **Figcaption:** `Checkout branch logic and step consolidation` (44 chars) | *Limit:* 35 – 70 chars
+  * **Title:** `Rebuilt for opt-in transparency` (31 chars) | *Limit:* 25 – 55 chars
+  * **Text:** `I redesigned the checkout to require active subscription opt-in and added a one-time purchase option.` (101 chars) | *Limit:* 70 – 130 chars
+  * **Tags:** `Checkout UX · Transparent Pricing` (33 chars) | *Limit:* 25 – 55 chars
+  * **Figcaption:** `New checkout flow with clear opt-in and purchase choices` (56 chars) | *Limit:* 35 – 70 chars
 * **Step 04:**
-  * **Title:** `Built it properly once it stopped being wrong` (45 chars) | *Limit:* 25 – 55 chars
-  * **Text:** `What you did, in two sentences, and what it changed about the next step. Verbs, not nouns.` (90 chars) | *Limit:* 70 – 130 chars
-  * **Tags:** `UI design · Design system` (25 chars) | *Limit:* 20 – 50 chars
-  * **Figcaption:** `Componentized checkout sheet and validation states` (50 chars) | *Limit:* 35 – 70 chars
+  * **Title:** `Argued the case with evidence` (29 chars) | *Limit:* 25 – 55 chars
+  * **Text:** `Orders plummeted 80%, so the client panicked. I showed the CEO the data proving we saved money.` (96 chars) | *Limit:* 70 – 130 chars
+  * **Tags:** `Stakeholder Mgmt · P&L Framing` (30 chars) | *Limit:* 20 – 50 chars
+  * **Figcaption:** `Presenting return rates and competitor models to the CEO` (56 chars) | *Limit:* 35 – 70 chars
 * **Step 05:**
-  * **Title:** `Shipped it behind a flag and watched the number move` (52 chars) | *Limit:* 25 – 55 chars
-  * **Text:** `What you did, in two sentences, and what it changed about the next step. Verbs, not nouns.` (90 chars) | *Limit:* 70 – 130 chars
-  * **Tags:** `Handoff · A/B test` (18 chars) | *Limit:* 15 – 45 chars
-  * **Figcaption:** `Cohort conversion split test results` (36 chars) | *Limit:* 30 – 65 chars
+  * **Title:** `Rolled back the visual design` (29 chars) | *Limit:* 25 – 55 chars
+  * **Text:** `They reverted the catalogue look but kept the honest checkout. Total retained customers grew by 80%.` (99 chars) | *Limit:* 70 – 130 chars
+  * **Tags:** `Compromise · Final Launch` (25 chars) | *Limit:* 15 – 45 chars
+  * **Figcaption:** `Final hybrid launch combining original site and new checkout` (59 chars) | *Limit:* 30 – 65 chars
 
 ---
 
 ### Section 5: The Impact
 * **Section Kicker:** `The impact` (10 chars)
-* **Outcome Statement:** `Cart completion rose from 21% to 78% within six weeks of rollout.` (65 chars) | *Limit:* 50 – 100 chars
+* **Outcome Statement:** `While top-line orders dropped, actual kept products increased by 80%.` (69 chars) | *Limit:* 50 – 100 chars
 * **Metrics (3 Data Points):**
-  * **Metric 1:** `+57%` | Label: `Checkout conversion` (19 chars) | *Limit:* 12 – 28 chars
-  * **Metric 2:** `−42s` | Label: `Time to complete` (16 chars) | *Limit:* 12 – 28 chars
-  * **Metric 3:** `0` | Label: `Drop-off support tickets` (24 chars) | *Limit:* 12 – 28 chars
-* **Impact Prose:** `Two to three sentences on the business outcome, the long-term impact on the team, and what this project taught you about product design under real constraints.` (163 chars) | *Limit:* 140 – 280 chars
+  * **Metric 1:** `-80%` | Label: `Initial order volume` (20 chars) | *Limit:* 12 – 28 chars
+  * **Metric 2:** `10%` | Label: `Final return rate` (17 chars) | *Limit:* 12 – 28 chars
+  * **Metric 3:** `+80%` | Label: `Retained customers` (18 chars) | *Limit:* 12 – 28 chars
+* **Impact Prose:** `We eliminated the massive hidden costs of shipping free boxes only to handle returns. I learned a crucial lesson: UX issues are often P&L issues. If I had framed this around profit margins in month one instead of month three, the conversation would have been much easier.` (272 chars) | *Limit:* 140 – 280 chars
 
 ---
 
 ### Section 6: Next Case Study Link
 * **Eyebrow:** `Next case study` (15 chars)
-* **Next Project Title:** `Quantum chemistry startup website` (33 chars) | *Limit:* 20 – 45 chars
+* **Next Project Title:** `Marketing AI Service` | *Limit:* 20 – 45 chars
 
 ---
 
