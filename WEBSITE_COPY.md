@@ -8,7 +8,7 @@ This document compiles **every user-facing text element across all 5 pages of th
 1. [Global Components (Shared Across Pages)](#global-components-shared-across-pages)
 2. [Page 1: index.html (Homepage / Interactive Ideas Canvas)](#page-1-indexhtml--homepage--ideas-canvas)
 3. [Page 2: about-section.html (About Me — The Marble & The Thread)](#page-2-about-sectionhtml--about-me)
-4. [Page 3: kynso.html (Case Study — Kynso Holistic Fitness App)](#page-3-kynsohtml--case-study-kynso)
+4. [Page 3: kynso.html (Case Study — Kynso Fitness App)](#page-3-kynsohtml--case-study-kynso)
 5. [Page 4: supplement.html (Case Study — Supplement Checkout Fix)](#page-4-supplementhtml--case-study-supplement-checkout-fix)
 6. [Page 5: 404.html (Error 404 — D20 Fact Roller)](#page-5-404html--error-404-page)
 7. [Quick Reference: Character Limits Summary Table](#quick-reference-character-limits-summary-table)
@@ -69,7 +69,7 @@ This document compiles **every user-facing text element across all 5 pages of th
 *Floating interactive nodes distributed across the canvas. Each node has a title label, a category tag, and optional sparks.*
 
 * **Idea 1 (Coordinates: 20% / 18% — links to `kynso.html`):**
-  * *Label:* `Holistic fitness app` (20 chars) | *Limit:* 15 – 30 chars
+  * *Label:* `Kynso Fitness App` (17 chars) | *Limit:* 15 – 30 chars
   * *Tag:* `Case study →` (12 chars) | *Limit:* 10 – 16 chars
   * *Sparks:* `design system`, `branding`, `research`, `user testing`, `marketing`, `prototyping`
 
@@ -82,7 +82,7 @@ This document compiles **every user-facing text element across all 5 pages of th
   * *Tag:* `Design prototype` (16 chars) | *Limit:* 8 – 16 chars
 
 * **Idea 4 (Coordinates: 74% / 24% — links to `quantistry.html`):**
-  * *Label:* `Quantum chemistry startup website` (33 chars) | *Limit:* 15 – 35 chars
+  * *Label:* `Quantum Chemistry Startup Website` (33 chars) | *Limit:* 15 – 35 chars
   * *Tag:* `Case study →` (12 chars) | *Limit:* 10 – 16 chars
   * *Sparks:* `user interviews`, `research`, `pitch deck design`, `website design`
 
@@ -91,7 +91,7 @@ This document compiles **every user-facing text element across all 5 pages of th
   * *Tag:* `Prototype` (9 chars) | *Limit:* 8 – 16 chars
 
 * **Idea 6 (Coordinates: 80% / 82% — links to `supplement.html`):**
-  * *Label:* `Supplement checkout fix` (23 chars) | *Limit:* 15 – 30 chars
+  * *Label:* `Supplement Checkout Fix` (23 chars) | *Limit:* 15 – 30 chars
   * *Tag:* `Case study →` (12 chars) | *Limit:* 10 – 16 chars
   * *Sparks:* `data analysis`, `UI design`, `UX design`
 
@@ -100,7 +100,7 @@ This document compiles **every user-facing text element across all 5 pages of th
   * *Tag:* `Prototype` (9 chars) | *Limit:* 8 – 16 chars
 
 * **Idea 8 (Coordinates: 52% / 86% — links to `mx2.html`):**
-  * *Label:* `Marketing AI service` (20 chars) | *Limit:* 15 – 30 chars
+  * *Label:* `Marketing AI Service` (20 chars) | *Limit:* 15 – 30 chars
   * *Tag:* `Case study →` (12 chars) | *Limit:* 10 – 16 chars
   * *Sparks:* `product design`, `design system`, `research`, `branding`, `user testing`
 
@@ -197,7 +197,7 @@ This document compiles **every user-facing text element across all 5 pages of th
 * **Kicker:** `Professional` (12 chars) | *Limit:* 20 – 35 chars
 * **Title:** `Instruments for human agency` (28 chars) | *Limit:* 18 – 35 chars
 * **Paragraph 1:** `Today, I build at the edge of human agency and AI orchestration. Co-founding a fitness app gave me the canvas to design without constraints, turning autonomous tools into creative extensions of product intent.` (210 chars) | *Limit:* 160 – 235 chars
-* **Paragraph 2:** `I bring ambitious 0-to-1 ideas into crisp, living software. Explore how I translate systems and craft in the Holistic fitness app case study →` (144 chars) | *Limit:* 130 – 185 chars
+* **Paragraph 2:** `I bring ambitious 0-to-1 ideas into crisp, living software. Explore how I translate systems and craft in the Kynso Fitness App case study →` (140 chars) | *Limit:* 130 – 185 chars
 
 #### Center Column (Marble Sculpture Meta)
 * **Year Range:** `2025 – NOW` (10 chars) | *Limit:* 9 – 12 chars
@@ -215,10 +215,10 @@ This document compiles **every user-facing text element across all 5 pages of th
 
 ---
 
-# Page 3: `kynso.html` — Case Study: Kynso
+# Page 3: `kynso.html` — Case Study: Kynso Fitness App
 
 ### Page Metadata
-* **Browser Tab Title:** `Kynso — holistic fitness app case study` (41 chars) | *Limit:* 25 – 60 chars
+* **Browser Tab Title:** `Kynso — Fitness App Case Study` (31 chars) | *Limit:* 25 – 60 chars
 
 ---
 
