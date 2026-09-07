@@ -1,20 +1,26 @@
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Case study &mdash; Supplement</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@300;400&display=swap">
-<link rel="stylesheet" href="style.css">
-<script>
-  (function() {
-    var saved = localStorage.getItem('theme');
-    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (saved === 'dark' || (!saved && prefersDark)) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'light');
-    }
-  })();
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Case study &mdash; Supplement</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@300;400&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+</head>
+<body>
 
 <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Toggle theme">
   <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 16 16" width="16" height="16" fill="none"
@@ -153,7 +159,7 @@
           <p class="cs__step-tags">UI Redesign &middot; Product Pages</p>
         </div>
         <figure class="cs__shot" id="cs-shot-1" role="tooltip">
-          <img class="cs__shot-img" src="placeholders/step-01.svg" alt="Unified catalog highlighting product certifications">
+          <img class="cs__shot-img" src="placeholders/step-01.svg" alt="Unified catalog highlighting product certifications" width="800" height="560" loading="lazy" decoding="async">
           <figcaption class="cs__shot-cap">Unified catalog highlighting product certifications</figcaption>
         </figure>
       </li>
@@ -166,7 +172,7 @@
           <p class="cs__step-tags">Data Analysis &middot; Session Replays</p>
         </div>
         <figure class="cs__shot" id="cs-shot-2" role="tooltip">
-          <img class="cs__shot-img" src="placeholders/step-02.svg" alt="Reviewing Shopify return rates and hidden checkout terms">
+          <img class="cs__shot-img" src="placeholders/step-02.svg" alt="Reviewing Shopify return rates and hidden checkout terms" width="800" height="560" loading="lazy" decoding="async">
           <figcaption class="cs__shot-cap">Reviewing Shopify return rates and hidden checkout terms</figcaption>
         </figure>
       </li>
@@ -179,7 +185,7 @@
           <p class="cs__step-tags">Checkout UX &middot; Transparent Pricing</p>
         </div>
         <figure class="cs__shot" id="cs-shot-3" role="tooltip">
-          <img class="cs__shot-img" src="placeholders/step-03.svg" alt="New checkout flow with clear opt-in and purchase choices">
+          <img class="cs__shot-img" src="placeholders/step-03.svg" alt="New checkout flow with clear opt-in and purchase choices" width="800" height="560" loading="lazy" decoding="async">
           <figcaption class="cs__shot-cap">New checkout flow with clear opt-in and purchase choices</figcaption>
         </figure>
       </li>
@@ -192,7 +198,7 @@
           <p class="cs__step-tags">Stakeholder Mgmt &middot; P&amp;L Framing</p>
         </div>
         <figure class="cs__shot" id="cs-shot-4" role="tooltip">
-          <img class="cs__shot-img" src="placeholders/step-04.svg" alt="Presenting return rates and competitor models to the CEO">
+          <img class="cs__shot-img" src="placeholders/step-04.svg" alt="Presenting return rates and competitor models to the CEO" width="800" height="560" loading="lazy" decoding="async">
           <figcaption class="cs__shot-cap">Presenting return rates and competitor models to the CEO</figcaption>
         </figure>
       </li>
@@ -205,7 +211,7 @@
           <p class="cs__step-tags">Compromise &middot; Final Launch</p>
         </div>
         <figure class="cs__shot" id="cs-shot-5" role="tooltip">
-          <img class="cs__shot-img" src="placeholders/step-05.svg" alt="Final hybrid launch combining original site and new checkout">
+          <img class="cs__shot-img" src="placeholders/step-05.svg" alt="Final hybrid launch combining original site and new checkout" width="800" height="560" loading="lazy" decoding="async">
           <figcaption class="cs__shot-cap">Final hybrid launch combining original site and new checkout</figcaption>
         </figure>
       </li>
@@ -357,3 +363,5 @@
     });
   })();
 </script>
+</body>
+</html>

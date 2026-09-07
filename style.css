@@ -813,6 +813,9 @@ a { color: inherit; }
   align-items: center;
   justify-content: center;
 }
+.am__sculpture-box picture {
+  display: contents;
+}
 .am__sculpture-img {
   width: 100%;
   height: auto;
