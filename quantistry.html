@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quantistry &mdash; Brand &amp; Website Design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@300;400&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+</head>
+<body>
+
+<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Toggle theme">
+  <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 16 16" width="16" height="16" fill="none"
+       stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+       aria-hidden="true" focusable="false">
+    <circle cx="8" cy="8" r="3.2"/>
+    <path d="M8 1.5v1.5M8 13v1.5M1.5 8h1.5M13 8h1.5M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M3.4 12.6l1.1-1.1M11.5 4.5l1.1-1.1"/>
+  </svg>
+  <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 16 16" width="16" height="16" fill="none"
+       stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+       aria-hidden="true" focusable="false">
+    <path d="M13.2 9.8A5.6 5.6 0 1 1 6.2 2.8a6.3 6.3 0 0 0 7 7Z"/>
+  </svg>
+</button>
+
+<!-- Quantistry case study -->
+<!-- the shared rail: same component as the intro section, fixed to the window so it
+     rides along the sideways track instead of scrolling off the end of it -->
+<nav class="rail" aria-label="Section links">
+  <div class="rail__main">
+    <a class="rail__link" href="index.html">Home</a>
+    <span class="rail__rule" aria-hidden="true"></span>
+    <a class="rail__link" href="about-section.html">About me</a>
+    <span class="rail__rule" aria-hidden="true"></span>
+    <a class="rail__link" href="contact.html">Contact</a>
+  </div>
+  <a class="rail__cv" href="#cv" aria-label="Download CV">
+    <span class="rail__cv-label">CV</span>
+    <svg class="rail__cv-icon" viewBox="0 0 16 16" width="15" height="15" fill="none"
+         stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+         aria-hidden="true" focusable="false">
+      <path d="M8 1.7v8.1"/><path d="M4.7 6.5 8 9.8l3.3-3.3"/>
+      <path d="M2.2 12.2v1.3c0 .4.4.8.8.8h10c.4 0 .8-.4.8-.8v-1.3"/>
+    </svg>
+  </a>
+</nav>
+
+<article class="cs" role="region" aria-label="Quantistry case study" aria-labelledby="cs-title" tabindex="0">
+
+  <!-- ============ 1. the hook ============ -->
+  <!-- one screen, one claim: the reason to keep scrolling -->
+  <header class="cs__hook">
+    <p class="cs__eyebrow">Case study &mdash; Quantistry</p>
+
+    <h1 class="cs__hook-line" id="cs-title">Replacing empty AI buzzwords with proof of 10x faster chemical R&amp;D.</h1>
+
+    <p class="cs__hook-sub">A complete brand refresh and evidence-led marketing site built to help a quantum chemistry startup close their next funding round and land enterprise R&amp;D teams.</p>
+
+    <!-- the facts a recruiter scans for before reading a word of prose -->
+    <dl class="cs__meta">
+      <div class="cs__meta-pair">
+        <dt class="cs__meta-key">Role</dt>
+        <dd class="cs__meta-val">Product Designer</dd>
+      </div>
+      <div class="cs__meta-pair">
+        <dt class="cs__meta-key">Year</dt>
+        <dd class="cs__meta-val">2025</dd>
+      </div>
+      <div class="cs__meta-pair">
+        <dt class="cs__meta-key">Duration</dt>
+        <dd class="cs__meta-val">2 months</dd>
+      </div>
+      <div class="cs__meta-pair">
+        <dt class="cs__meta-key">Team</dt>
+        <dd class="cs__meta-val">1 designer, client, 2 engineers</dd>
+      </div>
+    </dl>
+
+    <p class="cs__scroll" aria-hidden="true">
+      <span class="cs__scroll-label">Scroll</span>
+      <span class="cs__scroll-rule"></span>
+      <span class="cs__scroll-arrow">&rarr;</span>
+    </p>
+  </header>
+
+  <!-- ============ 2. the client ============ -->
+  <section class="cs__block" aria-labelledby="cs-client">
+    <h2 class="cs__kicker" id="cs-client">The client</h2>
+    <div class="cs__block-body">
+      <p class="cs__lede">Quantistry builds AI tools to simulate physical materials for R&amp;D teams.</p>
+      <p class="cs__prose">Instead of running slow lab experiments, scientists use Quantistry's software to predict chemical behavior. They had real technology and customers, but were preparing for a critical funding round with an outdated logo and no web presence to prove their market traction.</p>
+
+      <!-- the shape of the business, in the same mono voice as the hook facts -->
+      <dl class="cs__facts">
+        <div class="cs__meta-pair">
+          <dt class="cs__meta-key">Industry</dt>
+          <dd class="cs__meta-val">Deeptech &amp; Quantum Chemistry</dd>
+        </div>
+        <div class="cs__meta-pair">
+          <dt class="cs__meta-key">Stage</dt>
+          <dd class="cs__meta-val">Pre-Series A</dd>
+        </div>
+        <div class="cs__meta-pair">
+          <dt class="cs__meta-key">Surface</dt>
+          <dd class="cs__meta-val">Responsive web &amp; brand</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ 3. the problem ============ -->
+  <section class="cs__block cs__block--problem" aria-labelledby="cs-problem">
+    <h2 class="cs__kicker" id="cs-problem">The problem</h2>
+    <div class="cs__block-body">
+      <p class="cs__statement">We need a brand and site refresh so we can raise our next investment round.</p>
+      <p class="cs__prose">While competitors made vague AI promises with no real tech, Quantistry had working software but no way to show it. The challenge wasn't just talking about algorithms. We had to prove concrete business value to investors by demonstrating that R&amp;D managers actually relied on their simulation tools to work faster.</p>
+
+      <!-- what the problem looked like from the outside, one line each -->
+      <ul class="cs__symptoms">
+        <li class="cs__symptom">
+          <span class="cs__symptom-key">Signal</span>
+          <span class="cs__symptom-val">Competitors flooded the space with AI rebrands, masking thin products behind generic buzzwords.</span>
+        </li>
+        <li class="cs__symptom">
+          <span class="cs__symptom-key">Constraint</span>
+          <span class="cs__symptom-val">A tight two-month launch window ahead of investor meetings, with a non-scientist designing for chemists.</span>
+        </li>
+        <li class="cs__symptom">
+          <span class="cs__symptom-key">Unknown</span>
+          <span class="cs__symptom-val">How to explain quantum chemistry clearly to investors without dumbing down the science for R&amp;D leads.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 4. the timeline ============ -->
+  <!-- each step is its own hover target; the artwork arrives from the right without moving the column -->
+  <section class="cs__flow" aria-labelledby="cs-flow">
+    <div class="cs__flow-header">
+      <h2 class="cs__kicker" id="cs-flow">How it got solved</h2>
+      <span class="cs__flow-rule" aria-hidden="true"></span>
+      <p class="cs__flow-hint">Hover a step</p>
+    </div>
+
+    <ol class="cs__steps">
+      <li class="cs__step is-active" tabindex="0" aria-describedby="cs-shot-1">
+        <span class="cs__step-num">01</span>
+        <div class="cs__step-body">
+          <h3 class="cs__step-title">Decoded the quantum chemistry</h3>
+          <p class="cs__step-text">Interviewed the team to uncover the core value. The takeaway wasn't just complex science; it was raw speed to market.</p>
+          <p class="cs__step-tags">Team interviews &middot; Domain research</p>
+        </div>
+        <figure class="cs__shot" id="cs-shot-1" role="tooltip">
+          <img class="cs__shot-img" src="placeholders/step-01.svg" alt="Mapping core value propositions from scientist interviews" width="800" height="560" loading="lazy" decoding="async">
+          <figcaption class="cs__shot-cap">Mapping core value propositions from scientist interviews</figcaption>
+        </figure>
+      </li>
+
+      <li class="cs__step" tabindex="0" aria-describedby="cs-shot-2">
+        <span class="cs__step-num">02</span>
+        <div class="cs__step-body">
+          <h3 class="cs__step-title">Aligned two distinct audiences</h3>
+          <p class="cs__step-text">Focused on solving R&amp;D managers' daily pains. Proving direct value to scientists made the business case obvious to investors.</p>
+          <p class="cs__step-tags">Audience mapping &middot; Pitch strategy</p>
+        </div>
+        <figure class="cs__shot" id="cs-shot-2" role="tooltip">
+          <img class="cs__shot-img" src="placeholders/step-02.svg" alt="Audience intersection matrix for scientists and investors" width="800" height="560" loading="lazy" decoding="async">
+          <figcaption class="cs__shot-cap">Audience intersection matrix for scientists and investors</figcaption>
+        </figure>
+      </li>
+
+      <li class="cs__step" tabindex="0" aria-describedby="cs-shot-3">
+        <span class="cs__step-num">03</span>
+        <div class="cs__step-body">
+          <h3 class="cs__step-title">Built an identity grounded in science</h3>
+          <p class="cs__step-text">Kept a credible scientific blue and added bright orange accents. It signaled modern AI without losing domain credibility.</p>
+          <p class="cs__step-tags">Brand identity &middot; Design system</p>
+        </div>
+        <figure class="cs__shot" id="cs-shot-3" role="tooltip">
+          <img class="cs__shot-img" src="placeholders/step-03.svg" alt="Color system, updated logo mark, and typography rules" width="800" height="560" loading="lazy" decoding="async">
+          <figcaption class="cs__shot-cap">Color system, updated logo mark, and typography rules</figcaption>
+        </figure>
+      </li>
+
+      <li class="cs__step" tabindex="0" aria-describedby="cs-shot-4">
+        <span class="cs__step-num">04</span>
+        <div class="cs__step-body">
+          <h3 class="cs__step-title">Visualized the 10x speed advantage</h3>
+          <p class="cs__step-text">Built motion graphics showing lab steps eliminated by simulation. The animation proved time savings instead of just claiming it.</p>
+          <p class="cs__step-tags">Motion direction &middot; UI wireframing</p>
+        </div>
+        <figure class="cs__shot" id="cs-shot-4" role="tooltip">
+          <img class="cs__shot-img" src="placeholders/step-04.svg" alt="Before-and-after simulation process motion storyboard" width="800" height="560" loading="lazy" decoding="async">
+          <figcaption class="cs__shot-cap">Before-and-after simulation process motion storyboard</figcaption>
+        </figure>
+      </li>
+
+      <li class="cs__step" tabindex="0" aria-describedby="cs-shot-5">
+        <span class="cs__step-num">05</span>
+        <div class="cs__step-body">
+          <h3 class="cs__step-title">Anchored the site in proof</h3>
+          <p class="cs__step-text">Structured pages around named clients, concrete case studies, and engineering handoff to ship the site on schedule.</p>
+          <p class="cs__step-tags">Content strategy &middot; Dev handoff</p>
+        </div>
+        <figure class="cs__shot" id="cs-shot-5" role="tooltip">
+          <img class="cs__shot-img" src="placeholders/step-05.svg" alt="Production-ready page layouts highlighting customer proof" width="800" height="560" loading="lazy" decoding="async">
+          <figcaption class="cs__shot-cap">Production-ready page layouts highlighting customer proof</figcaption>
+        </figure>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ============ 5. the impact ============ -->
+  <section class="cs__block cs__block--impact" aria-labelledby="cs-impact">
+    <h2 class="cs__kicker" id="cs-impact">The impact</h2>
+    <div class="cs__block-body">
+      <p class="cs__statement">The live site became Quantistry's central engine for sales calls and investor meetings.</p>
+      
+      <dl class="cs__metrics">
+        <div class="cs__metric">
+          <dt class="cs__metric-num">8 wks</dt>
+          <dd class="cs__metric-label">Brief to live site rollout</dd>
+        </div>
+      </dl>
+
+      <p class="cs__prose">The new brand gave Quantistry immediate credibility across deeptech events, while the site cleanly bridged technical rigor and business value. It gave both founders and sales leads a sharp, defensible story to tell.</p>
+    </div>
+  </section>
+
+  <!-- ============ 6. next project ============ -->
+  <section class="cs__next" aria-labelledby="cs-next">
+    <p class="cs__eyebrow" id="cs-next">Next case study</p>
+    <a class="cs__next-link" href="supplement.html">
+      <span class="cs__next-title" data-multiline>Supplement checkout fix</span>
+      <span class="cs__next-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+  </section>
+
+</article>
+
+<script>
+(function(){
+  var page = document.querySelector('.cs');
+  if(!page) return;
+
+  /* a trackpad swipe already arrives as deltaX and is left alone; a mouse wheel only
+     ever reports deltaY, so on the horizontal layout it has to be turned by hand.
+     below the breakpoint the page stacks and scrolls down again -- the guard on
+     scrollWidth is what tells the two layouts apart, so it needs no media query. */
+  page.addEventListener('wheel', function(e){
+    if(page.scrollWidth <= page.clientWidth) return;
+    if(Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    e.preventDefault();
+    page.scrollLeft += e.deltaY;
+  }, {passive: false});
+
+  /* active step tracking: keeps the artwork populated on desktop */
+  var steps = Array.prototype.slice.call(document.querySelectorAll('.cs__step'));
+  steps.forEach(function(step){
+    function activate(){
+      steps.forEach(function(s){ s.classList.remove('is-active'); });
+      step.classList.add('is-active');
+    }
+    step.addEventListener('mouseenter', activate);
+    step.addEventListener('focusin', activate);
+  });
+
+  /* keyboard arrow horizontal scrolling when the container is focused */
+  page.addEventListener('keydown', function(e){
+    if(page.scrollWidth <= page.clientWidth) return;
+    if(e.key === 'ArrowRight' || e.key === 'PageDown'){
+      page.scrollBy({left: 320, behavior: 'smooth'});
+    } else if(e.key === 'ArrowLeft' || e.key === 'PageUp'){
+      page.scrollBy({left: -320, behavior: 'smooth'});
+    }
+  });
+
+  /* multiline staggered highlight: splits wrapped text into rows with incremental transition delays */
+  function splitMultiline(el){
+    if(!el) return;
+    if(!el._rawText){
+      el._rawText = el.textContent.trim();
+    }
+    var words = el._rawText.split(/\s+/);
+    if(words.length <= 1) return;
+
+    el.innerHTML = words.map(function(w){
+      return '<span class="cs__word-measure" style="display:inline">' + w + '</span>';
+    }).join(' ');
+
+    var spans = el.querySelectorAll('.cs__word-measure');
+    var lines = [];
+    var currentLine = [];
+    var lastTop = null;
+
+    for(var i = 0; i < spans.length; i++){
+      var top = Math.round(spans[i].offsetTop);
+      if(lastTop === null || Math.abs(top - lastTop) < 6){
+        currentLine.push(words[i]);
+      } else {
+        lines.push(currentLine.join(' '));
+        currentLine = [words[i]];
+      }
+      lastTop = top;
+    }
+    if(currentLine.length){
+      lines.push(currentLine.join(' '));
+    }
+
+    el.innerHTML = lines.map(function(line, idx){
+      var delay = (idx * 0.22).toFixed(2);
+      return '<span class="cs__row" style="--row-idx:' + idx + ';--d:' + delay + 's">' + line + '</span>';
+    }).join(' ');
+  }
+
+  var multilineEls = Array.prototype.slice.call(document.querySelectorAll('[data-multiline]'));
+  function refreshMultilines(){
+    multilineEls.forEach(splitMultiline);
+  }
+  refreshMultilines();
+  if(document.fonts && document.fonts.ready){
+    document.fonts.ready.then(refreshMultilines);
+  }
+  var resizeTimer;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(refreshMultilines, 80);
+  });
+})();
+</script>
+
+<script>
+  (function() {
+    var toggle = document.getElementById('theme-toggle');
+    if (!toggle) return;
+    function updateLabel() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+      toggle.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+    updateLabel();
+    toggle.addEventListener('click', function() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      var nextTheme = isDark ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', nextTheme);
+      try { localStorage.setItem('theme', nextTheme); } catch(e) {}
+      updateLabel();
+    });
+  })();
+</script>
+</body>
+</html>
