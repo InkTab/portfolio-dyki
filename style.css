@@ -12,12 +12,13 @@
   /* Light mode palette */
   --paper: #f8f7ff;
   --ink: #111316;
-  --ghost: #767676;        /* reading copy — 4.54:1 */
-  --ghost-link: #575757;   /* link at rest — 7.21:1 */
-  --rule-link: #8C8C8C;    /* hairlines, borders, thread — 3.36:1 */
+  --ghost: #484848;        /* reading copy — 8.60:1 vs #f8f7ff (WCAG AAA) */
+  --ghost-link: #2E2E2E;   /* link at rest — 12.76:1 vs #f8f7ff (WCAG AAA) */
+  --rule-link: #8C8C8C;    /* hairlines, step lines, thread — 3.16:1 vs #f8f7ff (WCAG AA UI) */
+  --rule-deco: #E2E1E8;    /* ultra-pale decorative dividers (even paler & thinner) — 1.22:1 */
   --rule-faint: #DCDCDC;   /* decorative ground rules only — 1.30:1, carries no information */
-  --tag: #6E6E6E;          /* mono metadata, captions, hints — 5.10:1 */
-  --woke: #2E2E2E;         /* non-link hover ceiling — 13.64:1 */
+  --tag: #717171;          /* mono metadata, captions, hints — 4.59:1 vs #f8f7ff (WCAG AA) */
+  --woke: #2E2E2E;         /* non-link hover ceiling — 12.76:1 vs #f8f7ff (WCAG AAA) */
   --marker: linear-gradient(101deg,
     rgba(255,214,10,0) 0%, rgba(255,214,10,.75) 2.5%,
     rgba(255,214,10,.92) 34%, rgba(255,214,10,.86) 68%,
@@ -35,11 +36,12 @@
   /* Dark mode palette (photographic negative) */
   --paper: #111316;
   --ink: #FFFFFF;
-  --ghost: #9A9A9A;        /* 6.6:1 WCAG AA */
-  --ghost-link: #CCCCCC;   /* 11.5:1 WCAG AAA */
-  --rule-link: #5F6368;    /* 3.1:1 WCAG AA */
+  --ghost: #C5C7CC;        /* reading copy — 11.0:1 WCAG AAA */
+  --ghost-link: #E8E8E8;   /* link at rest — 15.2:1 WCAG AAA */
+  --rule-link: #5F6368;    /* step lines & borders — 3.1:1 WCAG AA */
+  --rule-deco: #24272C;    /* ultra-pale decorative dividers (dark mode) — 1.24:1 */
   --rule-faint: #2A2D33;   /* decorative ground rules only — 1.34:1 */
-  --tag: #8E929A;          /* 5.8:1 WCAG AA */
+  --tag: #8E929A;          /* mono metadata — 5.96:1 WCAG AA */
   --woke: #E8E8E8;         /* 15.5:1 WCAG AAA */
   --marker-ink: #111316;
 }
@@ -369,7 +371,7 @@ a { color: inherit; }
   display: grid; align-content: center;
   padding: var(--pad-y) var(--pad-x);
 }
-.cs__block, .cs__flow, .gt { border-left: 1px solid var(--rule-link); }
+.cs__block, .cs__flow, .gt { border-left: 0.5px solid var(--rule-deco); }
 .cs > :last-child { margin-right: var(--rail-w); }
 
 /* shared voices */
@@ -387,7 +389,7 @@ a { color: inherit; }
 
 /* 1. hook */
 .cs__hook { width: min(92vw, 980px); }
-.cs__eyebrow { margin: 0 0 clamp(22px, 3.6vh, 38px); color: var(--tag); }
+.cs__eyebrow { margin: 0 0 clamp(22px, 3.6vh, 38px); color: var(--tag); font-weight: 400; }
 .cs__hook-line {
   font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif; font-weight: 800;
   font-size: clamp(2.1rem, 4.6vw, 4.1rem); line-height: 1.02; letter-spacing: -.03em;
@@ -400,7 +402,7 @@ a { color: inherit; }
 .cs__meta, .cs__facts {
   display: flex; flex-wrap: wrap; gap: clamp(24px, 3vw, 58px);
   margin: clamp(36px, 6vh, 64px) 0 0; padding: clamp(22px, 3vh, 32px) 0 0;
-  border-top: 1px solid var(--rule-link);
+  border-top: 0.5px solid var(--rule-deco);
 }
 .cs__meta-pair { margin: 0; }
 .cs__meta-key { margin: 0 0 7px; color: var(--tag); }
@@ -409,7 +411,7 @@ a { color: inherit; }
   position: absolute; left: var(--pad-x); bottom: clamp(26px, 5vh, 52px);
   display: flex; align-items: center; gap: 12px; margin: 0; color: var(--tag);
 }
-.cs__scroll-rule { display: block; width: clamp(34px, 5vw, 64px); height: 1px; background: var(--rule-link); }
+.cs__scroll-rule { display: block; width: clamp(34px, 5vw, 64px); height: 0.5px; background: var(--rule-deco); }
 .cs__scroll-arrow { font-size: 13px; line-height: 1; margin-left: -6px; }
 
 /* 2 & 3. client, problem, impact */
@@ -449,12 +451,12 @@ a { color: inherit; }
 }
 .cs__symptoms {
   list-style: none; margin: clamp(30px, 4.6vh, 52px) 0 0; padding: 0;
-  border-top: 1px solid var(--rule-link);
+  border-top: 0.5px solid var(--rule-deco);
 }
 .cs__symptom {
   display: grid; grid-template-columns: minmax(0, clamp(92px, 10vw, 132px)) minmax(0, 1fr);
   gap: clamp(14px, 2vw, 26px);
-  padding: clamp(15px, 2.2vh, 23px) 0; border-bottom: 1px solid var(--rule-link);
+  padding: clamp(15px, 2.2vh, 23px) 0; border-bottom: 0.5px solid var(--rule-deco);
 }
 .cs__symptom-key { color: var(--tag); padding-top: .28em; }
 .cs__symptom-val { font-size: clamp(.96rem, 1.15vw, 1.04rem); line-height: 1.55; }
@@ -465,7 +467,7 @@ a { color: inherit; }
   gap: clamp(16px, 2.4vw, 36px);
   margin: clamp(28px, 4.2vh, 48px) 0 clamp(24px, 3.6vh, 40px);
   padding: clamp(20px, 2.8vh, 30px) 0 0;
-  border-top: 1px solid var(--rule-link);
+  border-top: 0.5px solid var(--rule-deco);
 }
 .cs__metric { margin: 0; }
 .cs__metric-num {
@@ -486,7 +488,7 @@ a { color: inherit; }
   display: flex; align-items: center; gap: 14px;
   margin: 0 0 clamp(28px, 4.5vh, 52px);
 }
-.cs__flow-rule { width: 22px; height: 1px; background: var(--rule-link); }
+.cs__flow-rule { width: 22px; height: 0.5px; background: var(--rule-deco); }
 
 .cs__steps {
   list-style: none; margin: 0; padding: var(--art-zone) 0 0;
@@ -565,7 +567,7 @@ a { color: inherit; }
   flex: 0 0 auto; height: 100%;
   display: grid; align-content: center;
   padding: var(--pad-y) var(--pad-x);
-  border-left: 1px solid var(--rule-link);
+  border-left: 0.5px solid var(--rule-deco);
   width: min(88vw, 560px);
 }
 .cs__next .cs__eyebrow { margin-bottom: clamp(16px, 2.8vh, 28px); }
@@ -1150,8 +1152,8 @@ a { color: inherit; }
   display: grid;
   margin: clamp(11px, 1.7vh, 19px) 0;
   padding: clamp(12px, 1.8vh, 20px) 0;
-  border-top: 1px solid var(--rule-link);
-  border-bottom: 1px solid var(--rule-link);
+  border-top: 0.5px solid var(--rule-deco);
+  border-bottom: 0.5px solid var(--rule-deco);
 }
 .gt__group {
   grid-area: 1 / 1;
@@ -1536,7 +1538,7 @@ a { color: inherit; }
     padding: clamp(62px, 10vh, 104px) var(--gutter);
   }
   .cs__scroll { display: none; }
-  .cs__block, .cs__flow, .cs__next, .gt { border-left: 0; border-top: 1px solid var(--rule-link); }
+  .cs__block, .cs__flow, .cs__next, .gt { border-left: 0; border-top: 0.5px solid var(--rule-deco); }
   .cs__symptom { grid-template-columns: minmax(0, 1fr); gap: 6px; }
   .cs__symptom-key { padding-top: 0; }
   .cs__metrics { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 24px; }
