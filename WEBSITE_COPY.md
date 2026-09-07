@@ -81,7 +81,7 @@ This document compiles **every user-facing text element across all 5 pages of th
   * *Label:* `Flower delivery app` (19 chars) | *Limit:* 15 – 30 chars
   * *Tag:* `Design prototype` (16 chars) | *Limit:* 8 – 16 chars
 
-* **Idea 4 (Coordinates: 74% / 24% — links to `case-study-section.html`):**
+* **Idea 4 (Coordinates: 74% / 24% — links to `quantistry.html`):**
   * *Label:* `Quantum chemistry startup website` (33 chars) | *Limit:* 15 – 35 chars
   * *Tag:* `Case study →` (12 chars) | *Limit:* 10 – 16 chars
   * *Sparks:* `user interviews`, `research`, `pitch deck design`, `website design`
@@ -99,7 +99,7 @@ This document compiles **every user-facing text element across all 5 pages of th
   * *Label:* `Synonyms lookup` (15 chars) | *Limit:* 12 – 30 chars
   * *Tag:* `Prototype` (9 chars) | *Limit:* 8 – 16 chars
 
-* **Idea 8 (Coordinates: 52% / 86% — links to `case-study-section.html`):**
+* **Idea 8 (Coordinates: 52% / 86% — links to `mx2.html`):**
   * *Label:* `Marketing AI service` (20 chars) | *Limit:* 15 – 30 chars
   * *Tag:* `Case study →` (12 chars) | *Limit:* 10 – 16 chars
   * *Sparks:* `product design`, `design system`, `research`, `branding`, `user testing`
