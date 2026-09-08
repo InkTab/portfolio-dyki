@@ -491,8 +491,8 @@ a { color: inherit; }
 .cs__flow-rule { width: 22px; height: 0.5px; background: var(--rule-deco); }
 
 .cs__steps {
-  list-style: none; margin: 0; padding: var(--art-zone) 0 0;
-  position: relative; display: flex; align-items: start;
+  list-style: none; margin: 0; padding: 0;
+  position: relative; display: flex; align-items: stretch;
   gap: clamp(40px, 4.6vw, 88px);
 }
 .cs__steps::before {
@@ -502,12 +502,12 @@ a { color: inherit; }
 }
 .cs__step {
   position: relative; flex: 0 0 auto; width: var(--step-w);
-  padding-top: clamp(24px, 3.8vh, 40px);
+  padding-top: calc(var(--art-zone) + clamp(24px, 3.8vh, 40px));
   cursor: help;
 }
 .cs__step:hover, .cs__step:focus-visible, .cs__step.is-active { z-index: 4; }
 .cs__step::before {
-  content: ""; position: absolute; left: 0; top: 0; width: 7px; height: 7px; margin-top: -3px;
+  content: ""; position: absolute; left: 0; top: var(--art-zone); width: 7px; height: 7px; margin-top: -3px;
   border-radius: 50%; background: var(--rule-link);
   transition: background-color .3s;
 }
@@ -540,7 +540,7 @@ a { color: inherit; }
 
 .cs__shot {
   position: absolute; z-index: 6;
-  left: 0; top: calc(-1 * var(--art-zone)); width: 100%; margin: 0;
+  left: 0; top: 0; width: 100%; margin: 0;
   opacity: 0; transform: translateY(8px);
   pointer-events: none;
   transition: opacity .26s ease, transform .26s cubic-bezier(.2,.7,.3,1);

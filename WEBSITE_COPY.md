@@ -437,26 +437,26 @@ This document compiles **every user-facing text element across all 5 pages of th
 
 | # | Face / Theme | Current Fact Text | Chars | Limit |
 | :-: | :--- | :--- | :-: | :-: |
-| **01** | Origins | `Replace me: where you grew up, and where you live now.` | 53 | **≤ 130** |
-| **02** | First Design | `Replace me: the first thing you ever designed.` | 46 | **≤ 130** |
-| **03** | Past Life | `Replace me: a job you had before design.` | 39 | **≤ 130** |
-| **04** | Tabletop Game | `Replace me: the tabletop game you will always say yes to.` | 56 | **≤ 130** |
-| **05** | Languages | `Replace me: a language you speak, and how you picked it up.` | 57 | **≤ 130** |
-| **06** | Design Philosophy | `Replace me: the design rule you break on purpose.` | 48 | **≤ 130** |
-| **07** | Collection | `Replace me: something you collect.` | 34 | **≤ 130** |
-| **08** | Tooling / Workflow | `Replace me: your most-used keyboard shortcut.` | 44 | **≤ 130** |
-| **09** | Unexpected Hobby | `Replace me: a hobby nobody expects from a product designer.` | 58 | **≤ 130** |
-| **10** | Unshipped Pride | `Replace me: the project you are proudest of that never shipped.` | 61 | **≤ 130** |
-| **11** | Work Soundtrack | `Replace me: what is playing while you work.` | 42 | **≤ 130** |
-| **12** | Software Love | `Replace me: a piece of software you genuinely love.` | 50 | **≤ 130** |
-| **13** | Design Critique | `Replace me: the worst design advice you were ever given.` | 54 | **≤ 130** |
-| **14** | Active Learning | `Replace me: something you are learning right now.` | 48 | **≤ 130** |
-| **15** | Coffee Order | `Replace me: your order at the coffee place.` | 42 | **≤ 130** |
-| **16** | Remote Destination | `Replace me: a place you want to work from for a month.` | 52 | **≤ 130** |
-| **17** | Book Recommendation | `Replace me: the book you hand to new designers.` | 46 | **≤ 130** |
-| **18** | Simple Pleasure | `Replace me: a small thing that makes you irrationally happy.` | 58 | **≤ 130** |
-| **19** | Childhood Dream | `Replace me: what you wanted to be at ten years old.` | 49 | **≤ 130** |
-| **20** | Natural 20 (Best Fact) | `Replace me: the natural 20 — save your best fact for this one.` | 62 | **≤ 130** |
+| **01** | Origins | `I was born and grew up in Odesa, Ukraine and live in Canada now.` | 63 | **≤ 130** |
+| **02** | First Design | `The first app I ever designed was an app for my college.` | 57 | **≤ 130** |
+| **03** | Past Life | `The first job I've had was a car counter for outdoor market analysis.` | 70 | **≤ 130** |
+| **04** | Tabletop Game | `I will always say yes to a D&D game.` | 35 | **≤ 130** |
+| **05** | Languages | `I speak Polish and I learned over 2 months for university.` | 58 | **≤ 130** |
+| **06** | Design Philosophy | `Familiarity isn't as important as next clear action.` | 52 | **≤ 130** |
+| **07** | Collection | `I collect pins. I have about 70 of them now.` | 44 | **≤ 130** |
+| **08** | Tooling / Workflow | `My most used hotkey is ctrl+c, ctrl+v.` | 38 | **≤ 130** |
+| **09** | Unexpected Hobby | `I like crocheting hats.` | 23 | **≤ 130** |
+| **10** | Unshipped Pride | `I'm proud of turning my perfectionism into a superpower.` | 56 | **≤ 130** |
+| **11** | Work Soundtrack | `I like listening to dubstep while I work.` | 41 | **≤ 130** |
+| **12** | Software Love | `I genuinely love figma.` | 23 | **≤ 130** |
+| **13** | Design Critique | `The worst design advice I ever received was "make it brighter".` | 63 | **≤ 130** |
+| **14** | Active Learning | `I'm curently learning React to be able to build my ideas.` | 56 | **≤ 130** |
+| **15** | Coffee Order | `I like ordering lattes and anything with cinnamon.` | 50 | **≤ 130** |
+| **16** | Remote Destination | `I’d love to spend a month working from small house in Alps.` | 58 | **≤ 130** |
+| **17** | Book Recommendation | `I would hand "Burn your portfolio" to new designers.` | 51 | **≤ 130** |
+| **18** | Simple Pleasure | `For me, the most irrationally joyful thing is iridiscent objects.` | 65 | **≤ 130** |
+| **19** | Childhood Dream | `When I was a kid I wanted to be a lawyer.` | 41 | **≤ 130** |
+| **20** | Natural 20 (Best Fact) | `I've run a D&D campaign for a year and learned more about user motivation than I ever expected.` | 95 | **≤ 130** |
 
 ---
 
@@ -477,4 +477,4 @@ This document compiles **every user-facing text element across all 5 pages of th
 | **Case Studies (`kynso.html`)** | Gantt Art Notes | 88 – 148 | 80 – 155 chars | > 170 chars (overflows art column height) |
 | **Case Studies (`kynso.html`)** | Impact Metrics Numbers | 1 – 4 | 2 – 6 chars | > 8 chars |
 | **Case Studies (`kynso.html`)** | Impact Metrics Labels | 17 – 25 | 12 – 28 chars | > 32 chars |
-| **404 (`404.html`)** | 20 D20 Dice Facts | 34 – 62 | **40 – 125 chars** | **> 130 chars (hard phone overflow)** |
+| **404 (`404.html`)** | 20 D20 Dice Facts | 23 – 95 | **40 – 125 chars** | **> 130 chars (hard phone overflow)** |
