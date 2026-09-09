@@ -610,5 +610,15 @@
     });
   })();
 </script>
+<!-- Mobile only: the rail lies down at the top of a column several screens tall,
+     so the return trip needs a control within thumb reach. Hidden above 960px. -->
+<button class="totop" type="button" aria-label="Back to top" title="Back to top">
+  <svg class="totop__icon" viewBox="0 0 16 16" width="16" height="16"
+       aria-hidden="true" focusable="false">
+    <path d="M8 13.3V4.4"/><path d="M4.4 8 8 4.4 11.6 8"/>
+  </svg>
+</button>
+
+<script src="mobile-ui.js"></script>
 </body>
 </html>

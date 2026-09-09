@@ -319,9 +319,9 @@
           <p class="cs__step-text">Kept a credible scientific blue and added bright orange accents. It signaled modern AI without losing domain credibility.</p>
           <p class="cs__step-tags">Brand identity &middot; Design system</p>
         </div>
-        <figure class="cs__shot" id="cs-shot-3" role="tooltip">
-          <img class="cs__shot-img" src="placeholders/step-03.svg" alt="Color system, updated logo mark, and typography rules" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="cs__shot-cap">Color system, updated logo mark, and typography rules</figcaption>
+        <figure class="cs__shot cs__shot--span-3 cs__shot--tall" id="cs-shot-3" role="tooltip" style="--nat-h:345px;--nat-ratio:3.1884">
+          <img class="cs__shot-img" src="assets/quantistry-step-03.webp" alt="Logo mark before and after: unbalanced stroke widths and poor legibility at small sizes, redrawn with balanced strokes and an orange motion accent" width="1100" height="345" loading="lazy" decoding="async">
+          <figcaption class="cs__shot-cap">LOGO MARK REDRAWN: STROKE BALANCE AND SMALL-SIZE LEGIBILITY</figcaption>
         </figure>
       </li>
 
@@ -332,9 +332,9 @@
           <p class="cs__step-text">Built motion graphics showing lab steps eliminated by simulation. The animation visualized time savings for R&amp;D teams.</p>
           <p class="cs__step-tags">Motion direction &middot; UI wireframing</p>
         </div>
-        <figure class="cs__shot" id="cs-shot-4" role="tooltip">
-          <img class="cs__shot-img" src="placeholders/step-04.svg" alt="Before-and-after simulation process motion storyboard" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="cs__shot-cap">Before-and-after simulation process motion storyboard</figcaption>
+        <figure class="cs__shot cs__shot--span-3 cs__shot--tall cs__shot--seated" id="cs-shot-4" role="tooltip" style="--nat-h:669px;--nat-ratio:1.7025">
+          <img class="cs__shot-img" src="assets/quantistry-step-04.webp" alt="Motion storyboard comparing traditional R&D, one hypothesis per round over six days, against the Quantistry flow: unlimited hypotheses, parameters in minutes, optimized modelling in the cloud" width="1139" height="669" loading="lazy" decoding="async">
+          <figcaption class="cs__shot-cap">MOTION STORYBOARD: TRADITIONAL R&D ROUNDS VERSUS SIMULATED RUNS</figcaption>
         </figure>
       </li>
 
@@ -345,9 +345,9 @@
           <p class="cs__step-text">Structured pages around named clients, concrete case studies, and engineering handoff to ship the site on schedule.</p>
           <p class="cs__step-tags">Content strategy &middot; Dev handoff</p>
         </div>
-        <figure class="cs__shot" id="cs-shot-5" role="tooltip">
-          <img class="cs__shot-img" src="placeholders/step-05.svg" alt="Production-ready page layouts highlighting customer proof" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="cs__shot-cap">Production-ready page layouts highlighting customer proof</figcaption>
+        <figure class="cs__shot cs__shot--span-3 cs__shot--tall cs__shot--cut" id="cs-shot-5" role="tooltip" style="--nat-h:603px;--nat-ratio:1.6716">
+          <img class="cs__shot-img" src="assets/quantistry-step-05.webp" alt="Shipped homepage: hero reading The Future of Materials, Engineered by Design, above a customer strip naming sectors from batteries to aerospace" width="1008" height="603" loading="lazy" decoding="async">
+          <figcaption class="cs__shot-cap">SHIPPED HOMEPAGE: HERO AND NAMED-CUSTOMER PROOF STRIP</figcaption>
         </figure>
       </li>
     </ol>
@@ -440,6 +440,24 @@
     var flowPad = flowSection ? parseFloat(window.getComputedStyle(flowSection).paddingLeft) || 60 : 60;
     var homeLeft = Math.max(flowPad, (pageRect.left || 0) + flowPad);
 
+    /* The three photographic shots are both wider and taller than the schematic
+       ones, and anchoring them to their step's left edge runs them off the right
+       of the canvas from most scroll positions -- the further right the step,
+       the more of the picture is off screen. They are centred in the canvas left
+       of the rail instead, so the whole picture is visible wherever its step
+       happens to be, then clamped so it never leaves the timeline it belongs to. */
+    if(activeShot.classList.contains('cs__shot--tall')){
+      var rail = document.querySelector('.rail');
+      var visibleW = window.innerWidth - (rail ? rail.offsetWidth : 0);
+      var flowRect = flowSection ? flowSection.getBoundingClientRect() : pageRect;
+      var centred = Math.max(20, (visibleW - shotWidth) / 2) - stepRect.left;
+      var minX = (flowRect.left + flowPad) - stepRect.left;
+      var maxX = (flowRect.right - flowPad - shotWidth) - stepRect.left;
+      var boundedX = Math.min(Math.max(centred, minX), maxX);
+      activeShot.style.setProperty('--sticky-x', Math.round(boundedX) + 'px');
+      return;
+    }
+
     // On hover / before scrolling past, align with the left edge of the step div.
     // As the user scrolls past the step (stepRect.left < homeLeft), transition to screen center.
     var scrollPast = homeLeft - stepRect.left;
@@ -468,6 +486,12 @@
     function activate(){
       steps.forEach(function(s){ s.classList.remove('is-active'); });
       step.classList.add('is-active');
+      /* Tells the header it may now start clearing out of a tall shot's way.
+         Before this, the active step is the one the markup seeds, and taking
+         the section's heading away for it would mean the reader never sees
+         either the heading or the hint that tells them to hover. */
+      var flowEl = document.querySelector('.cs__flow');
+      if(flowEl){ flowEl.classList.add('is-browsing'); }
       updateStickyShot();
     }
     step.addEventListener('mouseenter', activate);
@@ -561,5 +585,15 @@
     });
   })();
 </script>
+<!-- Mobile only: the rail lies down at the top of a column several screens tall,
+     so the return trip needs a control within thumb reach. Hidden above 960px. -->
+<button class="totop" type="button" aria-label="Back to top" title="Back to top">
+  <svg class="totop__icon" viewBox="0 0 16 16" width="16" height="16"
+       aria-hidden="true" focusable="false">
+    <path d="M8 13.3V4.4"/><path d="M4.4 8 8 4.4 11.6 8"/>
+  </svg>
+</button>
+
+<script src="mobile-ui.js"></script>
 </body>
 </html>
