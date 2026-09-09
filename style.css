@@ -797,6 +797,235 @@ a { color: inherit; }
   opacity: .7;
 }
 
+/* Step 02 Session Replay Horizontal Timeline Diagram */
+.cs__timeline-card {
+  fill: var(--paper);
+  stroke: var(--rule-link);
+  stroke-width: 1px;
+  transition: stroke .2s ease, fill .2s ease;
+}
+[data-theme="dark"] .cs__timeline-card {
+  fill: #181B1F;
+}
+
+.cs__timeline-label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  fill: var(--tag);
+}
+
+.cs__timeline-title {
+  font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: -.02em;
+  fill: var(--ink);
+}
+
+.cs__timeline-pill {
+  stroke: var(--rule-link);
+  stroke-width: 0.8px;
+  fill: var(--paper);
+}
+[data-theme="dark"] .cs__timeline-pill {
+  fill: #181B1F;
+}
+
+.cs__timeline-pill-text {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-anchor: middle;
+  dominant-baseline: central;
+  fill: var(--tag);
+}
+
+.cs__timeline-dot {
+  fill: var(--tag);
+}
+
+.cs__timeline-text {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12.5px;
+  fill: var(--ghost-link);
+}
+
+.cs__timeline-feeder {
+  stroke: var(--rule-link);
+  stroke-width: 1.2px;
+  stroke-dasharray: 4 3;
+  fill: none;
+}
+
+.cs__step:hover .cs__timeline-feeder,
+.cs__step:focus-visible .cs__timeline-feeder,
+.cs__step.is-active .cs__timeline-feeder {
+  animation: csDiagFlow 1.6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs__step:hover .cs__timeline-feeder,
+  .cs__step:focus-visible .cs__timeline-feeder,
+  .cs__step.is-active .cs__timeline-feeder {
+    animation: none;
+  }
+}
+
+.cs__timeline-arrow-head {
+  fill: var(--ink);
+}
+
+.cs__timeline-meta {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  fill: var(--tag);
+}
+
+.cs__timeline-rule {
+  stroke: var(--rule-link);
+  stroke-opacity: 0.35;
+  stroke-width: 0.5px;
+}
+
+.cs__timeline-block {
+  fill: var(--ink);
+  stroke: var(--ink);
+  stroke-width: 1px;
+}
+
+.cs__timeline-block-eyebrow {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  fill: var(--paper);
+  opacity: .75;
+}
+
+.cs__timeline-block-headline {
+  font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: -.02em;
+  fill: var(--paper);
+}
+
+.cs__timeline-block-rule {
+  stroke: var(--paper);
+  stroke-opacity: .25;
+  stroke-width: 0.5px;
+}
+
+/* The inverted stage carries its own pill rather than borrowing the venn one, whose
+   text is left-anchored: reusing it here pushed the label out past the pill's right
+   edge. Metrics track .cs__timeline-pill-text so all three pills set identically. */
+.cs__timeline-block-pill {
+  stroke: var(--paper);
+  stroke-opacity: .3;
+  stroke-width: 0.8px;
+  fill: none;
+}
+
+.cs__timeline-block-pill-text {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-anchor: middle;
+  dominant-baseline: central;
+  fill: var(--paper);
+}
+
+.cs__timeline-block-dot {
+  fill: var(--paper);
+  opacity: .6;
+}
+
+/* Matches .cs__timeline-text so the three stages share one baseline grid. */
+.cs__timeline-block-sub {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12.5px;
+  fill: var(--paper);
+  opacity: .85;
+}
+
+/* Step 04 Unit Economics Ledger. Reuses the step 02 diagram primitives -- card, block,
+   label, pill, rule, feeder, arrow head, meta -- so the two diagrams read as one set,
+   and adds only what a ledger needs on top: a right-anchored figure column and a
+   summed total. Right-anchored monospace is nudged by its full trailing letter-space
+   (DESIGN.md 3.8), which would otherwise hold the column short of its own edge. */
+.cs__unit-value {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-anchor: end;
+  fill: var(--woke);
+}
+
+.cs__unit-block-value {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-anchor: end;
+  fill: var(--paper);
+}
+
+/* Heavier than .cs__timeline-rule: this one closes a column of figures, so it has to
+   read as a sum line rather than as another section divider. */
+.cs__unit-sum-rule {
+  stroke: var(--rule-link);
+  stroke-opacity: .55;
+  stroke-width: 1px;
+}
+
+.cs__unit-block-sum-rule {
+  stroke: var(--paper);
+  stroke-opacity: .4;
+  stroke-width: 1px;
+}
+
+.cs__unit-sum-label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  fill: var(--tag);
+}
+
+.cs__unit-block-sum-label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  fill: var(--paper);
+  opacity: .75;
+}
+
+/* These cards carry no title line, so the total is the card's primary heading and
+   takes --ink under rule 2 rather than the --woke ceiling the figures above it use. */
+.cs__unit-sum-figure {
+  font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: -.02em;
+  text-anchor: end;
+  fill: var(--ink);
+}
+
+.cs__unit-block-sum-figure {
+  font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: -.02em;
+  text-anchor: end;
+  fill: var(--paper);
+}
+
 /* 6. next project */
 .cs__next {
   position: relative; z-index: 2;
