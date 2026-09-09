@@ -1,6 +1,6 @@
 # Website Copy & Character Limits Reference
 
-This document compiles **every user-facing text element across all 5 pages of the website**, detailing current copy, character counts, recommended character limits, and layout notes.
+This document compiles **every user-facing text element across all 8 pages of the website**, detailing current copy, character counts, recommended character limits, and layout notes.
 
 ---
 
@@ -9,9 +9,12 @@ This document compiles **every user-facing text element across all 5 pages of th
 2. [Page 1: index.html (Homepage / Interactive Ideas Canvas)](#page-1-indexhtml--homepage--ideas-canvas)
 3. [Page 2: about-section.html (About Me — The Marble & The Thread)](#page-2-about-sectionhtml--about-me)
 4. [Page 3: kynso.html (Case Study — Kynso Fitness App)](#page-3-kynsohtml--case-study-kynso)
-5. [Page 4: supplement.html (Case Study — Supplement Checkout Fix)](#page-4-supplementhtml--case-study-supplement-checkout-fix)
-6. [Page 5: 404.html (Error 404 — D20 Fact Roller)](#page-5-404html--error-404-page)
-7. [Quick Reference: Character Limits Summary Table](#quick-reference-character-limits-summary-table)
+5. [Page 4: quantistry.html (Case Study — Quantistry Brand & Website Design)](#page-4-quantistryhtml--case-study-quantistry-brand--website-design)
+6. [Page 5: supplement.html (Case Study — Supplement Checkout Fix)](#page-5-supplementhtml--case-study-supplement-checkout-fix)
+7. [Page 6: mx2.html (Case Study — MX2 AI Marketing)](#page-6-mx2html--case-study-mx2-ai-marketing)
+8. [Page 7: contact.html (Contact — Channels & Profiles)](#page-7-contacthtml--contact)
+9. [Page 8: 404.html (Error 404 — D20 Fact Roller)](#page-8-404html--error-404-page)
+10. [Quick Reference: Character Limits Summary Table](#quick-reference-character-limits-summary-table)
 
 ---
 
@@ -114,7 +117,7 @@ This document compiles **every user-facing text element across all 5 pages of th
 > Keep each paragraph strictly under **200–220 characters** (~30 words max).
 
 ### Page Metadata & Top Indicator
-* **Browser Tab Title:** `About me — The Marble & The Thread` (35 chars) | *Limit:* 20 – 50 chars
+* **Browser Tab Title:** `About me` (35 chars) | *Limit:* 20 – 50 chars
 * **Scroll Hint:** `Scroll ↓` (8 chars) | *Limit:* 6 – 12 chars
 
 ---
@@ -227,20 +230,20 @@ This document compiles **every user-facing text element across all 5 pages of th
 
 * **Eyebrow:** `Case study — Kynso` (19 chars) | *Limit:* 14 – 25 chars
 * **Hook Line (H1):** `Fitness apps track training in silos. Kynso connects workouts, recovery, and fuel.` (82 chars) | *Limit:* 60 – 95 chars
-* **Hook Subtitle:** `An integrated fitness platform reading workouts, nutrition, sleep, and cycle as one signal. Built from zero to pre-beta by a two-person founding team.` (154 chars) | *Limit:* 120 – 180 chars
+* **Hook Subtitle:** `A fitness platform reading workouts, nutrition, sleep, and cycle as interconnected elements of one system. Built from zero to pre-beta by a two-person founding team.` (166 chars) | *Limit:* 120 – 180 chars
 * **Metadata Facts:**
   * **Role:** `Co-founder, design & marketing` (30 chars) | *Limit:* 15 – 35 chars
   * **Year:** `2025` (4 chars) | *Limit:* 4 – 9 chars
   * **Duration:** `16 weeks` (8 chars) | *Limit:* 6 – 15 chars
-  * **Team:** `2 co-founders (1 design, 1 eng)` (31 chars) | *Limit:* 20 – 45 chars
+  * **Team:** `1 design, 1 engineer` (23 chars) | *Limit:* 20 – 45 chars
 * **Scroll Callout:** `Scroll →` (8 chars) | *Limit:* 6 – 12 chars
 
 ---
 
 ### Section 2: Venture
 * **Section Kicker:** `Venture` (7 chars) | *Limit:* 6 – 14 chars
-* **Lede Statement:** `Kynso is an early-stage startup connecting training, nutrition, and cycle into a single ecosystem.` (99 chars) | *Limit:* 75 – 120 chars
-* **Prose:** `Athletes were juggling three different trackers, a notes app, and ChatGPT just to understand if they were recovered. Kynso was founded to solve that fragmentation. As co-founder, I led product design, brand identity, and marketing, working alongside one engineer to take the concept from zero into internal testing ahead of our upcoming beta.` (338 chars) | *Limit:* 260 – 380 chars
+* **Lede Statement:** `Kynso is an early-stage startup connecting strength, cardio, mobility and nutrition into a single ecosystem.` (101 chars) | *Limit:* 75 – 120 chars
+* **Prose:** `Athletes were juggling three different trackers, a notes app, and ChatGPT just to see their progress. Kynso was founded to solve that fragmentation. As co-founder, I led product design, brand identity, and marketing, working alongside one engineer to take the concept from zero into internal testing ahead of our upcoming beta.` (326 chars) | *Limit:* 260 – 380 chars
 * **Business Shape Facts:**
   * **Industry:** `Health & fitness` (16 chars) | *Limit:* 12 – 30 chars
   * **Stage:** `Pre-beta` (8 chars) | *Limit:* 8 – 20 chars
@@ -250,8 +253,8 @@ This document compiles **every user-facing text element across all 5 pages of th
 
 ### Section 3: The Problem
 * **Section Kicker:** `The problem` (11 chars) | *Limit:* 8 – 16 chars
-* **Problem Statement:** `Apps gave confident scores on partial data. No one looked at training and nutrition together.` (93 chars) | *Limit:* 60 – 100 chars
-* **Underlying Gap Prose:** `If you lift in a deficit and ate poorly, a typical fitness app still declares you ready to train because it only sees yesterday's workout. Every user we interviewed had hacked together their own fix—logging lifts, runs, and meals across separate tools and pasting them into ChatGPT. The data existed everywhere, but nothing analyzed the trade-offs between them.` (358 chars) | *Limit:* 280 – 420 chars
+* **Problem Statement:** `Human body is an interdependent system. Fitness apps track everything separately.` (85 chars) | *Limit:* 60 – 100 chars
+* **Underlying Gap Prose:** `If you lift in a deficit and ate poorly, a typical fitness app still declares you ready to train because it only sees last workout. Every user we interviewed had hacked together their own fix—logging lifts, runs, and meals across separate tools and pasting them into ChatGPT. The data existed everywhere, but nothing analyzed the trade-offs between them.` (344 chars) | *Limit:* 280 – 420 chars
 * **Symptoms (3 Diagnoses):**
   * **Signal:** `Every interviewed athlete used two to three apps plus a notepad and AI to manually spot training patterns.` (107 chars) | *Limit:* 90 – 150 chars
   * **Constraint:** `One designer and one engineer building a multi-domain engine and sync pipeline before public beta.` (98 chars) | *Limit:* 75 – 140 chars
@@ -274,11 +277,11 @@ This document compiles **every user-facing text element across all 5 pages of th
 * **Phase 01:** `User research` (13 chars) | *Limit:* 6 – 14 chars
   * *Artwork Note:* `Interviews revealed users combining three trackers with ChatGPT. The core insight: readiness scores fail when isolated from diet, sleep, and cycle.` (148 chars) | *Limit:* 100 – 165 chars
 * **Phase 02:** `Dual UI modes` (13 chars) | *Limit:* 6 – 14 chars
-  * *Artwork Note:* `Separated planning from active training. Field tests in gyms showed dense desktop-friendly layouts collapse during physical exertion.` (134 chars) | *Limit:* 95 – 155 chars
+  * *Artwork Note:* `Separated planning from active training. Field tests in gyms showed dense layouts collapse during physical exertion.` (111 chars) | *Limit:* 95 – 155 chars
 * **Phase 03:** `UI iteration` (12 chars) | *Limit:* 6 – 14 chars
-  * *Artwork Note:* `Removed PR vanity stats from home, simplified pre-workout screens, and made readiness fully interactive so users see what drives the score.` (139 chars) | *Limit:* 95 – 155 chars
+  * *Artwork Note:* `Removed PR vanity stats from home, simplified pre-workout screens, and made readiness fully interactive so users see what drives the score.` (126 chars) | *Limit:* 95 – 155 chars
 * **Phase 04:** `Design system` (13 chars) | *Limit:* 6 – 16 chars
-  * *Artwork Note:* `Dark mode architecture with domain-specific neon colors, allowing users to identify training domains at a glance across all session states.` (139 chars) | *Limit:* 95 – 155 chars
+  * *Artwork Note:* `Dark mode architecture with domain-specific neon colors, allowing users to identify training domains at a glance across all session states.` (126 chars) | *Limit:* 95 – 155 chars
 
 #### Group 2: Branding (Foldable Track)
 * **Aside Overview Note (when closed):** `Brand identity, 3D domain mark, and domain color systems established early to give the multi-input interface visual hierarchy.` (130 chars) | *Limit:* 100 – 165 chars
@@ -325,7 +328,117 @@ This document compiles **every user-facing text element across all 5 pages of th
 
 ---
 
-# Page 4: `supplement.html` — Case Study: Supplement Checkout Fix
+# Page 4: `quantistry.html` — Case Study: Quantistry Brand & Website Design
+
+### Page Metadata
+* **Browser Tab Title:** `Quantistry — Brand & Website Design` (35 chars) | *Limit:* 20 – 50 chars
+
+---
+
+### Section 1: The Hook
+*Screen 1: Opening thesis statement, meta facts, and scroll prompt.*
+
+* **Eyebrow:** `Case study — Quantistry` (23 chars) | *Limit:* 15 – 30 chars
+* **Hook Line (H1):** `Replacing empty AI buzzwords with proof of 10x faster chemical R&D.` (67 chars) | *Limit:* 55 – 90 chars
+* **Hook Subtitle:** `A complete brand refresh and evidence-led marketing site built to help a quantum chemistry startup close their next funding round and land enterprise R&D teams.` (160 chars) | *Limit:* 120 – 180 chars
+* **Metadata Facts:**
+  * **Role:** `Product Designer` (16 chars) | *Limit:* 12 – 30 chars
+  * **Year:** `2025` (4 chars) | *Limit:* 4 – 9 chars
+  * **Duration:** `2 months` (8 chars) | *Limit:* 6 – 15 chars
+  * **Team:** `1 designer, 2 engineers` (31 chars) | *Limit:* 18 – 40 chars
+* **Scroll Callout:** `Scroll →` (8 chars) | *Limit:* 6 – 12 chars
+
+---
+
+### Section 2: The Client
+* **Section Kicker:** `The client` (10 chars)
+* **Lede Statement:** `Quantistry builds AI tools to simulate physical materials for R&D teams.` (72 chars) | *Limit:* 50 – 100 chars
+* **Prose:** `Instead of running slow lab experiments, scientists use Quantistry's software to predict chemical behavior. They had real technology and customers, but were preparing for a critical funding round with an outdated logo and no web presence to prove their market traction.` (269 chars) | *Limit:* 180 – 320 chars
+* **Business Shape Facts:**
+  * **Industry:** `Deeptech & Quantum Chemistry` (28 chars) | *Limit:* 15 – 35 chars
+  * **Stage:** `Pre-Series A` (12 chars) | *Limit:* 8 – 20 chars
+  * **Surface:** `Responsive web & brand` (22 chars) | *Limit:* 12 – 30 chars
+
+---
+
+### Section 3: The Problem
+* **Section Kicker:** `The problem` (11 chars)
+* **Problem Statement:** `We need a brand and site refresh so we can raise our next investment round.` (75 chars) | *Limit:* 55 – 95 chars
+* **Prose:** `While competitors made vague AI promises with no real tech, Quantistry had working software but no way to show it. The challenge wasn't just talking about algorithms. We had to prove concrete business value to investors by demonstrating that R&D managers actually relied on their simulation tools to work faster.` (312 chars) | *Limit:* 200 – 360 chars
+* **Symptoms (3 Diagnoses):**
+  * **Signal:** `Competitors flooded the space with AI rebrands, masking thin products behind generic buzzwords.` (95 chars) | *Limit:* 60 – 130 chars
+  * **Constraint:** `A tight two-month launch window ahead of investor meetings, with a non-scientist designing for chemists.` (104 chars) | *Limit:* 60 – 130 chars
+  * **Unknown:** `How to explain quantum chemistry clearly to investors without dumbing down the science for R&D leads.` (101 chars) | *Limit:* 60 – 130 chars
+
+---
+
+### Section 4: Timeline / Steps (01 – 05)
+*Sequential steps with hover artwork and custom SVG interactive diagrams.*
+
+* **Header:**
+  * *Kicker:* `How it got solved` (17 chars)
+  * *Hint:* `Hover a step` (12 chars)
+
+* **Step 01:**
+  * **Title:** `Decoded the quantum chemistry` (29 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `Interviewed the team to uncover the core value. The takeaway wasn't just complex science; it was raw speed to market.` (117 chars) | *Limit:* 70 – 135 chars
+  * **Tags:** `Team interviews · Domain research` (33 chars) | *Limit:* 20 – 45 chars
+  * **Figcaption:** `VALUE REFRAME: DOMAIN COMPLEXITY TO CORE COMMERCIAL PROMISE` (59 chars) | *Limit:* 35 – 70 chars
+  * **Diagram Elements (SVG Conversion Diagram):**
+    * *Technical Jargon Tags:* `Quantum Algorithms`, `Basis Sets`, `Molecular Simulation`, `DFT Approximations`, `Wavefunction Theory`, `Hamiltonian Dynamics`
+    * *Funnel Transformation:* `SYNTHESIS` → `REFRAME`
+    * *Core Commercial Promise Card:*
+      * *Eyebrow:* `CORE COMMERCIAL PROMISE`
+      * *Headline:* `Months → Days`
+      * *Subtext:* `Regular processes took months. Their product reduced that time and cost to days.`
+
+* **Step 02:**
+  * **Title:** `Aligned two distinct audiences` (30 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `Focused on solving R&D managers' daily pains. Proving direct value to scientists made the business case obvious to investors.` (125 chars) | *Limit:* 70 – 135 chars
+  * **Tags:** `Audience mapping · Pitch strategy` (33 chars) | *Limit:* 20 – 45 chars
+  * **Figcaption:** `AUDIENCE INTERSECTION: SCIENTISTS & INVESTORS CORE PITCH` (56 chars) | *Limit:* 35 – 70 chars
+  * **Diagram Elements (SVG Audience Venn Diagram):**
+    * *Audience 01 // Scientists (`Lab Scientists & R&D`):* `Daily workflow friction`, `Reproducibility`, `Computational accuracy`
+    * *Audience 02 // Investors (`Deeptech Investors`):* `Defensibility`, `ARR potential`, `Total addressable market`
+    * *Intersection (`The Core Pitch` / `Unified Messaging`):* `Validated speed-to-market & De-risked R&D capital` | Label: `COMMERCIAL VALIDATION`
+
+* **Step 03:**
+  * **Title:** `Built an identity grounded in science` (37 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `Kept a credible scientific blue and added bright orange accents. It signaled modern AI without losing domain credibility.` (121 chars) | *Limit:* 70 – 135 chars
+  * **Tags:** `Brand identity · Design system` (30 chars) | *Limit:* 20 – 45 chars
+  * **Figcaption & Alt:** `Color system, updated logo mark, and typography rules` (53 chars) | *Limit:* 35 – 70 chars
+
+* **Step 04:**
+  * **Title:** `Visualized the 10x speed advantage` (34 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `Built motion graphics showing lab steps eliminated by simulation. The animation visualized time savings for R&D teams.` (105 chars) | *Limit:* 70 – 135 chars
+  * **Tags:** `Motion direction · UI wireframing` (33 chars) | *Limit:* 20 – 45 chars
+  * **Figcaption & Alt:** `Before-and-after simulation process motion storyboard` (53 chars) | *Limit:* 35 – 70 chars
+
+* **Step 05:**
+  * **Title:** `Anchored the site in proof` (26 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `Structured pages around named clients, concrete case studies, and engineering handoff to ship the site on schedule.` (115 chars) | *Limit:* 70 – 135 chars
+  * **Tags:** `Content strategy · Dev handoff` (30 chars) | *Limit:* 20 – 45 chars
+  * **Figcaption & Alt:** `Production-ready page layouts highlighting customer proof` (57 chars) | *Limit:* 35 – 70 chars
+
+---
+
+### Section 5: The Impact
+* **Section Kicker:** `The impact` (10 chars)
+* **Outcome Statement:** `The live site became Quantistry's central engine for sales calls and investor meetings.` (87 chars) | *Limit:* 55 – 100 chars
+* **Metrics (1 Data Point):**
+  * **Metric 1:** `8 wks` | Label: `Brief to live site rollout` (26 chars) | *Limit:* 14 – 32 chars
+* **Impact Prose:** `The new brand gave Quantistry immediate credibility across deeptech events, while the site cleanly bridged technical rigor and business value. It gave both founders and sales leads a sharp, defensible story to tell.` (215 chars) | *Limit:* 140 – 280 chars
+* **External Link:** `Check out live site →` (`https://quantistry.ai`) (21 chars) | *Limit:* 15 – 30 chars
+
+---
+
+### Section 6: Next Case Study Link
+* **Eyebrow:** `Next case study` (15 chars)
+* **Next Project Title:** `Supplement Checkout Fix` (23 chars) | *Limit:* 20 – 45 chars
+
+---
+
+# Page 5: `supplement.html` — Case Study: Supplement Checkout Fix
 
 ### Page Metadata
 * **Browser Tab Title:** `Case study — Supplement` (23 chars) | *Limit:* 20 – 50 chars
@@ -334,13 +447,13 @@ This document compiles **every user-facing text element across all 5 pages of th
 
 ### Section 1: The Hook
 * **Eyebrow:** `Case study — 01` (15 chars) | *Limit:* 12 – 24 chars
-* **Hook Line (H1):** `Initial orders plummeted 80%, but retained customers grew by 80%.` (65 chars) | *Limit:* 55 – 90 chars
+* **Hook Line (H1):** `Why killing an 80% sales funnel actually saved this supplement brand.` (69 chars) | *Limit:* 55 – 90 chars
 * **Hook Subtitle:** `A premium supplement brand blamed their design for bad sales, but a deceptive free trial was actually driving a 90% product return rate.` (138 chars) | *Limit:* 100 – 170 chars
 * **Metadata Facts:**
   * **Role:** `UI/UX Designer` (14 chars) | *Limit:* 12 – 30 chars
   * **Year:** `2023` (4 chars) | *Limit:* 4 – 9 chars
   * **Duration:** `4 months` (8 chars) | *Limit:* 6 – 15 chars
-  * **Team:** `Agency team, Client CEO` (23 chars) | *Limit:* 18 – 40 chars
+  * **Team:** `1 designer, 2 devs` (18 chars) | *Limit:* 18 – 40 chars
 
 ---
 
@@ -413,11 +526,152 @@ This document compiles **every user-facing text element across all 5 pages of th
 
 ### Section 6: Next Case Study Link
 * **Eyebrow:** `Next case study` (15 chars)
-* **Next Project Title:** `Marketing AI Service` | *Limit:* 20 – 45 chars
+* **Next Project Title:** `MX2 AI Marketing` (16 chars) | *Limit:* 20 – 45 chars
 
 ---
 
-# Page 5: `404.html` — Error 404 Page
+# Page 6: `mx2.html` — Case Study: MX2 AI Marketing
+
+### Page Metadata
+* **Browser Tab Title:** `Case study — MX2 AI Marketing` (29 chars) | *Limit:* 20 – 50 chars
+
+---
+
+### Section 1: The Hook
+*Screen 1: Opening thesis statement, meta facts, and scroll prompt.*
+
+* **Eyebrow:** `Case study — 01` (15 chars) | *Limit:* 12 – 24 chars
+* **Hook Line (H1):** `SMB owners don't need another dashboard. They need marketing decisions.` (71 chars) | *Limit:* 55 – 90 chars
+* **Hook Subtitle:** `Built an AI marketing platform for small businesses by replacing complex setups with guided review, cutting campaign setup from 30 to 5 minutes.` (144 chars) | *Limit:* 110 – 175 chars
+* **Metadata Facts:**
+  * **Role:** `Design Lead & Acting PM` (23 chars) | *Limit:* 15 – 35 chars
+  * **Year:** `2025` (4 chars) | *Limit:* 4 – 9 chars
+  * **Duration:** `3 months` (8 chars) | *Limit:* 6 – 15 chars
+  * **Team:** `2 designers, eng, marketing` (27 chars) | *Limit:* 18 – 40 chars
+* **Scroll Callout:** `Scroll →` (8 chars) | *Limit:* 6 – 12 chars
+
+---
+
+### Section 2: The Client
+* **Section Kicker:** `The client` (10 chars)
+* **Lede Statement:** `An internal agency venture productized to give SMBs automated marketing.` (72 chars) | *Limit:* 45 – 100 chars
+* **Prose:** `Originally kicked off by the CEO as an internal tool, the product showed enough traction to be spun out as MX2 under the agency's main brand. It serves small business owners who know their customers and margins inside out, but can't justify the cost or overhead of hiring an agency.` (282 chars) | *Limit:* 180 – 340 chars
+* **Business Shape Facts:**
+  * **Industry:** `B2B SaaS / MarTech` (18 chars) | *Limit:* 12 – 30 chars
+  * **Stage:** `Internal venture` (16 chars) | *Limit:* 8 – 24 chars
+  * **Surface:** `Web application` (15 chars) | *Limit:* 10 – 25 chars
+
+---
+
+### Section 3: The Problem
+* **Section Kicker:** `The problem` (11 chars)
+* **Problem Statement:** `“Build an AI tool so clients can spin up their own marketing campaigns.”` (72 chars) | *Limit:* 50 – 95 chars
+* **Prose:** `The initial brief assumed owners just needed an AI generator. But marketing isn't just copywriting—it's attribution, budget pacing, and media planning. Handing non-marketers empty fields and complex charts paralyzed them. We didn't need to add features; we had to bake the domain expertise directly into the UI.` (311 chars) | *Limit:* 200 – 360 chars
+* **Symptoms (3 Diagnoses):**
+  * **Signal:** `Internal testers spent 30 minutes struggling to launch a first campaign.` (72 chars) | *Limit:* 50 – 120 chars
+  * **Constraint:** `Integrating live multi-source marketing APIs without crushing engineering.` (74 chars) | *Limit:* 50 – 120 chars
+  * **Unknown:** `How deep non-marketers actually want to dig into their data without getting lost.` (81 chars) | *Limit:* 50 – 120 chars
+
+---
+
+### Section 4: Timeline / Steps (01 – 05)
+*Sequential steps with hover artwork and screenshots.*
+
+* **Header:**
+  * *Kicker:* `How it got solved` (17 chars)
+  * *Hint:* `Hover a step` (12 chars)
+
+* **Step 01:**
+  * **Title:** `Mapped marketing's hidden complexity` (36 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `Ran workshops with senior media planners to unpack campaign logic. Realized the UI needed to do the heavy lifting, not the user.` (128 chars) | *Limit:* 70 – 135 chars
+  * **Tags:** `Domain research · Workflow mapping` (34 chars) | *Limit:* 20 – 45 chars
+  * **Figcaption & Alt:** `Campaign planning logic and attribution breakdown` (49 chars) | *Limit:* 35 – 70 chars
+
+* **Step 02:**
+  * **Title:** `Replaced blank inputs with guided review` (40 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `Scraped website copy to prefill business details and suggest starter budgets. Users just corrected and confirmed.` (113 chars) | *Limit:* 70 – 135 chars
+  * **Tags:** `Onboarding flow · Form redesign` (31 chars) | *Limit:* 20 – 45 chars
+  * **Figcaption & Alt:** `Pre-populated business profile and media proposal` (49 chars) | *Limit:* 35 – 70 chars
+
+* **Step 03:**
+  * **Title:** `Structured 25 dashboards across 5 tiers` (39 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `Organized data from high-level health down to individual ad creative. Casual users stay top-level; fixers dive deep.` (116 chars) | *Limit:* 70 – 135 chars
+  * **Tags:** `Information architecture · Dashboard specs` (42 chars) | *Limit:* 20 – 45 chars
+  * **Figcaption & Alt:** `Five-level drill-down architecture from health to creative` (58 chars) | *Limit:* 35 – 70 chars
+
+* **Step 04:**
+  * **Title:** `Prototyped live widgets to unblock dev` (38 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `Engineering pushed back on multi-API widgets. Built a working prototype with Claude Code to prove feasibility.` (110 chars) | *Limit:* 70 – 135 chars
+  * **Tags:** `Prototyping · Code proof-of-concept` (35 chars) | *Limit:* 20 – 45 chars
+  * **Figcaption & Alt:** `Working multi-source widget prototype and API binding` (53 chars) | *Limit:* 35 – 70 chars
+
+* **Step 05:**
+  * **Title:** `Added AI guidance and scaled the system` (39 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `Paired contextual widgets with AI recommendations and built a 40-component design system that onboarded a second designer fast.` (127 chars) | *Limit:* 70 – 135 chars
+  * **Tags:** `Design systems · AI interaction` (31 chars) | *Limit:* 20 – 45 chars
+  * **Figcaption & Alt:** `Component system specs and dual-mode AI companion` (49 chars) | *Limit:* 35 – 70 chars
+
+---
+
+### Section 5: The Impact
+* **Section Kicker:** `The impact` (10 chars)
+* **Outcome Statement:** `Cut first-time campaign launch time by 83% while scaling to 25 core dashboards.` (79 chars) | *Limit:* 55 – 100 chars
+* **Metrics (3 Data Points):**
+  * **Metric 1:** `−25m` | Label: `Time to first campaign` (22 chars) | *Limit:* 12 – 28 chars
+  * **Metric 2:** `25` | Label: `Dashboards delivered` (20 chars) | *Limit:* 12 – 28 chars
+  * **Metric 3:** `40+` | Label: `Reusable components` (19 chars) | *Limit:* 12 – 28 chars
+* **Impact Prose:** `Prototyping complex widgets unblocked development and proved feasibility on day one. By baking marketing expertise directly into the UI rather than asking users for it, we turned a 30-minute chore into a 5-minute review.` (220 chars) | *Limit:* 140 – 280 chars
+
+---
+
+### Section 6: Next Case Study Link
+* **Eyebrow:** `Next case study` (15 chars)
+* **Next Project Title:** `Kynso Fitness App` (17 chars) | *Limit:* 20 – 45 chars
+
+---
+
+# Page 7: `contact.html` — Contact
+
+### Page Metadata
+* **Browser Tab Title:** `Contact — Taya The Designer` (30 chars) | *Limit:* 20 – 50 chars
+
+---
+
+### Stage Content & Core Messaging
+* **Hint (Top Center):** `Hover a channel` (15 chars) | *Limit:* 10 – 22 chars (Mono 10px uppercase)
+* **Lead Headline (H1):** `Let’s talk about what you’re building` (37 chars) | *Limit:* 25 – 50 chars
+  * *Rationale:* Bold Bricolage Grotesque display font (`clamp(2.15rem, 4.9vw, 3.5rem)`).
+* **Subheading:** `Email is the fastest way in. The rest is where the work lives.` (62 chars) | *Limit:* 40 – 75 chars
+
+---
+
+### Drifting Channels (5 Stage Slots)
+*Interactive drifting links with label and revealed handle/tag on hover.*
+
+* **Channel 1 (Coordinates: 20% / 16%):**
+  * *Label:* `Email` (5 chars) | *Limit:* 4 – 12 chars
+  * *Tag / Handle:* `tetiana.burlachenko@gmail.com` (29 chars) | *Limit:* 20 – 35 chars
+  * *Link:* `mailto:tetiana.burlachenko@gmail.com`
+* **Channel 2 (Coordinates: 78% / 13%):**
+  * *Label:* `Behance` (7 chars) | *Limit:* 4 – 12 chars
+  * *Tag / Handle:* `behance.net/tetianaburlachenko` (29 chars) | *Limit:* 20 – 35 chars
+  * *Link:* `https://www.behance.net/tetianaburlachenko`
+* **Channel 3 (Coordinates: 84% / 63%):**
+  * *Label:* `Instagram` (9 chars) | *Limit:* 4 – 12 chars
+  * *Tag / Handle:* `instagram.com/tb_dyki` (21 chars) | *Limit:* 15 – 30 chars
+  * *Link:* `https://www.instagram.com/tb_dyki`
+* **Channel 4 (Coordinates: 15% / 68%):**
+  * *Label:* `Medium` (6 chars) | *Limit:* 4 – 12 chars
+  * *Tag / Handle:* `medium.com/@tayadyki` (20 chars) | *Limit:* 15 – 30 chars
+  * *Link:* `https://medium.com/@tayadyki`
+* **Channel 5 (Coordinates: 48% / 84%):**
+  * *Label:* `Dribbble` (8 chars) | *Limit:* 4 – 12 chars
+  * *Tag / Handle:* `dribbble.com/dyki_design` (24 chars) | *Limit:* 15 – 30 chars
+  * *Link:* `https://dribbble.com/dyki_design`
+
+---
+
+# Page 8: `404.html` — Error 404 Page
 
 ### Page Metadata & Core Content
 * **Browser Tab Title:** `Page not found — Taya The Designer` (34 chars) | *Limit:* 20 – 50 chars
@@ -471,10 +725,16 @@ This document compiles **every user-facing text element across all 5 pages of th
 | **About (`about-section.html`)** | Paragraphs (Left & Right) | 144 – 210 | 140 – 220 chars | > 240 chars (overflows 100dvh snap view on laptop) |
 | **About (`about-section.html`)** | Card Quotes | 94 – 116 | 70 – 120 chars | > 130 chars (pushes card off screen bottom) |
 | **About (`about-section.html`)** | Year Range (`.am__year`) | 10 – 11 | 9 – 12 chars | > 15 chars |
-| **Case Studies (`kynso.html`)** | Hook Line (H1) | 67 – 82 | 60 – 95 chars | > 105 chars |
-| **Case Studies (`kynso.html`)** | Hook Subtitle | 130 – 154 | 120 – 180 chars | > 200 chars (exceeds `56ch`) |
-| **Case Studies (`kynso.html`)** | Gantt Bar Names | 6 – 14 | 6 – 16 chars | > 18 chars (overflows grid bar pill) |
-| **Case Studies (`kynso.html`)** | Gantt Art Notes | 88 – 148 | 80 – 155 chars | > 170 chars (overflows art column height) |
-| **Case Studies (`kynso.html`)** | Impact Metrics Numbers | 1 – 4 | 2 – 6 chars | > 8 chars |
-| **Case Studies (`kynso.html`)** | Impact Metrics Labels | 17 – 25 | 12 – 28 chars | > 32 chars |
+| **All Case Studies** | Hook Line (H1) | 65 – 82 | 55 – 95 chars | > 105 chars |
+| **All Case Studies** | Hook Subtitle | 138 – 160 | 110 – 180 chars | > 200 chars (exceeds `56ch`) |
+| **Gantt Case Study (`kynso.html`)** | Gantt Bar Names | 6 – 14 | 6 – 16 chars | > 18 chars (overflows grid bar pill) |
+| **Gantt Case Study (`kynso.html`)** | Gantt Art Notes | 88 – 148 | 80 – 155 chars | > 170 chars (overflows art column height) |
+| **Flow Case Studies (Quantistry, Supplement, MX2)** | Step Title (`.cs__step-title`) | 24 – 40 | 20 – 45 chars | > 50 chars (breaks step row balance) |
+| **Flow Case Studies (Quantistry, Supplement, MX2)** | Step Text (`.cs__step-text`) | 96 – 128 | 70 – 135 chars | > 145 chars (stretches card vertically) |
+| **Flow Case Studies (Quantistry, Supplement, MX2)** | Step Tags (`.cs__step-tags`) | 25 – 42 | 20 – 45 chars | > 50 chars |
+| **Flow Case Studies (Quantistry, Supplement, MX2)** | Artwork Figcaption (`.cs__shot-cap`) | 49 – 59 | 35 – 70 chars | > 80 chars |
+| **All Case Studies** | Impact Metrics Numbers | 1 – 6 | 2 – 6 chars | > 8 chars |
+| **All Case Studies** | Impact Metrics Labels | 17 – 26 | 12 – 30 chars | > 35 chars |
+| **Contact (`contact.html`)** | Stage Lead (`.ct__lead`) | 37 | 25 – 50 chars | > 60 chars |
+| **Contact (`contact.html`)** | Channel Tags (Handles) | 20 – 29 | 15 – 35 chars | > 40 chars |
 | **404 (`404.html`)** | 20 D20 Dice Facts | 23 – 95 | **40 – 125 chars** | **> 130 chars (hard phone overflow)** |
