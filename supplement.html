@@ -158,9 +158,9 @@
           <p class="cs__step-text">I built the requested educational pages first. It improved the promise but didn't stop the returns.</p>
           <p class="cs__step-tags">UI Redesign &middot; Product Pages</p>
         </div>
-        <figure class="cs__shot" id="cs-shot-1" role="tooltip">
-          <img class="cs__shot-img" src="placeholders/step-01.svg" alt="Unified catalog highlighting product certifications" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="cs__shot-cap">Unified catalog highlighting product certifications</figcaption>
+        <figure class="cs__shot cs__shot--span-3 cs__shot--tall" id="cs-shot-1" role="tooltip" style="--nat-h:785px;--nat-ratio:1.2166">
+          <img class="cs__shot-img" src="assets/supplement-step-01.webp" alt="Redesigned catalogue: a six-product grid, each pack shot paired with a one-line health claim and its own view-product button" width="955" height="785" loading="lazy" decoding="async">
+          <figcaption class="cs__shot-cap">REDESIGNED CATALOGUE: SIX PRODUCTS, ONE CLAIM EACH</figcaption>
         </figure>
       </li>
 
@@ -279,9 +279,9 @@
           <p class="cs__step-text">I redesigned the checkout to require active subscription opt-in and added a one-time purchase option.</p>
           <p class="cs__step-tags">Checkout UX &middot; Transparent Pricing</p>
         </div>
-        <figure class="cs__shot" id="cs-shot-3" role="tooltip">
-          <img class="cs__shot-img" src="placeholders/step-03.svg" alt="New checkout flow with clear opt-in and purchase choices" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="cs__shot-cap">New checkout flow with clear opt-in and purchase choices</figcaption>
+        <figure class="cs__shot cs__shot--span-3 cs__shot--tall" id="cs-shot-3" role="tooltip" style="--nat-h:578px;--nat-ratio:1.7543">
+          <img class="cs__shot-img" src="assets/supplement-step-03.webp" alt="Rebuilt product page offering Subscribe and Save at 24,99 euro beside an equally weighted one-time purchase at 49,99 euro, with the recurring charge and cancel-anytime terms stated up front" width="1014" height="578" loading="lazy" decoding="async">
+          <figcaption class="cs__shot-cap">OPT-IN CHECKOUT: SUBSCRIPTION AND ONE-TIME PURCHASE, PRICED IN THE OPEN</figcaption>
         </figure>
       </li>
 
@@ -392,9 +392,9 @@
           <p class="cs__step-text">They reverted the catalogue look but kept the honest checkout. Total retained customers grew by 80%.</p>
           <p class="cs__step-tags">Compromise &middot; Final Launch</p>
         </div>
-        <figure class="cs__shot" id="cs-shot-5" role="tooltip">
-          <img class="cs__shot-img" src="placeholders/step-05.svg" alt="Final hybrid launch combining original site and new checkout" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="cs__shot-cap">Final hybrid launch combining original site and new checkout</figcaption>
+        <figure class="cs__shot cs__shot--span-3 cs__shot--tall" id="cs-shot-5" role="tooltip" style="--nat-h:644px;--nat-ratio:1.4627">
+          <img class="cs__shot-img" src="assets/supplement-step-05.webp" alt="Ingredient education page in the reverted catalogue styling, explaining that the active ingredient is the paper-thin membrane beneath the eggshell, annotated with collagen, elastin and hyaluronic acid" width="942" height="644" loading="lazy" decoding="async">
+          <figcaption class="cs__shot-cap">THE REVERTED CATALOGUE LOOK: INGREDIENT EDUCATION PAGE</figcaption>
         </figure>
       </li>
     </ol>
@@ -481,6 +481,27 @@
     var pageRect = page.getBoundingClientRect();
     var shotWidth = activeShot.offsetWidth || 900;
 
+    /* The photographic shots are taller than the schematic ones and reach up into
+       the header's band, so they are centred in the canvas left of the rail
+       rather than in the whole window -- a shot centred on the window slips its
+       right edge under the rail -- and clamped inside the flow section's padding
+       so it never leaves the timeline it belongs to. */
+    if(activeShot.classList.contains('cs__shot--tall')){
+      var railEl = document.querySelector('.rail');
+      var visibleW = window.innerWidth - (railEl ? railEl.offsetWidth : 0);
+      var flowEl = document.querySelector('.cs__flow');
+      var flowBox = flowEl ? flowEl.getBoundingClientRect() : pageRect;
+      var pad = flowEl ? (parseFloat(window.getComputedStyle(flowEl).paddingLeft) || 60) : 60;
+      var centred = Math.max(20, (visibleW - shotWidth) / 2) - stepRect.left;
+      var lowX = (flowBox.left + pad) - stepRect.left;
+      var highX = (flowBox.right - pad - shotWidth) - stepRect.left;
+      activeShot.style.setProperty(
+        '--sticky-x',
+        Math.round(Math.min(Math.max(centred, lowX), highX)) + 'px'
+      );
+      return;
+    }
+
     // Center position in the viewport
     var centerLeft = Math.max(20, (window.innerWidth - shotWidth) / 2);
 
@@ -507,6 +528,12 @@
     function activate(){
       steps.forEach(function(s){ s.classList.remove('is-active'); });
       step.classList.add('is-active');
+      /* Tells the header it may now start clearing out of a tall shot's way.
+         Before this, the active step is the one the markup seeds, and taking
+         the section's heading away for it would mean the reader never sees
+         either the heading or the hint that tells them to hover. */
+      var flowEl = document.querySelector('.cs__flow');
+      if(flowEl){ flowEl.classList.add('is-browsing'); }
       updateStickyShot();
     }
     step.addEventListener('mouseenter', activate);
@@ -600,5 +627,15 @@
     });
   })();
 </script>
+<!-- Mobile only: the rail lies down at the top of a column several screens tall,
+     so the return trip needs a control within thumb reach. Hidden above 960px. -->
+<button class="totop" type="button" aria-label="Back to top" title="Back to top">
+  <svg class="totop__icon" viewBox="0 0 16 16" width="16" height="16"
+       aria-hidden="true" focusable="false">
+    <path d="M8 13.3V4.4"/><path d="M4.4 8 8 4.4 11.6 8"/>
+  </svg>
+</button>
+
+<script src="mobile-ui.js"></script>
 </body>
 </html>

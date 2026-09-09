@@ -28,6 +28,28 @@
     rgba(255,214,10,.92) 34%, rgba(255,214,10,.86) 68%,
     rgba(255,214,10,.7) 97.5%, rgba(255,214,10,0) 100%);
   --marker-ink: #111316;   /* text struck by marker locks to #111316 for 13.5:1 contrast */
+
+  /* The system's only shadow, and it replaces a border rather than decorating one:
+     a photographic export carries its own edge, so it takes no frame, but it then
+     has nothing holding it off the paper either. Two stops -- a tight contact
+     shadow and a soft ambient one -- so it reads as a sheet lying on the page
+     rather than a card floating above it. Never on a drawn diagram: a schematic is
+     inked onto the paper, so there is no sheet there to cast one. */
+  --shadow-art: 0 1px 2px rgba(17,19,22,.05), 0 10px 28px -6px rgba(17,19,22,.10);
+
+  /* The sheet a photographic export is printed on. Deliberately NOT redefined in
+     dark mode: these are screenshots of light-ground products and they carry
+     transparent backgrounds, so on the dark backing every other shot uses, their
+     own dark type would fall onto a near-black ground and disappear. The sheet
+     stays paper in both themes and the shadow is what seats it on the canvas. */
+  --art-sheet: #f8f7ff;
+
+  /* The same shadow cast from an image's own alpha rather than from its box, for
+     an export that already is a sheet: it follows a rounded corner instead of
+     squaring it off, and shows through the transparent margin around the picture.
+     Blur runs tighter than --shadow-art's because a silhouette shadow has no
+     spread to pull it back in. */
+  --shadow-cut: drop-shadow(0 1px 1px rgba(17,19,22,.06)) drop-shadow(0 7px 14px rgba(17,19,22,.11));
 }
 
 :root[data-theme="dark"],
@@ -44,6 +66,11 @@
   --tag: #8E929A;          /* mono metadata — 5.96:1 WCAG AA */
   --woke: #E8E8E8;         /* 15.5:1 WCAG AAA */
   --marker-ink: #111316;
+  /* Deeper than its light counterpart: the same weight against a carbon ground is
+     invisible, and what separates a bright export from that ground is the falloff
+     around it rather than the tint of the shadow itself. */
+  --shadow-art: 0 1px 3px rgba(0,0,0,.4), 0 12px 32px -6px rgba(0,0,0,.55);
+  --shadow-cut: drop-shadow(0 1px 2px rgba(0,0,0,.45)) drop-shadow(0 8px 18px rgba(0,0,0,.6));
 }
 
 /* ============ 2. Base & Reset ============ */
@@ -351,6 +378,14 @@ a { color: inherit; }
   from { transform: translate3d(-8px, 10px, 0) rotate(.5deg); }
   to { transform: translate3d(11px, -10px, 0) rotate(-1deg); }
 }
+/* Only ever runs below the breakpoint, where a name too long for the column
+   travels rather than wrapping. It alternates rather than looping, so the name
+   returns to its own left edge and is read from the start each pass; the
+   distance is per-instance, measured against the column the name has to cross. */
+@keyframes iaMarquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(var(--marq-shift, 0px), 0, 0); }
+}
 
 /* ============ 6. Case Study Section (.cs) ============ */
 .cs {
@@ -580,6 +615,106 @@ a { color: inherit; }
 }
 .cs__shot-cap { margin: 11px 0 0; color: var(--tag); letter-spacing: .16em; line-height: 1.5; }
 .cs__shot--span-3 .cs__shot-cap { text-align: center; padding-left: .16em; margin-top: 13px; }
+
+/* Photographic artwork, where the shared art zone is too short to read.
+   A schematic placeholder survives being shrunk to 280px because it carries a
+   dozen shapes; a screenshot of a shipped page carries body copy, and at that
+   height its type falls under the legible floor. So these grow upward: the box
+   hangs above the art zone by the height it gained, which leaves its bottom edge
+   -- and therefore the caption and the timeline rule below it -- exactly where
+   every other step's sits. Only the space overhead is borrowed, and only the
+   section header occupies it.
+
+   The box is sized from the export itself, passed in as --nat-h and --nat-ratio,
+   rather than taking the shared three-step span: height is capped at the source's
+   own pixel height so a 1100px-wide export is never stretched past its
+   resolution, and width follows from its ratio. A box wider than its picture
+   would letterbox it inside a visible frame, and would also hand the centring
+   script the wrong number to measure -- it positions the figure, so a figure
+   twice the width of the picture inside it clamps the picture off the canvas. */
+.cs__shot--tall {
+  --shot-h: min(calc(var(--art-h) + 120px), 46vh);
+  --shot-real-h: min(var(--shot-h), var(--nat-h, 100vh));
+  width: calc(var(--shot-real-h) * var(--nat-ratio, 1.6));
+  top: calc(var(--art-h) - var(--shot-real-h));
+}
+/* A diagram is drawn at a fixed unit width, so its figure takes that width rather
+   than the three-step span the photographic shots borrow. A lane wider than the
+   picture inside it hands the centring script the wrong box to position -- it
+   would centre the lane and let the picture ride out from the middle of it -- and
+   at three steps that lane is wider than the canvas the rail leaves. */
+.cs__shot--drawn { width: calc(var(--art-h) * var(--nat-ratio, 4)); }
+
+/* Centred under its picture. On the pages where a tall shot also carries
+   --span-3 this came free with that class; a page whose tall shots stand alone
+   would otherwise set its captions flush left and read differently. */
+.cs__shot--tall .cs__shot-cap { text-align: center; padding-left: .16em; }
+.cs__shot--tall .cs__shot-img {
+  height: var(--shot-real-h);
+  /* No frame: the schematic placeholders need a rule to separate an empty
+     wireframe from the paper behind it, but these exports carry their own edge
+     -- a border around one reads as a second, competing line. The shadow takes
+     over what the border was doing, which is holding the sheet off the paper. */
+  border: none;
+  background: var(--art-sheet);
+  box-shadow: var(--shadow-art);
+}
+
+/* An export whose opaque area *is* the picture, with transparency only outside its
+   own edge. It needs no paper behind it -- it brought its own -- so it casts from
+   its alpha instead: the shadow follows the rounded corner the artwork actually
+   has, and the page shows through the margin around it. The other exports cannot
+   do this: their design sits on a canvas they do not carry, so tracing their alpha
+   would halo every text block separately and leave the dark type with nothing to
+   sit on. Those keep the sheet, and the shadow belongs to the sheet's edge. */
+.cs__shot--cut .cs__shot-img {
+  background: none;
+  box-shadow: none;
+  filter: var(--shadow-cut);
+}
+
+/* Step 04's export is cropped mid-content at its foot, so it reads as a panel
+   that carries on past the edge of the picture. Seating it on the timeline rule
+   lets the rule finish that crop, instead of leaving it to hang in the gap above.
+   Positioned from its bottom edge rather than its top, so the figure grows
+   upward by whatever its caption measures and the picture still lands exactly on
+   the rule when that caption wraps to another line. The caption moves above the
+   picture because the band it used to sit in is picture now.
+
+   Scoped to the wide canvas: below the breakpoint there is no rule to sit on,
+   and the caption belongs under its picture like every other step's. */
+@media (min-width: 961px) {
+  .cs__shot--seated {
+    top: auto; bottom: calc(100% - var(--art-zone));
+    display: flex; flex-direction: column-reverse;
+  }
+  .cs__shot--seated .cs__shot-cap { margin: 0 0 13px; }
+}
+
+/* Collision handling (DESIGN 4): the header sits in the band a tall shot grows
+   into, so it clears out rather than being overlapped. These are the same three
+   states that reveal the shot, is-active included -- the shot stays up after the
+   pointer leaves, so the header has to stay down for exactly as long. Opacity
+   rather than display, because the h2 still labels the section.
+
+   The is-active branch waits for .is-browsing, which the step script sets on the
+   first real hover or focus. A page seeds one step as active in its markup so the
+   art zone is not empty at rest; if that seeded step carries a tall shot, the
+   unguarded rule would take the heading -- and the hint telling the reader to
+   hover -- away before they had done anything at all.
+
+   Scoped to the wide canvas: below the breakpoint the shots are blocks in flow
+   under the step that names them, so nothing is ever overlapped and there is
+   nothing to clear -- and a tap, which lands as focusin there, would otherwise
+   take the section's heading away for no reason the reader can see. */
+.cs__flow-header { transition: opacity .26s ease; }
+@media (min-width: 961px) {
+  .cs__flow:has(.cs__step:hover .cs__shot--tall) .cs__flow-header,
+  .cs__flow:has(.cs__step:focus-visible .cs__shot--tall) .cs__flow-header,
+  .cs__flow.is-browsing:has(.cs__step.is-active .cs__shot--tall) .cs__flow-header {
+    opacity: 0; pointer-events: none;
+  }
+}
 
 /* Step 01 Horizontal Conversion Diagram */
 .cs__diag-tag-rect {
@@ -1890,6 +2025,23 @@ a { color: inherit; }
   opacity: 1; transform: translate(-50%, 0); color: var(--ink);
 }
 
+/* ============ 11. Back To Top (.totop) ============ */
+/* The wide canvas keeps navigation permanently in the reader's path on the right
+   edge. Stacked, that rail sits at the very top of a column several screens long,
+   so the return trip needs its own control within thumb reach. It therefore has no
+   wide-canvas counterpart and is display:none above the breakpoint entirely. */
+.totop { display: none; }
+
+/* ============ 12. Figure Zoom (.zoom) ============ */
+/* The trigger wraps artwork in place. display:contents dissolves its box, so the
+   wide layout measures exactly what it did before the wrapper existed; the button
+   is disabled there as well, so it adds no tab stop and swallows no clicks. */
+.zoom__trigger {
+  display: contents;
+  padding: 0; border: 0; background: none; font: inherit; color: inherit;
+}
+.zoom { display: none; }
+
 @media (max-width: 960px) {
 
   /* One page gutter for every section and for the horizontal rail, so the bar
@@ -1961,7 +2113,11 @@ a { color: inherit; }
   .ia__rail { margin-inline: 0; }
 
   /* Intro Section */
-  .ia__stage { min-height: 0; display: block; justify-items: start; }
+  /* min-width:0 because the names below hold one line: a grid item's automatic
+     minimum size is its min-content width, and an unbreakable name makes that
+     the width of the name itself. Without this the stage widens the page past
+     the screen rather than letting a name overrun its own row. */
+  .ia__stage { min-height: 0; min-width: 0; display: block; justify-items: start; }
   .ia__core { max-width: none; text-align: left; margin: 0 0 clamp(30px, 6vh, 46px); }
   .ia__core::before { display: none; }
   .ia__hint { display: none; }
@@ -1984,9 +2140,37 @@ a { color: inherit; }
     -webkit-box-decoration-break: clone; box-decoration-break: clone;
   }
   .ia__lead { font-size: clamp(1.75rem, 7.4vw, 2.6rem); line-height: 1.06; }
-  .ia__slot { position: static; transform: none; margin: 0 0 26px; }
+  /* justify-items:start on the stage aligns these rows left, and in block
+     layout that also shrink-wraps each one to its own text. A name then has no
+     column to overrun, so nothing could ever be measured as too long for the
+     screen. Stretching the row back to full width restores the track without
+     moving a single glyph -- every row is left-aligned either way. */
+  .ia__slot { position: static; transform: none; margin: 0 0 26px; justify-self: stretch; }
   .ia__drift { animation: none; }
-  .ia__idea { white-space: normal; font-size: calc(var(--s, 1) * 1.06rem); }
+  .ia__idea {
+    /* One size for every name. The per-instance --s scale exists to compose the
+       wide canvas's scatter, where a name's size is read against its neighbours'
+       and its distance from the centre; stacked into a single-file list with all
+       of that gone, the same variation reads as inconsistent type rather than as
+       hierarchy. */
+    font-size: 1.06rem;
+    /* A name too long for the column travels instead of wrapping: a two-line
+       name would sit taller than its neighbours and break the even rhythm of
+       the list, and the marker stroke would have to be struck row by row on a
+       row that is never hovered. .ia__idea is the track the name travels in. */
+    white-space: nowrap; overflow: hidden;
+  }
+  /* Inline elements ignore transforms, and the label is what moves. nowrap has
+     already ruled out the multi-line highlight this would otherwise cost. */
+  .ia__label { display: inline-block; }
+  /* Set only on names measured to overrun the column, and paced by the distance
+     each one has to cross, so every name travels at the same speed rather than
+     in the same time. The drift these replace is disabled at this width, so no
+     two ambient animations run on one element. */
+  .ia__idea.is-marquee .ia__label {
+    animation: iaMarquee var(--marq-dur, 12s) ease-in-out infinite alternate;
+    will-change: transform;
+  }
   .ia__tag { position: static; display: block; margin-top: 6px; opacity: 1; transform: none; }
   .ia__spark { display: none; }
   .ia__real { left: 0; transform: translate(0, -5px); }
@@ -2025,6 +2209,9 @@ a { color: inherit; }
     opacity: 1; transform: none;
   }
   .cs__shot-img { height: auto; }
+  /* The tall shots' fixed height is a wide-canvas measure -- stacked, they are
+     full-width blocks and must take their height from their own ratio again. */
+  .cs__shot--tall .cs__shot-img { height: auto; }
 
   /* Gantt Track Chart */
   /* Each box carries its own name, and the narrowest of them is three of twelve
@@ -2130,6 +2317,159 @@ a { color: inherit; }
     opacity: 1; transform: none;
     white-space: normal; overflow-wrap: anywhere;
   }
+
+  /* Back To Top */
+  /* Sits at the page gutter from both edges so it lines up with the column of
+     copy it floats over rather than hugging the bezel. 44px square meets the
+     touch minimum without an expanded hit box. */
+  .totop {
+    position: fixed; z-index: 6;
+    right: var(--gutter); bottom: var(--gutter);
+    display: grid; place-items: center;
+    width: 44px; height: 44px;
+    padding: 0; border: none; border-radius: 50%;
+    background: var(--ink); color: var(--paper);
+    cursor: pointer;
+    /* Absent until the reader is a screen deep, so it never covers the opening
+       hook. visibility keeps it out of the tab order while it is invisible. */
+    opacity: 0; visibility: hidden; transform: translateY(8px);
+    transition: opacity .26s ease,
+                transform .26s cubic-bezier(.2,.7,.3,1),
+                visibility 0s linear .26s;
+  }
+  .totop.is-visible {
+    opacity: 1; visibility: visible; transform: translateY(0);
+    transition: opacity .26s ease,
+                transform .26s cubic-bezier(.2,.7,.3,1),
+                visibility 0s;
+  }
+  /* Matches the rail: the disc keeps a dark ground in both themes rather than
+     inverting to white, and takes a hairline boundary to hold its edge. */
+  [data-theme="dark"] .totop {
+    background: #0D0E11; color: #FFFFFF;
+    border: 1px solid var(--rule-link, #5F6368);
+  }
+  .totop:hover { transform: translateY(0) scale(1.05); }
+  .totop:focus-visible { outline-color: var(--paper); }
+  [data-theme="dark"] .totop:focus-visible { outline-color: #FFFFFF; }
+  .totop__icon {
+    width: 16px; height: 16px;
+    stroke: currentColor; fill: none; stroke-width: 1.6;
+    stroke-linecap: round; stroke-linejoin: round;
+    pointer-events: none;
+  }
+
+  /* Figure Zoom */
+  /* The trigger takes its own box here so it can carry the tap target. The
+     shots it wraps are painted with pointer-events:none on the wide canvas so
+     the floating art never blocks the steps beneath it; stacked, they are
+     ordinary blocks in flow and have to take taps again. */
+  .zoom__trigger {
+    display: block; width: 100%; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .cs__shot, .gt__shot.is-active { pointer-events: auto; }
+  .zoom__trigger:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+  .zoom {
+    position: fixed; z-index: 6; inset: 0;
+    display: grid; grid-template-rows: 1fr auto;
+    background: var(--paper);
+    opacity: 0; transform: translateY(8px);
+    transition: opacity .26s ease, transform .26s cubic-bezier(.2,.7,.3,1);
+  }
+  .zoom[hidden] { display: none; }
+  /* Resolves to none rather than translateY(0): a transformed ancestor becomes
+     the containing block for the absolutely positioned close control. */
+  .zoom.is-open { opacity: 1; transform: none; }
+
+  /* The pane pans in both axes: a diagram opens at its authored width, which is
+     wider than the screen by design, and a screenshot opens taller. */
+  .zoom__pane {
+    overflow: auto; -webkit-overflow-scrolling: touch;
+    display: grid; place-items: center;
+    padding: calc(var(--gutter) + 44px) var(--gutter) var(--gutter);
+  }
+  .zoom__frame > * {
+    display: block; max-width: none;
+    background: var(--paper); border: 1px solid var(--rule-link);
+  }
+  [data-theme="dark"] .zoom__frame > * { background: #181B1F; }
+  /* Diagrams are drawn on the ground itself, so a frame around them would read
+     as a second, competing rule — same exemption they take in flow. */
+  .zoom__frame > .cs__shot-diagram { border: none; background: transparent; }
+  [data-theme="dark"] .zoom__frame > .cs__shot-diagram { background: transparent; }
+  /* Photographic exports carry their own edge; a frame around one reads as a
+     second, competing line, in the reader as much as in the flow. */
+  .zoom.is-photo .zoom__frame > * {
+    border: none;
+    background: var(--art-sheet);
+    box-shadow: var(--shadow-art);
+  }
+  .zoom.is-cut .zoom__frame > * {
+    background: none;
+    box-shadow: none;
+    filter: var(--shadow-cut);
+  }
+
+  .zoom__foot {
+    display: grid; gap: 8px;
+    padding: clamp(14px, 2.4vh, 20px) var(--gutter) calc(var(--gutter) + 4px);
+    border-top: 0.5px solid var(--rule-deco);
+  }
+  .zoom__cap {
+    margin: 0;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+    line-height: 1.5; color: var(--tag);
+  }
+  /* Prose that travelled with a chart caption keeps the sans it was set in
+     rather than being run through the label's uppercase mono. */
+  .zoom__note {
+    margin: 0;
+    font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 300;
+    font-size: .92rem; line-height: 1.5; color: var(--ghost);
+  }
+  /* Only stated when the figure actually overflows its pane, so it is a fact
+     about this figure rather than a standing instruction. */
+  .zoom__hint {
+    margin: 0;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--tag);
+  }
+  .zoom:not(.is-pannable) .zoom__hint { display: none; }
+
+  .zoom__close {
+    position: absolute; z-index: 6;
+    top: var(--gutter); right: var(--gutter);
+    display: grid; place-items: center;
+    width: 44px; height: 44px;
+    padding: 0; border: none; border-radius: 50%;
+    background: var(--ink); color: var(--paper);
+    cursor: pointer;
+    transition: transform .2s cubic-bezier(.2,.7,.3,1);
+  }
+  [data-theme="dark"] .zoom__close {
+    background: #0D0E11; color: #FFFFFF;
+    border: 1px solid var(--rule-link, #5F6368);
+  }
+  .zoom__close:hover { transform: scale(1.05); }
+  .zoom__close:focus-visible { outline-color: var(--paper); }
+  [data-theme="dark"] .zoom__close:focus-visible { outline-color: #FFFFFF; }
+  .zoom__close-icon {
+    width: 16px; height: 16px;
+    stroke: currentColor; fill: none; stroke-width: 1.6;
+    stroke-linecap: round; stroke-linejoin: round;
+    pointer-events: none;
+  }
+
+  /* The zoom owns the whole canvas while it is open; the page behind it is
+     frozen by .is-zoomed on <body>, and the toggle would otherwise float on
+     top of the reader. */
+  body.is-zoomed { overflow: hidden; }
+  body.is-zoomed .theme-toggle,
+  body.is-zoomed .totop { display: none; }
 }
 
 /* Touch devices */
@@ -2167,4 +2507,17 @@ a { color: inherit; }
   /* A 0.001s spin is a single jarring jump frame; the roll still
      resolves, it simply lands without tumbling. */
   .nf__die[data-rolling="true"] .nf__die-svg { animation: none !important; }
+}
+
+/* The marquee is the only animation on the site that carries content rather
+   than decorating it: collapsed to 0.001s by the block above, it would strand a
+   long name at the far end of its travel with its opening words clipped off. So
+   here the name wraps instead, which is what it did before it was given
+   anywhere to travel. Placed after that block because it has to outrank it. */
+@media (max-width: 960px) and (prefers-reduced-motion: reduce) {
+  .ia__idea { white-space: normal; overflow: visible; }
+  .ia__label { display: inline; }
+  .ia__idea.is-marquee .ia__label {
+    animation: none !important; transform: none;
+  }
 }
