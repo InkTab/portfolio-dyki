@@ -66,7 +66,7 @@
 
     <h1 class="cs__hook-line" id="cs-title">Why killing an 80% sales funnel actually saved this supplement brand.</h1>
 
-    <p class="cs__hook-sub">A premium supplement brand blamed their design for bad sales, but a deceptive free trial was actually driving a 90% product return rate.</p>
+    <p class="cs__hook-sub">A premium supplement brand blamed design for low sales, but an obscured subscription checkout was driving a 90% product return rate.</p>
 
     <dl class="cs__meta">
       <div class="cs__meta-pair">
@@ -123,7 +123,7 @@
     <h2 class="cs__kicker" id="cs-problem">The problem</h2>
     <div class="cs__block-body">
       <p class="cs__statement">&ldquo;Our site looks outdated. We need a modern redesign to increase our product sales.&rdquo;</p>
-      <p class="cs__prose">They didn't have a design problem; they had a deceptive checkout. Customers clicked &lsquo;try for free&rsquo; but were secretly enrolled in an opt-out subscription. They'd get billed later and return it. We built a beautiful new site, but it didn't fix the core lie driving a 90% return rate.</p>
+      <p class="cs__prose">They didn't have a visual design problem; they had a business logic flaw. Customers clicked &lsquo;try for free&rsquo; into an undisclosed subscription. They'd get billed later and return it. A visual reskin wouldn't fix the underlying checkout model driving a 90% return rate.</p>
 
       <ul class="cs__symptoms">
         <li class="cs__symptom">
@@ -171,9 +171,104 @@
           <p class="cs__step-text">I dug into their Shopify data and session recordings. I found a 90% return rate tied to the trial.</p>
           <p class="cs__step-tags">Data Analysis &middot; Session Replays</p>
         </div>
-        <figure class="cs__shot" id="cs-shot-2" role="tooltip">
-          <img class="cs__shot-img" src="placeholders/step-02.svg" alt="Reviewing Shopify return rates and hidden checkout terms" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="cs__shot-cap">Reviewing Shopify return rates and hidden checkout terms</figcaption>
+        <figure class="cs__shot cs__shot--span-3" id="cs-shot-2" role="tooltip">
+          <!-- Card grid: three 280-wide cards on a 1020 lane with a 70 gap, so the 20
+               left margin equals the 20 right margin. The gap is sized off its widest
+               occupant rather than the arrow: the "+60D" pill and the "2ND BOX" caption
+               below it are both ~45 wide, so 70 leaves each of them a 13 gutter clear of
+               both cards. Every card reserves a uniform 22 of padding on all four sides:
+               content starts at card.x + 22, rules stop at card.x + 258, the first
+               label's cap-height sits 22 below the card top, and the last item's baseline
+               sits 22 above the card bottom. Centred monospace is nudged by half its
+               tracking (DESIGN.md 3.8) because the trailing letter-space would otherwise
+               pull the glyphs left of true centre. -->
+          <svg class="cs__shot-img cs__shot-diagram" viewBox="0 0 1020 220" width="1020" height="220" preserveAspectRatio="xMinYMid meet" role="img" aria-label="Session replay timeline: Checkout completed to 60-day unexpected invoice to immediate cancellation">
+            <!-- Stage 01: Checkout completed -->
+            <g class="cs__timeline-stage">
+              <rect x="20" y="15" width="280" height="190" rx="6" class="cs__timeline-card" />
+              <text x="42" y="44" class="cs__timeline-label">STAGE 01 // DAY 0</text>
+              <text x="42" y="70" class="cs__timeline-title">Checkout completed</text>
+              <rect x="42" y="84" width="134" height="20" rx="3" class="cs__timeline-pill" />
+              <text x="109.6" y="94" class="cs__timeline-pill-text">FREE TRIAL OFFER</text>
+              <line x1="42" y1="116" x2="278" y2="116" class="cs__timeline-rule" />
+
+              <!-- Bullet dots are centred at card.x + 25 so their left edge lands on the
+                   same 22 content edge as the label, pill and rule above them. -->
+              <g class="cs__timeline-items">
+                <circle cx="45" cy="134" r="3" class="cs__timeline-dot" />
+                <text x="57" y="134" dominant-baseline="central" class="cs__timeline-text">Customer orders &ldquo;$0 Trial&rdquo; box</text>
+
+                <circle cx="45" cy="156" r="3" class="cs__timeline-dot" />
+                <text x="57" y="156" dominant-baseline="central" class="cs__timeline-text">Pre-checked subscription terms</text>
+
+                <circle cx="45" cy="178" r="3" class="cs__timeline-dot" />
+                <text x="57" y="178" dominant-baseline="central" class="cs__timeline-text">Expects single sample delivery</text>
+              </g>
+            </g>
+
+            <!-- Connector 1 (Day 0 -> Day 60). Pill, feeder and caption share one 13
+                 gutter off both cards, so the three stack as a single connector unit. -->
+            <g class="cs__timeline-connector-group">
+              <path d="M 313,116 L 357,116" class="cs__timeline-feeder" />
+              <polygon points="351,111 357,116 351,121" class="cs__timeline-arrow-head" />
+              <rect x="313" y="84" width="44" height="20" rx="3" class="cs__timeline-pill" />
+              <text x="335.6" y="94" class="cs__timeline-pill-text">+60D</text>
+              <text x="335.7" y="144" text-anchor="middle" class="cs__timeline-meta">2ND BOX</text>
+            </g>
+
+            <!-- Stage 02: Unexpected invoice. The label above already carries DAY 60. -->
+            <g class="cs__timeline-stage">
+              <rect x="370" y="15" width="280" height="190" rx="6" class="cs__timeline-card" />
+              <text x="392" y="44" class="cs__timeline-label">STAGE 02 // DAY 60</text>
+              <text x="392" y="70" class="cs__timeline-title">Unexpected invoice</text>
+              <rect x="392" y="84" width="134" height="20" rx="3" class="cs__timeline-pill" />
+              <text x="459.6" y="94" class="cs__timeline-pill-text">ENCLOSED INVOICE</text>
+              <line x1="392" y1="116" x2="628" y2="116" class="cs__timeline-rule" />
+
+              <g class="cs__timeline-items">
+                <circle cx="395" cy="134" r="3" class="cs__timeline-dot" />
+                <text x="407" y="134" dominant-baseline="central" class="cs__timeline-text">2nd package arrives unannounced</text>
+
+                <circle cx="395" cy="156" r="3" class="cs__timeline-dot" />
+                <text x="407" y="156" dominant-baseline="central" class="cs__timeline-text">Unexpected paper invoice inside</text>
+
+                <circle cx="395" cy="178" r="3" class="cs__timeline-dot" />
+                <text x="407" y="178" dominant-baseline="central" class="cs__timeline-text">Full recurring charge billed</text>
+              </g>
+            </g>
+
+            <!-- Connector 2 (Day 60 -> Immediate) -->
+            <g class="cs__timeline-connector-group">
+              <path d="M 663,116 L 707,116" class="cs__timeline-feeder" />
+              <polygon points="701,111 707,116 701,121" class="cs__timeline-arrow-head" />
+              <rect x="663" y="84" width="44" height="20" rx="3" class="cs__timeline-pill" />
+              <text x="685.6" y="94" class="cs__timeline-pill-text">&lt;24H</text>
+              <text x="685.7" y="144" text-anchor="middle" class="cs__timeline-meta">CHURN</text>
+            </g>
+
+            <!-- Stage 03: Immediate cancellation & chargeback. Inverted container, but it
+                 sits on the same padding and baseline grid as the two cards before it. -->
+            <g class="cs__timeline-stage">
+              <rect x="720" y="15" width="280" height="190" rx="6" class="cs__timeline-block" />
+              <text x="742" y="44" class="cs__timeline-block-eyebrow">STAGE 03 // FALLOUT</text>
+              <text x="742" y="70" class="cs__timeline-block-headline">Cancellation &amp; chargeback</text>
+              <rect x="742" y="84" width="134" height="20" rx="3" class="cs__timeline-block-pill" />
+              <text x="809.6" y="94" class="cs__timeline-block-pill-text">90% RETURN RATE</text>
+              <line x1="742" y1="116" x2="978" y2="116" class="cs__timeline-block-rule" />
+
+              <g class="cs__timeline-items">
+                <circle cx="745" cy="134" r="3" class="cs__timeline-block-dot" />
+                <text x="757" y="134" dominant-baseline="central" class="cs__timeline-block-sub">Unopened 2nd box returned</text>
+
+                <circle cx="745" cy="156" r="3" class="cs__timeline-block-dot" />
+                <text x="757" y="156" dominant-baseline="central" class="cs__timeline-block-sub">Enclosed invoice rejected</text>
+
+                <circle cx="745" cy="178" r="3" class="cs__timeline-block-dot" />
+                <text x="757" y="178" dominant-baseline="central" class="cs__timeline-block-sub">Absorbs roundtrip freight fees</text>
+              </g>
+            </g>
+          </svg>
+          <figcaption class="cs__shot-cap">SESSION RECORDINGS: 60-DAY INVOICE TO CHURN TIMELINE</figcaption>
         </figure>
       </li>
 
@@ -194,12 +289,99 @@
         <span class="cs__step-num">04</span>
         <div class="cs__step-body">
           <h3 class="cs__step-title">Argued the case with evidence</h3>
-          <p class="cs__step-text">Orders plummeted 80%, so the client panicked. I showed the CEO the data proving we saved money.</p>
+          <p class="cs__step-text">Order volume fell 80%, causing client concern. I walked the CEO through unit economics to show net profit gains.</p>
           <p class="cs__step-tags">Stakeholder Mgmt &middot; P&amp;L Framing</p>
         </div>
-        <figure class="cs__shot" id="cs-shot-4" role="tooltip">
-          <img class="cs__shot-img" src="placeholders/step-04.svg" alt="Presenting return rates and competitor models to the CEO" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="cs__shot-cap">Presenting return rates and competitor models to the CEO</figcaption>
+        <figure class="cs__shot cs__shot--span-3" id="cs-shot-4" role="tooltip">
+          <!-- Same card grid as step 02, re-proportioned for a ledger: two 395-wide
+               cards on a 900 lane with the same 70 gap and the same 20 side margins, and
+               the same uniform 22 of padding on all four sides of both cards. The figure
+               column is right-anchored on card.right - 22, so it closes on the same edge
+               the rules above it stop at. There is no title line here -- the total is the
+               card's heading -- so the header stack runs label, pill, rule and the whole
+               grid sits 26 higher than step 02's.
+               Two cards leave this lane narrower than its container, so it centres
+               (xMidYMid) rather than hugging the left edge the way step 02's fuller lane
+               can afford to. Widening the cards to fill instead would open a dead gutter
+               between each label and its figure.
+               Every figure is a share of one order's value rather than an amount: the
+               shape of the cost structure is the point, and no client money is on the
+               page. The opening 100% row sets that base. Payment processing is the one
+               line that does not move between the models, which is what makes the rest
+               of the column read as return overhead. -->
+          <svg class="cs__shot-img cs__shot-diagram" viewBox="0 0 900 278" width="900" height="278" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Real cost per order, as a share of order value: the $0 trial funnel nets a minus 16 percent margin at a 90 percent return rate, while the opt-in checkout nets plus 84 percent at a 10 percent return rate on 80 percent fewer orders.">
+            <!-- Old model -->
+            <g class="cs__unit-stage">
+              <rect x="20" y="15" width="395" height="248" rx="6" class="cs__timeline-card" />
+              <text x="42" y="44" class="cs__timeline-label">OLD MODEL // $0 TRIAL</text>
+              <rect x="42" y="58" width="134" height="20" rx="3" class="cs__timeline-pill" />
+              <text x="109.6" y="68" class="cs__timeline-pill-text">90% RETURN RATE</text>
+              <line x1="42" y1="90" x2="393" y2="90" class="cs__timeline-rule" />
+
+              <g class="cs__unit-items">
+                <text x="42" y="108" dominant-baseline="central" class="cs__timeline-text">Gross order value</text>
+                <text x="394.9" y="108" dominant-baseline="central" class="cs__unit-value">100%</text>
+
+                <text x="42" y="130" dominant-baseline="central" class="cs__timeline-text">Returned goods</text>
+                <text x="394.9" y="130" dominant-baseline="central" class="cs__unit-value">&minus;90%</text>
+
+                <text x="42" y="152" dominant-baseline="central" class="cs__timeline-text">Return shipping, both ways</text>
+                <text x="394.9" y="152" dominant-baseline="central" class="cs__unit-value">&minus;15%</text>
+
+                <text x="42" y="174" dominant-baseline="central" class="cs__timeline-text">Support &amp; disputes</text>
+                <text x="394.9" y="174" dominant-baseline="central" class="cs__unit-value">&minus;8%</text>
+
+                <text x="42" y="196" dominant-baseline="central" class="cs__timeline-text">Payment processing</text>
+                <text x="394.9" y="196" dominant-baseline="central" class="cs__unit-value">&minus;3%</text>
+              </g>
+
+              <line x1="42" y1="214" x2="393" y2="214" class="cs__unit-sum-rule" />
+              <text x="42" y="241" class="cs__unit-sum-label">Net margin</text>
+              <text x="392.6" y="241" class="cs__unit-sum-figure">&minus;16%</text>
+            </g>
+
+            <!-- Connector (old -> new). Pill, feeder and caption share one 13 gutter off
+                 both cards, exactly as they do on step 02. -->
+            <g class="cs__timeline-connector-group">
+              <path d="M 428,90 L 472,90" class="cs__timeline-feeder" />
+              <polygon points="466,85 472,90 466,95" class="cs__timeline-arrow-head" />
+              <rect x="428" y="58" width="44" height="20" rx="3" class="cs__timeline-pill" />
+              <text x="450.6" y="68" class="cs__timeline-pill-text">&minus;80%</text>
+              <text x="450.7" y="118" text-anchor="middle" class="cs__timeline-meta">ORDERS</text>
+            </g>
+
+            <!-- New model. Inverted container, carrying the payoff the way step 02's last
+                 stage does, on the same padding and baseline grid as the card beside it. -->
+            <g class="cs__unit-stage">
+              <rect x="485" y="15" width="395" height="248" rx="6" class="cs__timeline-block" />
+              <text x="507" y="44" class="cs__timeline-block-eyebrow">NEW MODEL // OPT-IN</text>
+              <rect x="507" y="58" width="134" height="20" rx="3" class="cs__timeline-block-pill" />
+              <text x="574.6" y="68" class="cs__timeline-block-pill-text">10% RETURN RATE</text>
+              <line x1="507" y1="90" x2="858" y2="90" class="cs__timeline-block-rule" />
+
+              <g class="cs__unit-items">
+                <text x="507" y="108" dominant-baseline="central" class="cs__timeline-block-sub">Gross order value</text>
+                <text x="859.9" y="108" dominant-baseline="central" class="cs__unit-block-value">100%</text>
+
+                <text x="507" y="130" dominant-baseline="central" class="cs__timeline-block-sub">Returned goods</text>
+                <text x="859.9" y="130" dominant-baseline="central" class="cs__unit-block-value">&minus;10%</text>
+
+                <text x="507" y="152" dominant-baseline="central" class="cs__timeline-block-sub">Return shipping, both ways</text>
+                <text x="859.9" y="152" dominant-baseline="central" class="cs__unit-block-value">&minus;2%</text>
+
+                <text x="507" y="174" dominant-baseline="central" class="cs__timeline-block-sub">Support &amp; disputes</text>
+                <text x="859.9" y="174" dominant-baseline="central" class="cs__unit-block-value">&minus;1%</text>
+
+                <text x="507" y="196" dominant-baseline="central" class="cs__timeline-block-sub">Payment processing</text>
+                <text x="859.9" y="196" dominant-baseline="central" class="cs__unit-block-value">&minus;3%</text>
+              </g>
+
+              <line x1="507" y1="214" x2="858" y2="214" class="cs__unit-block-sum-rule" />
+              <text x="507" y="241" class="cs__unit-block-sum-label">Net margin</text>
+              <text x="857.6" y="241" class="cs__unit-block-sum-figure">+84%</text>
+            </g>
+          </svg>
+          <figcaption class="cs__shot-cap">REAL COST PER ORDER: SHARE OF ORDER VALUE, $0 TRIAL VS OPT-IN</figcaption>
         </figure>
       </li>
 
@@ -270,16 +452,70 @@
     page.scrollLeft += e.deltaY;
   }, {passive: false});
 
-  /* active step tracking: keeps the artwork populated on desktop */
+  /* active step tracking & wide diagram sticky behavior */
   var steps = Array.prototype.slice.call(document.querySelectorAll('.cs__step'));
+  var lastStep = steps[steps.length - 1];
+
+  function updateStickyShot(){
+    if(!lastStep) return;
+    var wideShots = Array.prototype.slice.call(document.querySelectorAll('.cs__shot--span-3'));
+    if(page.scrollWidth <= page.clientWidth || window.innerWidth <= 960){
+      wideShots.forEach(function(sh){ sh.style.setProperty('--sticky-x', '0px'); });
+      return;
+    }
+
+    var activeStep = document.querySelector('.cs__step.is-active') || steps[0];
+    var activeShot = activeStep ? activeStep.querySelector('.cs__shot--span-3') : null;
+
+    // Reset non-active wide shots to 0
+    wideShots.forEach(function(sh){
+      if(sh !== activeShot){
+        sh.style.setProperty('--sticky-x', '0px');
+      }
+    });
+
+    if(!activeShot) return;
+
+    var stepRect = activeStep.getBoundingClientRect();
+    var lastStepRect = lastStep.getBoundingClientRect();
+    var pageRect = page.getBoundingClientRect();
+    var shotWidth = activeShot.offsetWidth || 900;
+
+    // Center position in the viewport
+    var centerLeft = Math.max(20, (window.innerWidth - shotWidth) / 2);
+
+    // Position relative to activeStep to place diagram centered on screen immediately on hover
+    var desiredX = centerLeft - stepRect.left;
+
+    // Keep diagram bounded within the horizontal flow section
+    var flowSection = document.querySelector('.cs__flow');
+    var minShift = flowSection ? (flowSection.getBoundingClientRect().left - stepRect.left) : -stepRect.left;
+    var maxShift = (lastStepRect.right - stepRect.left) - shotWidth;
+
+    var finalX = desiredX;
+    if(maxShift !== undefined && finalX > maxShift){
+      finalX = maxShift;
+    }
+    if(minShift !== undefined && finalX < minShift){
+      finalX = minShift;
+    }
+
+    activeShot.style.setProperty('--sticky-x', Math.round(finalX) + 'px');
+  }
+
   steps.forEach(function(step){
     function activate(){
       steps.forEach(function(s){ s.classList.remove('is-active'); });
       step.classList.add('is-active');
+      updateStickyShot();
     }
     step.addEventListener('mouseenter', activate);
     step.addEventListener('focusin', activate);
   });
+
+  page.addEventListener('scroll', updateStickyShot, { passive: true });
+  window.addEventListener('resize', updateStickyShot, { passive: true });
+  updateStickyShot();
 
   /* keyboard arrow horizontal scrolling when the container is focused */
   page.addEventListener('keydown', function(e){

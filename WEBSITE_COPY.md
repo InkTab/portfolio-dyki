@@ -152,7 +152,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 * **Kicker:** `Professional` (12 chars) | *Limit:* 20 – 35 chars
 * **Title:** `Knocking off the excess` (23 chars) | *Limit:* 18 – 35 chars
 * **Paragraph 1:** `A computer science foundation gave way to design school in Poland. I experimented across sculpture, video, and branding before zeroing in on digital products—stripping away everything that didn’t fit.` (201 chars) | *Limit:* 150 – 210 chars
-* **Paragraph 2:** `Freelancing took off overnight. I hired a classmate, ran client comms, and delivered identities and packaging under relentless standards. I led early, burned bright, and learned the cost of brute force.` (204 chars) | *Limit:* 150 – 210 chars
+* **Paragraph 2:** `Freelancing took off overnight. I hired a classmate, managed clients, and shipped identities under high standards. Leading early taught me that sustainable discipline outlasts raw brute force.` (194 chars) | *Limit:* 150 – 210 chars
 
 #### Center Column (Marble Sculpture Meta)
 * **Year Range:** `2013 – 2021` (11 chars) | *Limit:* 9 – 12 chars
@@ -187,7 +187,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 #### Right Column (Personal)
 * **Kicker:** `Personal` (8 chars) | *Limit:* 18 – 34 chars
 * **Title:** `Village stillness & worldbuilding` (33 chars) | *Limit:* 18 – 35 chars
-* **Paragraph 1:** `After burnout, I closed my laptop to travel and reset. When war escalated, living in quiet Ukrainian villages taught me the deep power of slowness before I finally made my way back home to Odesa.` (197 chars) | *Limit:* 140 – 200 chars
+* **Paragraph 1:** `Taking an intentional pause to travel, I found perspective. When war escalated, living in quiet Ukrainian villages taught me resilience and clarity before I finally made my way back home to Odesa.` (197 chars) | *Limit:* 140 – 200 chars
 * **Paragraph 2:** `In Odesa, I co-founded a D&D club that outgrew two spaces. Crafting campaigns showed me that worldbuilding and product design share the same truth: both rely on clear systems and player agency.` (193 chars) | *Limit:* 140 – 195 chars
 * **Card Label:** `SYSTEMS OF PLAY` (15 chars) | *Limit:* 10 – 20 chars
 * **Card Quote:** `“Designing a product is just worldbuilding: craft the rules, honor the player's agency, and let the story unfold.”` (114 chars) | *Limit:* 70 – 120 chars
@@ -229,8 +229,8 @@ This document compiles **every user-facing text element across all 8 pages of th
 *Screen 1: The bold opening thesis statement and metadata.*
 
 * **Eyebrow:** `Case study — Kynso` (19 chars) | *Limit:* 14 – 25 chars
-* **Hook Line (H1):** `Fitness apps track training in silos. Kynso connects workouts, recovery, and fuel.` (82 chars) | *Limit:* 60 – 95 chars
-* **Hook Subtitle:** `A fitness platform reading workouts, nutrition, sleep, and cycle as interconnected elements of one system. Built from zero to pre-beta by a two-person founding team.` (166 chars) | *Limit:* 120 – 180 chars
+* **Hook Line (H1):** `The secret to a 6-domain fitness engine was stripping half the UI off the screen.` (78 chars) | *Limit:* 60 – 95 chars
+* **Hook Subtitle:** `Dense trackers collapse during physical exertion. By splitting calm planning from high-intensity training, a 2-person team built an adaptive iOS beta from zero.` (158 chars) | *Limit:* 120 – 180 chars
 * **Metadata Facts:**
   * **Role:** `Co-founder, design & marketing` (30 chars) | *Limit:* 15 – 35 chars
   * **Year:** `2025` (4 chars) | *Limit:* 4 – 9 chars
@@ -253,8 +253,8 @@ This document compiles **every user-facing text element across all 8 pages of th
 
 ### Section 3: The Problem
 * **Section Kicker:** `The problem` (11 chars) | *Limit:* 8 – 16 chars
-* **Problem Statement:** `Human body is an interdependent system. Fitness apps track everything separately.` (85 chars) | *Limit:* 60 – 100 chars
-* **Underlying Gap Prose:** `If you lift in a deficit and ate poorly, a typical fitness app still declares you ready to train because it only sees last workout. Every user we interviewed had hacked together their own fix—logging lifts, runs, and meals across separate tools and pasting them into ChatGPT. The data existed everywhere, but nothing analyzed the trade-offs between them.` (344 chars) | *Limit:* 280 – 420 chars
+* **Problem Statement:** `The human body is an interdependent system. Fitness apps track everything in silos.` (76 chars) | *Limit:* 60 – 100 chars
+* **Underlying Gap Prose:** `If you lift in a deficit and ate poorly, a typical fitness app still declares you ready to train because it only sees the last workout. Every user we interviewed had hacked together their own fix—logging lifts, runs, and meals across separate tools and pasting them into ChatGPT. The data existed everywhere, but nothing analyzed the trade-offs between them.` (348 chars) | *Limit:* 280 – 420 chars
 * **Symptoms (3 Diagnoses):**
   * **Signal:** `Every interviewed athlete used two to three apps plus a notepad and AI to manually spot training patterns.` (107 chars) | *Limit:* 90 – 150 chars
   * **Constraint:** `One designer and one engineer building a multi-domain engine and sync pipeline before public beta.` (98 chars) | *Limit:* 75 – 140 chars
@@ -339,8 +339,8 @@ This document compiles **every user-facing text element across all 8 pages of th
 *Screen 1: Opening thesis statement, meta facts, and scroll prompt.*
 
 * **Eyebrow:** `Case study — Quantistry` (23 chars) | *Limit:* 15 – 30 chars
-* **Hook Line (H1):** `Replacing empty AI buzzwords with proof of 10x faster chemical R&D.` (67 chars) | *Limit:* 55 – 90 chars
-* **Hook Subtitle:** `A complete brand refresh and evidence-led marketing site built to help a quantum chemistry startup close their next funding round and land enterprise R&D teams.` (160 chars) | *Limit:* 120 – 180 chars
+* **Hook Line (H1):** `Designing for PhD chemists when you don't speak quantum chemistry.` (70 chars) | *Limit:* 55 – 90 chars
+* **Hook Subtitle:** `Instead of simplifying the science, we decoded the commercial promise: turning months of lab friction into days of simulation to anchor enterprise sales and Series A.` (163 chars) | *Limit:* 120 – 180 chars
 * **Metadata Facts:**
   * **Role:** `Product Designer` (16 chars) | *Limit:* 12 – 30 chars
   * **Year:** `2025` (4 chars) | *Limit:* 4 – 9 chars
@@ -448,7 +448,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 ### Section 1: The Hook
 * **Eyebrow:** `Case study — 01` (15 chars) | *Limit:* 12 – 24 chars
 * **Hook Line (H1):** `Why killing an 80% sales funnel actually saved this supplement brand.` (69 chars) | *Limit:* 55 – 90 chars
-* **Hook Subtitle:** `A premium supplement brand blamed their design for bad sales, but a deceptive free trial was actually driving a 90% product return rate.` (138 chars) | *Limit:* 100 – 170 chars
+* **Hook Subtitle:** `A premium supplement brand blamed design for low sales, but an obscured subscription checkout was driving a 90% product return rate.` (132 chars) | *Limit:* 100 – 170 chars
 * **Metadata Facts:**
   * **Role:** `UI/UX Designer` (14 chars) | *Limit:* 12 – 30 chars
   * **Year:** `2023` (4 chars) | *Limit:* 4 – 9 chars
@@ -471,7 +471,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 ### Section 3: The Problem
 * **Section Kicker:** `The problem` (11 chars)
 * **Problem Statement:** `"Our site looks outdated. We need a modern redesign to increase our product sales."` (84 chars) | *Limit:* 60 – 100 chars
-* **Prose:** `They didn't have a design problem; they had a deceptive checkout. Customers clicked 'try for free' but were secretly enrolled in an opt-out subscription. They'd get billed later and return it. We built a beautiful new site, but it didn't fix the core lie driving a 90% return rate.` (285 chars) | *Limit:* 180 – 360 chars
+* **Prose:** `They didn't have a visual design problem; they had a business logic flaw. Customers clicked 'try for free' into an undisclosed subscription. They'd get billed later and return it. A visual reskin wouldn't fix the underlying checkout model driving a 90% return rate.` (262 chars) | *Limit:* 180 – 360 chars
 * **Symptoms (3 Diagnoses):**
   * **Signal:** `A massive 90% return rate buried in Shopify data, costing them double in shipping.` (82 chars) | *Limit:* 50 – 140 chars
   * **Constraint:** `We were initially hired just to reskin the landing pages and product catalog.` (78 chars) | *Limit:* 50 – 140 chars
@@ -494,7 +494,7 @@ This document compiles **every user-facing text element across all 8 pages of th
   * **Title:** `Uncovered the real P&L issue` (28 chars) | *Limit:* 20 – 45 chars
   * **Text:** `I dug into their Shopify data and session recordings. I found a 90% return rate tied to the trial.` (98 chars) | *Limit:* 70 – 130 chars
   * **Tags:** `Data Analysis · Session Replays` (31 chars) | *Limit:* 25 – 55 chars
-  * **Figcaption:** `Reviewing Shopify return rates and hidden checkout terms` (56 chars) | *Limit:* 35 – 70 chars
+  * **Figcaption:** `Session recordings: 60-day invoice to churn timeline` (52 chars) | *Limit:* 35 – 70 chars
 * **Step 03:**
   * **Title:** `Rebuilt for opt-in transparency` (31 chars) | *Limit:* 25 – 55 chars
   * **Text:** `I redesigned the checkout to require active subscription opt-in and added a one-time purchase option.` (101 chars) | *Limit:* 70 – 130 chars
@@ -502,7 +502,7 @@ This document compiles **every user-facing text element across all 8 pages of th
   * **Figcaption:** `New checkout flow with clear opt-in and purchase choices` (56 chars) | *Limit:* 35 – 70 chars
 * **Step 04:**
   * **Title:** `Argued the case with evidence` (29 chars) | *Limit:* 25 – 55 chars
-  * **Text:** `Orders plummeted 80%, so the client panicked. I showed the CEO the data proving we saved money.` (96 chars) | *Limit:* 70 – 130 chars
+  * **Text:** `Order volume fell 80%, causing client concern. I walked the CEO through unit economics to show net profit gains.` (113 chars) | *Limit:* 70 – 130 chars
   * **Tags:** `Stakeholder Mgmt · P&L Framing` (30 chars) | *Limit:* 20 – 50 chars
   * **Figcaption:** `Presenting return rates and competitor models to the CEO` (56 chars) | *Limit:* 35 – 70 chars
 * **Step 05:**
@@ -541,8 +541,8 @@ This document compiles **every user-facing text element across all 8 pages of th
 *Screen 1: Opening thesis statement, meta facts, and scroll prompt.*
 
 * **Eyebrow:** `Case study — 01` (15 chars) | *Limit:* 12 – 24 chars
-* **Hook Line (H1):** `SMB owners don't need another dashboard. They need marketing decisions.` (71 chars) | *Limit:* 55 – 90 chars
-* **Hook Subtitle:** `Built an AI marketing platform for small businesses by replacing complex setups with guided review, cutting campaign setup from 30 to 5 minutes.` (144 chars) | *Limit:* 110 – 175 chars
+* **Hook Line (H1):** `Why 25 analytics dashboards are useless without guided decisions.` (70 chars) | *Limit:* 55 – 90 chars
+* **Hook Subtitle:** `Internal users spent 30 minutes struggling to launch a single campaign. We replaced manual form-filling with automated data review, cutting onboarding by 25 minutes.` (156 chars) | *Limit:* 110 – 175 chars
 * **Metadata Facts:**
   * **Role:** `Design Lead & Acting PM` (23 chars) | *Limit:* 15 – 35 chars
   * **Year:** `2025` (4 chars) | *Limit:* 4 – 9 chars
@@ -693,22 +693,22 @@ This document compiles **every user-facing text element across all 8 pages of th
 | :-: | :--- | :--- | :-: | :-: |
 | **01** | Origins | `I was born and grew up in Odesa, Ukraine and live in Canada now.` | 63 | **≤ 130** |
 | **02** | First Design | `The first app I ever designed was an app for my college.` | 57 | **≤ 130** |
-| **03** | Past Life | `The first job I've had was a car counter for outdoor market analysis.` | 70 | **≤ 130** |
+| **03** | Past Life | `My first job was a car counter for outdoor market traffic analysis.` | 67 | **≤ 130** |
 | **04** | Tabletop Game | `I will always say yes to a D&D game.` | 35 | **≤ 130** |
 | **05** | Languages | `I speak Polish and I learned over 2 months for university.` | 58 | **≤ 130** |
-| **06** | Design Philosophy | `Familiarity isn't as important as next clear action.` | 52 | **≤ 130** |
+| **06** | Design Philosophy | `Familiarity isn't as important as the next clear action.` | 56 | **≤ 130** |
 | **07** | Collection | `I collect pins. I have about 70 of them now.` | 44 | **≤ 130** |
 | **08** | Tooling / Workflow | `My most used hotkey is ctrl+c, ctrl+v.` | 38 | **≤ 130** |
 | **09** | Unexpected Hobby | `I like crocheting hats.` | 23 | **≤ 130** |
 | **10** | Unshipped Pride | `I'm proud of turning my perfectionism into a superpower.` | 56 | **≤ 130** |
 | **11** | Work Soundtrack | `I like listening to dubstep while I work.` | 41 | **≤ 130** |
-| **12** | Software Love | `I genuinely love figma.` | 23 | **≤ 130** |
+| **12** | Software Love | `I genuinely love Figma.` | 23 | **≤ 130** |
 | **13** | Design Critique | `The worst design advice I ever received was "make it brighter".` | 63 | **≤ 130** |
-| **14** | Active Learning | `I'm curently learning React to be able to build my ideas.` | 56 | **≤ 130** |
+| **14** | Active Learning | `I'm currently learning React to build and test my ideas.` | 56 | **≤ 130** |
 | **15** | Coffee Order | `I like ordering lattes and anything with cinnamon.` | 50 | **≤ 130** |
-| **16** | Remote Destination | `I’d love to spend a month working from small house in Alps.` | 58 | **≤ 130** |
+| **16** | Remote Destination | `I’d love to spend a month working from a quiet cabin in the Alps.` | 65 | **≤ 130** |
 | **17** | Book Recommendation | `I would hand "Burn your portfolio" to new designers.` | 51 | **≤ 130** |
-| **18** | Simple Pleasure | `For me, the most irrationally joyful thing is iridiscent objects.` | 65 | **≤ 130** |
+| **18** | Simple Pleasure | `For me, the most irrationally joyful things are iridescent objects.` | 67 | **≤ 130** |
 | **19** | Childhood Dream | `When I was a kid I wanted to be a lawyer.` | 41 | **≤ 130** |
 | **20** | Natural 20 (Best Fact) | `I've run a D&D campaign for a year and learned more about user motivation than I ever expected.` | 95 | **≤ 130** |
 
