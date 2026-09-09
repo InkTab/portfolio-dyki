@@ -443,6 +443,14 @@ a { color: inherit; }
              color .1s ease calc(var(--d, 0s) + .18s),
              background-size .34s cubic-bezier(.2,.7,.3,1) var(--d, 0s);
 }
+.cs__link-arrow {
+  display: inline-block;
+  transition: transform .26s cubic-bezier(.2,.7,.3,1);
+}
+.cs__link:hover .cs__link-arrow,
+.cs__link:focus-visible .cs__link-arrow {
+  transform: translateX(4px);
+}
 
 .cs__statement {
   font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif; font-weight: 800;
@@ -480,6 +488,7 @@ a { color: inherit; }
 /* 4. timeline */
 .cs__flow {
   --step-w: clamp(280px, 28vw, 400px);
+  --step-gap: clamp(40px, 4.6vw, 88px);
   --art-h: min(calc(var(--step-w) * .7), 34vh);
   --art-zone: calc(var(--art-h) + 84px);
   align-content: center;
@@ -493,7 +502,7 @@ a { color: inherit; }
 .cs__steps {
   list-style: none; margin: 0; padding: 0;
   position: relative; display: flex; align-items: stretch;
-  gap: clamp(40px, 4.6vw, 88px);
+  gap: var(--step-gap);
 }
 .cs__steps::before {
   content: ""; position: absolute; top: var(--art-zone); height: 1px;
@@ -540,7 +549,7 @@ a { color: inherit; }
 
 .cs__shot {
   position: absolute; z-index: 6;
-  left: 0; top: 0; width: 100%; margin: 0;
+  left: var(--sticky-x, 0px); top: 0; width: 100%; margin: 0;
   opacity: 0; transform: translateY(8px);
   pointer-events: none;
   transition: opacity .26s ease, transform .26s cubic-bezier(.2,.7,.3,1);
@@ -549,6 +558,9 @@ a { color: inherit; }
 .cs__step:focus-visible .cs__shot,
 .cs__step.is-active .cs__shot {
   opacity: 1; transform: translateY(0);
+}
+.cs__shot--span-3 {
+  width: calc(3 * var(--step-w) + 2 * var(--step-gap));
 }
 .cs__shot-img {
   display: block; width: 100%; height: var(--art-h);
@@ -559,7 +571,231 @@ a { color: inherit; }
 [data-theme="dark"] .cs__shot-img {
   background: #181B1F;
 }
+.cs__shot-diagram {
+  border: none;
+  background: transparent;
+}
+[data-theme="dark"] .cs__shot-diagram {
+  background: transparent;
+}
 .cs__shot-cap { margin: 11px 0 0; color: var(--tag); letter-spacing: .16em; line-height: 1.5; }
+.cs__shot--span-3 .cs__shot-cap { text-align: center; padding-left: .16em; margin-top: 13px; }
+
+/* Step 01 Horizontal Conversion Diagram */
+.cs__diag-tag-rect {
+  fill: var(--paper);
+  stroke: var(--rule-link);
+  stroke-width: 1px;
+  transition: stroke .2s ease, fill .2s ease;
+}
+[data-theme="dark"] .cs__diag-tag-rect {
+  fill: #181B1F;
+}
+
+.cs__diag-tag-dot {
+  fill: var(--tag);
+}
+
+.cs__diag-tag-text {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 12.5px;
+  font-weight: 400;
+  letter-spacing: .04em;
+  fill: var(--ghost-link);
+}
+
+.cs__diag-feeder {
+  stroke: var(--rule-link);
+  stroke-width: 1.2px;
+  stroke-dasharray: 4 3;
+  fill: none;
+}
+
+.cs__step:hover .cs__diag-feeder,
+.cs__step:focus-visible .cs__diag-feeder,
+.cs__step.is-active .cs__diag-feeder {
+  animation: csDiagFlow 1.6s linear infinite;
+}
+
+@keyframes csDiagFlow {
+  to { stroke-dashoffset: -14; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs__step:hover .cs__diag-feeder,
+  .cs__step:focus-visible .cs__diag-feeder,
+  .cs__step.is-active .cs__diag-feeder {
+    animation: none;
+  }
+}
+
+.cs__diag-funnel {
+  stroke: var(--rule-link);
+  stroke-width: 1.4px;
+  fill: var(--paper);
+}
+[data-theme="dark"] .cs__diag-funnel {
+  fill: #181B1F;
+}
+
+.cs__diag-funnel-label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  fill: var(--tag);
+}
+
+.cs__diag-core-line {
+  stroke: var(--rule-link);
+  stroke-width: 1px;
+  stroke-dasharray: 2 2;
+}
+
+.cs__diag-arrow-shaft {
+  stroke: var(--ink);
+  stroke-width: 2.5px;
+}
+
+.cs__diag-arrow-head {
+  fill: var(--ink);
+}
+
+.cs__diag-block {
+  fill: var(--ink);
+  stroke: var(--ink);
+  stroke-width: 1px;
+}
+
+.cs__diag-block-eyebrow {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  fill: var(--paper);
+  opacity: .72;
+}
+
+.cs__diag-block-headline {
+  font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  letter-spacing: -.02em;
+  fill: var(--paper);
+}
+
+.cs__diag-block-sub {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 13.5px;
+  line-height: 1.4;
+  fill: var(--paper);
+  opacity: .9;
+}
+
+.cs__diag-block-rule {
+  stroke: var(--paper);
+  stroke-opacity: .25;
+  stroke-width: 0.5px;
+}
+
+.cs__diag-block-meta {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  fill: var(--paper);
+  opacity: .75;
+}
+
+/* Step 02 Venn Intersection Diagram */
+.cs__venn-ring {
+  fill: none;
+  stroke: var(--rule-link);
+  stroke-width: 1.5px;
+  transition: stroke .2s ease;
+}
+
+.cs__venn-label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  fill: var(--tag);
+}
+
+.cs__venn-title {
+  font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -.02em;
+  fill: var(--ink);
+}
+
+.cs__venn-item-dot {
+  fill: var(--tag);
+}
+
+.cs__venn-item-text {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 13.5px;
+  fill: var(--ghost-link);
+}
+
+.cs__venn-core-card {
+  fill: var(--ink);
+  stroke: var(--ink);
+  stroke-width: 1px;
+}
+
+.cs__venn-core-eyebrow {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  fill: var(--paper);
+  opacity: .72;
+}
+
+.cs__venn-core-pill {
+  stroke: var(--paper);
+  stroke-opacity: .3;
+  stroke-width: 0.8px;
+  fill: none;
+}
+
+.cs__venn-core-pill-text {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 9.5px;
+  letter-spacing: .14em;
+  fill: var(--paper);
+}
+
+.cs__venn-core-text {
+  font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: -.01em;
+  fill: var(--paper);
+}
+
+.cs__venn-core-amp {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-weight: 700;
+  font-size: 12px;
+  fill: var(--paper);
+  opacity: .6;
+}
+
+.cs__venn-core-meta {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 9.5px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  fill: var(--paper);
+  opacity: .7;
+}
 
 /* 6. next project */
 .cs__next {
@@ -1553,7 +1789,8 @@ a { color: inherit; }
   }
   .cs__step:last-child { padding-bottom: 0; }
   .cs__step::before { top: .55em; margin-top: 0; margin-left: -3px; }
-  .cs__shot {
+  .cs__shot,
+  .cs__shot--span-3 {
     position: static; width: 100%; max-width: 520px; height: auto;
     margin: clamp(16px, 2.4vh, 22px) 0 0;
     opacity: 1; transform: none;
