@@ -44,6 +44,14 @@
      stays paper in both themes and the shadow is what seats it on the canvas. */
   --art-sheet: #f8f7ff;
 
+  /* The counterpart sheet, for a product whose own canvas is carbon. --art-sheet
+     above is fixed at paper because it was written for light-ground products; a
+     dark-ground product inverts every term of it -- white type, neon tuned to
+     bloom on black -- so paper erases exactly what carbon erases in the other
+     case. Not redefined in dark mode for the same reason --art-sheet is not: the
+     sheet belongs to the artwork, so it may not follow the reader's theme. */
+  --art-sheet-dark: #181B1F;
+
   /* The same shadow cast from an image's own alpha rather than from its box, for
      an export that already is a sheet: it follows a rounded corner instead of
      squaring it off, and shows through the transparent margin around the picture.
@@ -85,6 +93,37 @@ body {
 img, svg { max-width: 100%; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+/* ============ Accessible Skip Link ============ */
+.skip-link {
+  position: fixed;
+  top: -999px;
+  left: clamp(20px, 3vw, 40px);
+  z-index: 100;
+  padding: 8px 16px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: top .2s ease;
+}
+.skip-link:focus-visible {
+  top: clamp(20px, 3vh, 32px);
+  outline: 2px solid var(--paper);
+  outline-offset: 3px;
+}
+[data-theme="dark"] .skip-link {
+  background: #FFFFFF;
+  color: #111316;
+}
+[data-theme="dark"] .skip-link:focus-visible {
+  outline: 2px solid #FFFFFF;
+}
 
 /* ============ 3. Theme Toggle Component ============ */
 .theme-toggle {
@@ -1061,7 +1100,7 @@ a { color: inherit; }
    edge. Metrics track .cs__timeline-pill-text so all three pills set identically. */
 .cs__timeline-block-pill {
   stroke: var(--paper);
-  stroke-opacity: .3;
+  stroke-opacity: .45;
   stroke-width: 0.8px;
   fill: none;
 }
@@ -1705,8 +1744,19 @@ a { color: inherit; }
    by colour. */
 .gt {
   --lane-cols: 12;
-  --art-w: clamp(230px, 24vw, 340px);
-  --art-h: min(30vh, 244px);
+  --art-w: clamp(276px, 28.8vw, 408px);
+  --art-h: min(51.5vh, 419px);
+  /* A drawn panel figure sets its own height, where an export arrives at
+     whatever proportion it was shot in. --art-h is the box an export has to be
+     made to fit; this is the taller ceiling a drawing may spend, and it is the
+     room the section actually has -- the chart column runs shorter than the art
+     column, and the section reserves a full viewport. The vh term is what keeps
+     a short window from pushing the figure past the fold; 468px is where the
+     ceiling stops being useful, since the column is only 408 wide. The floor is
+     not decorative: a bare vh term resolves to zero wherever the viewport does
+     -- a hidden pane, a thumbnail capture -- and the figure would size itself
+     out of existence rather than merely small. */
+  --art-h-drawn: clamp(336px, 58.8vh, 468px);
   /* Boxes carry their own name, so they are sized to hold a line of type */
   --bar-h: clamp(30px, 4.2vh, 40px);
   --row-gap: clamp(6px, 1vh, 12px);
@@ -1838,8 +1888,11 @@ a { color: inherit; }
   font-size: clamp(1.15rem, 1.7vw, 1.5rem); line-height: 1.08; letter-spacing: -.02em;
   color: var(--ink);
 }
-/* A phase only reveals its artwork, so it is not a click target (DESIGN.md §4) */
-.gt__track--phase { cursor: help; }
+/* A phase only reveals its artwork, so it is not a click target (DESIGN.md §4).
+   The cursor rides the box rather than the row for the same reason the hover
+   does: the row is a full-lane grid cell, and most of it is the empty lane the
+   box is positioned within, not the box itself. */
+.gt__track--phase .gt__bar { cursor: help; }
 .gt__track--aside { cursor: default; }
 
 /* ---- the two aside tracks are disclosure buttons ---- */
@@ -1863,7 +1916,8 @@ a { color: inherit; }
 }
 
 /* ---- hover / focus ---- */
-/* A resting active row lifts to the contrast ceiling; it is never struck. */
+/* A row that has never been pointed at lifts only to the contrast ceiling. This
+   is the state the seeded row rests in before the reader has done anything. */
 .gt__track.is-active .gt__bar { border-color: var(--woke); }
 .gt__track.is-active .gt__bar--phase { box-shadow: inset 0 -3px 0 var(--woke); }
 .gt__track.is-active .gt__num,
@@ -1871,28 +1925,44 @@ a { color: inherit; }
 
 /* Struck by the marker, the box floods and every glyph in it locks to
    --marker-ink for 13.5:1 against the yellow core. Ordered after the resting
-   rules so it wins the tie on equal specificity. */
-.gt__track--phase:hover .gt__bar,
+   rules so it wins the tie on equal specificity.
+
+   The stroke holds on the active row after the pointer leaves, rather than
+   retracting with it. The chart's artwork is a reserved stage that keeps showing
+   the last row pointed at, so the stroke is what says which row the panel on the
+   right belongs to -- let it retract and the chart is left displaying an answer
+   with nothing marking the question. This is the marker acting as a selection
+   indicator rather than a hover indicator (DESIGN 1.4), and it is gated on
+   .is-browsing so a page's seeded row is never struck before the reader has
+   pointed at anything. */
+.gt.is-browsing .gt__track--phase.is-active .gt__bar,
+.gt.is-browsing .gt__track--aside.is-active .gt__bar,
+.gt__track--phase .gt__bar:hover,
 .gt__track--phase:focus-visible .gt__bar,
-.gt__track--aside:hover .gt__bar,
+.gt__track--aside .gt__bar:hover,
 .gt__toggle:focus-visible {
   background-size: 100% 100%;
   border-color: var(--marker-ink, #111316);
   transition: color .1s ease .18s, border-color .3s, box-shadow .3s,
               background-size .34s cubic-bezier(.2, .7, .3, 1);
 }
-.gt__track--phase:hover .gt__bar--phase,
+.gt.is-browsing .gt__track--phase.is-active .gt__bar--phase,
+.gt.is-browsing .gt__track--aside.is-active .gt__toggle,
+.gt__bar--phase:hover,
 .gt__track--phase:focus-visible .gt__bar--phase,
-.gt__track--aside:hover .gt__toggle,
+.gt__toggle:hover,
 .gt__toggle:focus-visible {
   box-shadow: inset 0 -3px 0 var(--marker-ink, #111316);
 }
-.gt__track--phase:hover .gt__num,
+.gt.is-browsing .gt__track--phase.is-active .gt__num,
+.gt.is-browsing .gt__track--phase.is-active .gt__name,
+.gt.is-browsing .gt__track--aside.is-active .gt__name,
+.gt.is-browsing .gt__track--aside.is-active .gt__toggle-mark,
+.gt__bar:hover .gt__num,
 .gt__track--phase:focus-visible .gt__num,
-.gt__track--phase:hover .gt__name,
+.gt__bar:hover .gt__name,
 .gt__track--phase:focus-visible .gt__name,
-.gt__track--aside:hover .gt__name,
-.gt__track--aside:hover .gt__toggle-mark,
+.gt__toggle:hover .gt__toggle-mark,
 .gt__toggle:focus-visible .gt__name,
 .gt__toggle:focus-visible .gt__toggle-mark {
   color: var(--marker-ink, #111316);
@@ -1907,21 +1977,1202 @@ a { color: inherit; }
   grid-area: 1 / 1; margin: 0;
   opacity: 0; transform: translateX(8px);
   pointer-events: none; /* never blocks the chart underneath it */
-  transition: opacity .26s ease, transform .26s cubic-bezier(.2, .7, .3, 1);
+  /* An inactive panel leaves the accessibility and tab order, not just the eye
+     (DESIGN 4, Reserved Stages). It cost nothing while every panel was a
+     picture; one of them now holds a tablist, and a control inside a panel that
+     is not on screen must not be a tab stop. Visibility is stepped, not eased,
+     so it waits out the fade on the way down and switches immediately on the
+     way up. */
+  visibility: hidden;
+  transition: opacity .26s ease, transform .26s cubic-bezier(.2, .7, .3, 1),
+              visibility 0s linear .26s;
 }
-.gt__shot.is-active { opacity: 1; transform: none; }
+.gt__shot.is-active {
+  opacity: 1; transform: none; visibility: visible;
+  transition: opacity .26s ease, transform .26s cubic-bezier(.2, .7, .3, 1),
+              visibility 0s;
+}
 .gt__shot-img {
   display: block; width: 100%; height: var(--art-h);
   object-fit: contain;
+  /* The picture is inset from its own edge rather than meeting it, so the sheet
+     reads as a mount around the artwork instead of a crop of it. Inside the box
+     (border-box), so the lane height is unchanged. */
+  padding: 8px;
   background: var(--paper); border: 1px solid var(--rule-link);
 }
-[data-theme="dark"] .gt__shot-img { background: #181B1F; }
+/* The placeholders are 800x560; the lane is taller than that ratio, so a fixed
+   height would letterbox the wireframe and leave the frame drawn around two
+   bands of empty paper. The frame exists to separate an empty wireframe from the
+   page, so it has to end where the wireframe does -- these take their own ratio
+   and sit shorter than the lane. Scaffolding only: every one is replaced by a
+   real export, which fills the lane.
+
+   Wide canvas only: below the breakpoint every panel is already sized from its
+   own ratio, and the cap would be the one thing holding a placeholder back. */
+@media (min-width: 961px) {
+  .gt__shot:not(.gt__shot--dark):not(.gt__shot--cut) .gt__shot-img:not(.gt__shot-diagram) {
+    height: auto; aspect-ratio: 800 / 560; max-height: var(--art-h);
+  }
+}
+[data-theme="dark"] .gt__shot-img:not(.gt__shot-diagram) { background: #181B1F; }
+
+/* A drawn schematic in the panel rather than an export. It carries neither the
+   placeholder's frame nor a sheet: a diagram is inked *onto* the paper and
+   inverts with it (rule 6), so the sheet tokens -- which exist to stop a
+   photographic export's own ground from fighting the page's -- have nothing to
+   do here. Sized from its own viewBox, not from the placeholder ratio.
+
+   The class sits on the svg rather than on the figure so it survives being
+   cloned into the zoom reader, where there is no figure above it to match.
+
+   These are drawn at the panel's own unit width, so nothing is being rendered
+   below its own resolution and no magnifier is wanted: the loupe cannot read an
+   inline svg at all and quietly stays shut, which is the correct outcome here
+   rather than a gap. */
+/* The metadata tier sits at the floor inside a panel schematic. The timeline
+   diagrams set it at 9px, which is under the 10px minimum §3 gives monospace but
+   reads at that size because those are drawn on a 900-1020 unit lane and painted
+   at roughly 1:1. A panel drawing is a third of that lane, so the same 9px would
+   land visibly under the floor. Scoped here rather than raised on the primitives
+   themselves, whose own diagrams are laid out around the narrower measure. */
+.gt__shot-diagram .cs__timeline-meta,
+.gt__shot-diagram .cs__timeline-pill-text,
+.gt__shot-diagram .cs__timeline-block-pill-text {
+  font-size: 10px;
+}
+
+.gt__shot-diagram {
+  /* Sized from its own height rather than from the column, so the box is always
+     exactly the picture: --art-h-drawn is the ceiling, the ratio gives the width
+     it implies, and the column caps that on a narrow canvas. Letting width lead
+     instead would clamp the height on a short window and letterbox the drawing
+     inside a box wider than itself -- dead ground the reader reads as a margin
+     that only appears at some window sizes. */
+  width: min(100%, calc(var(--art-h-drawn) * var(--nat-ratio, 1)));
+  height: auto;
+  padding: 0; border: none; background: none;
+}
+
+/* A real export drops the placeholder's frame -- that rule is there to separate
+   an empty wireframe from the page, and around artwork it reads as a second,
+   competing line -- but keeps a ground. --dark is the carbon sheet: these boards
+   were composed on the product's own dark canvas, and the transparency in them
+   *is* that canvas, so any type left outside an opaque panel is light type that a
+   paper ground would erase. The sheet therefore holds in both themes.
+
+   The radius is the one softening in the system, and it is 2px: enough to stop
+   the sheet reading as a hard-cut rectangle now that no rule finishes its edge,
+   small enough not to become a card corner. */
+.gt__shot--dark .gt__shot-img {
+  background: var(--art-sheet-dark);
+  border: none; border-radius: 2px;
+}
+
+/* --cut is the alpha cast, for an export whose opaque area is the whole picture
+   -- a phone frame, a rendered mark -- transparent only outside its own edge. It
+   brings its own edge, so a frame around it reads as a second competing line and
+   a sheet behind it as a slab it never sat on. */
+.gt__shot--cut .gt__shot-img {
+  background: none; border: none;
+  filter: var(--shadow-cut);
+}
+
+/* --screen is --cut for a capture taken off a phone: the export is a flat
+   rectangle because the grab was, but the thing pictured has rounded corners, and
+   at this size a hard-cut rectangle reads as a cropped region of a screen rather
+   than as the screen. Rounding it puts the corner back.
+
+   It is the one place a radius larger than the sheet's 2px is right, and it is not
+   decoration -- it is the subject's own geometry. It scales with how large the
+   picture is drawn: ~4.7% of the width, the proportion a phone screen actually
+   carries, which is 8px in the --art-w panel and about twice that once the reader
+   opens the file nearer its own resolution. The drop-shadow rasterises after the
+   clip, so --cut's shadow follows the corner rather than the box. */
+.gt__shot--screen .gt__shot-img {
+  /* The box has to *be* the picture for any of this to land. The shared rule is
+     `width: 100%` with `object-fit: contain`, which letterboxes a 9:20 capture
+     inside a box twice its width -- a radius on that box rounds transparent
+     ground 100px clear of the artwork, and the drop-shadow casts from a corner
+     the picture does not have. So this one takes its width from its own ratio off
+     the lane height, the way .gt__shot-diagram and .cs__shot--tall already do, and
+     drops the 8px mount: that inset exists to hold a sheet's edge off the artwork,
+     and a cut export has no sheet to hold. */
+  width: auto; max-width: 100%;
+  padding: 0;
+  margin-inline: auto;
+  /* One ratio, three sizes. A phone screen's corner is about 4.7% of its width,
+     and this picture is drawn at three widths -- ~193px in the --art-w panel, the
+     full column below the breakpoint, and its authored 590px in the reader -- so a
+     single px value would read as a screen in one of them and as a hairline or a
+     card corner in the others. The value is set per regime instead, each one
+     4.7% of the width that regime actually paints. */
+  border-radius: 9px;
+}
+@media (max-width: 960px) {
+  /* Stacked, the picture is the column rather than a panel inside it: ~337px. */
+  .gt__shot--screen .gt__shot-img { border-radius: 15px; }
+}
+
 .gt__shot-cap { margin: 11px 0 0; color: var(--tag); line-height: 1.5; }
 .gt__shot-note {
   display: block; margin-top: 8px;
   font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 300;
   text-transform: none; letter-spacing: 0;
   font-size: .92rem; line-height: 1.5; color: var(--ghost);
+}
+
+/* ============ the brand voice matrix (.vm) ============ */
+/* A live card in the chart panel, in place of a static picture. It manifests the
+   system thesis: one brand voice across two physical human situations.
+   Presented as a dual-register visual split card:
+   - Dry hands: on paper ground (qualifier and analytical reasoning).
+   - Wet hands: on inverted carbon ground (the number and nothing else).
+
+   Sized to --art-h-drawn as a floor, matching the schematics in the stage.
+   Zero layout shifts: self-contained and fluid across all viewport widths. */
+.vm {
+  display: flex; flex-direction: column;
+  min-height: var(--art-h-drawn);
+  padding: 0;
+  border: 1px solid var(--rule-link);
+  /* 6px, matching the rx the schematic cards are drawn with */
+  border-radius: 6px;
+  background: var(--paper);
+  overflow: hidden;
+}
+[data-theme="dark"] .vm { background: #181B1F; }
+
+/* ---- Upper Register: Dry hands (Analysis) ---- */
+.vm__pane--desk {
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  flex: 1 1 50%;
+  padding: clamp(16px, 2vw, 24px) clamp(16px, 2.2vw, 24px);
+  background: var(--paper);
+}
+[data-theme="dark"] .vm__pane--desk {
+  background: #181B1F;
+}
+
+.vm__meta {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 12px;
+  margin-bottom: clamp(10px, 1.4vw, 16px);
+}
+.vm__hands {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px; font-weight: 400;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--tag);
+}
+.vm__grade {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px; font-weight: 400;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--ghost);
+}
+
+.vm__body {
+  margin-top: auto;
+}
+.vm__line {
+  margin: 0;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 300;
+  font-size: clamp(14px, 1.45vw, 16px);
+  line-height: 1.5;
+  color: var(--ghost);
+}
+.vm__action {
+  margin: clamp(6px, 0.8vw, 10px) 0 0;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(14px, 1.45vw, 16px);
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+/* ---- Lower Register: Wet hands (Workout HUD on Inverted Carbon) ---- */
+.vm__pane--gym {
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  flex: 1 1 50%;
+  padding: clamp(16px, 2vw, 24px) clamp(16px, 2.2vw, 24px);
+  background: #181B1F;
+  border-top: 1px solid var(--rule-link);
+}
+[data-theme="dark"] .vm__pane--gym {
+  background: #0D0E11;
+  border-top-color: var(--rule-link);
+}
+
+.vm__pane--gym .vm__hands {
+  color: #8E929A;
+}
+.vm__pane--gym .vm__grade {
+  color: #C5C7CC;
+}
+
+.vm__killed {
+  margin: 0 0 clamp(10px, 1.4vw, 16px);
+}
+.vm__killed s {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 300;
+  font-size: clamp(12px, 1.15vw, 13px);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration-line: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.vm__hud {
+  display: flex; gap: clamp(24px, 3.5vw, 42px);
+  margin-top: auto;
+}
+.vm__hud-metric {
+  display: flex; flex-direction: column;
+}
+.vm__hud-metric .vm__grade {
+  margin-bottom: 5px;
+  color: #8E929A;
+}
+.vm__figure {
+  margin: 0;
+  font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.35rem, 1.9vw, 1.65rem);
+  line-height: 1.04; letter-spacing: -.02em;
+  color: #FFFFFF;
+}
+.vm__figure--clock {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- the panel that holds it ---- */
+.gt__shot--card .vm,
+.gt__shot--card .pq,
+.gt__shot--card .mp,
+.gt__shot--card .oc,
+.gt__shot--card .qc,
+.gt__shot--card .fn { width: 100%; }
+
+/* ============ the pull quote card (.pq) ============ */
+/* A live card in Product Step 01 replacing the placeholder image with a
+   high-impact pull quote from athlete interviews.
+   Floored at --art-h-drawn, matching the schematics in the stage. */
+.pq {
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  min-height: var(--art-h-drawn);
+  padding: clamp(20px, 2.6vw, 30px) clamp(18px, 2.4vw, 26px);
+  border: 1px solid var(--rule-link);
+  border-radius: 6px;
+  background: var(--paper);
+  box-sizing: border-box;
+}
+[data-theme="dark"] .pq { background: #181B1F; }
+
+.pq__meta {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 12px;
+}
+.pq__tag {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px; font-weight: 400;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--tag);
+}
+.pq__pill {
+  display: inline-flex; align-items: center;
+  padding: 2px 7px;
+  border: 0.8px solid var(--rule-link);
+  border-radius: 3px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 9px; font-weight: 400;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--tag);
+  line-height: 1.2;
+}
+
+.pq__body {
+  position: relative;
+  margin: auto 0;
+  padding: clamp(16px, 2vw, 24px) 0;
+}
+.pq__glyph {
+  position: absolute;
+  top: -12px; left: -6px;
+  font-family: "Bricolage Grotesque", Georgia, serif;
+  font-size: 52px; line-height: 1;
+  color: var(--rule-link);
+  opacity: 0.22;
+  pointer-events: none;
+  user-select: none;
+}
+.pq__quote {
+  position: relative;
+  margin: 0;
+  font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.32rem, 1.85vw, 1.68rem);
+  line-height: 1.18;
+  letter-spacing: -.025em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.pq__author {
+  display: flex; align-items: center;
+  margin-top: auto;
+  padding-top: clamp(12px, 1.5vw, 16px);
+  border-top: 1px solid var(--rule-deco);
+}
+.pq__author-line {
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.pq__author-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--rule-link);
+  flex-shrink: 0;
+}
+.pq__author-name {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(13px, 1.25vw, 14px);
+  color: var(--ink);
+  font-style: normal;
+  letter-spacing: 0;
+}
+
+/* ============ the market positioning card (.mp) ============ */
+/* A live card in Marketing Step 01 replacing the placeholder image with a
+   dual-register visual comparison of the fragmented stack vs. Kynso antidote.
+   - Upper register (Paper ground): 4 disconnected pills representing the user's
+     fragmented stack (Cardio, Lifting, Diet, Mobility) with Siloed data tag.
+   - Lower register (Inverted carbon ground): The Kynso Antidote, grouping all into
+     a unified node with the Correlated Intelligence tag.
+   Sized to --art-h-drawn as a floor, fluid across viewport widths, zero layout shift. */
+.mp {
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  min-height: var(--art-h-drawn);
+  border: 1px solid var(--rule-link);
+  border-radius: 6px;
+  background: var(--paper);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+[data-theme="dark"] .mp { background: #181B1F; }
+
+/* ---- Upper Register: Fragmented Stack (Paper ground) ---- */
+.mp__pane--fragmented {
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  flex: 1 1 50%;
+  padding: clamp(14px, 1.8vw, 20px) clamp(16px, 2vw, 22px);
+  background: var(--paper);
+}
+[data-theme="dark"] .mp__pane--fragmented {
+  background: #181B1F;
+}
+
+.mp__meta {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 10px;
+}
+.mp__label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px; font-weight: 400;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--tag);
+}
+.mp__tag {
+  display: inline-flex; align-items: center;
+  padding: 2px 7px;
+  border-radius: 3px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px; font-weight: 400;
+  letter-spacing: .14em; text-transform: uppercase;
+  line-height: 1.2;
+}
+.mp__tag--siloed {
+  border: 0.8px solid var(--rule-link);
+  color: var(--tag);
+}
+.mp__tag--correlated {
+  border: 0.8px solid rgba(255, 255, 255, 0.28);
+  color: #C5C7CC;
+}
+
+/* 4 Disconnected pills */
+.mp__silos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(6px, 0.9vw, 9px);
+  margin-top: auto;
+  padding-top: clamp(10px, 1.3vw, 14px);
+}
+.mp__pill--siloed {
+  display: inline-flex; align-items: center;
+  gap: 8px;
+  padding: clamp(5px, 0.7vw, 7px) clamp(8px, 1vw, 12px);
+  border: 1px dashed var(--rule-link);
+  border-radius: 999px;
+  background: var(--paper);
+  box-sizing: border-box;
+}
+[data-theme="dark"] .mp__pill--siloed {
+  background: #181B1F;
+}
+.mp__pill-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  border: 1px solid var(--rule-link);
+  background: transparent;
+  flex-shrink: 0;
+}
+.mp__pill-name {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: clamp(13px, 1.25vw, 14.5px);
+  line-height: 1.2;
+  color: var(--ghost);
+  letter-spacing: -.01em;
+}
+
+/* ---- Lower Register: The Kynso Antidote (Inverted carbon ground) ---- */
+.mp__pane--antidote {
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  flex: 1 1 50%;
+  padding: clamp(14px, 1.8vw, 20px) clamp(16px, 2vw, 22px);
+  background: #181B1F;
+  border-top: 1px solid var(--rule-link);
+}
+[data-theme="dark"] .mp__pane--antidote {
+  background: #0D0E11;
+  border-top-color: var(--rule-link);
+}
+
+.mp__title {
+  margin: 0;
+  font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.08rem, 1.36vw, 1.28rem);
+  line-height: 1.12;
+  letter-spacing: -.02em;
+  color: #FFFFFF;
+}
+
+/* Unified Node Card */
+.mp__node {
+  margin-top: auto;
+  padding: clamp(10px, 1.2vw, 13px) clamp(12px, 1.4vw, 15px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.05);
+  box-sizing: border-box;
+}
+.mp__node-domains {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 4px 6px;
+}
+.mp__node-pill {
+  display: inline-flex; align-items: center;
+  padding: 2px 7px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 3px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: clamp(10px, 0.98vw, 11px);
+  font-weight: 500;
+  letter-spacing: .06em;
+  color: #FFFFFF;
+  line-height: 1.2;
+  background: rgba(255, 255, 255, 0.08);
+}
+.mp__node-link {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px;
+  color: #8E929A;
+  user-select: none;
+}
+.mp__node-body {
+  display: flex; align-items: center; gap: 9px;
+  margin-top: clamp(8px, 1vw, 10px);
+  padding-top: clamp(7px, 0.9vw, 9px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.mp__node-core-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #FFFFFF;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+}
+.mp__node-core-text {
+  display: flex; flex-direction: column;
+}
+.mp__node-core-headline {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(13px, 1.2vw, 14px);
+  line-height: 1.25;
+  color: #FFFFFF;
+  letter-spacing: -.01em;
+}
+.mp__node-core-sub {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 300;
+  font-size: clamp(12px, 1.1vw, 13px);
+  line-height: 1.35;
+  color: #C5C7CC;
+  margin-top: 1px;
+}
+
+/* ============ the pre-beta funnel cascade (.fn) ============ */
+/* The Marketing track's own panel -- the one the aside bar shows before any step
+   is pointed at -- so it has to say what the whole track was, not what one step
+   produced. Three crops of the waitlist page: the hook, the conversion point, and
+   the success state, cascading bottom-left to top-right so the funnel reads as one
+   movement rather than as three pictures set side by side.
+
+   Drawn, not exported. A diagram is inked onto the paper and inverts with it
+   (DESIGN 5/6), so these crops are greyscale on --paper in both themes rather
+   than reproductions of the product's own neon-on-carbon canvas -- which would be
+   the one thing on the page holding colour it had not earned.
+
+   Depth is a rule, not a shadow (rule 5): each crop separates from the one behind
+   it by carrying its own border and an opaque ground, which is what the flat print
+   premise has in place of elevation. */
+.fn {
+  display: flex; flex-direction: column;
+  min-height: var(--art-h-drawn);
+  padding: clamp(16px, 2.2vw, 24px);
+  border: 1px solid var(--rule-link);
+  border-radius: 6px;
+  background: var(--paper);
+  box-sizing: border-box;
+  gap: clamp(12px, 1.6vw, 18px);
+  /* Sized against the card, not the window: the panel is a fixed --art-w box that
+     can be 288px wide inside a 1000px viewport. Same reasoning as .oc / .qc. */
+  container-type: inline-size;
+}
+[data-theme="dark"] .fn { background: #181B1F; }
+
+/* ---- Meta bar ---- */
+/* The opening line every live card in this stage shares. No display title: the
+   cascade is the content, the figcaption already names the track, and a heading
+   here would only repeat it into space the crops need. */
+.fn__meta {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 10px;
+}
+.fn__label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px; font-weight: 400;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--tag);
+}
+.fn__tag {
+  display: inline-flex; align-items: center;
+  padding: 2px 7px;
+  border-radius: 3px;
+  border: 0.8px solid var(--rule-link);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px; font-weight: 400;
+  letter-spacing: .14em; text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--tag);
+  white-space: nowrap;
+}
+
+/* ---- The cascade ---- */
+/* The step is a fixed offset, not a share of whatever height is left. Anchoring
+   the first crop to the bottom and the last to the top would make the overlap a
+   residue of the stage -- it opens into a gap on a tall window and swallows a
+   whole crop on a short one. Stepping instead keeps the overlap bounded at both
+   ends: --ch and --sy scale on the same viewport height --art-h-drawn does, and
+   their difference is the overlap, which stays between 20 and 34px throughout.
+
+   --tuck is what that overlap is allowed to cover: a bottom reserve, held clear of
+   copy, always at least as deep as the overlap can get. Every crop is therefore
+   read in full, and what tucks under the crop in front of it is empty ground. A
+   crop has no natural bottom edge anyway -- it is a cut, not a card. */
+/* The stage is the room; the cascade is the figure inside it, and it is centred
+   rather than stretched. The two are sized on different axes -- the stage takes
+   its height from --art-h-drawn (a viewport height) while the crops are sized by
+   the panel's width -- so on a tall window with a narrow panel there is height the
+   cascade cannot spend without either breaking the overlap or blowing the type up
+   past what the column can carry. Air is the right thing to do with it. */
+.fn__stage {
+  flex: 1 1 auto;
+  display: flex; align-items: center;
+  --ch: clamp(96px, 21.5vh, 146px);
+  /* The step is derived from the crop height, so the overlap is exactly --ov at
+     every viewport rather than a difference between two independent clamps. */
+  --ov: clamp(24px, 5vh, 30px);
+  --sy: calc(var(--ch) - var(--ov));
+  /* The bottom reserve the overlap is allowed to cover, held clear of copy. One
+     step deeper than the overlap, so a crop whose copy grows past --ch still tucks
+     empty ground rather than a line of text. */
+  --tuck: calc(var(--ov) + 6px);
+}
+.fn__cascade {
+  position: relative;
+  width: 100%;
+  height: calc(var(--sy) * 2 + var(--ch));
+  /* Local stacking context, so the crops order among themselves without reaching
+     into the global scale (DESIGN 6). */
+  isolation: isolate;
+}
+.fn__card {
+  position: absolute;
+  display: flex; flex-direction: column;
+  gap: clamp(6px, 0.9vw, 9px);
+  width: var(--cw, 66%);
+  min-height: var(--ch);
+  padding: clamp(9px, 1.2vw, 13px) clamp(10px, 1.3vw, 14px) var(--tuck);
+  border: 1px solid var(--rule-link);
+  border-radius: 5px;
+  background: var(--paper);
+  box-sizing: border-box;
+}
+[data-theme="dark"] .fn__card { background: #181B1F; }
+
+/* Front-to-back runs bottom-left forward, the way a fanned deck lies: each crop
+   tucks its foot under the one in front of it. A crop has no natural bottom edge
+   anyway -- it is a cut, not a card -- so the covered edge reads as intended. */
+.fn__card--hook    { left: 0;                        bottom: 0;                        z-index: 3; }
+.fn__card--action  { left: var(--sx, 17%);           bottom: var(--sy);                z-index: 2; }
+.fn__card--confirm { left: calc(var(--sx, 17%) * 2); bottom: calc(var(--sy) * 2);      z-index: 1; }
+
+.fn__step {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px; font-weight: 400;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--tag);
+  line-height: 1.4;
+}
+
+/* A crop's lead is the headline it was cut around, but it is neither this page's
+   heading nor a link, so it stops at the --woke ceiling rule 2 allows. */
+.fn__lead {
+  margin: 0;
+  font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(13px, 1.25vw, 15px);
+  line-height: 1.18;
+  letter-spacing: -.02em;
+  color: var(--woke);
+  text-wrap: balance;
+}
+.fn__lead--confirm {
+  display: flex; align-items: center;
+  gap: 6px;
+}
+.fn__check { flex-shrink: 0; color: var(--rule-link); }
+
+.fn__badge {
+  display: inline-flex; align-items: center;
+  align-self: flex-start;
+  gap: 5px;
+  padding: 3px 7px;
+  border: 1px solid var(--rule-link);
+  border-radius: 999px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 9.5px; font-weight: 400;
+  letter-spacing: .06em; text-transform: uppercase;
+  line-height: 1.3;
+  color: var(--tag);
+  white-space: nowrap;
+}
+.fn__glyph { flex-shrink: 0; }
+
+/* The conversion point itself: the field and the button that commits it. Drawn as
+   inert marks -- this is a picture of a form, not a form, so nothing here is
+   focusable and nothing carries a hover (rule 3: affordance is established at
+   rest, and there is no action behind these to afford). */
+.fn__form {
+  display: flex; align-items: stretch;
+  gap: 5px;
+}
+.fn__field {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex; align-items: center;
+  padding: 5px 8px;
+  border: 1px solid var(--rule-link);
+  border-radius: 4px;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 300;
+  font-size: clamp(10.5px, 1vw, 11.5px);
+  line-height: 1.3;
+  color: var(--tag);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+/* The one filled mark in the cascade, and it is ink rather than accent: the
+   marker is reserved for interaction (rule 4) and this button is a drawing. Its
+   label inverts to --paper on the ink ground, per rule 8. */
+.fn__cta {
+  display: inline-flex; align-items: center;
+  padding: 5px 8px;
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  background: var(--ink);
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: clamp(10.5px, 1vw, 11.5px);
+  line-height: 1.3;
+  color: var(--paper);
+  white-space: nowrap;
+}
+
+.fn__hint {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 300;
+  font-size: clamp(10.5px, 1vw, 11.5px);
+  line-height: 1.35;
+  color: var(--ghost);
+  letter-spacing: -.01em;
+}
+
+/* Narrow panel: widen each crop and shorten the step, so the cascade holds its
+   diagonal without dropping any crop under the legible floor. Below ~150px a crop
+   is too narrow to carry a headline fragment at all. */
+@container (max-width: 330px) {
+  .fn { padding: 14px 16px; gap: 11px; }
+  /* Each crop widens to hold its headline and the step shortens to match, so the
+     diagonal survives a column too narrow for the wide proportions. */
+  .fn__stage { --ch: 108px; --ov: 24px; }
+  .fn__card {
+    --cw: 76%;
+    --sx: 12%;
+    padding: 8px 10px var(--tuck);
+    gap: 5px;
+  }
+  .fn__lead { font-size: 12.5px; }
+}
+
+/* The narrowest band, where the panel is a 288px box beside a wide chart rather
+   than a phone column. Side by side, the field and the button need ~180px and the
+   crop has ~164px: the address truncates mid-domain, which reads as a clipped
+   element rather than as a cropped picture. Stacked, both are whole -- and --ch is
+   raised, not lowered, to pay for the second row and for the headline wrapping.
+   A crop that outgrows --ch deepens the overlap on the join under it by exactly
+   what it grew, so that height has to be given rather than taken. */
+@container (max-width: 272px) {
+  .fn__stage { --ch: 130px; }
+  .fn__form { flex-direction: column; align-items: stretch; }
+  .fn__cta { justify-content: center; }
+}
+
+/* ============ the onboarding calibration card (.oc) ============ */
+/* A live card in Marketing Step 03 (Onboarding copy) replacing the placeholder image.
+   Shows the biological sex choice user has to make before starting Kynso,
+   the rationale explaining why fitness algorithms fail when defaulting to a static
+   24-hour male baseline, and the downstream math modules that dynamically calibrate.
+   Floored at --art-h-drawn, fluid across viewport widths, zero layout shift. */
+.oc {
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  min-height: var(--art-h-drawn);
+  padding: clamp(16px, 2.2vw, 24px) clamp(16px, 2.2vw, 24px);
+  border: 1px solid var(--rule-link);
+  border-radius: 6px;
+  background: var(--paper);
+  box-sizing: border-box;
+  gap: clamp(10px, 1.4vw, 16px);
+  /* The panel is a fixed --art-w box (276-408px), so what the copy has to fit is
+     the card's own width, not the viewport's -- at a 1000px window the panel is
+     288px wide while every viewport-keyed clamp above is still near its maximum. */
+  container-type: inline-size;
+}
+[data-theme="dark"] .oc { background: #181B1F; }
+
+/* ---- Meta Bar ---- */
+.oc__header {
+  display: flex; flex-direction: column;
+  gap: clamp(4px, 0.6vw, 8px);
+}
+.oc__meta {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 10px;
+}
+.oc__label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px; font-weight: 400;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--tag);
+}
+.oc__tag {
+  display: inline-flex; align-items: center;
+  padding: 2px 7px;
+  border-radius: 3px;
+  border: 0.8px solid var(--rule-link);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px; font-weight: 400;
+  letter-spacing: .14em; text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--tag);
+}
+.oc__title {
+  margin: 0;
+  font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.1rem, 1.4vw, 1.32rem);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+
+/* ---- Biological Sex Choice Selector ---- */
+.oc__selector {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(8px, 1vw, 12px);
+}
+.oc__choice {
+  display: flex; align-items: flex-start;
+  gap: 10px;
+  padding: clamp(10px, 1.2vw, 12px) clamp(10px, 1.2vw, 14px);
+  border: 1px solid var(--rule-link);
+  border-radius: 5px;
+  background: var(--paper);
+  text-align: left;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: border-color .18s ease, background-color .18s ease, box-shadow .18s ease;
+  font: inherit;
+  color: inherit;
+}
+[data-theme="dark"] .oc__choice {
+  background: rgba(255, 255, 255, 0.03);
+}
+.oc__choice:hover {
+  border-color: var(--ghost);
+}
+.oc__choice:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+/* Rest -> hover -> selected is one ladder of the same greyscale step:
+   --rule-link, --ghost, --woke. It stops at the --woke ceiling rather than
+   reaching --ink, which rule 2 reserves for links and headings. */
+.oc__choice.is-selected {
+  border-color: var(--woke);
+  background: rgba(17, 19, 22, 0.04);
+}
+[data-theme="dark"] .oc__choice.is-selected {
+  background: rgba(255, 255, 255, 0.08);
+}
+.oc__radio {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--rule-link);
+  background: transparent;
+  flex-shrink: 0;
+  margin-top: 2px;
+  position: relative;
+  transition: border-color .18s ease;
+}
+.oc__choice.is-selected .oc__radio {
+  border-color: var(--woke);
+}
+.oc__choice.is-selected .oc__radio::after {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--woke);
+}
+.oc__choice-info {
+  display: flex; flex-direction: column;
+  gap: 2px;
+}
+.oc__choice-name {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(13px, 1.2vw, 14.5px);
+  line-height: 1.2;
+  color: var(--woke);
+}
+.oc__choice-sub {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 300;
+  font-size: clamp(11px, 1vw, 12px);
+  line-height: 1.35;
+  color: var(--ghost);
+}
+
+/* ---- Body Copy ---- */
+.oc__body {
+  margin: 0;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 300;
+  font-size: clamp(12.5px, 1.15vw, 13.5px);
+  line-height: 1.52;
+  color: var(--ghost);
+  letter-spacing: -.01em;
+}
+
+/* ---- Downstream Connected Math Modules ---- */
+.oc__downstream {
+  margin-top: auto;
+  padding-top: clamp(10px, 1.2vw, 14px);
+  border-top: 1px solid var(--rule-deco);
+}
+.oc__downstream-header {
+  display: flex; align-items: center;
+  gap: 7px;
+  margin-bottom: clamp(8px, 1vw, 10px);
+}
+.oc__downstream-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--rule-link);
+}
+.oc__downstream-title {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px; font-weight: 400;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--tag);
+}
+/* Two fixed columns rather than a wrap: left to wrap, the four modules break
+   one-per-row in a narrow panel and the "four connected modules" read -- the
+   whole point of the block -- collapses into a ragged list. */
+.oc__pills {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 8px;
+}
+.oc__pill {
+  display: inline-flex; align-items: center; justify-content: center;
+  text-align: center;
+  padding: clamp(3px, 0.5vw, 5px) clamp(7px, 1vw, 10px);
+  border: 1px solid var(--rule-link);
+  border-radius: 999px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: clamp(10px, 0.95vw, 11px);
+  font-weight: 400;
+  letter-spacing: .04em;
+  color: var(--woke);
+  background: rgba(17, 19, 22, 0.03);
+  line-height: 1.25;
+}
+[data-theme="dark"] .oc__pill {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Narrow panel: stack the two choices and tighten the rhythm. Two columns hold
+   while the card's content box is ~358px (the panel at its widest) and the
+   sub-label breaks over two lines; below that each column falls under ~150px,
+   the label breaks into three ragged lines, and stacking costs less height than
+   the wrap does. Keyed to the card, not the window: the panel is 288px wide at a
+   1000px viewport and 304px at a 375px one, so the window says nothing useful. */
+@container (max-width: 330px) {
+  .oc { padding: 14px 16px; gap: 9px; }
+  .oc__selector { grid-template-columns: 1fr; gap: 7px; }
+  .oc__choice { padding: 9px 11px; }
+  .oc__body { font-size: 12.5px; line-height: 1.45; }
+  .oc__downstream { padding-top: 10px; }
+  .oc__downstream-header { margin-bottom: 7px; }
+  /* Hold each module on one line: a two-line pill in a one-line pill's grid row
+     reads as a wrapped label rather than as one of four equal modules. */
+  .oc__pill { padding: 4px 5px; letter-spacing: .01em; }
+  .oc__pills { gap: 5px 6px; }
+}
+
+/* ============ the beta qualification scorecard (.qc) ============ */
+/* A scorecard in Marketing Step 04 (Beta outreach) showing how beta applicants
+   were qualified (Discipline mix, Active stack, Friction point).
+
+   The three criteria are rule-separated rows rather than bordered boxes. A box
+   inside the card frame repeats the frame's own stroke at the same weight and
+   colour, so the container reads at the same level as its contents and the three
+   criteria arrive unranked; hierarchy is carried instead by the mono numeral,
+   the mono label and the sans reading line, which is how the chart beside it
+   ranks its own tracks (DESIGN .gt).
+
+   The rows take the slack (flex: 1) and a closing line holds the bottom edge, so
+   the card is composed to --art-h-drawn rather than running out a third of the
+   way down it. Floored at that height, not fixed to it: live copy reflows where
+   a drawing does not, so the vertical rhythm tightens with the container. */
+.qc {
+  display: flex; flex-direction: column;
+  min-height: var(--art-h-drawn);
+  padding: clamp(16px, 2.2vw, 24px);
+  border: 1px solid var(--rule-link);
+  border-radius: 6px;
+  background: var(--paper);
+  box-sizing: border-box;
+  gap: clamp(12px, 1.6vw, 18px);
+  /* The panel is a fixed --art-w box, so the card's own width is what the copy
+     has to fit -- not the viewport, which can be wide while the panel is narrow. */
+  container-type: inline-size;
+}
+[data-theme="dark"] .qc { background: #181B1F; }
+
+/* ---- Meta bar ---- */
+.qc__header {
+  display: flex; flex-direction: column;
+  gap: clamp(4px, 0.6vw, 8px);
+}
+.qc__meta {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 10px;
+}
+.qc__label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px; font-weight: 400;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--tag);
+}
+.qc__tag {
+  display: inline-flex; align-items: center;
+  padding: 2px 7px;
+  border-radius: 3px;
+  border: 0.8px solid var(--rule-link);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px; font-weight: 400;
+  letter-spacing: .14em; text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--tag);
+  white-space: nowrap;
+}
+.qc__title {
+  margin: 0;
+  font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.15rem, 1.5vw, 1.35rem);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+/* ---- Criteria ---- */
+.qc__list {
+  flex: 1 1 auto;
+  display: flex; flex-direction: column;
+  margin: 0; padding: 0;
+  list-style: none;
+}
+.qc__item {
+  /* Numeral in its own column so the label and the reading line share one left
+     edge; the rows share the slack the card has left over. */
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-content: center;
+  column-gap: clamp(9px, 1.1vw, 12px);
+  row-gap: 3px;
+  padding: clamp(9px, 1.2vw, 13px) 0;
+}
+.qc__item + .qc__item {
+  border-top: 1px solid var(--rule-deco);
+}
+.qc__item-num {
+  grid-row: 1 / span 2;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px; font-weight: 400;
+  letter-spacing: .08em;
+  color: var(--tag);
+  line-height: 1.45;
+}
+.qc__item-label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px; font-weight: 400;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--tag);
+  line-height: 1.5;
+}
+.qc__item-value {
+  /* A criterion is not a link or a heading, so it stops at the --woke ceiling
+     rule 2 allows a non-navigational element rather than reaching --ink. */
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: clamp(12.5px, 1.15vw, 13.5px);
+  line-height: 1.42;
+  color: var(--woke);
+  letter-spacing: -.01em;
+}
+.qc__item-detail {
+  display: block;
+  font-weight: 300;
+  color: var(--ghost);
+}
+
+/* ---- Closing line ---- */
+.qc__foot {
+  margin: 0;
+  padding-top: clamp(10px, 1.2vw, 14px);
+  border-top: 1px solid var(--rule-link);
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 300;
+  font-size: clamp(12px, 1.1vw, 13px);
+  line-height: 1.45;
+  color: var(--ghost);
+  letter-spacing: -.01em;
+}
+
+/* Narrow panel: the fluid rhythm above is keyed to the viewport, which can be
+   wide while the --art-w box is not. Tighten against the card's own width. */
+@container (max-width: 300px) {
+  .qc { padding: 15px 16px; gap: 11px; }
+  .qc__item { padding: 8px 0; }
+  .qc__foot { padding-top: 10px; }
+}
+
+/* ---- the loupe ---- */
+/* The panel is a fixed box that a portrait export lands inside at a fraction of
+   its resolution. On a pointer device the reader gets the detail in place
+   instead of being sent to a full-canvas reader and back: hovering the picture
+   opens a magnified window beside it that tracks the cursor, so the gesture that
+   asks the question and the surface that answers it are the same movement.
+
+   It opens over the chart because there is nowhere else -- the panel sits in the
+   last column before the rail. That is the right thing to cover: the reader is
+   pointing at the picture, not at the rows, and it clears the moment they leave.
+
+   Sits on the hint tier (DESIGN 6) so it clears the chart but stays under the
+   rail, and is pointer-events:none so it can never eat the movement driving it. */
+.loupe {
+  position: fixed; z-index: 4;
+  pointer-events: none;
+  /* A pre-script fallback only. The real box is written back per figure: the
+     smaller of the gap the panel leaves beside it and the magnified picture
+     itself, so it never pads a small picture out with dead ground and never
+     spills past the space there is. No viewport unit can express that -- it
+     depends on where the panel landed and on the export's own proportions. */
+  width: clamp(320px, 40vw, 900px); height: min(68vh, 560px);
+  /* A rule rather than a shadow: the canvas is flat, and rules are what separate
+     one plane from another (DESIGN 5). It is the same hairline the rail uses to
+     hold a dark panel off a dark page. */
+  border: 1px solid var(--rule-link); border-radius: 2px;
+  background-color: var(--paper);
+  background-repeat: no-repeat;
+  opacity: 0; transform: translateX(8px);
+  transition: opacity .26s ease, transform .26s cubic-bezier(.2, .7, .3, 1);
+}
+/* The ground follows the figure it is magnifying, for the reason rule 6 gives:
+   the sheet belongs to the artwork, so the window onto it cannot use a different
+   one than the panel does. */
+.loupe--dark { background-color: var(--art-sheet-dark); }
+.loupe--cut { background-color: transparent; border-color: transparent; }
+.loupe.is-open { opacity: 1; transform: none; }
+
+/* The picture answers a hover and commits nothing on click, so it takes the same
+   cursor the track boxes take for the same reason (DESIGN 4). */
+@media (hover: hover) and (pointer: fine) and (min-width: 961px) {
+  .gt__shot-img { cursor: help; }
+}
+
+/* Tracking must not be eased -- an interpolated background-position lags the
+   cursor and the window stops reading as attached to it. Only the reveal is. */
+@media (prefers-reduced-motion: reduce) {
+  .loupe { transition-duration: .001s; }
 }
 
 
@@ -2228,7 +3479,7 @@ a { color: inherit; }
   /* The art layer drops below the chart rather than beside it. It still shows one
      panel at a time — a tap on a row swaps it, and the first phase holds it from
      the start, so there is artwork at rest where there is no pointer to hover. */
-  .gt__art { margin-top: clamp(20px, 3.4vh, 30px); max-width: 520px; }
+  .gt__art { margin-top: clamp(20px, 3.4vh, 30px); max-width: min(100%, 624px); }
   .gt__shot-img { height: auto; }
 
   /* About Me Section */
@@ -2359,7 +3610,7 @@ a { color: inherit; }
     pointer-events: none;
   }
 
-  /* Figure Zoom */
+  /* Figure Zoom — the parts that belong to the stacked layout alone */
   /* The trigger takes its own box here so it can carry the tap target. The
      shots it wraps are painted with pointer-events:none on the wide canvas so
      the floating art never blocks the steps beneath it; stacked, they are
@@ -2368,108 +3619,159 @@ a { color: inherit; }
     display: block; width: 100%; cursor: pointer;
     -webkit-tap-highlight-color: transparent;
   }
-  .cs__shot, .gt__shot.is-active { pointer-events: auto; }
-  .zoom__trigger:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  .cs__shot { pointer-events: auto; }
+}
 
-  .zoom {
-    position: fixed; z-index: 6; inset: 0;
-    display: grid; grid-template-rows: 1fr auto;
-    background: var(--paper);
-    opacity: 0; transform: translateY(8px);
-    transition: opacity .26s ease, transform .26s cubic-bezier(.2,.7,.3,1);
-  }
-  .zoom[hidden] { display: none; }
-  /* Resolves to none rather than translateY(0): a transformed ancestor becomes
-     the containing block for the absolutely positioned close control. */
-  .zoom.is-open { opacity: 1; transform: none; }
+/* ============ 12b. Figure Zoom — the reader itself ============ */
+/* Outside the breakpoint block: the overlay is a full-canvas surface that
+   the Gantt panel opens at every width (see the gate below). */
 
-  /* The pane pans in both axes: a diagram opens at its authored width, which is
-     wider than the screen by design, and a screenshot opens taller. */
-  .zoom__pane {
-    overflow: auto; -webkit-overflow-scrolling: touch;
-    display: grid; place-items: center;
-    padding: calc(var(--gutter) + 44px) var(--gutter) var(--gutter);
-  }
-  .zoom__frame > * {
-    display: block; max-width: none;
-    background: var(--paper); border: 1px solid var(--rule-link);
-  }
-  [data-theme="dark"] .zoom__frame > * { background: #181B1F; }
-  /* Diagrams are drawn on the ground itself, so a frame around them would read
-     as a second, competing rule — same exemption they take in flow. */
-  .zoom__frame > .cs__shot-diagram { border: none; background: transparent; }
-  [data-theme="dark"] .zoom__frame > .cs__shot-diagram { background: transparent; }
-  /* Photographic exports carry their own edge; a frame around one reads as a
-     second, competing line, in the reader as much as in the flow. */
-  .zoom.is-photo .zoom__frame > * {
-    border: none;
-    background: var(--art-sheet);
-    box-shadow: var(--shadow-art);
-  }
-  .zoom.is-cut .zoom__frame > * {
-    background: none;
-    box-shadow: none;
-    filter: var(--shadow-cut);
-  }
+.zoom {
+  /* Its own gutter: the page token is declared only below the breakpoint,
+     and the reader is a full-canvas surface at every width. */
+  --gutter: clamp(18px, 5vw, 40px);
+  position: fixed; z-index: 6; inset: 0;
+  display: grid; grid-template-rows: 1fr auto;
+  background: var(--paper);
+  opacity: 0; transform: translateY(8px);
+  transition: opacity .26s ease, transform .26s cubic-bezier(.2,.7,.3,1);
+}
+.zoom[hidden] { display: none; }
+/* Resolves to none rather than translateY(0): a transformed ancestor becomes
+   the containing block for the absolutely positioned close control. */
+.zoom.is-open { opacity: 1; transform: none; }
 
-  .zoom__foot {
-    display: grid; gap: 8px;
-    padding: clamp(14px, 2.4vh, 20px) var(--gutter) calc(var(--gutter) + 4px);
-    border-top: 0.5px solid var(--rule-deco);
-  }
-  .zoom__cap {
-    margin: 0;
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
-    line-height: 1.5; color: var(--tag);
-  }
-  /* Prose that travelled with a chart caption keeps the sans it was set in
-     rather than being run through the label's uppercase mono. */
-  .zoom__note {
-    margin: 0;
-    font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 300;
-    font-size: .92rem; line-height: 1.5; color: var(--ghost);
-  }
-  /* Only stated when the figure actually overflows its pane, so it is a fact
-     about this figure rather than a standing instruction. */
-  .zoom__hint {
-    margin: 0;
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
-    color: var(--tag);
-  }
-  .zoom:not(.is-pannable) .zoom__hint { display: none; }
+/* The pane pans in both axes: a diagram opens at its authored width, which is
+   wider than the screen by design, and a screenshot opens taller. */
+.zoom__pane {
+  overflow: auto; -webkit-overflow-scrolling: touch;
+  display: grid; place-items: center;
+  padding: calc(var(--gutter) + 44px) var(--gutter) var(--gutter);
+}
+.zoom__frame > * {
+  display: block; max-width: none;
+  background: var(--paper); border: 1px solid var(--rule-link);
+}
+[data-theme="dark"] .zoom__frame > * { background: #181B1F; }
+/* Diagrams are drawn on the ground itself, so a frame around them would read
+   as a second, competing rule — same exemption they take in flow. */
+.zoom__frame > .cs__shot-diagram { border: none; background: transparent; }
+[data-theme="dark"] .zoom__frame > .cs__shot-diagram { background: transparent; }
+/* Photographic exports carry their own edge; a frame around one reads as a
+   second, competing line, in the reader as much as in the flow. */
+.zoom.is-photo .zoom__frame > * {
+  border: none;
+  background: var(--art-sheet);
+  box-shadow: var(--shadow-art);
+}
+/* Same exemption the flow grants a cut export, and for the same reason: it is
+   its own edge, so the frame rule would box a transparent field around the
+   picture and land nowhere near the artwork's actual silhouette. */
+.zoom.is-cut .zoom__frame > * {
+  background: none;
+  border: none;
+  box-shadow: none;
+  filter: var(--shadow-cut);
+}
+/* A dark-ground export carries its sheet into the reader too: the ground is a
+   property of the artwork, not of the surface it happens to be shown on, so it
+   stays carbon here in both themes exactly as it does in the panel. The frame
+   goes, as it does in the panel. */
+.zoom.is-dark .zoom__frame > * {
+  background: var(--art-sheet-dark);
+  border: none; border-radius: 2px;
+}
+/* The corner is the subject's, not the surface's, so it comes into the reader
+   with the picture -- larger here only because the reader opens the file at its
+   authored 590px, and 4.7% of that is 28. */
+.zoom.is-screen .zoom__frame > * { border-radius: 28px; }
 
-  .zoom__close {
-    position: absolute; z-index: 6;
-    top: var(--gutter); right: var(--gutter);
-    display: grid; place-items: center;
-    width: 44px; height: 44px;
-    padding: 0; border: none; border-radius: 50%;
-    background: var(--ink); color: var(--paper);
-    cursor: pointer;
-    transition: transform .2s cubic-bezier(.2,.7,.3,1);
-  }
-  [data-theme="dark"] .zoom__close {
-    background: #0D0E11; color: #FFFFFF;
-    border: 1px solid var(--rule-link, #5F6368);
-  }
-  .zoom__close:hover { transform: scale(1.05); }
-  .zoom__close:focus-visible { outline-color: var(--paper); }
-  [data-theme="dark"] .zoom__close:focus-visible { outline-color: #FFFFFF; }
-  .zoom__close-icon {
-    width: 16px; height: 16px;
-    stroke: currentColor; fill: none; stroke-width: 1.6;
-    stroke-linecap: round; stroke-linejoin: round;
-    pointer-events: none;
-  }
+.zoom__foot {
+  display: grid; gap: 8px;
+  padding: clamp(14px, 2.4vh, 20px) var(--gutter) calc(var(--gutter) + 4px);
+  border-top: 0.5px solid var(--rule-deco);
+}
+.zoom__cap {
+  margin: 0;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+  line-height: 1.5; color: var(--tag);
+}
+/* Prose that travelled with a chart caption keeps the sans it was set in
+   rather than being run through the label's uppercase mono. */
+.zoom__note {
+  margin: 0;
+  font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 300;
+  font-size: .92rem; line-height: 1.5; color: var(--ghost);
+}
+/* Only stated when the figure actually overflows its pane, so it is a fact
+   about this figure rather than a standing instruction. */
+.zoom__hint {
+  margin: 0;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--tag);
+}
+.zoom:not(.is-pannable) .zoom__hint { display: none; }
 
-  /* The zoom owns the whole canvas while it is open; the page behind it is
-     frozen by .is-zoomed on <body>, and the toggle would otherwise float on
-     top of the reader. */
-  body.is-zoomed { overflow: hidden; }
-  body.is-zoomed .theme-toggle,
-  body.is-zoomed .totop { display: none; }
+.zoom__close {
+  position: absolute; z-index: 6;
+  top: var(--gutter); right: var(--gutter);
+  display: grid; place-items: center;
+  width: 44px; height: 44px;
+  padding: 0; border: none; border-radius: 50%;
+  background: var(--ink); color: var(--paper);
+  cursor: pointer;
+  transition: transform .2s cubic-bezier(.2,.7,.3,1);
+}
+[data-theme="dark"] .zoom__close {
+  background: #0D0E11; color: #FFFFFF;
+  border: 1px solid var(--rule-link, #5F6368);
+}
+.zoom__close:hover { transform: scale(1.05); }
+.zoom__close:focus-visible { outline-color: var(--paper); }
+[data-theme="dark"] .zoom__close:focus-visible { outline-color: #FFFFFF; }
+.zoom__close-icon {
+  width: 16px; height: 16px;
+  stroke: currentColor; fill: none; stroke-width: 1.6;
+  stroke-linecap: round; stroke-linejoin: round;
+  pointer-events: none;
+}
+
+/* The zoom owns the whole canvas while it is open; the page behind it is
+   frozen by .is-zoomed on <body>, and the toggle would otherwise float on
+   top of the reader. */
+body.is-zoomed { overflow: hidden; }
+body.is-zoomed .theme-toggle,
+body.is-zoomed .totop { display: none; }
+
+/* ---- the reader above the breakpoint ---- */
+/* The stacked layout gives every figure a zoom because a phone column is too
+   narrow to render one legibly. The Gantt panel needs one for the opposite
+   reason and at every width: it is a fixed 340-wide box that a portrait export
+   lands inside at a fraction of its own resolution, and unlike a timeline shot
+   it never grows to fill the canvas. So its trigger stays live above 960px,
+   where the case-study shots' triggers are still dissolved and disabled.
+
+   The panel is painted pointer-events:none so an inactive shot never blocks the
+   chart; the active one has to take the click. */
+.gt__shot.is-active { pointer-events: auto; }
+
+@media (min-width: 961px) {
+  .gt__shot .zoom__trigger {
+    display: block; width: 100%; cursor: pointer;
+  }
+  .gt__shot .zoom__trigger:focus-visible {
+    outline: 2px solid var(--ink); outline-offset: 3px;
+  }
+}
+
+/* A drawn schematic is the one panel figure with no reader at any width: it is
+   painted at the unit width it was drawn at, so there is no detail left to
+   magnify. Its wrapper stays dissolved and its cursor stays default, the way a
+   timeline shot's does on the wide canvas. */
+.gt__shot .zoom__trigger:has(.gt__shot-diagram) {
+  display: contents; cursor: default;
 }
 
 /* Touch devices */
@@ -2503,6 +3805,10 @@ a { color: inherit; }
     animation-duration: .001s !important;
   }
   .ia__drift, .ct__drift { animation: none !important; }
+  /* The block above collapses durations but not delays, and this one gates a
+     panel's tab stops -- left at .26s it would hold an off-screen control
+     focusable after the fade it was waiting on had already finished. */
+  .gt__shot { transition-delay: 0s !important; }
   .am__thread-base, .am__scroll-hint-arrow { animation: none !important; }
   /* A 0.001s spin is a single jarring jump frame; the roll still
      resolves, it simply lands without tumbling. */

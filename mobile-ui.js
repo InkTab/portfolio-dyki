@@ -1,16 +1,22 @@
-/* Mobile-only controls, shared by the case studies and About me.
+/* Reader controls, shared by the case studies and About me.
 
-   Both components exist because the 960px reflow takes something away that the
+   Most of this exists because the 960px reflow takes something away that the
    wide canvas provided for free: the rail is no longer in the reader's path
    once it lies down at the top of a column several screens tall, and the
-   diagrams are no longer wide enough to read once the lane they were drawn on
-   is squeezed into a phone column. Neither has a wide-canvas counterpart, so
-   both are inert above the breakpoint rather than downscaled. */
+   timeline artwork is no longer wide enough to read once the lane it was drawn
+   on is squeezed into a phone column. Those are inert above the breakpoint
+   rather than downscaled.
+
+   The figure zoom is the exception: it also serves the Gantt panel, which is a
+   fixed 340-wide box at every width, so that one trigger stays live on the wide
+   canvas too. */
 (function () {
   'use strict';
 
   var MOBILE = window.matchMedia('(max-width: 960px)');
   var STILL = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var COARSE = window.matchMedia('(hover: none)');
+  var FINE = window.matchMedia('(hover: hover) and (pointer: fine)');
 
   function onMediaChange(mq, fn) {
     if (mq.addEventListener) { mq.addEventListener('change', fn); }
@@ -147,12 +153,13 @@
     var frame = zoom.querySelector('.zoom__frame');
     var cap = zoom.querySelector('.zoom__cap');
     var note = zoom.querySelector('.zoom__note');
+    var hint = zoom.querySelector('.zoom__hint');
     var close = zoom.querySelector('.zoom__close');
     var opener = null;
     var teardown = null;
 
-    /* Wrapping happens once, at every width. Above the breakpoint the wrapper
-       is display:contents and disabled, so the wide layout measures the same
+    /* Wrapping happens once, at every width. Where the reader is off, the
+       wrapper is display:contents and disabled, so that layout measures the same
        boxes it always did and gains no tab stop. */
     var triggers = figures.map(function (node) {
       var fig = node.closest('figure');
@@ -169,17 +176,40 @@
       btn.appendChild(node);
 
       btn.addEventListener('click', function () {
-        /* disabled already blocks this above the breakpoint; the guard covers
+        /* disabled already blocks this where the reader is off; the guard covers
            the window between a resize and the media-query callback. */
-        if (MOBILE.matches) { open(node, figcap, btn); }
+        if (zoomable(btn)) { open(node, figcap, btn); }
       });
       return btn;
     });
 
+    /* Below the breakpoint every figure opens, because a phone column renders
+       none of them legibly. Above it only the Gantt panel does: it is a fixed
+       box that a portrait export lands inside at a fraction of its own
+       resolution, and unlike a timeline shot it never grows to fill the canvas.
+       The case-study shots are already full size on the wide canvas, so a
+       trigger there would add a tab stop that buys the reader nothing.
+
+       And only where there is no hover to answer with instead. On a pointer
+       device the panel's detail comes from the loupe below, in place, so sending
+       the reader to a full-canvas reader and back would be the longer road to
+       the same picture. */
+    function zoomable(btn) {
+      /* A schematic drawn at the unit width the panel paints it at is never
+         shown below its own resolution, so a reader would open the identical
+         picture -- a tab stop and a modal that buy the reader nothing. This is
+         the same test the two branches below apply, only settled by the file
+         rather than by the viewport. It does not extend to the timeline
+         diagrams: those are drawn on a 900-1020 unit lane, which a phone
+         column renders at a third of. */
+      if (btn.querySelector('.gt__shot-diagram')) { return false; }
+      if (MOBILE.matches) { return true; }
+      return !!btn.closest('.gt__shot') && !FINE.matches;
+    }
+
     function syncTriggers() {
-      var off = !MOBILE.matches;
-      triggers.forEach(function (btn) { btn.disabled = off; });
-      if (off && !zoom.hidden) { hide(); }
+      triggers.forEach(function (btn) { btn.disabled = !zoomable(btn); });
+      if (!zoom.hidden && opener && !zoomable(opener)) { hide(); }
     }
     syncTriggers();
     onMediaChange(MOBILE, syncTriggers);
@@ -250,7 +280,9 @@
       /* A photographic export carries its own edge, so it takes no frame here
          either -- same reason the flow drops the frame on .cs__shot--tall. */
       zoom.classList.toggle('is-photo', !!btn.closest('.cs__shot--tall'));
-      zoom.classList.toggle('is-cut', !!btn.closest('.cs__shot--cut'));
+      zoom.classList.toggle('is-cut', !!btn.closest('.cs__shot--cut, .gt__shot--cut'));
+      zoom.classList.toggle('is-dark', !!btn.closest('.gt__shot--dark'));
+      zoom.classList.toggle('is-screen', !!btn.closest('.gt__shot--screen'));
 
       /* Unhidden before it is measured: a hidden pane reports a client width of
          zero, and every figure would then be sized against the fallback floor. */
@@ -271,6 +303,9 @@
         'is-pannable',
         pane.scrollWidth > pane.clientWidth + 1 || pane.scrollHeight > pane.clientHeight + 1
       );
+      /* The reader opens on a mouse now as well as a thumb, and the gesture it
+         names has to be the one the reader actually has. */
+      hint.textContent = COARSE.matches ? 'Swipe to pan' : 'Scroll to pan';
       close.focus();
     }
 
@@ -309,5 +344,173 @@
       var clone = frame.firstElementChild;
       if (clone) { size(clone, intrinsic(clone)); }
     }, { passive: true });
+  })();
+
+  /* ---------------- Chart figure loupe ---------------- */
+
+  /* The Gantt panel is a fixed box, so a portrait export paints inside it at a
+     fraction of the resolution it was exported at. On a pointer device the
+     reader gets that detail without leaving the page: hovering the picture opens
+     a magnified window beside it that follows the cursor. Touch and narrow
+     layouts keep the full-canvas reader instead -- there is no hover there to
+     drive this, and no room beside the panel to put it. */
+  (function () {
+    var art = document.querySelector('.gt__art');
+    var chart = document.querySelector('.gt');
+    if (!art || !chart) return;
+
+    /* Never magnifies past the resolution the file actually carries -- beyond
+       that the window would only be showing bigger pixels -- and never so far
+       that a hand's worth of cursor travel crosses the whole picture. */
+    var MAX_ZOOM = 2;
+    /* The window fills the gap the panel leaves, up to these. Past them the
+       picture stops being a detail beside the chart and becomes a second page. */
+    var MAX_W = 900;
+    var MAX_H = 560;
+    /* Clear of the panel it belongs to, and of the viewport edge it is clamped
+       against, by the same measure. */
+    var OFFSET = 20;
+
+    var loupe = document.createElement('div');
+    loupe.className = 'loupe';
+    /* Decorative duplicate of a picture the reader already has: the figure's own
+       alt text is what carries it to assistive tech. */
+    loupe.setAttribute('aria-hidden', 'true');
+    chart.appendChild(loupe);
+
+    var shown = false;
+    var queued = false;
+    var lastW = 0, lastH = 0;
+    var mx = 0, my = 0;
+
+    function activeImg() {
+      var fig = art.querySelector('.gt__shot.is-active');
+      return fig ? fig.querySelector('.gt__shot-img') : null;
+    }
+
+    /* object-fit:contain letterboxes the picture inside the padding box, so the
+       painted picture is a sub-rect of the element. Mapping the cursor against
+       the element instead would track wrong by exactly the letterbox -- which on
+       a 9:20 export is most of the box. */
+    function painted(img) {
+      var r = img.getBoundingClientRect();
+      var cs = getComputedStyle(img);
+      var bl = parseFloat(cs.borderLeftWidth) || 0;
+      var bt = parseFloat(cs.borderTopWidth) || 0;
+      var pl = parseFloat(cs.paddingLeft) || 0;
+      var pt = parseFloat(cs.paddingTop) || 0;
+      var cw = img.clientWidth - pl - (parseFloat(cs.paddingRight) || 0);
+      var ch = img.clientHeight - pt - (parseFloat(cs.paddingBottom) || 0);
+      var nw = img.naturalWidth || 1;
+      var nh = img.naturalHeight || 1;
+      if (cw <= 0 || ch <= 0) return null;
+      var s = Math.min(cw / nw, ch / nh);
+      var w = nw * s, h = nh * s;
+      return {
+        x: r.left + bl + pl + (cw - w) / 2,
+        y: r.top + bt + pt + (ch - h) / 2,
+        w: w, h: h, nw: nw, nh: nh
+      };
+    }
+
+    function hide() {
+      if (!shown) return;
+      shown = false;
+      loupe.classList.remove('is-open');
+    }
+
+    /* Places one axis of the magnified picture: the point under the cursor is
+       centred, then pulled back so the picture never parts from the window's
+       edge. A picture smaller than the window in that axis is simply centred. */
+    function offset(cursorFrac, big, box) {
+      if (big <= box) return (box - big) / 2;
+      return Math.min(0, Math.max(box - big, box / 2 - cursorFrac * big));
+    }
+
+    function track() {
+      queued = false;
+      var img = activeImg();
+      if (!img || !img.complete || !img.naturalWidth) { hide(); return; }
+
+      var p = painted(img);
+      if (!p) { hide(); return; }
+
+      var u = (mx - p.x) / p.w;
+      var v = (my - p.y) / p.h;
+      /* Only the picture drives it, not the letterbox around it. */
+      if (u < 0 || u > 1 || v < 0 || v > 1) { hide(); return; }
+
+      var fig = img.closest('.gt__shot');
+      loupe.classList.toggle('loupe--dark', fig.classList.contains('gt__shot--dark'));
+      loupe.classList.toggle('loupe--cut', fig.classList.contains('gt__shot--cut'));
+
+      var zoom = Math.min(MAX_ZOOM, p.nw / p.w);
+      var bw = Math.round(p.w * zoom), bh = Math.round(p.h * zoom);
+
+      /* The window is the smaller of what there is room for and what there is
+         picture for. The room is measured, not guessed at in viewport units --
+         the panel sits in the last column before the rail, so the gap to its
+         left is the whole budget and it is worth spending. Hugging the picture
+         when it is the smaller of the two is the other half of the same rule:
+         a window wider than the magnified picture would pad it out with dead
+         ground and give the cursor an axis with nothing to travel to. */
+      var ar = art.getBoundingClientRect();
+      var roomW = Math.min(MAX_W, Math.max(240, Math.round(ar.left - OFFSET * 2)));
+      var roomH = Math.min(MAX_H, Math.max(200, window.innerHeight - OFFSET * 2));
+      var lw = Math.min(roomW, bw), lh = Math.min(roomH, bh);
+      if (lw !== lastW || lh !== lastH) {
+        lastW = lw; lastH = lh;
+        loupe.style.width = lw + 'px';
+        loupe.style.height = lh + 'px';
+      }
+
+      loupe.style.backgroundImage = 'url("' + (img.currentSrc || img.src) + '")';
+      loupe.style.backgroundSize = Math.round(bw) + 'px ' + Math.round(bh) + 'px';
+      loupe.style.backgroundPosition =
+        Math.round(offset(u, bw, lw)) + 'px ' + Math.round(offset(v, bh, lh)) + 'px';
+
+      /* Left of the panel, top-aligned with the picture, then clamped into the
+         viewport -- there is no room on the other side to flip to. */
+      var left = Math.max(OFFSET, ar.left - OFFSET - lw);
+      var top = Math.min(Math.max(OFFSET, p.y), window.innerHeight - lh - OFFSET);
+      loupe.style.left = Math.round(left) + 'px';
+      loupe.style.top = Math.round(Math.max(OFFSET, top)) + 'px';
+
+      if (!shown) { shown = true; loupe.classList.add('is-open'); }
+    }
+
+    /* Read once per frame: a mousemove burst would otherwise force a layout per
+       event, and only the last position of the frame is the one that shows. */
+    function onMove(e) {
+      mx = e.clientX; my = e.clientY;
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(track);
+    }
+
+    function enabled() {
+      return FINE.matches && !MOBILE.matches;
+    }
+
+    /* Bound on the window rather than the picture: the picture sits inside the
+       zoom trigger, and a disabled button suppresses pointer events across its
+       whole subtree, so a listener down there would go quiet exactly where the
+       loupe is wanted. The hit test above is what scopes it. */
+    function sync() {
+      window.removeEventListener('mousemove', onMove);
+      if (enabled()) {
+        window.addEventListener('mousemove', onMove, { passive: true });
+      } else {
+        hide();
+      }
+    }
+    sync();
+    onMediaChange(FINE, sync);
+    onMediaChange(MOBILE, sync);
+
+    /* The page tracks sideways under a fixed loupe, so a scroll invalidates the
+       mapping the last frame was drawn from. */
+    window.addEventListener('scroll', hide, { passive: true, capture: true });
+    window.addEventListener('resize', hide, { passive: true });
   })();
 })();

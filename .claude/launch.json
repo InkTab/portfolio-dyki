@@ -4,8 +4,9 @@
     {
       "name": "static",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "4173"],
-      "port": 4173
+      "runtimeArgs": ["-m", "http.server", "4173", "--bind", "0.0.0.0"],
+      "port": 4173,
+      "url": "http://localhost:4173"
     }
   ]
 }

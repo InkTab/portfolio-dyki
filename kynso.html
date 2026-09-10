@@ -19,10 +19,21 @@
       }
     })();
   </script>
+  <!-- Microsoft Clarity. Async and self-inserting, so it never blocks the paint
+       or the theme script above it. -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "yg5y3ao9c8");
+  </script>
 </head>
 <body>
 
-<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Toggle theme">
+<a class="skip-link" href="#cs-title">Skip to content</a>
+
+<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-live="polite" title="Toggle theme">
   <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 16 16" width="16" height="16" fill="none"
        stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
        aria-hidden="true" focusable="false">
@@ -58,7 +69,7 @@
   </a>
 </nav>
 
-<article class="cs" role="region" aria-label="Kynso case study" aria-labelledby="cs-title" tabindex="0">
+<article class="cs" id="cs-root" aria-labelledby="cs-title" tabindex="0">
 
   <!-- ============ 1. the hook ============ -->
   <header class="cs__hook">
@@ -160,7 +171,7 @@
       <li class="gt__track gt__track--aside">
         <button class="gt__bar gt__bar--aside gt__toggle" type="button"
                 data-group="branding" aria-expanded="false" aria-controls="gt-group-branding"
-                aria-describedby="gt-shot-branding" style="--from:1;--to:5">
+                aria-describedby="gt-cap-branding" style="--from:1;--to:5">
           <span class="gt__name">Branding</span>
           <span class="gt__toggle-mark" aria-hidden="true"></span>
         </button>
@@ -176,28 +187,28 @@
           <span class="gt__bracket" style="--from:1;--to:13" aria-hidden="true"></span>
         </li>
 
-        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-research" style="--d:0.08s">
+        <li class="gt__track gt__track--phase" role="button" tabindex="0" aria-describedby="gt-cap-research" style="--d:0.08s">
           <span class="gt__bar gt__bar--phase" style="--from:1;--to:5">
             <span class="gt__num">01</span>
             <span class="gt__name">User research</span>
           </span>
         </li>
 
-        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-prototyping" style="--d:0.16s">
+        <li class="gt__track gt__track--phase" role="button" tabindex="0" aria-describedby="gt-cap-prototyping" style="--d:0.16s">
           <span class="gt__bar gt__bar--phase" style="--from:4;--to:8">
             <span class="gt__num">02</span>
             <span class="gt__name">Dual UI modes</span>
           </span>
         </li>
 
-        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-testing" style="--d:0.24s">
+        <li class="gt__track gt__track--phase" role="button" tabindex="0" aria-describedby="gt-cap-testing" style="--d:0.24s">
           <span class="gt__bar gt__bar--phase" style="--from:7;--to:10">
             <span class="gt__num">03</span>
             <span class="gt__name">UI iteration</span>
           </span>
         </li>
 
-        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-system" style="--d:0.32s">
+        <li class="gt__track gt__track--phase" role="button" tabindex="0" aria-describedby="gt-cap-system" style="--d:0.32s">
           <span class="gt__bar gt__bar--phase" style="--from:8;--to:13">
             <span class="gt__num">04</span>
             <span class="gt__name">Design system</span>
@@ -206,35 +217,35 @@
       </ul>
 
       <ul class="gt__group gt__group--branding" id="gt-group-branding" data-group="branding">
-        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-b-research" style="--d:0.00s">
+        <li class="gt__track gt__track--phase" role="button" tabindex="0" aria-describedby="gt-cap-b-research" style="--d:0.00s">
           <span class="gt__bar gt__bar--phase" style="--from:1;--to:5">
             <span class="gt__num">01</span>
             <span class="gt__name">Market audit</span>
           </span>
         </li>
 
-        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-b-naming" style="--d:0.08s">
+        <li class="gt__track gt__track--phase" role="button" tabindex="0" aria-describedby="gt-cap-b-naming" style="--d:0.08s">
           <span class="gt__bar gt__bar--phase" style="--from:4;--to:8">
             <span class="gt__num">02</span>
             <span class="gt__name">Naming</span>
           </span>
         </li>
 
-        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-b-logo" style="--d:0.16s">
+        <li class="gt__track gt__track--phase" role="button" tabindex="0" aria-describedby="gt-cap-b-logo" style="--d:0.16s">
           <span class="gt__bar gt__bar--phase" style="--from:6;--to:10">
             <span class="gt__num">03</span>
             <span class="gt__name">Logo design</span>
           </span>
         </li>
 
-        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-b-concept" style="--d:0.24s">
+        <li class="gt__track gt__track--phase" role="button" tabindex="0" aria-describedby="gt-cap-b-concept" style="--d:0.24s">
           <span class="gt__bar gt__bar--phase" style="--from:8;--to:12">
             <span class="gt__num">04</span>
             <span class="gt__name">Domain palette</span>
           </span>
         </li>
 
-        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-b-guidelines" style="--d:0.32s">
+        <li class="gt__track gt__track--phase" role="button" tabindex="0" aria-describedby="gt-cap-b-guidelines" style="--d:0.32s">
           <span class="gt__bar gt__bar--phase" style="--from:9;--to:13">
             <span class="gt__num">05</span>
             <span class="gt__name">Brand system</span>
@@ -243,35 +254,35 @@
       </ul>
 
       <ul class="gt__group gt__group--marketing" id="gt-group-marketing" data-group="marketing">
-        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-m-positioning" style="--d:0.00s">
+        <li class="gt__track gt__track--phase" role="button" tabindex="0" aria-describedby="gt-cap-m-positioning" style="--d:0.00s">
           <span class="gt__bar gt__bar--phase" style="--from:1;--to:5">
             <span class="gt__num">01</span>
             <span class="gt__name">Positioning</span>
           </span>
         </li>
 
-        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-m-waitlist" style="--d:0.08s">
+        <li class="gt__track gt__track--phase" role="button" tabindex="0" aria-describedby="gt-cap-m-waitlist" style="--d:0.08s">
           <span class="gt__bar gt__bar--phase" style="--from:3;--to:7">
             <span class="gt__num">02</span>
             <span class="gt__name">Landing page</span>
           </span>
         </li>
 
-        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-m-listing" style="--d:0.16s">
+        <li class="gt__track gt__track--phase" role="button" tabindex="0" aria-describedby="gt-cap-m-listing" style="--d:0.16s">
           <span class="gt__bar gt__bar--phase" style="--from:5;--to:9">
             <span class="gt__num">03</span>
             <span class="gt__name">Onboarding copy</span>
           </span>
         </li>
 
-        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-m-content" style="--d:0.24s">
+        <li class="gt__track gt__track--phase" role="button" tabindex="0" aria-describedby="gt-cap-m-content" style="--d:0.24s">
           <span class="gt__bar gt__bar--phase" style="--from:7;--to:11">
             <span class="gt__num">04</span>
             <span class="gt__name">Beta outreach</span>
           </span>
         </li>
 
-        <li class="gt__track gt__track--phase" tabindex="0" aria-describedby="gt-shot-m-launch" style="--d:0.32s">
+        <li class="gt__track gt__track--phase" role="button" tabindex="0" aria-describedby="gt-cap-m-launch" style="--d:0.32s">
           <span class="gt__bar gt__bar--phase" style="--from:10;--to:13">
             <span class="gt__num">05</span>
             <span class="gt__name">Beta launch</span>
@@ -283,7 +294,7 @@
       <li class="gt__track gt__track--aside">
         <button class="gt__bar gt__bar--aside gt__toggle" type="button"
                 data-group="marketing" aria-expanded="false" aria-controls="gt-group-marketing"
-                aria-describedby="gt-shot-marketing" style="--from:9;--to:13">
+                aria-describedby="gt-cap-marketing" style="--from:9;--to:13">
           <span class="gt__name">Marketing</span>
           <span class="gt__toggle-mark" aria-hidden="true"></span>
         </button>
@@ -294,114 +305,497 @@
       <!-- The art layer sits outside the chart on purpose: a folding group carries a
            transform, which would capture any absolutely positioned artwork inside it. -->
       <div class="gt__art">
-        <figure class="gt__shot" id="gt-shot-branding" role="tooltip">
-          <img class="gt__shot-img" src="placeholders/step-01.svg" alt="Wordmark studies and brand type specimen" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="gt__shot-cap">Branding
+        <figure class="gt__shot gt__shot--dark" id="gt-shot-branding" role="tooltip">
+          <img class="gt__shot-img" src="assets/kynso-branding-overview.webp" alt="Brand board: Blender viewports modelling the three-faced Kynso mark from every angle, the four domain shapes labelled sides, bottom, front and back, and the finished mark beside the Kynso wordmark" width="1862" height="2311" loading="lazy" decoding="async">
+          <figcaption class="gt__shot-cap" id="gt-cap-branding">Branding
             <span class="gt__shot-note">Brand identity, 3D domain mark, and domain color systems established early to give the multi-input interface visual hierarchy.</span>
           </figcaption>
         </figure>
 
-        <figure class="gt__shot is-active" id="gt-shot-research" role="tooltip">
-          <img class="gt__shot-img" src="placeholders/step-02.svg" alt="Interview synthesis board and abandonment timeline" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="gt__shot-cap">User research
+        <figure class="gt__shot gt__shot--card is-active" id="gt-shot-research" role="group" aria-label="User research interview quote">
+          <div class="pq">
+            <div class="pq__meta">
+              <span class="pq__tag">User research &middot; Signal 01</span>
+              <span class="pq__pill">Interview</span>
+            </div>
+            <div class="pq__body">
+              <span class="pq__glyph" aria-hidden="true">&ldquo;</span>
+              <blockquote class="pq__quote">
+                &ldquo;I built myself a GPT thread... I dump everything in there&rdquo;
+              </blockquote>
+            </div>
+            <div class="pq__author">
+              <div class="pq__author-line">
+                <span class="pq__author-dot" aria-hidden="true"></span>
+                <cite class="pq__author-name">Anonymous User</cite>
+              </div>
+            </div>
+          </div>
+          <figcaption class="gt__shot-cap" id="gt-cap-research">User research
             <span class="gt__shot-note">Interviews revealed users combining three trackers with ChatGPT. The core insight: readiness scores fail when isolated from diet, sleep, and cycle.</span>
           </figcaption>
         </figure>
 
-        <figure class="gt__shot" id="gt-shot-prototyping" role="tooltip">
-          <img class="gt__shot-img" src="placeholders/step-03.svg" alt="Low-fidelity daily check-in flow and one-card home screen" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="gt__shot-cap">Dual UI modes
+        <figure class="gt__shot gt__shot--dark" id="gt-shot-prototyping" role="tooltip">
+          <img class="gt__shot-img" src="assets/kynso-product-02.webp" alt="Two states of the same exercise card: the planning layout above, carrying dropset, modifier and percent-of-one-rep-max controls, and the active-training layout below, stripped to larger figures and a rating button per set" width="724" height="1611" loading="lazy" decoding="async">
+          <figcaption class="gt__shot-cap" id="gt-cap-prototyping">Dual UI modes
             <span class="gt__shot-note">Separated planning from active training. Field tests in gyms showed dense layouts collapse during physical exertion.</span>
           </figcaption>
         </figure>
 
-        <figure class="gt__shot" id="gt-shot-testing" role="tooltip">
-          <img class="gt__shot-img" src="placeholders/step-05.svg" alt="Moderated testing notes and two-week diary study results" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="gt__shot-cap">UI iteration
+        <figure class="gt__shot gt__shot--cut" id="gt-shot-testing" role="tooltip">
+          <img class="gt__shot-img" src="assets/kynso-product-03.webp" alt="Before and after of the home screen: the earlier build leading with an uncomputed readiness score above a weekly stats grid, beside the rebuilt one leading with a readiness score of 78, the four signals behind it, calorie balance and the next workout" width="1242" height="1266" loading="lazy" decoding="async">
+          <figcaption class="gt__shot-cap" id="gt-cap-testing">UI iteration
             <span class="gt__shot-note">Removed PR vanity stats from home, simplified pre-workout screens, and made readiness fully interactive so users see what drives the score.</span>
           </figcaption>
         </figure>
 
-        <figure class="gt__shot" id="gt-shot-system" role="tooltip">
-          <img class="gt__shot-img" src="placeholders/step-04.svg" alt="Component library, tokens and state documentation" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="gt__shot-cap">Design system
+        <figure class="gt__shot gt__shot--dark" id="gt-shot-system" role="tooltip">
+          <img class="gt__shot-img" src="assets/kynso-product-04.webp" alt="Component sheet: the Join the Beta button across default, hover, pressed and disabled states, a note field, segmented controls, meal and set-rating tags, and the training-domain legend, each group boxed in a dashed spec outline" width="1296" height="1085" loading="lazy" decoding="async">
+          <figcaption class="gt__shot-cap" id="gt-cap-system">Design system
             <span class="gt__shot-note">Dark mode architecture with domain-specific neon colors, allowing users to identify training domains at a glance across all session states.</span>
           </figcaption>
         </figure>
 
-        <figure class="gt__shot" id="gt-shot-marketing" role="tooltip">
-          <img class="gt__shot-img" src="placeholders/step-01.svg" alt="Waitlist landing page and App Store listing studies" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="gt__shot-cap">Marketing
+        <!-- The pre-beta funnel, drawn rather than exported: three crops of the
+             waitlist page cascading bottom-left to top-right, so the three moments
+             of the funnel are read as one movement instead of three pictures. -->
+        <figure class="gt__shot gt__shot--card" id="gt-shot-marketing" role="tooltip">
+          <div class="fn">
+            <div class="fn__meta">
+              <span class="fn__label">Pre-beta funnel</span>
+              <span class="fn__tag">Hook &rarr; list</span>
+            </div>
+
+            <div class="fn__stage">
+             <div class="fn__cascade">
+              <!-- 01 The hook: the hero crop -- headline and the sync badge under it. -->
+              <div class="fn__card fn__card--hook">
+                <span class="fn__step">01 &mdash; Hook</span>
+                <p class="fn__lead">Kynso adapts to what you&rsquo;re doing</p>
+                <span class="fn__badge">
+                  <svg class="fn__glyph" viewBox="0 0 16 16" width="11" height="11" aria-hidden="true" focusable="false"
+                       fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1.5 8h3l1.5-3.5L8.5 12l2-6 1.5 2h2.5"/>
+                  </svg>
+                  Apple Health sync
+                </span>
+              </div>
+
+              <!-- 02 The action: the conversion point itself. -->
+              <div class="fn__card fn__card--action">
+                <span class="fn__step">02 &mdash; Action</span>
+                <div class="fn__form">
+                  <span class="fn__field">you@email.com</span>
+                  <span class="fn__cta">Join the beta</span>
+                </div>
+                <span class="fn__hint">3 questions &middot; 40 seconds</span>
+              </div>
+
+              <!-- 03 The confirmation: the success state and the cohort joined. -->
+              <div class="fn__card fn__card--confirm">
+                <span class="fn__step">03 &mdash; Confirmed</span>
+                <p class="fn__lead fn__lead--confirm">
+                  <svg class="fn__check" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"
+                       fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="8" cy="8" r="6.4"/><path d="M5.2 8.2 7.1 10l3.7-4"/>
+                  </svg>
+                  You&rsquo;re on the list
+                </p>
+                <span class="fn__hint">Cohort 01 &middot; hybrid athletes</span>
+              </div>
+             </div>
+            </div>
+          </div>
+          <figcaption class="gt__shot-cap" id="gt-cap-marketing">Marketing
             <span class="gt__shot-note">Landing page, positioning, and pre-beta funnel built around transparent readiness and Apple Health sync.</span>
           </figcaption>
         </figure>
 
         <figure class="gt__shot" id="gt-shot-b-research" role="tooltip">
-          <img class="gt__shot-img" src="placeholders/step-02.svg" alt="Category teardown and name candidate screening" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="gt__shot-cap">Market audit
-            <span class="gt__shot-note">Screened name candidates across global markets for linguistics and conflicts, rejecting tired wellness tropes like leaves or mountains.</span>
+          <!-- Category positioning matrix. Drawn rather than exported, so it is inked
+               onto the canvas and inverts with it (DESIGN 5/6), and it is assembled from
+               the primitives the case-study schematics established -- card rule, dashed
+               core line, dot, text, meta, block, arrow head -- so it reads as one set
+               with them and adds no vocabulary of its own.
+
+               Drawn at the panel's own unit width rather than the 1000-unit lane the
+               timeline diagrams take. The panel is a fixed --art-w box, so a lane wider
+               than it would shrink every label below the legible floor; at 340 units the
+               shared primitives paint at roughly the pixel sizes they were set in. That
+               is also why the loupe is not wanted here and does not open: nothing is
+               being shown below its own resolution.
+
+               Height, unlike width, is not fixed for a drawing: --art-h sizes an export
+               that arrived at whatever proportion it was shot in, and a matrix has no
+               such given. So this one is drawn to the taller ceiling the section has room
+               for (--art-h-drawn) and spends it on air -- a 316-unit plot, 24 of padding
+               inside every quadrant, and clear gutters between the axis labels and the
+               field they measure.
+
+               Plot: 28..336 by 28..344, quartered at x=182 / y=186, so each quadrant is
+               154 x 158. The claimed quadrant inverts -- the house device for the node a
+               schematic resolves on -- which is also the argument: it is the only
+               quadrant with one name in it. Right- and end-anchored monospace is nudged
+               by its full trailing letter-space (DESIGN 3.8), which would otherwise hold
+               it short of the edge it is set against. -->
+          <svg class="gt__shot-img gt__shot-diagram" viewBox="0 0 340 390" width="340" height="390" preserveAspectRatio="xMidYMid meet" style="--nat-ratio:.8718" role="img" aria-label="Category positioning matrix. The horizontal axis runs from single-discipline to multi-discipline; the vertical axis from basic logging to high-fidelity tracking. Bottom left, basic and one lane: Strava and StretchIt. Top left, deep but one lane: Strong and Fitbod. Bottom right, basic across all lanes: Nike Training Club and Apple Fitness Plus. The top right quadrant, deep across all lanes, is held by Kynso alone.">
+            <!-- Y axis: reads bottom-up, low pole anchored at the foot of the plot and
+                 high pole at its head, with the arrow marking the direction of increase. -->
+            <polygon points="8.5,18 12.5,10 16.5,18" class="cs__diag-arrow-head" />
+            <text x="16" y="26.6" text-anchor="end" transform="rotate(-90 16 26.6)" class="cs__timeline-meta">HIGH-FIDELITY TRACKING</text>
+            <text x="16" y="344" transform="rotate(-90 16 344)" class="cs__timeline-meta">BASIC LOGGING</text>
+
+            <!-- The plot boundary is deliberately the faintest rule in the set: it
+                 carries no reading of its own, it only closes the field the quadrants
+                 divide. The two core lines that quarter it are what the reader measures
+                 against, so those are the dashed ones. -->
+            <rect x="28" y="28" width="308" height="316" fill="none" class="cs__timeline-rule" />
+            <line x1="182" y1="28" x2="182" y2="344" class="cs__diag-core-line" />
+            <line x1="28" y1="186" x2="336" y2="186" class="cs__diag-core-line" />
+
+            <!-- Top left: deep, but one lane -->
+            <g class="cs__matrix-cell">
+              <text x="44" y="52" class="cs__timeline-meta">DEEP, ONE LANE</text>
+              <circle cx="47" cy="101" r="3" class="cs__timeline-dot" />
+              <text x="59" y="101" dominant-baseline="central" class="cs__timeline-text">Strong</text>
+              <circle cx="47" cy="129" r="3" class="cs__timeline-dot" />
+              <text x="59" y="129" dominant-baseline="central" class="cs__timeline-text">Fitbod</text>
+            </g>
+
+            <!-- Bottom left: basic, and one lane -->
+            <g class="cs__matrix-cell">
+              <text x="44" y="210" class="cs__timeline-meta">BASIC, ONE LANE</text>
+              <circle cx="47" cy="259" r="3" class="cs__timeline-dot" />
+              <text x="59" y="259" dominant-baseline="central" class="cs__timeline-text">Strava</text>
+              <circle cx="47" cy="287" r="3" class="cs__timeline-dot" />
+              <text x="59" y="287" dominant-baseline="central" class="cs__timeline-text">StretchIt</text>
+            </g>
+
+            <!-- Bottom right: every lane, none of them logged -->
+            <g class="cs__matrix-cell">
+              <text x="198" y="210" class="cs__timeline-meta">BASIC, ALL LANES</text>
+              <circle cx="201" cy="259" r="3" class="cs__timeline-dot" />
+              <text x="213" y="259" dominant-baseline="central" class="cs__timeline-text">Nike Training Club</text>
+              <circle cx="201" cy="287" r="3" class="cs__timeline-dot" />
+              <text x="213" y="287" dominant-baseline="central" class="cs__timeline-text">Apple Fitness+</text>
+            </g>
+
+            <!-- Top right: the quadrant the audit found empty -->
+            <g class="cs__matrix-cell">
+              <rect x="182" y="28" width="154" height="158" class="cs__timeline-block" />
+              <text x="198" y="52" class="cs__timeline-block-eyebrow">DEEP, ALL LANES</text>
+              <text x="198" y="84" class="cs__timeline-block-headline">Kynso</text>
+              <line x1="198" y1="95" x2="320" y2="95" class="cs__timeline-block-rule" />
+              <text x="198" y="115" class="cs__timeline-block-sub">Strength, cardio and</text>
+              <text x="198" y="131" class="cs__timeline-block-sub">mobility in one log,</text>
+              <text x="198" y="147" class="cs__timeline-block-sub">backed by adaptive</text>
+              <text x="198" y="163" class="cs__timeline-block-sub">guidance.</text>
+            </g>
+
+            <!-- X axis poles -->
+            <text x="28" y="376" class="cs__timeline-meta">SINGLE-DISCIPLINE</text>
+            <text x="327.6" y="376" text-anchor="end" class="cs__timeline-meta">MULTI-DISCIPLINE</text>
+            <!-- Centred on the label's cap-height midpoint (376 baseline less half of
+                 the 6.98 ascent), not on the baseline itself: these are uppercase mono
+                 with no descender, so the ink sits entirely above the baseline and an
+                 arrow centred on it reads as dropped. Same reasoning as the Y arrow's
+                 horizontal placement against the rotated label. -->
+            <polygon points="329,368.5 336,372.5 329,376.5" class="cs__diag-arrow-head" />
+          </svg>
+          <figcaption class="gt__shot-cap" id="gt-cap-b-research">Market audit
+            <span class="gt__shot-note">Mapped the category on tracking depth against discipline breadth. Every incumbent held one axis and conceded the other, leaving the deep-and-unified quadrant unclaimed.</span>
           </figcaption>
         </figure>
 
         <figure class="gt__shot" id="gt-shot-b-naming" role="tooltip">
-          <img class="gt__shot-img" src="placeholders/step-01.svg" alt="Name candidate shortlist and trademark checks" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="gt__shot-cap">Naming
-            <span class="gt__shot-note">Selected Kynso: clean, unclaimed, and focused on clear integration rather than romantic fitness metaphors.</span>
+          <!-- Candidate knockout scorecard. Same drawn-panel construction as the
+               positioning matrix one step back, at the same 340 x 390 so the two figures
+               are the same size in the stage they share -- a reserved stage that changed
+               proportion between two steps would read as the panel moving, not as the
+               content changing.
+
+               Four rows on one column: card, name, verdict pill, rule, and the single
+               line that decided it. Every row is set to the same measure, which is the
+               argument -- the same screen ran against every candidate, and three of the
+               four died on it. The survivor inverts, the house device for the node a
+               schematic resolves on, so the outcome is legible before any of the reasons
+               are read.
+
+               Rows are 84 tall on a 101 pitch, so 17 separates one card from the next and
+               18 is the padding inside every one of them, uniform on all four sides:
+               content runs x 19..321, the name ink starts 18 below the card top, and the
+               reason's descender clears its floor by the same 18. The four rows carry the
+               whole lane between them -- there is no band of type above or below, so they
+               fill its height rather than sitting in the middle of it, and the figure's
+               own caption is the only line outside them. The pill column is right-aligned
+               to the same 321 the rules stop at. Centred monospace is nudged by half its
+               trailing letter-space (DESIGN 3.8), and the pill is sized off the longer of
+               the two verdicts rather than each one, so the column reads as a column. -->
+          <svg class="gt__shot-img gt__shot-diagram" viewBox="0 0 340 390" width="340" height="390" preserveAspectRatio="xMidYMid meet" style="--nat-ratio:.8718" role="img" aria-label="Name candidate knockout scorecard. Kinesis: killed, a live Technogym mark in classes 9 and 41. Kyro: killed, it reads as chiro and fitness marks are already in use. Vylt: killed, it rhymes with wilt, a loss of vigour. Kynso: selected, clean trademark clearance, a kinetic root and a calibrated tone.">
+            <g class="cs__knock-row">
+              <rect x="1" y="1" width="338" height="84" rx="6" class="cs__timeline-card" />
+              <text x="19" y="32" class="cs__timeline-title">Kinesis</text>
+              <rect x="243" y="16" width="78" height="20" rx="3" class="cs__timeline-pill" />
+              <text x="282.7" y="26" class="cs__timeline-pill-text">KILLED</text>
+              <line x1="19" y1="45" x2="321" y2="45" class="cs__timeline-rule" />
+              <text x="19" y="64" class="cs__timeline-text">Technogym mark live in Class 9 and 41</text>
+            </g>
+
+            <g class="cs__knock-row">
+              <rect x="1" y="102" width="338" height="84" rx="6" class="cs__timeline-card" />
+              <text x="19" y="133" class="cs__timeline-title">Kyro</text>
+              <rect x="243" y="117" width="78" height="20" rx="3" class="cs__timeline-pill" />
+              <text x="282.7" y="127" class="cs__timeline-pill-text">KILLED</text>
+              <line x1="19" y1="146" x2="321" y2="146" class="cs__timeline-rule" />
+              <text x="19" y="165" class="cs__timeline-text">Reads as &ldquo;chiro&rdquo;; fitness marks in use</text>
+            </g>
+
+            <g class="cs__knock-row">
+              <rect x="1" y="203" width="338" height="84" rx="6" class="cs__timeline-card" />
+              <text x="19" y="234" class="cs__timeline-title">Vylt</text>
+              <rect x="243" y="218" width="78" height="20" rx="3" class="cs__timeline-pill" />
+              <text x="282.7" y="228" class="cs__timeline-pill-text">KILLED</text>
+              <line x1="19" y1="247" x2="321" y2="247" class="cs__timeline-rule" />
+              <text x="19" y="266" class="cs__timeline-text">Rhymes with &ldquo;wilt&rdquo; &mdash; loss of vigour</text>
+            </g>
+
+            <g class="cs__knock-row">
+              <rect x="1" y="304" width="338" height="84" rx="6" class="cs__timeline-block" />
+              <text x="19" y="335" class="cs__timeline-block-headline">Kynso</text>
+              <rect x="243" y="319" width="78" height="20" rx="3" class="cs__timeline-block-pill" />
+              <text x="282.7" y="329" class="cs__timeline-block-pill-text">SELECTED</text>
+              <line x1="19" y1="348" x2="321" y2="348" class="cs__timeline-block-rule" />
+              <text x="19" y="367" class="cs__timeline-block-sub">Clean clearance, kinetic root, calibrated tone</text>
+            </g>
+          </svg>
+          <figcaption class="gt__shot-cap" id="gt-cap-b-naming">Naming
+            <span class="gt__shot-note">Every shortlisted name ran the same three screens &mdash; trademark, phonetics, tone. Three died on one of them. Kynso cleared all three: unclaimed, kinetic at the root, and calibrated rather than romantic.</span>
           </figcaption>
         </figure>
 
-        <figure class="gt__shot" id="gt-shot-b-logo" role="tooltip">
-          <img class="gt__shot-img" src="placeholders/step-04.svg" alt="Wordmark construction and icon grid" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="gt__shot-cap">Logo design
+        <figure class="gt__shot gt__shot--cut" id="gt-shot-b-logo" role="tooltip">
+          <img class="gt__shot-img" src="assets/kynso-branding-03.webp" alt="The Kynso mark rendered in 3D: a three-faced form with concave edges, in iridescent glass that splits the light along every seam" width="1741" height="1741" loading="lazy" decoding="async">
+          <figcaption class="gt__shot-cap" id="gt-cap-b-logo">Logo design
             <span class="gt__shot-note">Four geometric shapes in 3D rotation, capturing how strength, cardio, mobility, and recovery unify in one mark.</span>
           </figcaption>
         </figure>
 
-        <figure class="gt__shot" id="gt-shot-b-concept" role="tooltip">
-          <img class="gt__shot-img" src="placeholders/step-03.svg" alt="Design concept boards and accent studies" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="gt__shot-cap">Domain palette
+        <figure class="gt__shot gt__shot--dark" id="gt-shot-b-concept" role="tooltip">
+          <img class="gt__shot-img" src="assets/kynso-branding-04.webp" alt="The four domain shapes in neon outline on dark: a violet square, a red cushioned square, a yellow triangle and a teal inverted triangle, each glowing against the ground" width="953" height="936" loading="lazy" decoding="async">
+          <figcaption class="gt__shot-cap" id="gt-cap-b-concept">Domain palette
             <span class="gt__shot-note">High-contrast neon colors on pure dark backgrounds, letting users instantly decode domain types before reading.</span>
           </figcaption>
         </figure>
 
-        <figure class="gt__shot" id="gt-shot-b-guidelines" role="tooltip">
-          <img class="gt__shot-img" src="placeholders/step-05.svg" alt="Brand guideline spreads: voice, type scale, accent rules" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="gt__shot-cap">Brand system
-            <span class="gt__shot-note">Voice, typography, and onboarding disclosure standards codified to handle sensitive biological data with clarity and care.</span>
+        <!-- The one panel that is neither export nor drawing: a live card, because what
+             it documents is a rule about switching voice across two physical registers.
+             Presented as an editorial split-screen card: Desk register (analytical reasoning)
+             transitions directly into Workout register (glanceable telemetry on inverted carbon).
+
+             role="group" with accessible label, described by its caption. The track
+             matches on this figure's id for activation in the Gantt stage. -->
+        <figure class="gt__shot gt__shot--card" id="gt-shot-b-guidelines" role="group" aria-label="Brand voice matrix: dual-register comparison">
+          <div class="vm">
+            <!-- Upper register: Dry hands (Analysis & reasoning) -->
+            <div class="vm__pane vm__pane--desk">
+              <div class="vm__meta">
+                <span class="vm__hands">Dry hands</span>
+                <span class="vm__grade">High confidence</span>
+              </div>
+              <div class="vm__body">
+                <p class="vm__line">Squat volume dropped 14% after yesterday&rsquo;s 10k run.</p>
+                <p class="vm__action"><strong>Suggested: drop 1 working set.</strong></p>
+              </div>
+            </div>
+
+            <!-- Lower register: Wet hands (Glanceable telemetry on carbon ground) -->
+            <div class="vm__pane vm__pane--gym">
+              <div class="vm__meta">
+                <span class="vm__hands">Wet hands</span>
+                <span class="vm__grade">Glanceable</span>
+              </div>
+              <p class="vm__killed">
+                <s>&ldquo;Great job! Let&rsquo;s get ready for your next set of deadlifts.&rdquo;</s>
+              </p>
+              <div class="vm__hud">
+                <div class="vm__hud-metric">
+                  <span class="vm__grade">Set 3</span>
+                  <p class="vm__figure">315 lb &times; 5</p>
+                </div>
+                <div class="vm__hud-metric vm__hud-metric--clock">
+                  <span class="vm__grade">Rest</span>
+                  <p class="vm__figure vm__figure--clock">1:30</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <figcaption class="gt__shot-cap" id="gt-cap-b-guidelines">Brand system
+            <span class="gt__shot-note">One voice, two states: dry hands get the qualifier and the reasoning, wet hands get the number and nothing else.</span>
           </figcaption>
         </figure>
 
-        <figure class="gt__shot" id="gt-shot-m-positioning" role="tooltip">
-          <img class="gt__shot-img" src="placeholders/step-03.svg" alt="Positioning statement and message testing grid" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="gt__shot-cap">Positioning
+        <figure class="gt__shot gt__shot--card" id="gt-shot-m-positioning" role="group" aria-label="Market positioning: Fragmented stack versus the Kynso antidote">
+          <div class="mp">
+            <!-- Upper register: Disconnected stack (Paper ground) -->
+            <div class="mp__pane mp__pane--fragmented">
+              <div class="mp__meta">
+                <span class="mp__label">Fragmented stack</span>
+                <span class="mp__tag mp__tag--siloed">Siloed data</span>
+              </div>
+              <div class="mp__silos">
+                <div class="mp__pill mp__pill--siloed">
+                  <span class="mp__pill-dot" aria-hidden="true"></span>
+                  <span class="mp__pill-name">Cardio</span>
+                </div>
+                <div class="mp__pill mp__pill--siloed">
+                  <span class="mp__pill-dot" aria-hidden="true"></span>
+                  <span class="mp__pill-name">Lifting</span>
+                </div>
+                <div class="mp__pill mp__pill--siloed">
+                  <span class="mp__pill-dot" aria-hidden="true"></span>
+                  <span class="mp__pill-name">Diet</span>
+                </div>
+                <div class="mp__pill mp__pill--siloed">
+                  <span class="mp__pill-dot" aria-hidden="true"></span>
+                  <span class="mp__pill-name">Mobility</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lower register: The Kynso Antidote (Inverted carbon ground) -->
+            <div class="mp__pane mp__pane--antidote">
+              <div class="mp__meta">
+                <h4 class="mp__title">The Kynso Antidote</h4>
+                <span class="mp__tag mp__tag--correlated">Correlated Intelligence</span>
+              </div>
+              <div class="mp__node">
+                <div class="mp__node-domains">
+                  <span class="mp__node-pill">Cardio</span>
+                  <span class="mp__node-link" aria-hidden="true">+</span>
+                  <span class="mp__node-pill">Lifting</span>
+                  <span class="mp__node-link" aria-hidden="true">+</span>
+                  <span class="mp__node-pill">Diet</span>
+                  <span class="mp__node-link" aria-hidden="true">+</span>
+                  <span class="mp__node-pill">Mobility</span>
+                </div>
+                <div class="mp__node-body">
+                  <span class="mp__node-core-dot" aria-hidden="true"></span>
+                  <div class="mp__node-core-text">
+                    <span class="mp__node-core-headline">Unified readiness engine</span>
+                    <span class="mp__node-core-sub">All inputs analyzed together in real time</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <figcaption class="gt__shot-cap" id="gt-cap-m-positioning">Positioning
             <span class="gt__shot-note">Framed as the antidote to fragmented fitness apps: all your inputs analyzed together instead of in isolated silos.</span>
           </figcaption>
         </figure>
 
-        <figure class="gt__shot" id="gt-shot-m-waitlist" role="tooltip">
-          <img class="gt__shot-img" src="placeholders/step-01.svg" alt="Waitlist landing page wireframe and copy" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="gt__shot-cap">Landing page
+        <figure class="gt__shot gt__shot--dark" id="gt-shot-m-waitlist" role="tooltip">
+          <img class="gt__shot-img" src="assets/kynso-marketing-02.webp" alt="Waitlist landing page: a phone beside the gym-mode and desk-mode toggle, three trust cards covering encryption, anonymised metrics and data export, and a metrics strip feeding a plain-language key finding" width="1399" height="1513" loading="lazy" decoding="async">
+          <figcaption class="gt__shot-cap" id="gt-cap-m-waitlist">Landing page
             <span class="gt__shot-note">High-converting pre-beta waitlist page communicating integration, privacy, and Apple Health sync.</span>
           </figcaption>
         </figure>
 
-        <figure class="gt__shot" id="gt-shot-m-listing" role="tooltip">
-          <img class="gt__shot-img" src="placeholders/step-04.svg" alt="App Store listing screenshots and caption order" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="gt__shot-cap">Onboarding copy
+        <figure class="gt__shot gt__shot--card" id="gt-shot-m-listing" role="group" aria-label="Onboarding disclosure: Biological sex calibration and connected math modules">
+          <div class="oc">
+            <!-- Header -->
+            <div class="oc__header">
+              <div class="oc__meta">
+                <span class="oc__label">Calibration input</span>
+                <span class="oc__tag">Required</span>
+              </div>
+              <h3 class="oc__title">Biological sex</h3>
+            </div>
+
+            <!-- Choice Selector Component -->
+            <div class="oc__selector" role="radiogroup" aria-label="Biological sex selection">
+              <button type="button" class="oc__choice is-selected" role="radio" aria-checked="true" data-choice="female">
+                <span class="oc__radio" aria-hidden="true"></span>
+                <div class="oc__choice-info">
+                  <span class="oc__choice-name">Female</span>
+                  <span class="oc__choice-sub">Infradian rhythm &middot; 28-day cycle</span>
+                </div>
+              </button>
+              <button type="button" class="oc__choice" role="radio" aria-checked="false" data-choice="male">
+                <span class="oc__radio" aria-hidden="true"></span>
+                <div class="oc__choice-info">
+                  <span class="oc__choice-name">Male</span>
+                  <span class="oc__choice-sub">Circadian baseline &middot; 24-hour cycle</span>
+                </div>
+              </button>
+            </div>
+
+            <!-- Body Explanation -->
+            <p class="oc__body">Most fitness algorithms default to a static 24-hour male baseline. Kynso calibrates every calculation&mdash;from metabolic burn and lifting volume tolerance to weekly load shifts&mdash;against your actual physiology. Without this, the math is guessing.</p>
+
+            <!-- Downstream Connected Math Modules -->
+            <div class="oc__downstream">
+              <div class="oc__downstream-header">
+                <span class="oc__downstream-dot" aria-hidden="true"></span>
+                <span class="oc__downstream-title">Connected math modules</span>
+              </div>
+              <div class="oc__pills">
+                <span class="oc__pill">Metabolic Burn</span>
+                <span class="oc__pill">Volume Tolerance</span>
+                <span class="oc__pill">Macro Splitting</span>
+                <span class="oc__pill">Cycle Calibration</span>
+              </div>
+            </div>
+          </div>
+          <figcaption class="gt__shot-cap" id="gt-cap-m-listing">Onboarding copy
             <span class="gt__shot-note">Transparent rationale for biological sex questions, clearly tying inputs to cycle-aware readiness math.</span>
           </figcaption>
         </figure>
 
-        <figure class="gt__shot" id="gt-shot-m-content" role="tooltip">
-          <img class="gt__shot-img" src="placeholders/step-02.svg" alt="Eight-week content calendar drafted from interview language" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="gt__shot-cap">Beta outreach
+        <figure class="gt__shot gt__shot--card" id="gt-shot-m-content" role="group" aria-label="Beta applicant qualification scorecard">
+          <div class="qc">
+            <div class="qc__header">
+              <div class="qc__meta">
+                <span class="qc__label">Screening</span>
+                <span class="qc__tag">All 3 required</span>
+              </div>
+              <h3 class="qc__title">Beta applicant qualification</h3>
+            </div>
+
+            <ol class="qc__list">
+              <li class="qc__item">
+                <span class="qc__item-num" aria-hidden="true">01</span>
+                <span class="qc__item-label">Discipline mix</span>
+                <span class="qc__item-value">&ge; 2 fitness types
+                  <span class="qc__item-detail">Strength exercises + distance running</span>
+                </span>
+              </li>
+
+              <li class="qc__item">
+                <span class="qc__item-num" aria-hidden="true">02</span>
+                <span class="qc__item-label">Active stack</span>
+                <span class="qc__item-value">Currently juggling 2+ apps
+                  <span class="qc__item-detail">Strava + Strong / Hevy</span>
+                </span>
+              </li>
+
+              <li class="qc__item">
+                <span class="qc__item-num" aria-hidden="true">03</span>
+                <span class="qc__item-label">Friction point</span>
+                <span class="qc__item-value">Subscription fatigue, or context lost between disciplines</span>
+              </li>
+            </ol>
+
+            <p class="qc__foot">Screening out low-signal testers, to curate an intentional cohort of hybrid athletes.</p>
+          </div>
+          <figcaption class="gt__shot-cap" id="gt-cap-m-content">Beta outreach
             <span class="gt__shot-note">Direct recruiting of hybrid lifter-runners who actively struggle with cross-app tracking.</span>
           </figcaption>
         </figure>
 
-        <figure class="gt__shot" id="gt-shot-m-launch" role="tooltip">
-          <img class="gt__shot-img" src="placeholders/step-05.svg" alt="Cohort release schedule and first-week review tracking" width="800" height="560" loading="lazy" decoding="async">
-          <figcaption class="gt__shot-cap">Beta launch
+        <figure class="gt__shot gt__shot--cut gt__shot--screen" id="gt-shot-m-launch" role="tooltip">
+          <img class="gt__shot-img" src="assets/kynso-marketing-05.webp" alt="Workout detail screen from the beta build: a 45-minute resistance training session logged on Saturday 5 September, 4.6k lbs of volume across 9 sets, and a per-exercise breakdown of Lat Pulldown and Strict Press showing reps, weight and a per-set rating" width="590" height="1280" loading="lazy" decoding="async">
+          <figcaption class="gt__shot-cap" id="gt-cap-m-launch">Beta launch
             <span class="gt__shot-note">Targeted cohort rollout to stress-test dual-mode screens and readiness reliability in real training environments.</span>
           </figcaption>
         </figure>
@@ -486,7 +880,9 @@
     function panelFor(track){
       var src = track.hasAttribute('aria-describedby')
                   ? track : track.querySelector('[aria-describedby]');
-      return src ? document.getElementById(src.getAttribute('aria-describedby')) : null;
+      if (!src) return null;
+      var target = document.getElementById(src.getAttribute('aria-describedby'));
+      return target ? (target.closest('.gt__shot') || target) : null;
     }
     function activate(track){
       if (!track) return;
@@ -497,13 +893,29 @@
       if (panel) panel.classList.add('is-active');
     }
 
+    /* The stroke on the active row persists once the pointer leaves, so it reads
+       as a selection rather than a hover. That must not apply to the row a page
+       seeds active in its markup -- striking a row the reader has not pointed at
+       would announce a choice nobody made -- so the CSS waits on this flag, set
+       by the first genuine hover or focus. */
+    function browse(){ chart.classList.add('is-browsing'); }
+
     tracks.forEach(function(track){
-      track.addEventListener('mouseenter', function(){ activate(track); });
-      track.addEventListener('focusin', function(){ activate(track); });
+      /* The pointer listens on the box, not the row. A row is a full-lane grid
+         cell and the box occupies only the columns its --from/--to name, so the
+         rest of it is empty lane -- hovering there would swap the artwork with
+         nothing under the cursor to explain why. Focus stays on the row, which
+         is the tab stop. */
+      var bar = track.querySelector('.gt__bar');
+      if (bar) {
+        bar.addEventListener('mouseenter', function(){ browse(); activate(track); });
+      }
+      track.addEventListener('focusin', function(){ browse(); activate(track); });
       /* an aside row is a disclosure button, and its own handler below decides
          what a press should leave showing -- so it is left off the click path */
-      if (!track.classList.contains('gt__track--aside')) {
-        track.addEventListener('click', function(){ activate(track); });
+      if (bar && !track.classList.contains('gt__track--aside')) {
+        /* A touch screen has no hover, so the tap is the browse gesture there. */
+        bar.addEventListener('click', function(){ browse(); activate(track); });
       }
     });
 
@@ -535,6 +947,84 @@
           : btn.closest('.gt__track'));
       });
     });
+  }
+
+  /* The brand voice matrix: dual-register comparative card showing Desk (Analysis)
+     and Gym (Glance) simultaneously. If legacy tabs are present, roving tabindex
+     and arrow keys manage the switch. */
+  var vm = document.querySelector('.vm');
+  if (vm) {
+    var vmTabs = Array.prototype.slice.call(vm.querySelectorAll('.vm__tab'));
+    if (vmTabs.length) {
+      function selectTab(tab, moveFocus){
+        vmTabs.forEach(function(t){
+          var on = t === tab;
+          t.setAttribute('aria-selected', String(on));
+          t.tabIndex = on ? 0 : -1;
+          var panel = document.getElementById(t.getAttribute('aria-controls'));
+          if (panel) panel.classList.toggle('is-open', on);
+        });
+        if (moveFocus) tab.focus();
+      }
+
+      vmTabs.forEach(function(tab, i){
+        tab.addEventListener('click', function(){ selectTab(tab, false); });
+        tab.addEventListener('keydown', function(e){
+          var next = null;
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = vmTabs[(i + 1) % vmTabs.length];
+          else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = vmTabs[(i - 1 + vmTabs.length) % vmTabs.length];
+          else if (e.key === 'Home') next = vmTabs[0];
+          else if (e.key === 'End') next = vmTabs[vmTabs.length - 1];
+          if (!next) return;
+          /* The case study scrolls sideways on arrow keys; inside the tablist the
+             arrows belong to the tabs. */
+          e.preventDefault();
+          e.stopPropagation();
+          selectTab(next, true);
+        });
+      });
+    }
+  }
+
+  /* The biological sex choice selector in onboarding calibration card (.oc).
+     A radiogroup is one tab stop with a roving tabindex, not two: the arrow keys
+     move the selection inside it, and are stopped there because the case study
+     itself scrolls sideways on the same keys. Same pattern as the .vm tablist. */
+  var oc = document.querySelector('.oc');
+  if (oc) {
+    var ocChoices = Array.prototype.slice.call(oc.querySelectorAll('.oc__choice'));
+    if (ocChoices.length) {
+      var selectChoice = function(choice, moveFocus){
+        ocChoices.forEach(function(c){
+          var isCurrent = c === choice;
+          c.classList.toggle('is-selected', isCurrent);
+          c.setAttribute('aria-checked', String(isCurrent));
+          c.tabIndex = isCurrent ? 0 : -1;
+        });
+        if (moveFocus) choice.focus();
+      };
+
+      /* Seed the roving tabindex off whichever choice the markup ships selected. */
+      selectChoice(oc.querySelector('.oc__choice.is-selected') || ocChoices[0], false);
+
+      ocChoices.forEach(function(choice, i){
+        choice.addEventListener('click', function(e){
+          e.stopPropagation();
+          selectChoice(choice, false);
+        });
+        choice.addEventListener('keydown', function(e){
+          var next = null;
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = ocChoices[(i + 1) % ocChoices.length];
+          else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = ocChoices[(i - 1 + ocChoices.length) % ocChoices.length];
+          else if (e.key === 'Home') next = ocChoices[0];
+          else if (e.key === 'End') next = ocChoices[ocChoices.length - 1];
+          if (!next) return;
+          e.preventDefault();
+          e.stopPropagation();
+          selectChoice(next, true);
+        });
+      });
+    }
   }
 
   /* multiline staggered highlight: splits wrapped text into rows with incremental transition delays */
