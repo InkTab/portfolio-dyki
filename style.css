@@ -8,6 +8,10 @@
 :root {
   /* Layout */
   --rail-w: clamp(56px, 5vw, 66px);
+  /* The bottom offset a wide-canvas composition must stay above to clear the
+     fixed privacy link (.legal): the link's inset, its 16.5px line (11px x 1.5),
+     and a gap. The rail's counterpart on the bottom edge. */
+  --legal-clear: calc(clamp(20px, 3vh, 32px) + 16.5px + clamp(18px, 3vh, 28px));
 
   /* Light mode palette */
   --paper: #f8f7ff;
@@ -462,7 +466,14 @@ a { color: inherit; }
 .cs__kicker, .cs__flow-hint { margin: 0; color: var(--tag); font-weight: 400; }
 
 /* 1. hook */
-.cs__hook { width: min(92vw, 980px); }
+.cs__hook {
+  width: min(92vw, 980px);
+  /* Lifted clear of the privacy link, the scroll hint now stands in the band
+     the hook's centred copy used to reach into on a short window. So that band
+     -- the hint's offset, its 16px line and the same gap again -- is reserved
+     here, and only takes over from --pad-y where it is the larger of the two. */
+  padding-bottom: max(var(--pad-y), calc(var(--legal-clear) + 16px + clamp(18px, 3vh, 28px)));
+}
 .cs__eyebrow { margin: 0 0 clamp(22px, 3.6vh, 38px); color: var(--tag); font-weight: 400; }
 .cs__hook-line {
   font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif; font-weight: 800;
@@ -481,8 +492,14 @@ a { color: inherit; }
 .cs__meta-pair { margin: 0; }
 .cs__meta-key { margin: 0 0 7px; color: var(--tag); }
 .cs__meta-val { margin: 0; font-size: clamp(.95rem, 1.2vw, 1.05rem); line-height: 1.4; }
+/* Collision handling (DESIGN 4): the fixed privacy link owns the bottom-left
+   band of the window, and at the old offset this hint sat directly on top of it.
+   So the hint stands on --legal-clear and the two can never meet. The hint
+   belongs to the hook's column and the link to the page's corner, which the
+   different left edges already say; the gap keeps them from reading as a pair. */
 .cs__scroll {
-  position: absolute; left: var(--pad-x); bottom: clamp(26px, 5vh, 52px);
+  position: absolute; left: var(--pad-x);
+  bottom: var(--legal-clear);
   display: flex; align-items: center; gap: 12px; margin: 0; color: var(--tag);
 }
 .cs__scroll-rule { display: block; width: clamp(34px, 5vw, 64px); height: 0.5px; background: var(--rule-deco); }
@@ -1594,8 +1611,11 @@ a { color: inherit; }
 }
 
 /* Resting affordance: one step darker than body copy, one weight heavier, and
-   underlined before interaction. The marker then strikes it left-ward on hover. */
-.nf__link {
+   underlined before interaction. The marker then strikes it left-ward on hover.
+   Shared with the privacy page's inline links, which sit in the same reading
+   prose and so take the same treatment rather than a copy of it. */
+.nf__link,
+.pp__link {
   font-weight: 400;
   color: var(--ghost-link);
   text-decoration: underline;
@@ -1614,7 +1634,9 @@ a { color: inherit; }
               text-decoration-color .14s ease;
 }
 .nf__link:hover,
-.nf__link:focus-visible {
+.nf__link:focus-visible,
+.pp__link:hover,
+.pp__link:focus-visible {
   background-size: 100% 86%;
   text-decoration-color: transparent;
   color: var(--marker-ink, #111316);
@@ -3283,6 +3305,134 @@ a { color: inherit; }
    wide-canvas counterpart and is display:none above the breakpoint entirely. */
 .totop { display: none; }
 
+/* ============ 11b. Privacy Link (.legal) ============ */
+/* The one route every page carries that is not navigation: it answers a question
+   about the site rather than about the work, so it stays out of the rail instead
+   of becoming a fifth rail link. Above the breakpoint it is fixed to the
+   bottom-left corner at the theme toggle's own inset, so the two frameless
+   controls bracket the canvas's left edge and neither enters the composition
+   between them -- every section's vertical padding already clears that band.
+   It sits on the rail's tier (z-index 5): it is page chrome, not content. */
+.legal {
+  position: fixed; z-index: 5;
+  left: clamp(20px, 3vw, 40px);
+  /* The link's 14px of vertical padding is hit area rather than spacing, so it
+     is taken back here: the glyphs sit at the toggle's inset from the edge. */
+  bottom: calc(clamp(20px, 3vh, 32px) - 14px);
+}
+.legal__link {
+  display: inline-block;
+  /* 11px x 1.5 line + 2 x 14px = 44.5px, the touch minimum with no media query. */
+  padding: 14px 0;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px; font-weight: 400; letter-spacing: .18em; text-transform: uppercase;
+  line-height: 1.5; white-space: nowrap;
+  /* Resting affordance (DESIGN §1.3): the interactive grey and an underline,
+     not the --tag of the metadata it otherwise resembles. */
+  color: var(--ghost-link);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-link);
+  text-underline-offset: 3px;
+  cursor: pointer;
+  /* Sized in em rather than as a share of the box: the box is mostly padding,
+     and a percentage would strike the whole tap target instead of the line. */
+  background-image: var(--marker); background-repeat: no-repeat;
+  background-position: right center; background-size: 0% 1.5em;
+  transition: background-size .34s cubic-bezier(.2,.7,.3,1),
+              color .14s ease,
+              text-decoration-color .14s ease;
+}
+.legal__link:hover,
+.legal__link:focus-visible {
+  background-size: 100% 1.5em;
+  text-decoration-color: transparent;
+  color: var(--marker-ink, #111316);
+  transition: background-size .34s cubic-bezier(.2,.7,.3,1),
+              color .1s ease .18s,
+              text-decoration-color .1s ease .18s;
+}
+
+/* ============ 11c. Privacy Policy (.pp) ============ */
+/* A reading page, so it borrows the 404's plain-document footing rather than a
+   composed canvas. Two columns on the wide canvas: the title and the plain
+   summary on the left, the numbered sections on the right. The split is what
+   keeps the fixed privacy link clear: the left column is short, so once the
+   page scrolls there is nothing left in it to pass beneath the corner, and the
+   long column that does scroll starts well to the right of it. */
+.pp {
+  position: relative; z-index: 2;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: start; align-content: center;
+  column-gap: clamp(40px, 6vw, 112px);
+  padding: clamp(72px, 12vh, 128px) clamp(28px, 7vw, 96px);
+  /* Reserve the rail's own width on the trailing edge (DESIGN §Layout Tokens). */
+  padding-right: calc(var(--rail-w) + clamp(28px, 7vw, 96px));
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+}
+.pp__title {
+  margin: 0;
+  font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.1rem, 4.4vw, 3.6rem);
+  line-height: 1.04; letter-spacing: -.03em;
+  text-wrap: balance;
+  color: var(--ink);
+}
+.pp__meta {
+  margin: clamp(14px, 2.4vh, 22px) 0 0;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 12px; font-weight: 400; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--tag);
+}
+.pp__lede {
+  margin: clamp(26px, 4vh, 40px) 0 0; max-width: 40ch;
+  font-weight: 300;
+  font-size: clamp(1.08rem, 1.5vw, 1.25rem); line-height: 1.55;
+  color: var(--ghost);
+  text-wrap: pretty;
+}
+
+/* The sections take the case study's symptom rows: a mono numeral in a key
+   column, the heading and prose beside it, and --rule-deco hairlines between.
+   A section is read, not clicked, so no row carries a hover. */
+.pp__sections {
+  list-style: none; margin: 0; padding: 0;
+  border-top: 0.5px solid var(--rule-deco);
+}
+.pp__section {
+  display: grid;
+  grid-template-columns: minmax(0, clamp(40px, 4vw, 64px)) minmax(0, 1fr);
+  gap: clamp(12px, 1.6vw, 22px);
+  padding: clamp(22px, 3.4vh, 34px) 0;
+  border-bottom: 0.5px solid var(--rule-deco);
+}
+.pp__num {
+  /* Dropped to the heading's cap height so the numeral reads as its key. */
+  padding-top: .5em;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 12px; font-weight: 400; letter-spacing: .18em;
+  font-variant-numeric: tabular-nums;
+  color: var(--tag);
+}
+.pp__heading {
+  margin: 0;
+  font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.2rem, 1.7vw, 1.45rem);
+  line-height: 1.08; letter-spacing: -.02em;
+  text-wrap: balance;
+  color: var(--ink);
+}
+.pp__prose {
+  margin: clamp(12px, 1.8vh, 16px) 0 0; max-width: 62ch;
+  font-weight: 300;
+  font-size: clamp(1rem, 1.2vw, 1.06rem); line-height: 1.65;
+  color: var(--ghost);
+  text-wrap: pretty;
+}
+
 /* ============ 12. Figure Zoom (.zoom) ============ */
 /* The trigger wraps artwork in place. display:contents dissolves its box, so the
    wide layout measures exactly what it did before the wrapper existed; the button
@@ -3568,6 +3718,34 @@ a { color: inherit; }
     opacity: 1; transform: none;
     white-space: normal; overflow-wrap: anywhere;
   }
+
+  /* Privacy Link */
+  /* The corner is a wide-canvas position: stacked, a fixed link would float
+     over the column of copy for the whole length of the page. So it lies down
+     at the foot of the document, behind a hairline like every stacked section.
+     The bottom padding matches .totop's own inset, so at the end of the page
+     the link and the disc share one row -- link at the left, disc at the right. */
+  .legal {
+    position: static;
+    margin: 0 var(--gutter);
+    padding: 8px 0 var(--gutter);
+    border-top: 0.5px solid var(--rule-deco);
+  }
+
+  /* Privacy Policy */
+  .pp {
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+    padding-inline: var(--gutter);
+    /* The rail lies down into a bar at the top of the document here, so the
+       trailing clearance the wide canvas reserved is no longer needed. */
+    padding-right: var(--gutter);
+    /* The rail's own top margin already supplies the theme-toggle clearance. */
+    padding-top: 0;
+  }
+  .pp__head { margin-bottom: clamp(30px, 5vh, 44px); }
+  .pp__title { font-size: clamp(1.75rem, 7.4vw, 2.6rem); line-height: 1.06; }
 
   /* Back To Top */
   /* Sits at the page gutter from both edges so it lines up with the column of

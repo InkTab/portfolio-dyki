@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contact &mdash; Taya The Designer</title>
+  <title>Privacy Policy &mdash; Taya The Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@300;400&display=swap">
@@ -51,7 +51,7 @@
     <span class="rail__rule" aria-hidden="true"></span>
     <a class="rail__link" href="about-section.html">About me</a>
     <span class="rail__rule" aria-hidden="true"></span>
-    <a class="rail__link rail__link--active" href="contact.html" aria-current="page">Contact</a>
+    <a class="rail__link" href="contact.html">Contact</a>
   </div>
   <a class="rail__cv" href="assets/Tetiana-Burlachenko-Product-Designer.pdf" download aria-label="Download CV (PDF)">
     <span class="rail__cv-label">CV</span>
@@ -64,63 +64,44 @@
   </a>
 </nav>
 
-<main class="ct">
-  <p class="ct__hint">Hover a channel</p>
+<main class="pp">
+  <header class="pp__head">
+    <h1 class="pp__title">Privacy Policy</h1>
+    <p class="pp__meta">Last updated: <time datetime="2026-09">September 2026</time></p>
+    <p class="pp__lede">This website is a personal design portfolio. I respect your privacy and don&rsquo;t collect personal info through forms, require user accounts, or sell any visitor data.</p>
+  </header>
 
-  <div class="ct__stage">
-    <div class="ct__core">
-      <h1 class="ct__lead">Let&rsquo;s talk about what you&rsquo;re building</h1>
-      <p class="ct__sub">Email is the fastest way in. The rest is where the work lives.</p>
-    </div>
-
-    <!-- Every item is a real destination, so each is an <a> and carries the
-         intro's link treatment. The external profiles open in a new tab so the
-         site is not lost behind them; each says so in its aria-label, because
-         the handle only appears on hover and has no room for the note.
-         Coordinates, scale and drift cadence ride in as inline custom
-         properties — structure stays in the stylesheet (DESIGN §6). -->
-    <div class="ct__slot" style="--x:20%;--y:16%">
-      <div class="ct__drift" style="--dur:16s;--delay:0s">
-        <a class="ct__channel" href="mailto:tetiana.burlachenko@gmail.com" style="--s:1.12"><span class="ct__label">Email</span><span class="ct__tag">tetiana.burlachenko@gmail.com</span></a>
+  <!-- The numerals are the sections' keys, not their names: each h2 carries the
+       name, so the numeral is hidden from assistive tech rather than read out
+       ahead of every heading. -->
+  <ol class="pp__sections">
+    <li class="pp__section">
+      <span class="pp__num" aria-hidden="true">01</span>
+      <div>
+        <h2 class="pp__heading">Analytics &amp; Interaction Tracking</h2>
+        <p class="pp__prose">I use Microsoft Clarity to understand how visitors interact with my work so I can improve the site layout and viewing experience.</p>
+        <p class="pp__prose">I partner with Microsoft Clarity to capture how you use and interact with my website through behavioral metrics, heatmaps, and session replay to improve my site experience. Website usage data is captured using first- and third-party cookies and other tracking technologies to determine site activity. For more information about how Microsoft collects and uses your data, visit the <a class="pp__link" href="https://privacy.microsoft.com/privacystatement" target="_blank" rel="noopener noreferrer" aria-label="Microsoft Privacy Statement (opens in a new tab)">Microsoft Privacy Statement</a>.</p>
       </div>
-    </div>
-
-    <div class="ct__slot" style="--x:78%;--y:13%">
-      <div class="ct__drift ct__drift--b" style="--dur:13s;--delay:-4s">
-        <a class="ct__channel" href="https://www.behance.net/tetianaburlachenko"
-           target="_blank" rel="noopener noreferrer" style="--s:1.02"
-           aria-label="Behance — behance.net/tetianaburlachenko (opens in a new tab)"><span class="ct__label">Behance</span><span class="ct__tag">behance.net/tetianaburlachenko</span></a>
+    </li>
+    <li class="pp__section">
+      <span class="pp__num" aria-hidden="true">02</span>
+      <div>
+        <h2 class="pp__heading">Cookies</h2>
+        <p class="pp__prose">Clarity stores small data files (cookies) on your browser to track general site activity and engagement. You can easily block or delete these cookies through your browser settings at any time without impacting how you browse the work on this site.</p>
       </div>
-    </div>
-
-    <div class="ct__slot" style="--x:84%;--y:63%">
-      <div class="ct__drift ct__drift--c" style="--dur:18s;--delay:-7s">
-        <a class="ct__channel" href="https://www.instagram.com/tb_dyki"
-           target="_blank" rel="noopener noreferrer" style="--s:1.0"
-           aria-label="Instagram — instagram.com/tb_dyki (opens in a new tab)"><span class="ct__label">Instagram</span><span class="ct__tag">instagram.com/tb_dyki</span></a>
+    </li>
+    <li class="pp__section">
+      <span class="pp__num" aria-hidden="true">03</span>
+      <div>
+        <h2 class="pp__heading">Contact</h2>
+        <p class="pp__prose">If you have any questions about this policy or data on this site, you can reach me directly at <a class="pp__link" href="mailto:info@dyki.design">info@dyki.design</a>.</p>
       </div>
-    </div>
-
-    <div class="ct__slot" style="--x:15%;--y:68%">
-      <div class="ct__drift" style="--dur:15s;--delay:-2s">
-        <a class="ct__channel" href="https://medium.com/@tayadyki"
-           target="_blank" rel="noopener noreferrer" style="--s:1.04"
-           aria-label="Medium — medium.com/@tayadyki (opens in a new tab)"><span class="ct__label">Medium</span><span class="ct__tag">medium.com/@tayadyki</span></a>
-      </div>
-    </div>
-
-    <div class="ct__slot" style="--x:48%;--y:84%">
-      <div class="ct__drift ct__drift--b" style="--dur:17s;--delay:-9s">
-        <a class="ct__channel" href="https://dribbble.com/dyki_design"
-           target="_blank" rel="noopener noreferrer" style="--s:1.06"
-           aria-label="Dribbble — dribbble.com/dyki_design (opens in a new tab)"><span class="ct__label">Dribbble</span><span class="ct__tag">dribbble.com/dyki_design</span></a>
-      </div>
-    </div>
-  </div>
+    </li>
+  </ol>
 </main>
 
 <footer class="legal">
-  <a class="legal__link" href="privacy.html">Privacy policy</a>
+  <a class="legal__link" href="privacy.html" aria-current="page">Privacy policy</a>
 </footer>
 
 <script>
