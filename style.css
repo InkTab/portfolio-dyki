@@ -264,7 +264,7 @@ a { color: inherit; }
   display: grid; place-items: center;
 }
 .ia__core {
-  position: relative; z-index: 3; text-align: center; max-width: min(700px, 100%);
+  position: relative; z-index: 3; text-align: center; max-width: min(920px, 90vw);
 }
 .ia__core::before {
   content: ""; position: absolute; inset: -34% -16%; z-index: -1; pointer-events: none;
@@ -275,9 +275,10 @@ a { color: inherit; }
 }
 .ia__lead {
   font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif; font-weight: 800;
-  font-size: clamp(2.15rem, 4.9vw, 3.5rem); line-height: 1.02; letter-spacing: -.03em;
+  font-size: clamp(2rem, 3.4vw, 3.15rem); line-height: 1.08; letter-spacing: -.03em;
   margin: 0; color: var(--ink); text-wrap: balance;
 }
+.ia__lead-line { display: block; white-space: nowrap; }
 .ia__nb { white-space: nowrap; }
 .ia__name {
   display: inline-block;
@@ -304,11 +305,26 @@ a { color: inherit; }
 .ia__core:has(.ia__word:hover) .ia__name,
 .ia__core:has(.ia__word:focus) .ia__name { opacity: 0; }
 
+@keyframes iaWordSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .ia__word {
   position: relative; cursor: help; white-space: nowrap;
+  display: inline-block; vertical-align: baseline;
   border-bottom: 2px dashed var(--rule-link);
   transition: border-color .3s;
+  animation: iaWordSlideUp 1.2s cubic-bezier(.2,.7,.3,1) both;
 }
+.ia__word:nth-of-type(1) { animation-delay: .35s; }
+.ia__word:nth-of-type(2) { animation-delay: .9s; }
 .ia__word:hover, .ia__word:focus { border-bottom-color: var(--ink); }
 
 .ia__hint {
@@ -3536,6 +3552,7 @@ a { color: inherit; }
      sparks are suppressed below, so the display lead may wrap freely instead
      of overflowing a 375px canvas. */
   .ia__nb { white-space: normal; }
+  .ia__lead-line { display: inline; white-space: normal; }
   .ia__word {
     white-space: normal;
     -webkit-box-decoration-break: clone; box-decoration-break: clone;
@@ -3983,6 +4000,7 @@ body.is-zoomed .totop { display: none; }
     animation-duration: .001s !important;
   }
   .ia__drift, .ct__drift { animation: none !important; }
+  .ia__word { animation: none !important; opacity: 1 !important; transform: none !important; }
   /* The block above collapses durations but not delays, and this one gates a
      panel's tab stops -- left at .26s it would hold an off-screen control
      focusable after the fade it was waiting on had already finished. */
