@@ -7,7 +7,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 ## Summary of Pages
 1. [Global Components (Shared Across Pages)](#global-components-shared-across-pages)
 2. [Page 1: index.html (Homepage / Interactive Ideas Canvas)](#page-1-indexhtml--homepage--ideas-canvas)
-3. [Page 2: about-section.html (About Me — The Marble & The Thread)](#page-2-about-sectionhtml--about-me)
+3. [Page 2: about.html (About Me — The Marble & The Thread)](#page-2-abouthtml--about-me)
 4. [Page 3: kynso.html (Case Study — Kynso Fitness App)](#page-3-kynsohtml--case-study-kynso)
 5. [Page 4: quantistry.html (Case Study — Quantistry Brand & Website Design)](#page-4-quantistryhtml--case-study-quantistry-brand--website-design)
 6. [Page 5: supplement.html (Case Study — Supplement Checkout Fix)](#page-5-supplementhtml--case-study-supplement-checkout-fix)
@@ -109,7 +109,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 
 ---
 
-# Page 2: `about-section.html` — About Me (The Marble & The Thread)
+# Page 2: `about.html` — About Me (The Marble & The Thread)
 
 > **CRITICAL LAYOUT CONSTRAINT FOR THIS PAGE:**
 > On desktop, each screen is locked to **100vh / 100dvh snap height** with `overflow: hidden`.
@@ -717,10 +717,10 @@ This document compiles **every user-facing text element across all 8 pages of th
 | **Home (`index.html`)** | Hero Lead (`.ia__lead`) | 61 | 50 – 85 chars | > 95 chars (breaks radial backdrop) |
 | **Home (`index.html`)** | Hero Subhead (`.ia__name`) | 56 | 30 – 60 chars | > 65 chars (wraps into 3 lines) |
 | **Home (`index.html`)** | Drifting Idea Labels | 14 – 34 | 15 – 35 chars | > 38 chars (`nowrap` causes canvas collision) |
-| **About (`about-section.html`)** | Screen Column Titles | 18 – 33 | 18 – 35 chars | > 40 chars (wraps to 3 lines on laptop) |
-| **About (`about-section.html`)** | Paragraphs (Left & Right) | 144 – 210 | 140 – 220 chars | > 240 chars (overflows 100dvh snap view on laptop) |
-| **About (`about-section.html`)** | Card Quotes | 94 – 116 | 70 – 120 chars | > 130 chars (pushes card off screen bottom) |
-| **About (`about-section.html`)** | Year Range (`.am__year`) | 10 – 11 | 9 – 12 chars | > 15 chars |
+| **About (`about.html`)** | Screen Column Titles | 18 – 33 | 18 – 35 chars | > 40 chars (wraps to 3 lines on laptop) |
+| **About (`about.html`)** | Paragraphs (Left & Right) | 144 – 210 | 140 – 220 chars | > 240 chars (overflows 100dvh snap view on laptop) |
+| **About (`about.html`)** | Card Quotes | 94 – 116 | 70 – 120 chars | > 130 chars (pushes card off screen bottom) |
+| **About (`about.html`)** | Year Range (`.am__year`) | 10 – 11 | 9 – 12 chars | > 15 chars |
 | **All Case Studies** | Hook Line (H1) | 65 – 82 | 55 – 95 chars | > 105 chars |
 | **All Case Studies** | Hook Subtitle | 138 – 160 | 110 – 180 chars | > 200 chars (exceeds `56ch`) |
 | **Gantt Case Study (`kynso.html`)** | Gantt Bar Names | 6 – 14 | 6 – 16 chars | > 18 chars (overflows grid bar pill) |
