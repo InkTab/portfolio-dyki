@@ -78,27 +78,57 @@
     var TAIL = 10;
 
     function measure() {
+      if (!MOBILE.matches || STILL.matches) {
+        ideas.forEach(function (idea) {
+          idea.classList.remove('is-marquee');
+          var label = idea.querySelector('.ia__label');
+          if (label) {
+            label.style.removeProperty('--marq-shift');
+            label.style.removeProperty('--marq-dur');
+          }
+        });
+        return;
+      }
+
+      /* Batch Phase 1 (Write): Clear previous styles/classes before measuring so
+         names translated from a previous pass are not measured in the wrong place. */
       ideas.forEach(function (idea) {
-        var label = idea.querySelector('.ia__label');
-        if (!label) return;
-
-        /* Cleared before measuring: a name still translated from its last pass
-           would be measured in the wrong place. */
         idea.classList.remove('is-marquee');
-        label.style.removeProperty('--marq-shift');
-        label.style.removeProperty('--marq-dur');
+        var label = idea.querySelector('.ia__label');
+        if (label) {
+          label.style.removeProperty('--marq-shift');
+          label.style.removeProperty('--marq-dur');
+        }
+      });
 
-        if (!MOBILE.matches || STILL.matches) return;
+      /* Batch Phase 2 (Read): Query geometry without intervening DOM mutations
+         to avoid layout thrashing. */
+      var calculations = [];
+      for (var i = 0; i < ideas.length; i++) {
+        var idea = ideas[i];
+        var label = idea.querySelector('.ia__label');
+        if (!label) continue;
 
         var over = Math.round(label.scrollWidth - idea.clientWidth);
-        if (over <= 0) return;
+        if (over > 0) {
+          var travel = over + TAIL;
+          var seconds = Math.min(MAX_SECONDS, Math.max(MIN_SECONDS, travel / PX_PER_SECOND));
+          calculations.push({
+            idea: idea,
+            label: label,
+            travel: travel,
+            seconds: seconds
+          });
+        }
+      }
 
-        var travel = over + TAIL;
-        var seconds = Math.min(MAX_SECONDS, Math.max(MIN_SECONDS, travel / PX_PER_SECOND));
-        label.style.setProperty('--marq-shift', -travel + 'px');
-        label.style.setProperty('--marq-dur', seconds.toFixed(1) + 's');
-        idea.classList.add('is-marquee');
-      });
+      /* Batch Phase 3 (Write): Apply new styles and classes in a single pass. */
+      for (var j = 0; j < calculations.length; j++) {
+        var item = calculations[j];
+        item.label.style.setProperty('--marq-shift', -item.travel + 'px');
+        item.label.style.setProperty('--marq-dur', item.seconds.toFixed(1) + 's');
+        item.idea.classList.add('is-marquee');
+      }
     }
 
     measure();

@@ -6,8 +6,13 @@
   <title>Page not found &mdash; Taya The Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@300;400&display=swap">
-  <link rel="stylesheet" href="style.css">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@300;400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@300;400&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@300;400&display=swap">
+  </noscript>
+  <link rel="preload" as="style" href="css/style.min.css">
+  <link rel="stylesheet" href="css/style.min.css">
   <script>
     (function() {
       var saved = localStorage.getItem('theme');
@@ -19,14 +24,20 @@
       }
     })();
   </script>
-  <!-- Microsoft Clarity. Async and self-inserting, so it never blocks the paint
-       or the theme script above it. -->
+  <!-- Microsoft Clarity: loaded at idle to prevent main-thread tasks during paint -->
   <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "yg5y3ao9c8");
+    function initClarity() {
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "yg5y3ao9c8");
+    }
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(initClarity, { timeout: 2500 });
+    } else {
+      window.addEventListener('load', function() { setTimeout(initClarity, 500); });
+    }
   </script>
 </head>
 <body>
@@ -54,7 +65,7 @@
   <div class="rail__main">
     <a class="rail__link" href="index.html">Home</a>
     <span class="rail__rule" aria-hidden="true"></span>
-    <a class="rail__link" href="about-section.html">About me</a>
+    <a class="rail__link" href="about.html">About me</a>
     <span class="rail__rule" aria-hidden="true"></span>
     <a class="rail__link" href="contact.html">Contact</a>
   </div>

@@ -307,8 +307,8 @@ a { color: inherit; }
 
 @keyframes iaWordSlideUp {
   from {
-    opacity: 0;
-    transform: translateY(16px);
+    opacity: 0.3;
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -321,10 +321,10 @@ a { color: inherit; }
   display: inline-block; vertical-align: baseline;
   border-bottom: 2px dashed var(--rule-link);
   transition: border-color .3s;
-  animation: iaWordSlideUp 1.2s cubic-bezier(.2,.7,.3,1) both;
+  animation: iaWordSlideUp .8s cubic-bezier(.2,.7,.3,1) both;
 }
-.ia__word:nth-of-type(1) { animation-delay: .35s; }
-.ia__word:nth-of-type(2) { animation-delay: .9s; }
+.ia__word:nth-of-type(1) { animation-delay: .05s; }
+.ia__word:nth-of-type(2) { animation-delay: .18s; }
 .ia__word:hover, .ia__word:focus { border-bottom-color: var(--ink); }
 
 .ia__hint {
@@ -1339,8 +1339,8 @@ a { color: inherit; }
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.22fr) minmax(0, 1fr);
   align-items: center;
   justify-content: center;
-  padding: clamp(24px, 4vh, 44px) clamp(24px, 3.8vw, 56px);
-  padding-right: calc(var(--rail-w) + clamp(20px, 3vw, 44px));
+  padding: clamp(48px, 8vh, 88px) clamp(48px, 7.6vw, 112px);
+  padding-right: calc(var(--rail-w) + clamp(40px, 6vw, 88px));
   gap: clamp(20px, 3.2vw, 52px);
   position: relative;
   box-sizing: border-box;
@@ -1513,9 +1513,9 @@ a { color: inherit; }
   position: absolute;
   top: 0;
   bottom: 0;
-  left: clamp(24px, 3.8vw, 56px);
-  right: calc(var(--rail-w) + clamp(20px, 3vw, 44px));
-  width: calc(100% - clamp(24px, 3.8vw, 56px) - var(--rail-w) - clamp(20px, 3vw, 44px));
+  left: clamp(48px, 7.6vw, 112px);
+  right: calc(var(--rail-w) + clamp(40px, 6vw, 88px));
+  width: calc(100% - clamp(48px, 7.6vw, 112px) - var(--rail-w) - clamp(40px, 6vw, 88px));
   height: 400vh;
   height: 400dvh;
   pointer-events: none;
@@ -3665,7 +3665,7 @@ a { color: inherit; }
     scroll-snap-stop: normal;
     display: flex;
     flex-direction: column;
-    padding: clamp(40px, 6vh, 64px) var(--gutter);
+    padding: clamp(80px, 12vh, 128px) calc(var(--gutter) * 2);
     gap: clamp(24px, 3.5vh, 36px);
   }
   .am__sculpture {
