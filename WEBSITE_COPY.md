@@ -45,9 +45,9 @@ This document compiles **every user-facing text element across all 8 pages of th
 ### 3. Center Core (Hero Area)
 *The central statement with dynamic hover reveals and spark tags.*
 
-* **Hero Lead Sentence:** `Product Designer aligning business strategy with scalable product systems` (70 chars)
+* **Hero Lead Sentence:** `Product Designer aligning business strategy with product systems` (61 chars)
   * *Limit:* **50 – 85 chars**
-  * *Rationale:* Uses large Bricolage Grotesque display font (`clamp(2.15rem, 4.9vw, 3.5rem)`). Balances in 2–3 lines within the 700px central radial mask.
+  * *Rationale:* Uses large Bricolage Grotesque display font (`clamp(2rem, 3.4vw, 3.15rem)`). Balances in 2 lines within the central stage.
 
 * **Word Triggers & Spark Tags (Hover reveals on keywords):**
   * **Trigger 1:** `business strategy` (17 chars)
@@ -56,9 +56,9 @@ This document compiles **every user-facing text element across all 8 pages of th
     * *Spark chip 3:* `creative strategy` (17 chars) | *Limit:* 8 – 18 chars
     * *Spark chip 4:* `SEO` (3 chars) | *Limit:* 3 – 8 chars
   * **Trigger 2:** `product systems` (15 chars)
-    * *Spark chip 1:* `design system` (13 chars) | *Limit:* 8 – 16 chars
+    * *Spark chip 1:* `scalability` (11 chars) | *Limit:* 8 – 16 chars
     * *Spark chip 2:* `user testing` (12 chars) | *Limit:* 8 – 16 chars
-    * *Spark chip 3:* `research` (8 chars) | *Limit:* 6 – 14 chars
+    * *Spark chip 3:* `design systems` (14 chars) | *Limit:* 8 – 16 chars
     * *Spark chip 4:* `prototyping` (11 chars) | *Limit:* 8 – 16 chars
   * *Note:* Each spark has custom pixel offset coordinates (`--sx`, `--sy`). Words should remain 1–2 words each so they don't overlap adjacent words.
 
@@ -714,7 +714,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 
 | Page / Component | Key Field | Current Chars | Safe Recommended Range | Hard Failure Point |
 | :--- | :--- | :--- | :--- | :--- |
-| **Home (`index.html`)** | Hero Lead (`.ia__lead`) | 70 | 50 – 85 chars | > 95 chars (breaks radial backdrop) |
+| **Home (`index.html`)** | Hero Lead (`.ia__lead`) | 61 | 50 – 85 chars | > 95 chars (breaks radial backdrop) |
 | **Home (`index.html`)** | Hero Subhead (`.ia__name`) | 56 | 30 – 60 chars | > 65 chars (wraps into 3 lines) |
 | **Home (`index.html`)** | Drifting Idea Labels | 14 – 34 | 15 – 35 chars | > 38 chars (`nowrap` causes canvas collision) |
 | **About (`about-section.html`)** | Screen Column Titles | 18 – 33 | 18 – 35 chars | > 40 chars (wraps to 3 lines on laptop) |
