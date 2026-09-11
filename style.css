@@ -305,11 +305,26 @@ a { color: inherit; }
 .ia__core:has(.ia__word:hover) .ia__name,
 .ia__core:has(.ia__word:focus) .ia__name { opacity: 0; }
 
+@keyframes iaWordSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .ia__word {
   position: relative; cursor: help; white-space: nowrap;
+  display: inline-block; vertical-align: baseline;
   border-bottom: 2px dashed var(--rule-link);
   transition: border-color .3s;
+  animation: iaWordSlideUp .52s cubic-bezier(.2,.7,.3,1) both;
 }
+.ia__word:nth-of-type(1) { animation-delay: .22s; }
+.ia__word:nth-of-type(2) { animation-delay: .48s; }
 .ia__word:hover, .ia__word:focus { border-bottom-color: var(--ink); }
 
 .ia__hint {
@@ -3985,6 +4000,7 @@ body.is-zoomed .totop { display: none; }
     animation-duration: .001s !important;
   }
   .ia__drift, .ct__drift { animation: none !important; }
+  .ia__word { animation: none !important; opacity: 1 !important; transform: none !important; }
   /* The block above collapses durations but not delays, and this one gates a
      panel's tab stops -- left at .26s it would hold an off-screen control
      focusable after the fade it was waiting on had already finished. */
