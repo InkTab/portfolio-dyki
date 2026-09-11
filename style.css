@@ -264,7 +264,7 @@ a { color: inherit; }
   display: grid; place-items: center;
 }
 .ia__core {
-  position: relative; z-index: 3; text-align: center; max-width: min(700px, 100%);
+  position: relative; z-index: 3; text-align: center; max-width: min(920px, 90vw);
 }
 .ia__core::before {
   content: ""; position: absolute; inset: -34% -16%; z-index: -1; pointer-events: none;
@@ -275,9 +275,10 @@ a { color: inherit; }
 }
 .ia__lead {
   font-family: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif; font-weight: 800;
-  font-size: clamp(2.15rem, 4.9vw, 3.5rem); line-height: 1.02; letter-spacing: -.03em;
+  font-size: clamp(2rem, 3.4vw, 3.15rem); line-height: 1.08; letter-spacing: -.03em;
   margin: 0; color: var(--ink); text-wrap: balance;
 }
+.ia__lead-line { display: block; white-space: nowrap; }
 .ia__nb { white-space: nowrap; }
 .ia__name {
   display: inline-block;
@@ -3536,6 +3537,7 @@ a { color: inherit; }
      sparks are suppressed below, so the display lead may wrap freely instead
      of overflowing a 375px canvas. */
   .ia__nb { white-space: normal; }
+  .ia__lead-line { display: inline; white-space: normal; }
   .ia__word {
     white-space: normal;
     -webkit-box-decoration-break: clone; box-decoration-break: clone;
