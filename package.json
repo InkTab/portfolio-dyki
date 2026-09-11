@@ -1,0 +1,9 @@
+{
+  "name": "portfolio-dyki",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "esbuild css/style.css --minify --outfile=css/style.min.css && esbuild js/mobile-ui.js --minify --outfile=js/mobile-ui.min.js",
+    "watch": "esbuild css/style.css js/mobile-ui.js --minify --outdir=dist --watch"
+  }
+}
