@@ -714,8 +714,8 @@ This document compiles **every user-facing text element across all 8 pages of th
 
 | Page / Component | Key Field | Current Chars | Safe Recommended Range | Hard Failure Point |
 | :--- | :--- | :--- | :--- | :--- |
-| **Home (`index.html`)** | Hero Lead (`.ia__lead`) | 72 | 50 – 85 chars | > 95 chars (breaks radial backdrop) |
-| **Home (`index.html`)** | Hero Subhead (`.ia__name`) | 41 | 30 – 55 chars | > 65 chars (wraps into 3 lines) |
+| **Home (`index.html`)** | Hero Lead (`.ia__lead`) | 70 | 50 – 85 chars | > 95 chars (breaks radial backdrop) |
+| **Home (`index.html`)** | Hero Subhead (`.ia__name`) | 56 | 30 – 60 chars | > 65 chars (wraps into 3 lines) |
 | **Home (`index.html`)** | Drifting Idea Labels | 14 – 34 | 15 – 35 chars | > 38 chars (`nowrap` causes canvas collision) |
 | **About (`about-section.html`)** | Screen Column Titles | 18 – 33 | 18 – 35 chars | > 40 chars (wraps to 3 lines on laptop) |
 | **About (`about-section.html`)** | Paragraphs (Left & Right) | 144 – 210 | 140 – 220 chars | > 240 chars (overflows 100dvh snap view on laptop) |
