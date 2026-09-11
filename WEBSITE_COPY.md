@@ -35,7 +35,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 # Page 1: `index.html` — Homepage / Ideas Canvas
 
 ### 1. Page Metadata
-* **Browser Tab Title:** `Taya The Designer` (17 chars)
+* **Browser Tab Title:** `Taya Burlachenko — Senior Product Designer` (41 chars)
   * *Limit:* **15 – 60 chars** (Optimal for browser tab and search engine results)
 
 ### 2. Header & Hint
@@ -45,7 +45,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 ### 3. Center Core (Hero Area)
 *The central statement with dynamic hover reveals and spark tags.*
 
-* **Hero Lead Sentence:** `Product Designer with experience in business strategy and UI/UX` (72 chars)
+* **Hero Lead Sentence:** `Product Designer aligning business strategy with scalable product systems` (70 chars)
   * *Limit:* **50 – 85 chars**
   * *Rationale:* Uses large Bricolage Grotesque display font (`clamp(2.15rem, 4.9vw, 3.5rem)`). Balances in 2–3 lines within the 700px central radial mask.
 
@@ -55,7 +55,7 @@ This document compiles **every user-facing text element across all 8 pages of th
     * *Spark chip 2:* `marketing` (9 chars) | *Limit:* 6 – 14 chars
     * *Spark chip 3:* `creative strategy` (17 chars) | *Limit:* 8 – 18 chars
     * *Spark chip 4:* `SEO` (3 chars) | *Limit:* 3 – 8 chars
-  * **Trigger 2:** `UI/UX` (5 chars)
+  * **Trigger 2:** `product systems` (15 chars)
     * *Spark chip 1:* `design system` (13 chars) | *Limit:* 8 – 16 chars
     * *Spark chip 2:* `user testing` (12 chars) | *Limit:* 8 – 16 chars
     * *Spark chip 3:* `research` (8 chars) | *Limit:* 6 – 14 chars
@@ -63,8 +63,8 @@ This document compiles **every user-facing text element across all 8 pages of th
   * *Note:* Each spark has custom pixel offset coordinates (`--sx`, `--sy`). Words should remain 1–2 words each so they don't overlap adjacent words.
 
 * **Core Subheading & Identity Reveal:**
-  * **Subheading:** `Hey, I’m Taya. I move ideas from 1 to 1000` (41 chars)
-    * *Limit:* **30 – 55 chars** (Concise single-line or compact 2-line anchor below lead text)
+  * **Subheading:** `Hey, I’m Taya. I turn complex problems into clear products` (56 chars)
+    * *Limit:* **30 – 60 chars** (Concise single-line or compact 2-line anchor below lead text)
   * **Hover Reveal Tooltip (on "Taya"):** `AKA Tetiana Burlachenko` (23 chars)
     * *Limit:* **15 – 30 chars** (Centered mono badge tooltip, `white-space: nowrap`)
 
@@ -152,7 +152,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 * **Kicker:** `Professional` (12 chars) | *Limit:* 20 – 35 chars
 * **Title:** `Knocking off the excess` (23 chars) | *Limit:* 18 – 35 chars
 * **Paragraph 1:** `A computer science foundation gave way to design school in Poland. I experimented across sculpture, video, and branding before zeroing in on digital products—stripping away everything that didn’t fit.` (201 chars) | *Limit:* 150 – 210 chars
-* **Paragraph 2:** `Freelancing took off overnight. I hired a classmate, managed clients, and shipped identities under high standards. Leading early taught me that sustainable discipline outlasts raw brute force.` (194 chars) | *Limit:* 150 – 210 chars
+* **Paragraph 2:** `Freelancing took off overnight. I built a boutique client practice, delegated production to contract talent, and shipped high-standard identities. Leading early taught me sustainable discipline.` (194 chars) | *Limit:* 150 – 210 chars
 
 #### Center Column (Marble Sculpture Meta)
 * **Year Range:** `2013 – 2021` (11 chars) | *Limit:* 9 – 12 chars
@@ -175,7 +175,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 #### Left Column (Professional)
 * **Kicker:** `Professional` (12 chars) | *Limit:* 20 – 38 chars
 * **Title:** `Solo craft to living systems` (28 chars) | *Limit:* 18 – 35 chars
-* **Paragraph 1:** `At Propaganda Solutions, I shifted from shaping perception through marketing into architecting web products. When the team condensed to just me, I took full ownership of the agency's digital design pipeline.` (210 chars) | *Limit:* 160 – 220 chars
+* **Paragraph 1:** `At Propaganda Solutions, I shifted from shaping perception through marketing into architecting web products. Stepping up as the agency’s sole product design lead, I owned our entire web architecture and design pipeline.` (220 chars) | *Limit:* 160 – 220 chars
 * **Paragraph 2:** `Running solo meant owning the entire spectrum—from brand positioning to web architecture. I helped reshape the agency's identity while delivering digital products that balanced business goals with fine craft.` (208 chars) | *Limit:* 150 – 210 chars
 
 #### Center Column (Marble Sculpture Meta)
@@ -200,7 +200,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 * **Kicker:** `Professional` (12 chars) | *Limit:* 20 – 35 chars
 * **Title:** `Instruments for human agency` (28 chars) | *Limit:* 18 – 35 chars
 * **Paragraph 1:** `Today, I build at the edge of human agency and AI orchestration. Co-founding a fitness app gave me the canvas to design without constraints, turning autonomous tools into creative extensions of product intent.` (210 chars) | *Limit:* 160 – 235 chars
-* **Paragraph 2:** `I bring ambitious 0-to-1 ideas into crisp, living software. Explore how I translate systems and craft in the Kynso Fitness App case study →` (140 chars) | *Limit:* 130 – 185 chars
+* **Paragraph 2:** `I partner with founders and engineering teams to turn ambitious 0-to-1 bets into resilient, living software. Explore how I translate systems and craft in the Kynso Fitness App case study →` (190 chars) | *Limit:* 130 – 195 chars
 
 #### Center Column (Marble Sculpture Meta)
 * **Year Range:** `2025 – NOW` (10 chars) | *Limit:* 9 – 12 chars
@@ -317,7 +317,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 * **Metrics (3 Data Points):**
   * **Metric 1:** `6` | Label: `Integrated health inputs` (24 chars) | *Limit:* 12 – 28 chars
   * **Metric 2:** `2` | Label: `Adaptive UI session modes` (25 chars) | *Limit:* 12 – 28 chars
-  * **Metric 3:** `100%` | Label: `Transparent logic` (17 chars) | *Limit:* 12 – 28 chars
+  * **Metric 3:** `3x` | Label: `Faster workout logging speed` (28 chars) | *Limit:* 12 – 28 chars
 * **Impact Prose:** `The biggest breakthrough was learning what not to show. Splitting the interface between calm planning and high-intensity workout modes turned a cluttered tracking utility into a focused training tool. By making the readiness score transparent and cycle-aware, we replaced black-box guesswork with clear, actionable coaching.` (324 chars) | *Limit:* 240 – 360 chars
 
 ---
@@ -340,7 +340,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 
 * **Eyebrow:** `Case study — Quantistry` (23 chars) | *Limit:* 15 – 30 chars
 * **Hook Line (H1):** `Designing for PhD chemists when you don't speak quantum chemistry.` (70 chars) | *Limit:* 55 – 90 chars
-* **Hook Subtitle:** `Instead of simplifying the science, we decoded the commercial promise: turning months of lab friction into days of simulation to anchor enterprise sales and Series A.` (163 chars) | *Limit:* 120 – 180 chars
+* **Hook Subtitle:** `Decoded complex quantum simulation into an investor-ready web platform, turning months of lab friction into days of simulation to anchor enterprise sales and Series A.` (171 chars) | *Limit:* 120 – 180 chars
 * **Metadata Facts:**
   * **Role:** `Product Designer` (16 chars) | *Limit:* 12 – 30 chars
   * **Year:** `2025` (4 chars) | *Limit:* 4 – 9 chars
@@ -520,7 +520,7 @@ This document compiles **every user-facing text element across all 8 pages of th
   * **Metric 1:** `-80%` | Label: `Initial order volume` (20 chars) | *Limit:* 12 – 28 chars
   * **Metric 2:** `10%` | Label: `Final return rate` (17 chars) | *Limit:* 12 – 28 chars
   * **Metric 3:** `+80%` | Label: `Retained customers` (18 chars) | *Limit:* 12 – 28 chars
-* **Impact Prose:** `We eliminated the massive hidden costs of shipping free boxes only to handle returns. I learned a crucial lesson: UX issues are often P&L issues. If I had framed this around profit margins in month one instead of month three, the conversation would have been much easier.` (272 chars) | *Limit:* 140 – 280 chars
+* **Impact Prose:** `By eliminating deceptive acquisition logic, we halted an unsustainable wave of fulfillment losses, customer support tickets, and return shipping fees. It reinforced my core belief as a senior designer: UX problems are almost always P&L problems in disguise.` (260 chars) | *Limit:* 140 – 280 chars
 
 ---
 
@@ -600,7 +600,7 @@ This document compiles **every user-facing text element across all 8 pages of th
   * **Figcaption & Alt:** `Five-level drill-down architecture from health to creative` (58 chars) | *Limit:* 35 – 70 chars
 
 * **Step 04:**
-  * **Title:** `Prototyped live widgets to unblock dev` (38 chars) | *Limit:* 20 – 45 chars
+  * **Title:** `Prototyped in code to prove feasibility` (39 chars) | *Limit:* 20 – 45 chars
   * **Text:** `Engineering pushed back on multi-API widgets. Built a working prototype with Claude Code to prove feasibility.` (110 chars) | *Limit:* 70 – 135 chars
   * **Tags:** `Prototyping · Code proof-of-concept` (35 chars) | *Limit:* 20 – 45 chars
   * **Figcaption & Alt:** `Working multi-source widget prototype and API binding` (53 chars) | *Limit:* 35 – 70 chars
@@ -645,29 +645,25 @@ This document compiles **every user-facing text element across all 8 pages of th
 
 ---
 
-### Drifting Channels (5 Stage Slots)
+### Drifting Channels (4 Stage Slots)
 *Interactive drifting links with label and revealed handle/tag on hover.*
 
 * **Channel 1 (Coordinates: 20% / 16%):**
   * *Label:* `Email` (5 chars) | *Limit:* 4 – 12 chars
   * *Tag / Handle:* `tetiana.burlachenko@gmail.com` (29 chars) | *Limit:* 20 – 35 chars
   * *Link:* `mailto:tetiana.burlachenko@gmail.com`
-* **Channel 2 (Coordinates: 78% / 13%):**
-  * *Label:* `Behance` (7 chars) | *Limit:* 4 – 12 chars
-  * *Tag / Handle:* `behance.net/tetianaburlachenko` (29 chars) | *Limit:* 20 – 35 chars
-  * *Link:* `https://www.behance.net/tetianaburlachenko`
-* **Channel 3 (Coordinates: 84% / 63%):**
-  * *Label:* `Instagram` (9 chars) | *Limit:* 4 – 12 chars
-  * *Tag / Handle:* `instagram.com/tb_dyki` (21 chars) | *Limit:* 15 – 30 chars
-  * *Link:* `https://www.instagram.com/tb_dyki`
-* **Channel 4 (Coordinates: 15% / 68%):**
+* **Channel 2 (Coordinates: 78% / 16%):**
+  * *Label:* `LinkedIn` (8 chars) | *Limit:* 4 – 12 chars
+  * *Tag / Handle:* `linkedin.com/in/tetianaburlachenko` (33 chars) | *Limit:* 20 – 38 chars
+  * *Link:* `https://www.linkedin.com/in/tetianaburlachenko/`
+* **Channel 3 (Coordinates: 18% / 74%):**
   * *Label:* `Medium` (6 chars) | *Limit:* 4 – 12 chars
   * *Tag / Handle:* `medium.com/@tayadyki` (20 chars) | *Limit:* 15 – 30 chars
   * *Link:* `https://medium.com/@tayadyki`
-* **Channel 5 (Coordinates: 48% / 84%):**
-  * *Label:* `Dribbble` (8 chars) | *Limit:* 4 – 12 chars
-  * *Tag / Handle:* `dribbble.com/dyki_design` (24 chars) | *Limit:* 15 – 30 chars
-  * *Link:* `https://dribbble.com/dyki_design`
+* **Channel 4 (Coordinates: 80% / 74%):**
+  * *Label:* `Instagram` (9 chars) | *Limit:* 4 – 12 chars
+  * *Tag / Handle:* `instagram.com/tb_dyki` (21 chars) | *Limit:* 15 – 30 chars
+  * *Link:* `https://www.instagram.com/tb_dyki`
 
 ---
 
