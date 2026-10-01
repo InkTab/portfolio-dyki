@@ -59,6 +59,36 @@
     });
   })();
 
+  /* ---------------- Process reveal ---------------- */
+
+  /* The detailed process sits folded behind a standing rule until the reader
+     asks for it. Opening is one-way: the rule steps aside and the section takes
+     its place in the lane, so there is nothing left to close. Everything on the
+     page that positions artwork measured the section while it had no box, and
+     all of it re-measures on resize, so one is sent once the box exists. */
+  (function () {
+    var btns = document.querySelectorAll('.cs__reveal');
+    Array.prototype.forEach.call(btns, function (btn) {
+      var panel = document.getElementById(btn.getAttribute('aria-controls'));
+      if (!panel) return;
+
+      btn.addEventListener('click', function () {
+        panel.hidden = false;
+        btn.setAttribute('aria-expanded', 'true');
+        btn.hidden = true;
+        window.dispatchEvent(new Event('resize'));
+
+        /* The button is gone, so focus would fall back to the body; it moves to
+           the section's own heading instead, where the reader asked to go. */
+        var heading = panel.querySelector('h2');
+        if (heading) {
+          heading.setAttribute('tabindex', '-1');
+          heading.focus({ preventScroll: true });
+        }
+      });
+    });
+  })();
+
   /* ---------------- Long name marquee ---------------- */
 
   (function () {
