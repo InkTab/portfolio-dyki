@@ -68,41 +68,25 @@ This document compiles **every user-facing text element across all 8 pages of th
   * **Hover Reveal Tooltip (on "Taya"):** `AKA Tetiana Burlachenko` (23 chars)
     * *Limit:* **15 – 30 chars** (Centered mono badge tooltip, `white-space: nowrap`)
 
-### 4. Floating Drifting Ideas (8 Stage Slots)
-*Floating interactive nodes distributed across the canvas. Each node has a title label, a category tag, and optional sparks.*
+### 4. Floating Drifting Ideas (4 Stage Slots)
+*Floating interactive nodes distributed across the canvas linking to case studies. Each node has a title label, a category tag, and hover sparks.*
 
-* **Idea 1 (Coordinates: 20% / 18% — links to `kynso.html`):**
+* **Idea 1 (Coordinates: 20% / 20% — links to `kynso.html`):**
   * *Label:* `Kynso Fitness App` (17 chars) | *Limit:* 15 – 30 chars
   * *Tag:* `Case study →` (12 chars) | *Limit:* 10 – 16 chars
   * *Sparks:* `design system`, `branding`, `research`, `user testing`, `marketing`, `prototyping`
 
-* **Idea 2 (Coordinates: 50% / 6%):**
-  * *Label:* `Board game character sheet tracker` (34 chars) | *Limit:* 15 – 35 chars
-  * *Tag:* `Prototype` (9 chars) | *Limit:* 8 – 16 chars
-
-* **Idea 3 (Coordinates: 84% / 9%):**
-  * *Label:* `Flower delivery app` (19 chars) | *Limit:* 15 – 30 chars
-  * *Tag:* `Design prototype` (16 chars) | *Limit:* 8 – 16 chars
-
-* **Idea 4 (Coordinates: 74% / 24% — links to `quantistry.html`):**
+* **Idea 2 (Coordinates: 78% / 20% — links to `quantistry.html`):**
   * *Label:* `Quantum Chemistry Startup Website` (33 chars) | *Limit:* 15 – 35 chars
   * *Tag:* `Case study →` (12 chars) | *Limit:* 10 – 16 chars
   * *Sparks:* `user interviews`, `research`, `pitch deck design`, `website design`
 
-* **Idea 5 (Coordinates: 7% / 68%):**
-  * *Label:* `ADHD todo list` (14 chars) | *Limit:* 12 – 30 chars
-  * *Tag:* `Prototype` (9 chars) | *Limit:* 8 – 16 chars
-
-* **Idea 6 (Coordinates: 80% / 82% — links to `supplement.html`):**
+* **Idea 3 (Coordinates: 20% / 78% — links to `supplement.html`):**
   * *Label:* `Supplement Checkout Fix` (23 chars) | *Limit:* 15 – 30 chars
   * *Tag:* `Case study →` (12 chars) | *Limit:* 10 – 16 chars
   * *Sparks:* `data analysis`, `UI design`, `UX design`
 
-* **Idea 7 (Coordinates: 16% / 88%):**
-  * *Label:* `Synonyms lookup` (15 chars) | *Limit:* 12 – 30 chars
-  * *Tag:* `Prototype` (9 chars) | *Limit:* 8 – 16 chars
-
-* **Idea 8 (Coordinates: 52% / 86% — links to `mx2.html`):**
+* **Idea 4 (Coordinates: 78% / 78% — links to `mx2.html`):**
   * *Label:* `Marketing AI Service` (20 chars) | *Limit:* 15 – 30 chars
   * *Tag:* `Case study →` (12 chars) | *Limit:* 10 – 16 chars
   * *Sparks:* `product design`, `design system`, `research`, `branding`, `user testing`
@@ -641,7 +625,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 * **Hint (Top Center):** `Hover a channel` (15 chars) | *Limit:* 10 – 22 chars (Mono 10px uppercase)
 * **Lead Headline (H1):** `Let’s talk about what you’re building` (37 chars) | *Limit:* 25 – 50 chars
   * *Rationale:* Bold Bricolage Grotesque display font (`clamp(2.15rem, 4.9vw, 3.5rem)`).
-* **Subheading:** `Email is the fastest way in. The rest is where the work lives.` (62 chars) | *Limit:* 40 – 75 chars
+* **Subheading:** `I’d love to know what you do and how. Email me and I’ll answer as soon as I can.` (76 chars) | *Limit:* 40 – 80 chars
 
 ---
 

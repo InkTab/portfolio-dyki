@@ -65,27 +65,72 @@
     </svg>
   </button>
 
-  <section class="ia" id="ideas">
-    <p class="ia__hint">Hover an idea</p>
-    <nav class="ia__rail" aria-label="Section links">
-      <div class="ia__rail-main">
-        <a class="ia__rail-link ia__rail-link--active" href="#ideas" aria-current="page">Home</a>
-        <span class="ia__rail-rule" aria-hidden="true"></span>
-        <a class="ia__rail-link" href="about.html">About me</a>
-        <span class="ia__rail-rule" aria-hidden="true"></span>
-        <a class="ia__rail-link" href="contact.html">Contact</a>
+  <!-- Persistent Top Navigation -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav__left">
+      <a class="nav__home is-active" href="index.html" aria-label="Home" aria-current="page" title="Home">
+        <svg class="nav__icon nav__icon--home" viewBox="0 0 16 16" width="16" height="16" fill="none"
+          stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+          focusable="false">
+          <path d="M3 6.5 8 2.5l5 4V13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Z" />
+        </svg>
+      </a>
+    </div>
+    <div class="nav__center">
+      <div class="nav__dropdown">
+        <button class="nav__dropdown-btn" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="nav-cs-menu" id="nav-cs-btn">
+          <span>Case studies</span>
+          <svg class="nav__dropdown-caret" viewBox="0 0 10 10" width="10" height="10" fill="none"
+            stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+            focusable="false">
+            <path d="M2.5 3.75 5 6.25 7.5 3.75" />
+          </svg>
+        </button>
+        <div class="nav__dropdown-menu" id="nav-cs-menu" role="menu" aria-labelledby="nav-cs-btn">
+          <a class="nav__dropdown-link" href="kynso.html" role="menuitem">
+            <span class="nav__dropdown-name">Kynso</span>
+            <span class="nav__dropdown-meta">Fitness App</span>
+          </a>
+          <a class="nav__dropdown-link" href="quantistry.html" role="menuitem">
+            <span class="nav__dropdown-name">Quantistry</span>
+            <span class="nav__dropdown-meta">Quantum Chemistry</span>
+          </a>
+          <a class="nav__dropdown-link" href="supplement.html" role="menuitem">
+            <span class="nav__dropdown-name">Supplement</span>
+            <span class="nav__dropdown-meta">Checkout Fix</span>
+          </a>
+          <a class="nav__dropdown-link" href="mx2.html" role="menuitem">
+            <span class="nav__dropdown-name">MX2</span>
+            <span class="nav__dropdown-meta">Marketing AI</span>
+          </a>
+        </div>
       </div>
-      <a class="ia__rail-cv" href="assets/Tetiana-Burlachenko-Product-Designer.pdf" download
-        aria-label="Download CV (PDF)">
-        <span class="ia__rail-cv-label">CV</span>
-        <svg class="ia__rail-cv-icon" viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor"
-          stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <a class="nav__link nav__link--about" href="about.html">About me</a>
+    </div>
+    <div class="nav__right">
+      <a class="nav__cv" href="assets/Tetiana-Burlachenko-Product-Designer.pdf" download aria-label="Download CV (PDF)" title="Download CV">
+        <span>CV</span>
+        <svg class="nav__icon--cv" viewBox="0 0 16 16" width="13" height="13" fill="none"
+          stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+          focusable="false">
           <path d="M8 1.7v8.1" />
           <path d="M4.7 6.5 8 9.8l3.3-3.3" />
           <path d="M2.2 12.2v1.3c0 .4.4.8.8.8h10c.4 0 .8-.4.8-.8v-1.3" />
         </svg>
       </a>
-    </nav>
+      <a class="nav__contact" href="contact.html" aria-label="Contact" title="Contact">
+        <svg class="nav__icon nav__icon--contact" viewBox="0 0 16 16" width="16" height="16" fill="none"
+          stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+          focusable="false">
+          <rect x="2" y="3.5" width="12" height="9" rx="1.5" />
+          <path d="m2.5 4 5.5 4.5 5.5-4.5" />
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <section class="ia" id="ideas">
+    <p class="ia__hint">Hover an idea</p>
     <div class="ia__stage">
       <div class="ia__core">
         <p class="ia__lead"><span class="ia__lead-line">Product Designer aligning</span> <span
@@ -105,7 +150,7 @@
         <h1 class="ia__name">Hey, I&rsquo;m <span class="ia__who" tabindex="0">Taya<span class="ia__real">AKA Tetiana
               Burlachenko</span></span>. I turn complex problems into clear products</h1>
       </div>
-      <div class="ia__slot" style="--x:18%;--y:20%">
+      <div class="ia__slot" style="--x:20%;--y:20%;--enter-d:1.0s">
         <div class="ia__drift" style="--dur:16s;--delay:0s">
           <a class="ia__idea ia__idea--link" href="kynso.html" style="--s:1.12"><span class="ia__label">Kynso Fitness
               App</span><span class="ia__tag">Case study &rarr;</span><span class="ia__spark ia__spark--a"
@@ -119,8 +164,8 @@
               aria-hidden="true" style="--sx:42px;--sy:0px;--d:.44s">prototyping</span></a>
         </div>
       </div>
-      <div class="ia__slot" style="--x:77%;--y:21%">
-        <div class="ia__drift" style="--dur:15s;--delay:-2s">
+      <div class="ia__slot" style="--x:78%;--y:20%;--enter-d:1.22s">
+        <div class="ia__drift ia__drift--b" style="--dur:15s;--delay:-3s">
           <a class="ia__idea ia__idea--link" href="quantistry.html" style="--s:0.95"><span class="ia__label">Quantum
               Chemistry Startup Website</span><span class="ia__tag">Case study &rarr;</span><span
               class="ia__spark ia__spark--a" aria-hidden="true" style="--sx:-56px;--sy:0px;--d:.04s">user
@@ -130,8 +175,8 @@
               aria-hidden="true" style="--sx:54px;--sy:0px;--d:.28s">website design</span></a>
         </div>
       </div>
-      <div class="ia__slot" style="--x:80%;--y:82%">
-        <div class="ia__drift ia__drift--c" style="--dur:14s;--delay:-5s">
+      <div class="ia__slot" style="--x:20%;--y:78%;--enter-d:1.44s">
+        <div class="ia__drift ia__drift--c" style="--dur:17s;--delay:-7s">
           <a class="ia__idea ia__idea--link" href="supplement.html" style="--s:1.06"><span class="ia__label">Supplement
               Checkout Fix</span><span class="ia__tag">Case study &rarr;</span><span class="ia__spark ia__spark--a"
               aria-hidden="true" style="--sx:-32px;--sy:0px;--d:.04s">data analysis</span><span
@@ -139,8 +184,8 @@
               class="ia__spark ia__spark--b" aria-hidden="true" style="--sx:-48px;--sy:0px;--d:.2s">UX design</span></a>
         </div>
       </div>
-      <div class="ia__slot" style="--x:50%;--y:87%">
-        <div class="ia__drift ia__drift--b" style="--dur:16s;--delay:-6s">
+      <div class="ia__slot" style="--x:78%;--y:78%;--enter-d:1.66s">
+        <div class="ia__drift ia__drift--b" style="--dur:14s;--delay:-5s">
           <a class="ia__idea ia__idea--link" href="mx2.html" style="--s:1.02"><span class="ia__label">Marketing AI
               Service</span><span class="ia__tag">Case study &rarr;</span><span class="ia__spark ia__spark--a"
               aria-hidden="true" style="--sx:-53px;--sy:0px;--d:.04s">product design</span><span
@@ -149,30 +194,6 @@
               style="--sx:0px;--sy:0px;--d:.2s">research</span><span class="ia__spark ia__spark--r" aria-hidden="true"
               style="--sx:0px;--sy:0px;--d:.28s">branding</span><span class="ia__spark ia__spark--b" aria-hidden="true"
               style="--sx:-46px;--sy:0px;--d:.36s">user testing</span></a>
-        </div>
-      </div>
-      <div class="ia__slot" style="--x:48%;--y:7%">
-        <div class="ia__drift ia__drift--c" style="--dur:18s;--delay:-7s">
-          <span class="ia__idea" style="--s:0.92"><span class="ia__label">Board game character sheet tracker</span><span
-              class="ia__tag">Prototype</span></span>
-        </div>
-      </div>
-      <div class="ia__slot" style="--x:84%;--y:8%">
-        <div class="ia__drift ia__drift--b" style="--dur:13s;--delay:-4s">
-          <span class="ia__idea" style="--s:1.04"><span class="ia__label">Flower delivery app</span><span
-              class="ia__tag">Design prototype</span></span>
-        </div>
-      </div>
-      <div class="ia__slot" style="--x:8%;--y:67%">
-        <div class="ia__drift ia__drift--b" style="--dur:17s;--delay:-9s">
-          <span class="ia__idea" style="--s:1.0"><span class="ia__label">ADHD todo list</span><span
-              class="ia__tag">Prototype</span></span>
-        </div>
-      </div>
-      <div class="ia__slot" style="--x:18%;--y:87%">
-        <div class="ia__drift" style="--dur:19s;--delay:-11s">
-          <span class="ia__idea" style="--s:0.94"><span class="ia__label">Synonyms lookup</span><span
-              class="ia__tag">Prototype</span></span>
         </div>
       </div>
     </div>
