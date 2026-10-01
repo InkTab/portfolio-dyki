@@ -191,9 +191,9 @@ a { color: inherit; }
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  background: rgba(248, 247, 255, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  /* No ground of its own: the bar is type printed straight onto the paper,
+     like every other piece of page chrome. */
+  background: transparent;
   border: none;
   isolation: isolate;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
@@ -201,7 +201,7 @@ a { color: inherit; }
 [data-theme="dark"] .nav,
 [data-theme="dark"] .rail,
 [data-theme="dark"] .ia__rail {
-  background: rgba(17, 19, 22, 0.92);
+  background: transparent;
   border: none;
 }
 
@@ -530,6 +530,18 @@ a { color: inherit; }
   transition: opacity .3s, transform .3s;
 }
 .ia__who:hover .ia__real, .ia__who:focus .ia__real { opacity: 1; transform: translate(-50%, 0); }
+/* The invitation to hover sits at the foot of the canvas rather than in the
+   introduction: it is an instruction about the page, not part of who the
+   introduction says Taya is. Centred on the bottom edge at the theme toggle's
+   own inset, so it sits between the fixed privacy link and the toggle without
+   meeting either. Faded to 30% opacity so it reads as a quiet aside under the
+   composition rather than a second heading. */
+.ia__foot {
+  position: absolute; left: 50%; bottom: clamp(20px, 3vh, 32px); transform: translateX(-50%);
+  z-index: 3; margin: 0; white-space: nowrap;
+  font-size: clamp(.95rem, 1.3vw, 1.06rem); font-weight: 400; color: var(--ink);
+  opacity: .3;
+}
 .ia__core:has(.ia__word:hover) .ia__name,
 .ia__core:has(.ia__word:focus) .ia__name { opacity: 0; }
 
@@ -555,24 +567,34 @@ a { color: inherit; }
 .ia__word:nth-of-type(2) { animation-delay: .18s; }
 .ia__word:hover, .ia__word:focus { border-bottom-color: var(--ink); }
 
-.ia__hint {
-  position: absolute; top: clamp(26px, 5vh, 52px); left: 50%; transform: translateX(-50%); z-index: 4;
-  margin: 0;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--tag);
-}
+/* Each link enters from the corner of the canvas it settles nearest, so the four
+   arrive as one movement converging on the name rather than four fades. --ex /
+   --ey are the corner's signs (-1 left/top, 1 right/bottom), passed inline per
+   slot; the travel is in viewport units because the slots sit at fixed
+   percentages of a stage that spans the viewport, so 24vw × 30vh carries a
+   slot from roughly its corner to its resting place at any window size. The
+   section's overflow: hidden clips the off-canvas start.
 
+   The path is not a straight line: a damped sine pushes the slot 36px to one
+   side of its travel and then the other, so it swings in on a soft S and
+   settles, with a sub-degree tilt that follows the swing. The stops are
+   sampled from that curve (travel eased out cubically, the wave decaying to
+   zero at rest) and played linearly, because easing between dense stops would
+   brake the slot at every one of them. */
 @keyframes iaSlotEnter {
-  from {
-    opacity: 0;
-    transform: translate(-50%, calc(-50% + 22px));
-    pointer-events: none;
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-    pointer-events: auto;
-  }
+  0% { opacity: 0; transform: translate(calc(-50% + var(--ex, 0) * 24vw + var(--ey, 1) * 0px), calc(-50% + var(--ey, 1) * 30vh - var(--ex, 0) * 0px)) rotate(calc(var(--ex, 0) * 0deg)); pointer-events: none; }
+  6% { opacity: 0.061; transform: translate(calc(-50% + var(--ex, 0) * 19.934vw + var(--ey, 1) * 12.153px), calc(-50% + var(--ey, 1) * 24.918vh - var(--ex, 0) * 12.153px)) rotate(calc(var(--ex, 0) * 0.304deg)); pointer-events: none; }
+  12% { opacity: 0.216; transform: translate(calc(-50% + var(--ex, 0) * 16.355vw + var(--ey, 1) * 20.605px), calc(-50% + var(--ey, 1) * 20.444vh - var(--ex, 0) * 20.605px)) rotate(calc(var(--ex, 0) * 0.515deg)); pointer-events: none; }
+  18% { opacity: 0.425; transform: translate(calc(-50% + var(--ex, 0) * 13.233vw + var(--ey, 1) * 24.672px), calc(-50% + var(--ey, 1) * 16.541vh - var(--ex, 0) * 24.672px)) rotate(calc(var(--ex, 0) * 0.617deg)); pointer-events: none; }
+  25% { opacity: 0.684; transform: translate(calc(-50% + var(--ex, 0) * 10.125vw + var(--ey, 1) * 24.065px), calc(-50% + var(--ey, 1) * 12.656vh - var(--ex, 0) * 24.065px)) rotate(calc(var(--ex, 0) * 0.602deg)); pointer-events: none; }
+  32% { opacity: 0.896; transform: translate(calc(-50% + var(--ex, 0) * 7.546vw + var(--ey, 1) * 18.984px), calc(-50% + var(--ey, 1) * 9.433vh - var(--ex, 0) * 18.984px)) rotate(calc(var(--ex, 0) * 0.475deg)); pointer-events: none; }
+  40% { opacity: 1; transform: translate(calc(-50% + var(--ex, 0) * 5.184vw + var(--ey, 1) * 10.35px), calc(-50% + var(--ey, 1) * 6.48vh - var(--ex, 0) * 10.35px)) rotate(calc(var(--ex, 0) * 0.259deg)); pointer-events: none; }
+  50% { opacity: 1; transform: translate(calc(-50% + var(--ex, 0) * 3vw + var(--ey, 1) * 0px), calc(-50% + var(--ey, 1) * 3.75vh - var(--ex, 0) * 0px)) rotate(calc(var(--ex, 0) * 0deg)); pointer-events: none; }
+  60% { opacity: 1; transform: translate(calc(-50% + var(--ex, 0) * 1.536vw + var(--ey, 1) * -5.867px), calc(-50% + var(--ey, 1) * 1.92vh - var(--ex, 0) * -5.867px)) rotate(calc(var(--ex, 0) * -0.147deg)); pointer-events: none; }
+  70% { opacity: 1; transform: translate(calc(-50% + var(--ex, 0) * 0.648vw + var(--ey, 1) * -6.346px), calc(-50% + var(--ey, 1) * 0.81vh - var(--ex, 0) * -6.346px)) rotate(calc(var(--ex, 0) * -0.159deg)); pointer-events: none; }
+  80% { opacity: 1; transform: translate(calc(-50% + var(--ex, 0) * 0.192vw + var(--ey, 1) * -3.597px), calc(-50% + var(--ey, 1) * 0.24vh - var(--ex, 0) * -3.597px)) rotate(calc(var(--ex, 0) * -0.09deg)); pointer-events: none; }
+  90% { opacity: 1; transform: translate(calc(-50% + var(--ex, 0) * 0.024vw + var(--ey, 1) * -0.842px), calc(-50% + var(--ey, 1) * 0.03vh - var(--ex, 0) * -0.842px)) rotate(calc(var(--ex, 0) * -0.021deg)); pointer-events: none; }
+  100% { opacity: 1; transform: translate(-50%, -50%); pointer-events: auto; }
 }
 
 .ia__slot {
@@ -581,12 +603,12 @@ a { color: inherit; }
   top: var(--y);
   transform: translate(-50%, -50%);
   z-index: 2;
-  animation: iaSlotEnter .75s cubic-bezier(.2,.7,.3,1) var(--enter-d, 1.0s) both;
+  animation: iaSlotEnter 1.6s linear var(--enter-d, 1.0s) both;
 }
 .ia__slot:nth-child(2) { --enter-d: 1.0s; }
-.ia__slot:nth-child(3) { --enter-d: 1.22s; }
-.ia__slot:nth-child(4) { --enter-d: 1.44s; }
-.ia__slot:nth-child(5) { --enter-d: 1.66s; }
+.ia__slot:nth-child(3) { --enter-d: 1.4s; }
+.ia__slot:nth-child(4) { --enter-d: 1.8s; }
+.ia__slot:nth-child(5) { --enter-d: 2.2s; }
 
 .ia__slot:hover, .ia__slot:focus-within { z-index: 4; }
 .ia__drift {
@@ -3536,12 +3558,6 @@ a { color: inherit; }
   padding-right: clamp(92px, 7vw, 124px);   /* clearance for fixed rail */
   transition: background-color .3s ease, color .3s ease;
 }
-.ct__hint {
-  position: absolute; top: clamp(26px, 5vh, 52px); left: 50%; transform: translateX(-50%); z-index: 4;
-  margin: 0;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--tag);
-}
 .ct__stage {
   position: relative; z-index: 2;
   width: 100%; max-width: 1360px; margin: 0 auto;
@@ -3810,7 +3826,9 @@ a { color: inherit; }
   .ia__stage { min-height: 0; min-width: 0; display: block; justify-items: start; }
   .ia__core { max-width: none; text-align: left; margin: 0 0 clamp(30px, 6vh, 46px); }
   .ia__core::before { display: none; }
-  .ia__hint { display: none; }
+  /* The stacked list runs past the fold, so a caption pinned to the section's
+     bottom edge would land over the last link; it follows the list instead. */
+  .ia__foot { position: static; transform: none; white-space: normal; margin: 8px 0 0; }
   .ia {
     padding-inline: var(--gutter);
     padding-top: max(clamp(52px, 6.5vh, 62px) + 24px, 84px);
@@ -3829,24 +3847,30 @@ a { color: inherit; }
     -webkit-box-decoration-break: clone; box-decoration-break: clone;
   }
   .ia__lead { font-size: clamp(1.75rem, 7.4vw, 2.6rem); line-height: 1.06; }
+  /* The stacked list has no corners to come from, so each link keeps only the
+     horizontal half of its corner (left-column links from the left, right from
+     the right) and a shallower version of the same damped wave. */
   @keyframes iaSlotEnterMobile {
-    from {
-      opacity: 0;
-      transform: translateY(18px);
-      pointer-events: none;
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
+    0% { opacity: 0; transform: translate(calc(var(--ex, 0) * 48px), 0px) rotate(calc(var(--ex, 0) * 0deg)); pointer-events: none; }
+    6% { opacity: 0.061; transform: translate(calc(var(--ex, 0) * 39.868px), 2.025px) rotate(calc(var(--ex, 0) * 0.203deg)); pointer-events: none; }
+    12% { opacity: 0.216; transform: translate(calc(var(--ex, 0) * 32.711px), 3.434px) rotate(calc(var(--ex, 0) * 0.343deg)); pointer-events: none; }
+    18% { opacity: 0.425; transform: translate(calc(var(--ex, 0) * 26.466px), 4.112px) rotate(calc(var(--ex, 0) * 0.411deg)); pointer-events: none; }
+    25% { opacity: 0.684; transform: translate(calc(var(--ex, 0) * 20.25px), 4.011px) rotate(calc(var(--ex, 0) * 0.401deg)); pointer-events: none; }
+    32% { opacity: 0.896; transform: translate(calc(var(--ex, 0) * 15.093px), 3.164px) rotate(calc(var(--ex, 0) * 0.316deg)); pointer-events: none; }
+    40% { opacity: 1; transform: translate(calc(var(--ex, 0) * 10.368px), 1.725px) rotate(calc(var(--ex, 0) * 0.172deg)); pointer-events: none; }
+    50% { opacity: 1; transform: translate(calc(var(--ex, 0) * 6px), 0px) rotate(calc(var(--ex, 0) * 0deg)); pointer-events: none; }
+    60% { opacity: 1; transform: translate(calc(var(--ex, 0) * 3.072px), -0.978px) rotate(calc(var(--ex, 0) * -0.098deg)); pointer-events: none; }
+    70% { opacity: 1; transform: translate(calc(var(--ex, 0) * 1.296px), -1.058px) rotate(calc(var(--ex, 0) * -0.106deg)); pointer-events: none; }
+    80% { opacity: 1; transform: translate(calc(var(--ex, 0) * 0.384px), -0.6px) rotate(calc(var(--ex, 0) * -0.06deg)); pointer-events: none; }
+    90% { opacity: 1; transform: translate(calc(var(--ex, 0) * 0.048px), -0.14px) rotate(calc(var(--ex, 0) * -0.014deg)); pointer-events: none; }
+    100% { opacity: 1; transform: none; pointer-events: auto; }
   }
   .ia__slot {
     position: static;
     transform: none;
     margin: 0 0 26px;
     justify-self: stretch;
-    animation: iaSlotEnterMobile .75s cubic-bezier(.2,.7,.3,1) var(--enter-d, 1.0s) both;
+    animation: iaSlotEnterMobile 1.1s linear var(--enter-d, 1.0s) both;
   }
   .ia__drift { animation: none; }
   .ia__idea {
@@ -4018,7 +4042,6 @@ a { color: inherit; }
   .ct__stage { min-height: 0; display: block; justify-items: start; }
   .ct__core { max-width: none; text-align: left; margin: 0 0 clamp(30px, 6vh, 46px); }
   .ct__core::before { display: none; }
-  .ct__hint { display: none; }
   .ct__lead { font-size: clamp(1.75rem, 7.4vw, 2.6rem); line-height: 1.06; }
   .ct__slot { position: static; transform: none; margin: 0 0 26px; }
   .ct__drift { animation: none; }
