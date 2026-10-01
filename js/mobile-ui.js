@@ -61,29 +61,100 @@
 
   /* ---------------- Process reveal ---------------- */
 
-  /* The detailed process sits folded behind a standing rule until the reader
-     asks for it. Opening is one-way: the rule steps aside and the section takes
-     its place in the lane, so there is nothing left to close. Everything on the
-     page that positions artwork measured the section while it had no box, and
-     all of it re-measures on resize, so one is sent once the box exists. */
+  /* The detailed process sits folded behind a shaded strip until the reader
+     asks for it. Opening is one-way: the strip steps aside and the section takes
+     its place in the lane, so there is nothing left to close.
+
+     The opening reads as the strip itself widening: the section is uncovered
+     from the strip's own edge out to the far side of the window, starting in
+     the strip's shade and settling to the paper, and its contents rise in one
+     after another behind that edge. Only what is on screen is wiped -- the
+     section runs several windows long, and a wipe across all of it would cross
+     the visible part in a flicker. Stacked, the same thing happens downwards. */
   (function () {
+    var EASE = 'cubic-bezier(.65,0,.35,1)';
     var btns = document.querySelectorAll('.cs__reveal');
+
+    function unfold(btn, panel) {
+      var strip = btn.getBoundingClientRect();
+      var shade = window.getComputedStyle(btn).backgroundColor;
+      var down = MOBILE.matches;
+
+      panel.hidden = false;
+      btn.hidden = true;
+
+      if (STILL.matches || !panel.animate) return;
+
+      var box = panel.getBoundingClientRect();
+      var clipFrom, clipTo;
+      if (down) {
+        var h = box.height;
+        var shownH = Math.min(h, Math.max(strip.height, window.innerHeight - box.top));
+        clipFrom = 'inset(0 0 ' + Math.max(0, h - strip.height) + 'px 0)';
+        clipTo = 'inset(0 0 ' + Math.max(0, h - shownH) + 'px 0)';
+      } else {
+        var w = box.width;
+        var rail = document.querySelector('.rail');
+        var edge = window.innerWidth - (rail ? rail.offsetWidth : 0);
+        var shownW = Math.min(w, Math.max(strip.width, edge - box.left));
+        clipFrom = 'inset(0 ' + Math.max(0, w - strip.width) + 'px 0 0)';
+        clipTo = 'inset(0 ' + Math.max(0, w - shownW) + 'px 0 0)';
+      }
+
+      panel.animate([
+        { clipPath: clipFrom, backgroundColor: shade },
+        { clipPath: clipTo, backgroundColor: shade, offset: 0.55 },
+        { clipPath: clipTo, backgroundColor: 'rgba(0,0,0,0)' }
+      ], { duration: 1000, easing: EASE });
+
+      var parts = panel.querySelectorAll('.cs__flow-header, .cs__step, .gt__chart, .gt__art');
+      var shift = down ? '0 18px' : '24px 0';
+      Array.prototype.forEach.call(parts, function (el, i) {
+        el.animate([
+          { opacity: 0, translate: shift },
+          { opacity: 1, translate: '0 0' }
+        ], {
+          duration: 650,
+          delay: 260 + Math.min(i, 6) * 90,
+          easing: 'cubic-bezier(.2,.7,.3,1)',
+          fill: 'backwards'
+        });
+      });
+    }
+
     Array.prototype.forEach.call(btns, function (btn) {
       var panel = document.getElementById(btn.getAttribute('aria-controls'));
       if (!panel) return;
+      var label = btn.querySelector('.cs__reveal-label');
+      var busy = false;
 
       btn.addEventListener('click', function () {
-        panel.hidden = false;
+        if (busy) return;
+        busy = true;
         btn.setAttribute('aria-expanded', 'true');
-        btn.hidden = true;
-        window.dispatchEvent(new Event('resize'));
 
-        /* The button is gone, so focus would fall back to the body; it moves to
-           the section's own heading instead, where the reader asked to go. */
-        var heading = panel.querySelector('h2');
-        if (heading) {
-          heading.setAttribute('tabindex', '-1');
-          heading.focus({ preventScroll: true });
+        function open() {
+          unfold(btn, panel);
+          /* Everything on the page that positions artwork measured the section
+             while it had no box, and all of it re-measures on resize. */
+          window.dispatchEvent(new Event('resize'));
+
+          /* The button is gone, so focus would fall back to the body; it moves
+             to the section's own heading instead, where the reader asked to go. */
+          var heading = panel.querySelector('h2');
+          if (heading) {
+            heading.setAttribute('tabindex', '-1');
+            heading.focus({ preventScroll: true });
+          }
+        }
+
+        /* the label clears first, so the strip is empty when it starts to widen */
+        if (label && label.animate && !STILL.matches) {
+          label.animate([{ opacity: 1 }, { opacity: 0 }],
+                        { duration: 160, easing: 'ease-out', fill: 'forwards' })
+               .onfinish = open;
+        } else {
+          open();
         }
       });
     });
