@@ -542,9 +542,9 @@ a { color: inherit; }
   transition: background-color .3s ease;
 }
 .cs__reveal:hover, .cs__reveal:focus-visible { background: var(--strip-hover); }
-/* the strip is its own edge, so the section after it drops its hairline while
-   the process is still folded away between them */
-.cs__reveal + [hidden] + * { border-left: 0; border-top: 0; }
+/* a strip is its own edge, so the section that follows the process drops its
+   hairline -- it always meets one strip or the other */
+.cs__reveal--close + * { border-left: 0; border-top: 0; }
 .cs__reveal-label {
   position: relative; isolation: isolate;
   writing-mode: vertical-rl;

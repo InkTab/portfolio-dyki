@@ -62,101 +62,189 @@
   /* ---------------- Process reveal ---------------- */
 
   /* The detailed process sits folded behind a shaded strip until the reader
-     asks for it. Opening is one-way: the strip steps aside and the section takes
-     its place in the lane, so there is nothing left to close.
+     asks for it, and a matching strip at its far end folds it away again.
 
-     The opening reads as the strip itself widening: the section is uncovered
-     from the strip's own edge out to the far side of the window, starting in
-     the strip's shade and settling to the paper, and its contents rise in one
-     after another behind that edge. Only what is on screen is wiped -- the
-     section runs several windows long, and a wipe across all of it would cross
-     the visible part in a flicker. Stacked, the same thing happens downwards. */
+     Opening reads as the strip itself widening: the section is uncovered from
+     the strip's own edge out to the far side of the window, starting in the
+     strip's shade and settling to the paper, and its contents rise in one after
+     another behind that edge. Closing runs the other way: the contents sink,
+     the shade comes back over them, and what is on screen draws in to the close
+     strip, which then becomes the open strip in the same place on screen. Only
+     what is on screen is wiped -- the section runs several windows long, and a
+     wipe across all of it would cross the visible part in a flicker. Stacked,
+     the same thing happens downwards. */
   (function () {
     var EASE = 'cubic-bezier(.65,0,.35,1)';
-    var btns = document.querySelectorAll('.cs__reveal');
+    var RISE = 'cubic-bezier(.2,.7,.3,1)';
+    var CLEAR = 'rgba(0,0,0,0)';
+    var page = document.querySelector('.cs');
 
-    function unfold(btn, panel) {
-      var strip = btn.getBoundingClientRect();
-      var shade = window.getComputedStyle(btn).backgroundColor;
+    function moving() { return !STILL.matches && !!document.body.animate; }
+
+    function partsOf(panel) {
+      return panel.querySelectorAll('.cs__flow-header, .cs__step, .gt__chart, .gt__art');
+    }
+
+    /* the stretch of the panel the reader can actually see, along the lane */
+    function visibleSpan(box, down) {
+      if (down) {
+        return { from: Math.max(0, -box.top),
+                 to: Math.min(box.height, window.innerHeight - box.top) };
+      }
+      var rail = document.querySelector('.rail');
+      var edge = window.innerWidth - (rail ? rail.offsetWidth : 0);
+      return { from: Math.max(0, -box.left), to: Math.min(box.width, edge - box.left) };
+    }
+
+    /* inset() along the lane only: a = start edge, b = end edge, both in px */
+    function inset(down, a, b) {
+      return down ? 'inset(' + a + 'px 0 ' + b + 'px 0)'
+                  : 'inset(0 ' + b + 'px 0 ' + a + 'px)';
+    }
+
+    /* Everything on the page that positions artwork measures the section, and
+       all of it re-measures on resize. */
+    function remeasure() { window.dispatchEvent(new Event('resize')); }
+
+    function focusEl(el) {
+      if (el.tagName === 'H2') { el.setAttribute('tabindex', '-1'); }
+      el.focus({ preventScroll: true });
+    }
+
+    function fadeLabel(btn, to, done) {
+      var label = btn.querySelector('.cs__reveal-label');
+      if (!label || !moving()) { if (done) { done(); } return; }
+      var a = label.animate([{ opacity: 1 - to }, { opacity: to }],
+                            { duration: 160, easing: 'ease-out', fill: done ? 'none' : 'forwards' });
+      if (done) {
+        /* held until the strip is swapped out, so it cannot flash back */
+        label.style.opacity = String(to);
+        a.onfinish = function () { label.style.opacity = ''; done(); };
+      }
+    }
+
+    function clearLabel(btn) {
+      var label = btn && btn.querySelector('.cs__reveal-label');
+      if (label && label.getAnimations) {
+        label.getAnimations().forEach(function (x) { x.cancel(); });
+      }
+    }
+
+    function open(openBtn, closeBtn, panel) {
+      var strip = openBtn.getBoundingClientRect();
+      var shade = window.getComputedStyle(openBtn).backgroundColor;
       var down = MOBILE.matches;
 
       panel.hidden = false;
-      btn.hidden = true;
+      openBtn.hidden = true;
+      if (closeBtn) { clearLabel(closeBtn); closeBtn.hidden = false; }
+      remeasure();
+      var heading = panel.querySelector('h2');
+      if (heading) { focusEl(heading); }
 
-      if (STILL.matches || !panel.animate) return;
+      if (!moving()) return;
 
       var box = panel.getBoundingClientRect();
-      var clipFrom, clipTo;
-      if (down) {
-        var h = box.height;
-        var shownH = Math.min(h, Math.max(strip.height, window.innerHeight - box.top));
-        clipFrom = 'inset(0 0 ' + Math.max(0, h - strip.height) + 'px 0)';
-        clipTo = 'inset(0 0 ' + Math.max(0, h - shownH) + 'px 0)';
-      } else {
-        var w = box.width;
-        var rail = document.querySelector('.rail');
-        var edge = window.innerWidth - (rail ? rail.offsetWidth : 0);
-        var shownW = Math.min(w, Math.max(strip.width, edge - box.left));
-        clipFrom = 'inset(0 ' + Math.max(0, w - strip.width) + 'px 0 0)';
-        clipTo = 'inset(0 ' + Math.max(0, w - shownW) + 'px 0 0)';
-      }
-
+      var len = down ? box.height : box.width;
+      var stripLen = down ? strip.height : strip.width;
+      var span = visibleSpan(box, down);
+      var shown = Math.max(stripLen, span.to);
       panel.animate([
-        { clipPath: clipFrom, backgroundColor: shade },
-        { clipPath: clipTo, backgroundColor: shade, offset: 0.55 },
-        { clipPath: clipTo, backgroundColor: 'rgba(0,0,0,0)' }
+        { clipPath: inset(down, 0, Math.max(0, len - stripLen)), backgroundColor: shade },
+        { clipPath: inset(down, 0, Math.max(0, len - shown)), backgroundColor: shade, offset: 0.55 },
+        { clipPath: inset(down, 0, Math.max(0, len - shown)), backgroundColor: CLEAR }
       ], { duration: 1000, easing: EASE });
 
-      var parts = panel.querySelectorAll('.cs__flow-header, .cs__step, .gt__chart, .gt__art');
       var shift = down ? '0 18px' : '24px 0';
-      Array.prototype.forEach.call(parts, function (el, i) {
+      Array.prototype.forEach.call(partsOf(panel), function (el, i) {
         el.animate([
           { opacity: 0, translate: shift },
           { opacity: 1, translate: '0 0' }
-        ], {
-          duration: 650,
-          delay: 260 + Math.min(i, 6) * 90,
-          easing: 'cubic-bezier(.2,.7,.3,1)',
-          fill: 'backwards'
-        });
+        ], { duration: 650, delay: 260 + Math.min(i, 6) * 90, easing: RISE, fill: 'backwards' });
       });
     }
 
-    Array.prototype.forEach.call(btns, function (btn) {
-      var panel = document.getElementById(btn.getAttribute('aria-controls'));
+    function close(openBtn, closeBtn, panel, done) {
+      var down = MOBILE.matches;
+      var before = closeBtn.getBoundingClientRect();
+
+      function swap() {
+        panel.hidden = true;
+        closeBtn.hidden = true;
+        clearLabel(closeBtn);
+        clearLabel(openBtn);
+        openBtn.hidden = false;
+        openBtn.setAttribute('aria-expanded', 'false');
+
+        /* the open strip lands exactly where the close strip stood, so the
+           reader is not thrown back across everything that just folded away */
+        var after = openBtn.getBoundingClientRect();
+        if (down) {
+          window.scrollTo({ top: window.scrollY + after.top - before.top, behavior: 'instant' });
+        } else if (page) {
+          page.scrollTo({ left: page.scrollLeft + after.left - before.left, behavior: 'instant' });
+        }
+        remeasure();
+        focusEl(openBtn);
+        fadeLabel(openBtn, 1);
+        done();
+      }
+
+      if (!moving()) { swap(); return; }
+
+      var shade = window.getComputedStyle(closeBtn).backgroundColor;
+      var box = panel.getBoundingClientRect();
+      var len = down ? box.height : box.width;
+      var span = visibleSpan(box, down);
+      var from = Math.min(span.from, len);
+
+      var shift = down ? '0 18px' : '24px 0';
+      Array.prototype.forEach.call(partsOf(panel), function (el) {
+        el.animate([
+          { opacity: 1, translate: '0 0' },
+          { opacity: 0, translate: shift }
+        ], { duration: 320, easing: 'ease-in', fill: 'forwards' });
+      });
+
+      fadeLabel(closeBtn, 0);
+      var a = panel.animate([
+        { clipPath: inset(down, from, 0), backgroundColor: CLEAR },
+        { clipPath: inset(down, from, 0), backgroundColor: shade, offset: 0.35 },
+        { clipPath: inset(down, len, 0), backgroundColor: shade }
+      ], { duration: 900, easing: EASE, fill: 'forwards' });
+
+      a.onfinish = function () {
+        swap();
+        /* the panel is hidden now, so dropping the held end states is invisible */
+        a.cancel();
+        Array.prototype.forEach.call(partsOf(panel), function (el) {
+          el.getAnimations().forEach(function (x) { x.cancel(); });
+        });
+      };
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('.cs__reveal:not(.cs__reveal--close)'), function (openBtn) {
+      var id = openBtn.getAttribute('aria-controls');
+      var panel = document.getElementById(id);
       if (!panel) return;
-      var label = btn.querySelector('.cs__reveal-label');
+      var closeBtn = document.querySelector('.cs__reveal--close[aria-controls="' + id + '"]');
       var busy = false;
 
-      btn.addEventListener('click', function () {
+      openBtn.addEventListener('click', function () {
         if (busy) return;
         busy = true;
-        btn.setAttribute('aria-expanded', 'true');
-
-        function open() {
-          unfold(btn, panel);
-          /* Everything on the page that positions artwork measured the section
-             while it had no box, and all of it re-measures on resize. */
-          window.dispatchEvent(new Event('resize'));
-
-          /* The button is gone, so focus would fall back to the body; it moves
-             to the section's own heading instead, where the reader asked to go. */
-          var heading = panel.querySelector('h2');
-          if (heading) {
-            heading.setAttribute('tabindex', '-1');
-            heading.focus({ preventScroll: true });
-          }
-        }
-
+        openBtn.setAttribute('aria-expanded', 'true');
         /* the label clears first, so the strip is empty when it starts to widen */
-        if (label && label.animate && !STILL.matches) {
-          label.animate([{ opacity: 1 }, { opacity: 0 }],
-                        { duration: 160, easing: 'ease-out', fill: 'forwards' })
-               .onfinish = open;
-        } else {
-          open();
-        }
+        fadeLabel(openBtn, 0, function () { open(openBtn, closeBtn, panel); busy = false; });
       });
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function () {
+          if (busy) return;
+          busy = true;
+          close(openBtn, closeBtn, panel, function () { busy = false; });
+        });
+      }
     });
   })();
 
