@@ -230,7 +230,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 
 * **Eyebrow:** `Case study — Kynso` (19 chars) | *Limit:* 14 – 25 chars
 * **Hook Line (H1):** `The secret to a 6-domain fitness engine was stripping half the UI off the screen.` (78 chars) | *Limit:* 60 – 95 chars
-* **Hook Subtitle:** `Dense trackers collapse during physical exertion. By splitting calm planning from high-intensity training, a 2-person team built an adaptive iOS beta from zero.` (158 chars) | *Limit:* 120 – 180 chars
+* **Hook Subtitle:** `Dense trackers collapse during physical exertion. I split calm planning from high-intensity training, designing an adaptive iOS beta from zero alongside one engineer.` (169 chars) | *Limit:* 120 – 180 chars
 * **Metadata Facts:**
   * **Role:** `Co-founder, design & marketing` (30 chars) | *Limit:* 15 – 35 chars
   * **Year:** `2025` (4 chars) | *Limit:* 4 – 9 chars
@@ -243,7 +243,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 ### Section 2: Venture
 * **Section Kicker:** `Venture` (7 chars) | *Limit:* 6 – 14 chars
 * **Lede Statement:** `Kynso is an early-stage startup connecting strength, cardio, mobility and nutrition into a single ecosystem.` (101 chars) | *Limit:* 75 – 120 chars
-* **Prose:** `Athletes were juggling three different trackers, a notes app, and ChatGPT just to see their progress. Kynso was founded to solve that fragmentation. As co-founder, I led product design, brand identity, and marketing, working alongside one engineer to take the concept from zero into internal testing ahead of our upcoming beta.` (326 chars) | *Limit:* 260 – 380 chars
+* **Prose:** `Athletes were juggling three different trackers, a notes app, and ChatGPT just to see their progress. As co-founder, I defined the product roadmap, designed the entire iOS app from scratch, built the brand system, and ran marketing—partnering with one engineer to take Kynso from zero into live internal testing.` (319 chars) | *Limit:* 260 – 380 chars
 * **Business Shape Facts:**
   * **Industry:** `Health & fitness` (16 chars) | *Limit:* 12 – 30 chars
   * **Stage:** `Pre-beta` (8 chars) | *Limit:* 8 – 20 chars
@@ -254,7 +254,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 ### Section 3: The Problem
 * **Section Kicker:** `The problem` (11 chars) | *Limit:* 8 – 16 chars
 * **Problem Statement:** `The human body is an interdependent system. Fitness apps track everything in silos.` (76 chars) | *Limit:* 60 – 100 chars
-* **Underlying Gap Prose:** `If you lift in a deficit and ate poorly, a typical fitness app still declares you ready to train because it only sees the last workout. Every user we interviewed had hacked together their own fix—logging lifts, runs, and meals across separate tools and pasting them into ChatGPT. The data existed everywhere, but nothing analyzed the trade-offs between them.` (348 chars) | *Limit:* 280 – 420 chars
+* **Underlying Gap Prose:** `If you lift in a deficit and ate poorly, a typical fitness app still declares you ready to train because it only sees the last workout. In my user interviews, every athlete had hacked together their own fix across separate tools into ChatGPT. I set out to connect those inputs and analyze the real trade-offs between them.` (341 chars) | *Limit:* 280 – 420 chars
 * **Symptoms (3 Diagnoses):**
   * **Signal:** `Every interviewed athlete used two to three apps plus a notepad and AI to manually spot training patterns.` (107 chars) | *Limit:* 90 – 150 chars
   * **Constraint:** `One designer and one engineer building a multi-domain engine and sync pipeline before public beta.` (98 chars) | *Limit:* 75 – 140 chars
@@ -266,7 +266,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 *Interactive Gantt chart with bar pills and artwork notes.*
 
 * **Section Header:**
-  * *Kicker:** `How it got built` (16 chars)
+  * *Kicker:* `How it got built` (16 chars)
   * *Hint:* `Hover a track` (13 chars)
 * **Track Bar Labels:**
   * Track Title 1: `Branding` (8 chars) | *Limit:* 6 – 14 chars
@@ -275,26 +275,26 @@ This document compiles **every user-facing text element across all 8 pages of th
 
 #### Group 1: Product Design (Main Open Track)
 * **Phase 01:** `User research` (13 chars) | *Limit:* 6 – 14 chars
-  * *Artwork Note:* `Interviews revealed users combining three trackers with ChatGPT. The core insight: readiness scores fail when isolated from diet, sleep, and cycle.` (148 chars) | *Limit:* 100 – 165 chars
+  * *Artwork Note:* `I interviewed hybrid athletes juggling three apps with ChatGPT. I found readiness scores fail when isolated from daily nutrition, sleep, and cycle.` (148 chars) | *Limit:* 100 – 165 chars
 * **Phase 02:** `Dual UI modes` (13 chars) | *Limit:* 6 – 14 chars
-  * *Artwork Note:* `Separated planning from active training. Field tests in gyms showed dense layouts collapse during physical exertion.` (111 chars) | *Limit:* 95 – 155 chars
+  * *Artwork Note:* `I split the UI into calm planning and active training after gym testing showed dense layouts collapse during heavy sets.` (122 chars) | *Limit:* 95 – 155 chars
 * **Phase 03:** `UI iteration` (12 chars) | *Limit:* 6 – 14 chars
-  * *Artwork Note:* `Removed PR vanity stats from home, simplified pre-workout screens, and made readiness fully interactive so users see what drives the score.` (126 chars) | *Limit:* 95 – 155 chars
+  * *Artwork Note:* `I stripped PR vanity metrics from home, simplified pre-workout views, and made readiness interactive so athletes see what drives it.` (132 chars) | *Limit:* 95 – 155 chars
 * **Phase 04:** `Design system` (13 chars) | *Limit:* 6 – 16 chars
-  * *Artwork Note:* `Dark mode architecture with domain-specific neon colors, allowing users to identify training domains at a glance across all session states.` (126 chars) | *Limit:* 95 – 155 chars
+  * *Artwork Note:* `I built a dark-mode architecture with domain-specific neon accents, letting athletes identify training domains at an instant glance.` (133 chars) | *Limit:* 95 – 155 chars
 
 #### Group 2: Branding (Foldable Track)
 * **Aside Overview Note (when closed):** `Brand identity, 3D domain mark, and domain color systems established early to give the multi-input interface visual hierarchy.` (130 chars) | *Limit:* 100 – 165 chars
 * **Phase 01:** `Market audit` (12 chars) | *Limit:* 8 – 16 chars
-  * *Artwork Note:* `Screened name candidates across global markets for linguistics and conflicts, rejecting tired wellness tropes like leaves or mountains.` (134 chars) | *Limit:* 90 – 150 chars
+  * *Artwork Note:* `Mapped the category on tracking depth against discipline breadth. Every incumbent held one axis and conceded the other, leaving the deep-and-unified quadrant unclaimed.` (168 chars) | *Limit:* 90 – 175 chars
 * **Phase 02:** `Naming` (6 chars) | *Limit:* 6 – 14 chars
-  * *Artwork Note:* `Selected Kynso: clean, unclaimed, and focused on clear integration rather than romantic fitness metaphors.` (104 chars) | *Limit:* 80 – 140 chars
+  * *Artwork Note:* `Every shortlisted name ran the same three screens — trademark, phonetics, tone. Three died on one of them. Kynso cleared all three: unclaimed, kinetic at the root, and calibrated rather than romantic.` (199 chars) | *Limit:* 80 – 200 chars
 * **Phase 03:** `Logo design` (11 chars) | *Limit:* 4 – 12 chars
   * *Artwork Note:* `Four geometric shapes in 3D rotation, capturing how strength, cardio, mobility, and recovery unify in one mark.` (111 chars) | *Limit:* 80 – 140 chars
 * **Phase 04:** `Domain palette` (14 chars) | *Limit:* 8 – 16 chars
   * *Artwork Note:* `High-contrast neon colors on pure dark backgrounds, letting users instantly decode domain types before reading.` (112 chars) | *Limit:* 80 – 140 chars
 * **Phase 05:** `Brand system` (12 chars) | *Limit:* 8 – 18 chars
-  * *Artwork Note:* `Voice, typography, and onboarding disclosure standards codified to handle sensitive biological data with clarity and care.` (122 chars) | *Limit:* 90 – 150 chars
+  * *Artwork Note:* `One voice, two states: dry hands get the qualifier and the reasoning, wet hands get the number and nothing else.` (113 chars) | *Limit:* 80 – 150 chars
 
 #### Group 3: Marketing (Foldable Track)
 * **Aside Overview Note (when closed):** `Landing page, positioning, and pre-beta funnel built around transparent readiness and Apple Health sync.` (107 chars) | *Limit:* 80 – 140 chars
@@ -313,18 +313,18 @@ This document compiles **every user-facing text element across all 8 pages of th
 
 ### Section 5: The Impact
 * **Section Kicker:** `The impact` (10 chars) | *Limit:* 6 – 14 chars
-* **Outcome Statement:** `Advanced from napkin concept to internal testing, delivering a fully integrated multi-domain beta build.` (104 chars) | *Limit:* 80 – 135 chars
+* **Outcome Statement:** `I took Kynso from napkin concept to internal iOS testing, delivering a fully integrated multi-domain build.` (107 chars) | *Limit:* 80 – 135 chars
 * **Metrics (3 Data Points):**
   * **Metric 1:** `6` | Label: `Integrated health inputs` (24 chars) | *Limit:* 12 – 28 chars
   * **Metric 2:** `2` | Label: `Adaptive UI session modes` (25 chars) | *Limit:* 12 – 28 chars
   * **Metric 3:** `3x` | Label: `Faster workout logging speed` (28 chars) | *Limit:* 12 – 28 chars
-* **Impact Prose:** `The biggest breakthrough was learning what not to show. Splitting the interface between calm planning and high-intensity workout modes turned a cluttered tracking utility into a focused training tool. By making the readiness score transparent and cycle-aware, we replaced black-box guesswork with clear, actionable coaching.` (324 chars) | *Limit:* 240 – 360 chars
+* **Impact Prose:** `My biggest breakthrough was learning what to remove. By splitting the interface between calm planning and workout modes, I turned a cluttered tracker into a sharp training tool. I made our readiness engine transparent and cycle-aware, replacing black-box guesswork with clear, actionable coaching.` (306 chars) | *Limit:* 240 – 360 chars
 
 ---
 
 ### Section 6: Next Case Study Link
 * **Eyebrow:** `Next case study` (15 chars)
-* **Next Project Title:** `Quantum chemistry startup website` (33 chars) | *Limit:* 20 – 45 chars
+* **Next Project Title:** `Quantum Chemistry Startup Website` (33 chars) | *Limit:* 20 – 45 chars
 
 ---
 
@@ -340,12 +340,12 @@ This document compiles **every user-facing text element across all 8 pages of th
 
 * **Eyebrow:** `Case study — Quantistry` (23 chars) | *Limit:* 15 – 30 chars
 * **Hook Line (H1):** `Designing for PhD chemists when you don't speak quantum chemistry.` (70 chars) | *Limit:* 55 – 90 chars
-* **Hook Subtitle:** `Decoded complex quantum simulation into an investor-ready web platform, turning months of lab friction into days of simulation to anchor enterprise sales and Series A.` (171 chars) | *Limit:* 120 – 180 chars
+* **Hook Subtitle:** `I translated complex quantum simulation into an investor-ready platform, turning months of wet-lab friction into days of simulation to anchor enterprise sales and Series A.` (173 chars) | *Limit:* 120 – 180 chars
 * **Metadata Facts:**
   * **Role:** `Product Designer` (16 chars) | *Limit:* 12 – 30 chars
   * **Year:** `2025` (4 chars) | *Limit:* 4 – 9 chars
   * **Duration:** `2 months` (8 chars) | *Limit:* 6 – 15 chars
-  * **Team:** `1 designer, 2 engineers` (31 chars) | *Limit:* 18 – 40 chars
+  * **Team:** `1 designer, client, 2 engineers` (31 chars) | *Limit:* 18 – 40 chars
 * **Scroll Callout:** `Scroll →` (8 chars) | *Limit:* 6 – 12 chars
 
 ---
@@ -353,7 +353,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 ### Section 2: The Client
 * **Section Kicker:** `The client` (10 chars)
 * **Lede Statement:** `Quantistry builds AI tools to simulate physical materials for R&D teams.` (72 chars) | *Limit:* 50 – 100 chars
-* **Prose:** `Instead of running slow lab experiments, scientists use Quantistry's software to predict chemical behavior. They had real technology and customers, but were preparing for a critical funding round with an outdated logo and no web presence to prove their market traction.` (269 chars) | *Limit:* 180 – 320 chars
+* **Prose:** `Instead of slow wet-lab trials, chemical R&D teams use Quantistry to simulate physical materials. While they had proven algorithms and paying customers, they faced a crucial funding round with an outdated identity and no web presence to prove their enterprise traction.` (271 chars) | *Limit:* 180 – 320 chars
 * **Business Shape Facts:**
   * **Industry:** `Deeptech & Quantum Chemistry` (28 chars) | *Limit:* 15 – 35 chars
   * **Stage:** `Pre-Series A` (12 chars) | *Limit:* 8 – 20 chars
@@ -364,7 +364,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 ### Section 3: The Problem
 * **Section Kicker:** `The problem` (11 chars)
 * **Problem Statement:** `We need a brand and site refresh so we can raise our next investment round.` (75 chars) | *Limit:* 55 – 95 chars
-* **Prose:** `While competitors made vague AI promises with no real tech, Quantistry had working software but no way to show it. The challenge wasn't just talking about algorithms. We had to prove concrete business value to investors by demonstrating that R&D managers actually relied on their simulation tools to work faster.` (312 chars) | *Limit:* 200 – 360 chars
+* **Prose:** `While competitors pushed vague AI buzzwords without real tech, Quantistry had proven software with zero visual proof. My challenge was looking past the math to uncover the commercial hook: proving to investors that enterprise R&D directors actually rely on these tools to compress lab cycles.` (289 chars) | *Limit:* 200 – 360 chars
 * **Symptoms (3 Diagnoses):**
   * **Signal:** `Competitors flooded the space with AI rebrands, masking thin products behind generic buzzwords.` (95 chars) | *Limit:* 60 – 130 chars
   * **Constraint:** `A tight two-month launch window ahead of investor meetings, with a non-scientist designing for chemists.` (104 chars) | *Limit:* 60 – 130 chars
@@ -380,8 +380,8 @@ This document compiles **every user-facing text element across all 8 pages of th
   * *Hint:* `Hover a step` (12 chars)
 
 * **Step 01:**
-  * **Title:** `Decoded the quantum chemistry` (29 chars) | *Limit:* 20 – 45 chars
-  * **Text:** `Interviewed the team to uncover the core value. The takeaway wasn't just complex science; it was raw speed to market.` (117 chars) | *Limit:* 70 – 135 chars
+  * **Title:** `I decoded the quantum chemistry` (31 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `I interviewed the founders and engineers to isolate their real value: not algorithmic nuance, but raw speed to market.` (119 chars) | *Limit:* 70 – 135 chars
   * **Tags:** `Team interviews · Domain research` (33 chars) | *Limit:* 20 – 45 chars
   * **Figcaption:** `VALUE REFRAME: DOMAIN COMPLEXITY TO CORE COMMERCIAL PROMISE` (59 chars) | *Limit:* 35 – 70 chars
   * **Diagram Elements (SVG Conversion Diagram):**
@@ -393,41 +393,41 @@ This document compiles **every user-facing text element across all 8 pages of th
       * *Subtext:* `Regular processes took months. Their product reduced that time and cost to days.`
 
 * **Step 02:**
-  * **Title:** `Aligned two distinct audiences` (30 chars) | *Limit:* 20 – 45 chars
-  * **Text:** `Focused on solving R&D managers' daily pains. Proving direct value to scientists made the business case obvious to investors.` (125 chars) | *Limit:* 70 – 135 chars
+  * **Title:** `I aligned two distinct audiences` (32 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `I mapped the pitch to solve R&D managers' daily friction. Proving concrete lab value made the upside obvious to investors.` (122 chars) | *Limit:* 70 – 135 chars
   * **Tags:** `Audience mapping · Pitch strategy` (33 chars) | *Limit:* 20 – 45 chars
   * **Figcaption:** `AUDIENCE INTERSECTION: SCIENTISTS & INVESTORS CORE PITCH` (56 chars) | *Limit:* 35 – 70 chars
   * **Diagram Elements (SVG Audience Venn Diagram):**
     * *Audience 01 // Scientists (`Lab Scientists & R&D`):* `Daily workflow friction`, `Reproducibility`, `Computational accuracy`
     * *Audience 02 // Investors (`Deeptech Investors`):* `Defensibility`, `ARR potential`, `Total addressable market`
-    * *Intersection (`The Core Pitch` / `Unified Messaging`):* `Validated speed-to-market & De-risked R&D capital` | Label: `COMMERCIAL VALIDATION`
+    * *Intersection (`THE CORE PITCH` / `UNIFIED MESSAGING`):* `Validated speed-to-market & De-risked R&D capital` | Label: `COMMERCIAL VALIDATION`
 
 * **Step 03:**
-  * **Title:** `Built an identity grounded in science` (37 chars) | *Limit:* 20 – 45 chars
-  * **Text:** `Kept a credible scientific blue and added bright orange accents. It signaled modern AI without losing domain credibility.` (121 chars) | *Limit:* 70 – 135 chars
+  * **Title:** `I grounded the identity in science` (34 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `I paired scientific deep-blue with high-energy orange accents, signaling modern AI speed without sacrificing credibility.` (122 chars) | *Limit:* 70 – 135 chars
   * **Tags:** `Brand identity · Design system` (30 chars) | *Limit:* 20 – 45 chars
-  * **Figcaption & Alt:** `Color system, updated logo mark, and typography rules` (53 chars) | *Limit:* 35 – 70 chars
+  * **Figcaption & Alt:** `LOGO MARK REDRAWN: STROKE BALANCE AND SMALL-SIZE LEGIBILITY` (59 chars) | *Limit:* 35 – 70 chars
 
 * **Step 04:**
-  * **Title:** `Visualized the 10x speed advantage` (34 chars) | *Limit:* 20 – 45 chars
-  * **Text:** `Built motion graphics showing lab steps eliminated by simulation. The animation visualized time savings for R&D teams.` (105 chars) | *Limit:* 70 – 135 chars
+  * **Title:** `I visualized the speed advantage` (32 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `I animated how simulation eliminates months of physical lab rounds, making time savings palpable in seconds.` (108 chars) | *Limit:* 70 – 135 chars
   * **Tags:** `Motion direction · UI wireframing` (33 chars) | *Limit:* 20 – 45 chars
-  * **Figcaption & Alt:** `Before-and-after simulation process motion storyboard` (53 chars) | *Limit:* 35 – 70 chars
+  * **Figcaption & Alt:** `MOTION STORYBOARD: TRADITIONAL R&D ROUNDS VERSUS SIMULATED RUNS` (63 chars) | *Limit:* 35 – 70 chars
 
 * **Step 05:**
-  * **Title:** `Anchored the site in proof` (26 chars) | *Limit:* 20 – 45 chars
-  * **Text:** `Structured pages around named clients, concrete case studies, and engineering handoff to ship the site on schedule.` (115 chars) | *Limit:* 70 – 135 chars
+  * **Title:** `I anchored the site in proof` (28 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `I structured every page around enterprise case studies and customer logos, partnering with dev to ship in 8 weeks.` (115 chars) | *Limit:* 70 – 135 chars
   * **Tags:** `Content strategy · Dev handoff` (30 chars) | *Limit:* 20 – 45 chars
-  * **Figcaption & Alt:** `Production-ready page layouts highlighting customer proof` (57 chars) | *Limit:* 35 – 70 chars
+  * **Figcaption & Alt:** `SHIPPED HOMEPAGE: HERO AND NAMED-CUSTOMER PROOF STRIP` (53 chars) | *Limit:* 35 – 70 chars
 
 ---
 
 ### Section 5: The Impact
 * **Section Kicker:** `The impact` (10 chars)
-* **Outcome Statement:** `The live site became Quantistry's central engine for sales calls and investor meetings.` (87 chars) | *Limit:* 55 – 100 chars
+* **Outcome Statement:** `My redesign gave Quantistry a defensible narrative for sales calls and Series A pitches.` (89 chars) | *Limit:* 55 – 100 chars
 * **Metrics (1 Data Point):**
   * **Metric 1:** `8 wks` | Label: `Brief to live site rollout` (26 chars) | *Limit:* 14 – 32 chars
-* **Impact Prose:** `The new brand gave Quantistry immediate credibility across deeptech events, while the site cleanly bridged technical rigor and business value. It gave both founders and sales leads a sharp, defensible story to tell.` (215 chars) | *Limit:* 140 – 280 chars
+* **Impact Prose:** `I gave Quantistry instant credibility at deeptech summits and enterprise demos. By translating quantum mechanics into clear commercial ROI, I handed the founders a sharp, defensible story that closed sales and raised capital.` (228 chars) | *Limit:* 140 – 280 chars
 * **External Link:** `Check out live site →` (`https://quantistry.ai`) (21 chars) | *Limit:* 15 – 30 chars
 
 ---
@@ -448,7 +448,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 ### Section 1: The Hook
 * **Eyebrow:** `Case study — 01` (15 chars) | *Limit:* 12 – 24 chars
 * **Hook Line (H1):** `Why killing an 80% sales funnel actually saved this supplement brand.` (69 chars) | *Limit:* 55 – 90 chars
-* **Hook Subtitle:** `A premium supplement brand blamed design for low sales, but an obscured subscription checkout was driving a 90% product return rate.` (132 chars) | *Limit:* 100 – 170 chars
+* **Hook Subtitle:** `When a premium brand blamed design for falling sales, I dug into their Shopify data and traced a 90% return rate to a hidden subscription.` (138 chars) | *Limit:* 100 – 170 chars
 * **Metadata Facts:**
   * **Role:** `UI/UX Designer` (14 chars) | *Limit:* 12 – 30 chars
   * **Year:** `2023` (4 chars) | *Limit:* 4 – 9 chars
@@ -460,7 +460,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 ### Section 2: The Client
 * **Section Kicker:** `The client` (10 chars)
 * **Lede Statement:** `They sell premium, certified supplements to an older demographic.` (65 chars) | *Limit:* 45 – 100 chars
-* **Prose:** `The client offered high-priced supplements backed by real certifications. They came to us with stagnant sales, convinced a visual redesign would fix things. They used a free trial model to acquire users, aiming to boost revenue without changing the offer.` (256 chars) | *Limit:* 160 – 320 chars
+* **Prose:** `The client sold certified, high-potency supplements to older buyers. They hired me for a visual refresh to unstick stagnant sales, relying on a "$0 trial" model to acquire new customers without realizing the hidden cost it carried.` (233 chars) | *Limit:* 160 – 320 chars
 * **Facts:**
   * **Industry:** `Health & Wellness eComm` (23 chars) | *Limit:* 12 – 30 chars
   * **Stage:** `Established SMB` (15 chars) | *Limit:* 6 – 18 chars
@@ -471,7 +471,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 ### Section 3: The Problem
 * **Section Kicker:** `The problem` (11 chars)
 * **Problem Statement:** `"Our site looks outdated. We need a modern redesign to increase our product sales."` (84 chars) | *Limit:* 60 – 100 chars
-* **Prose:** `They didn't have a visual design problem; they had a business logic flaw. Customers clicked 'try for free' into an undisclosed subscription. They'd get billed later and return it. A visual reskin wouldn't fix the underlying checkout model driving a 90% return rate.` (262 chars) | *Limit:* 180 – 360 chars
+* **Prose:** `They didn't have a styling problem; they had a business logic flaw. Buyers took the free trial, were surprised by automated renewals, and returned shipments in frustration. I knew a visual reskin would never fix an acquisition model bleeding 90% of its volume.` (259 chars) | *Limit:* 180 – 360 chars
 * **Symptoms (3 Diagnoses):**
   * **Signal:** `A massive 90% return rate buried in Shopify data, costing them double in shipping.` (82 chars) | *Limit:* 50 – 140 chars
   * **Constraint:** `We were initially hired just to reskin the landing pages and product catalog.` (78 chars) | *Limit:* 50 – 140 chars
@@ -489,38 +489,38 @@ This document compiles **every user-facing text element across all 8 pages of th
   * **Title:** `Redesigned the catalogue` (24 chars) | *Limit:* 20 – 45 chars
   * **Text:** `I built the requested educational pages first. It improved the promise but didn't stop the returns.` (99 chars) | *Limit:* 70 – 130 chars
   * **Tags:** `UI Redesign · Product Pages` (27 chars) | *Limit:* 25 – 55 chars
-  * **Figcaption:** `Unified catalog highlighting product certifications` (51 chars) | *Limit:* 35 – 70 chars
+  * **Figcaption:** `REDESIGNED CATALOGUE: SIX PRODUCTS, ONE CLAIM EACH` (49 chars) | *Limit:* 35 – 70 chars
 * **Step 02:**
   * **Title:** `Uncovered the real P&L issue` (28 chars) | *Limit:* 20 – 45 chars
   * **Text:** `I dug into their Shopify data and session recordings. I found a 90% return rate tied to the trial.` (98 chars) | *Limit:* 70 – 130 chars
   * **Tags:** `Data Analysis · Session Replays` (31 chars) | *Limit:* 25 – 55 chars
-  * **Figcaption:** `Session recordings: 60-day invoice to churn timeline` (52 chars) | *Limit:* 35 – 70 chars
+  * **Figcaption:** `SESSION RECORDINGS: 60-DAY INVOICE TO CHURN TIMELINE` (51 chars) | *Limit:* 35 – 70 chars
 * **Step 03:**
   * **Title:** `Rebuilt for opt-in transparency` (31 chars) | *Limit:* 25 – 55 chars
   * **Text:** `I redesigned the checkout to require active subscription opt-in and added a one-time purchase option.` (101 chars) | *Limit:* 70 – 130 chars
   * **Tags:** `Checkout UX · Transparent Pricing` (33 chars) | *Limit:* 25 – 55 chars
-  * **Figcaption:** `New checkout flow with clear opt-in and purchase choices` (56 chars) | *Limit:* 35 – 70 chars
+  * **Figcaption:** `OPT-IN CHECKOUT: SUBSCRIPTION AND ONE-TIME PURCHASE, PRICED IN THE OPEN` (70 chars) | *Limit:* 35 – 75 chars
 * **Step 04:**
   * **Title:** `Argued the case with evidence` (29 chars) | *Limit:* 25 – 55 chars
   * **Text:** `Order volume fell 80%, causing client concern. I walked the CEO through unit economics to show net profit gains.` (113 chars) | *Limit:* 70 – 130 chars
   * **Tags:** `Stakeholder Mgmt · P&L Framing` (30 chars) | *Limit:* 20 – 50 chars
-  * **Figcaption:** `Presenting return rates and competitor models to the CEO` (56 chars) | *Limit:* 35 – 70 chars
+  * **Figcaption:** `REAL COST PER ORDER: SHARE OF ORDER VALUE, $0 TRIAL VS OPT-IN` (59 chars) | *Limit:* 35 – 70 chars
 * **Step 05:**
-  * **Title:** `Rolled back the visual design` (29 chars) | *Limit:* 25 – 55 chars
-  * **Text:** `They reverted the catalogue look but kept the honest checkout. Total retained customers grew by 80%.` (99 chars) | *Limit:* 70 – 130 chars
+  * **Title:** `I stood by the honest checkout` (32 chars) | *Limit:* 25 – 55 chars
+  * **Text:** `When they reverted the catalog redesign, I protected the transparent checkout. Net retained customers surged by 80%.` (121 chars) | *Limit:* 70 – 130 chars
   * **Tags:** `Compromise · Final Launch` (25 chars) | *Limit:* 15 – 45 chars
-  * **Figcaption:** `Final hybrid launch combining original site and new checkout` (59 chars) | *Limit:* 30 – 65 chars
+  * **Figcaption:** `THE REVERTED CATALOGUE LOOK: INGREDIENT EDUCATION PAGE` (53 chars) | *Limit:* 30 – 65 chars
 
 ---
 
 ### Section 5: The Impact
 * **Section Kicker:** `The impact` (10 chars)
-* **Outcome Statement:** `While top-line orders dropped, actual kept products increased by 80%.` (69 chars) | *Limit:* 50 – 100 chars
+* **Outcome Statement:** `By killing deceptive checkout logic, I boosted net kept orders by 80%.` (70 chars) | *Limit:* 50 – 100 chars
 * **Metrics (3 Data Points):**
   * **Metric 1:** `-80%` | Label: `Initial order volume` (20 chars) | *Limit:* 12 – 28 chars
   * **Metric 2:** `10%` | Label: `Final return rate` (17 chars) | *Limit:* 12 – 28 chars
   * **Metric 3:** `+80%` | Label: `Retained customers` (18 chars) | *Limit:* 12 – 28 chars
-* **Impact Prose:** `By eliminating deceptive acquisition logic, we halted an unsustainable wave of fulfillment losses, customer support tickets, and return shipping fees. It reinforced my core belief as a senior designer: UX problems are almost always P&L problems in disguise.` (260 chars) | *Limit:* 140 – 280 chars
+* **Impact Prose:** `By killing deceptive checkout tricks, I stopped an unsustainable bleed of return shipping fees, merchant chargebacks, and angry support calls. It proved my core design conviction: user experience problems are almost always business unit economics in disguise.` (258 chars) | *Limit:* 140 – 280 chars
 
 ---
 
@@ -542,7 +542,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 
 * **Eyebrow:** `Case study — 01` (15 chars) | *Limit:* 12 – 24 chars
 * **Hook Line (H1):** `Why 25 analytics dashboards are useless without guided decisions.` (70 chars) | *Limit:* 55 – 90 chars
-* **Hook Subtitle:** `Internal users spent 30 minutes struggling to launch a single campaign. We replaced manual form-filling with automated data review, cutting onboarding by 25 minutes.` (156 chars) | *Limit:* 110 – 175 chars
+* **Hook Subtitle:** `Users spent 30 minutes struggling to launch one campaign. I replaced manual form-filling with automated review and a 25-dashboard system, cutting setup by 25 minutes.` (167 chars) | *Limit:* 110 – 175 chars
 * **Metadata Facts:**
   * **Role:** `Design Lead & Acting PM` (23 chars) | *Limit:* 15 – 35 chars
   * **Year:** `2025` (4 chars) | *Limit:* 4 – 9 chars
@@ -555,7 +555,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 ### Section 2: The Client
 * **Section Kicker:** `The client` (10 chars)
 * **Lede Statement:** `An internal agency venture productized to give SMBs automated marketing.` (72 chars) | *Limit:* 45 – 100 chars
-* **Prose:** `Originally kicked off by the CEO as an internal tool, the product showed enough traction to be spun out as MX2 under the agency's main brand. It serves small business owners who know their customers and margins inside out, but can't justify the cost or overhead of hiring an agency.` (282 chars) | *Limit:* 180 – 340 chars
+* **Prose:** `Originally seeded as an internal tool, MX2 was spun out into a standalone platform for small business owners. As Design Lead and Acting PM, I was brought in to shape this complex engine into software that non-marketers could run without agency handholding.` (253 chars) | *Limit:* 180 – 340 chars
 * **Business Shape Facts:**
   * **Industry:** `B2B SaaS / MarTech` (18 chars) | *Limit:* 12 – 30 chars
   * **Stage:** `Internal venture` (16 chars) | *Limit:* 8 – 24 chars
@@ -566,7 +566,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 ### Section 3: The Problem
 * **Section Kicker:** `The problem` (11 chars)
 * **Problem Statement:** `“Build an AI tool so clients can spin up their own marketing campaigns.”` (72 chars) | *Limit:* 50 – 95 chars
-* **Prose:** `The initial brief assumed owners just needed an AI generator. But marketing isn't just copywriting—it's attribution, budget pacing, and media planning. Handing non-marketers empty fields and complex charts paralyzed them. We didn't need to add features; we had to bake the domain expertise directly into the UI.` (311 chars) | *Limit:* 200 – 360 chars
+* **Prose:** `The original brief assumed users just wanted an AI prompt box. But marketing requires attribution, budget pacing, and media strategy. Handing owners blank forms paralyzed them. Instead of piling on generative features, I embedded senior media planning expertise straight into the UI.` (282 chars) | *Limit:* 200 – 360 chars
 * **Symptoms (3 Diagnoses):**
   * **Signal:** `Internal testers spent 30 minutes struggling to launch a first campaign.` (72 chars) | *Limit:* 50 – 120 chars
   * **Constraint:** `Integrating live multi-source marketing APIs without crushing engineering.` (74 chars) | *Limit:* 50 – 120 chars
@@ -582,45 +582,45 @@ This document compiles **every user-facing text element across all 8 pages of th
   * *Hint:* `Hover a step` (12 chars)
 
 * **Step 01:**
-  * **Title:** `Mapped marketing's hidden complexity` (36 chars) | *Limit:* 20 – 45 chars
-  * **Text:** `Ran workshops with senior media planners to unpack campaign logic. Realized the UI needed to do the heavy lifting, not the user.` (128 chars) | *Limit:* 70 – 135 chars
+  * **Title:** `I mapped marketing's hidden logic` (33 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `I ran workshops with senior media strategists to unpack campaign logic, realizing our UI had to do the heavy lifting for users.` (128 chars) | *Limit:* 70 – 135 chars
   * **Tags:** `Domain research · Workflow mapping` (34 chars) | *Limit:* 20 – 45 chars
-  * **Figcaption & Alt:** `Campaign planning logic and attribution breakdown` (49 chars) | *Limit:* 35 – 70 chars
+  * **Figcaption & Alt:** `THE FOUR DEPENDENCIES THE WORKSHOPS UNCOVERED` (45 chars) | *Limit:* 35 – 70 chars
 
 * **Step 02:**
-  * **Title:** `Replaced blank inputs with guided review` (40 chars) | *Limit:* 20 – 45 chars
-  * **Text:** `Scraped website copy to prefill business details and suggest starter budgets. Users just corrected and confirmed.` (113 chars) | *Limit:* 70 – 135 chars
+  * **Title:** `I turned blank forms into guided review` (39 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `I pre-filled business profiles by scraping company URLs, turning an intimidating setup into a 2-minute review.` (110 chars) | *Limit:* 70 – 135 chars
   * **Tags:** `Onboarding flow · Form redesign` (31 chars) | *Limit:* 20 – 45 chars
-  * **Figcaption & Alt:** `Pre-populated business profile and media proposal` (49 chars) | *Limit:* 35 – 70 chars
+  * **Figcaption & Alt:** `ONBOARDING BEFORE AND AFTER: BLANK FIELDS TO GUIDED REVIEW` (57 chars) | *Limit:* 35 – 70 chars
 
 * **Step 03:**
-  * **Title:** `Structured 25 dashboards across 5 tiers` (39 chars) | *Limit:* 20 – 45 chars
-  * **Text:** `Organized data from high-level health down to individual ad creative. Casual users stay top-level; fixers dive deep.` (116 chars) | *Limit:* 70 – 135 chars
+  * **Title:** `I architected 25 dashboards in 5 tiers` (39 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `I structured metrics from high-level ROI down to ad creative so non-marketers monitor health while specialists drill deep.` (123 chars) | *Limit:* 70 – 135 chars
   * **Tags:** `Information architecture · Dashboard specs` (42 chars) | *Limit:* 20 – 45 chars
-  * **Figcaption & Alt:** `Five-level drill-down architecture from health to creative` (58 chars) | *Limit:* 35 – 70 chars
+  * **Figcaption & Alt:** `TOP TIER OF FIVE: HEALTH METRICS, CAMPAIGN TABLE, CREATIVE ROW` (62 chars) | *Limit:* 35 – 70 chars
 
 * **Step 04:**
-  * **Title:** `Prototyped in code to prove feasibility` (39 chars) | *Limit:* 20 – 45 chars
-  * **Text:** `Engineering pushed back on multi-API widgets. Built a working prototype with Claude Code to prove feasibility.` (110 chars) | *Limit:* 70 – 135 chars
+  * **Title:** `I prototyped in code to unblock dev` (35 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `When dev resisted multi-source API widgets, I coded a working interactive prototype to prove technical feasibility.` (116 chars) | *Limit:* 70 – 135 chars
   * **Tags:** `Prototyping · Code proof-of-concept` (35 chars) | *Limit:* 20 – 45 chars
-  * **Figcaption & Alt:** `Working multi-source widget prototype and API binding` (53 chars) | *Limit:* 35 – 70 chars
+  * **Figcaption & Alt:** `WORKING WIDGET: ONE FIGURE, ITS CHANGE, AND ITS SERIES` (54 chars) | *Limit:* 35 – 70 chars
 
 * **Step 05:**
-  * **Title:** `Added AI guidance and scaled the system` (39 chars) | *Limit:* 20 – 45 chars
-  * **Text:** `Paired contextual widgets with AI recommendations and built a 40-component design system that onboarded a second designer fast.` (127 chars) | *Limit:* 70 – 135 chars
+  * **Title:** `I built the design system & AI assistant` (40 chars) | *Limit:* 20 – 45 chars
+  * **Text:** `I paired live widgets with an AI advisor and built a 40-component design system that sped up our second designer's onboarding.` (126 chars) | *Limit:* 70 – 135 chars
   * **Tags:** `Design systems · AI interaction` (31 chars) | *Limit:* 20 – 45 chars
-  * **Figcaption & Alt:** `Component system specs and dual-mode AI companion` (49 chars) | *Limit:* 35 – 70 chars
+  * **Figcaption & Alt:** `AI COMPANION IN BOTH MODES: STANDING SUGGESTIONS AND CHAT` (56 chars) | *Limit:* 35 – 70 chars
 
 ---
 
 ### Section 5: The Impact
 * **Section Kicker:** `The impact` (10 chars)
-* **Outcome Statement:** `Cut first-time campaign launch time by 83% while scaling to 25 core dashboards.` (79 chars) | *Limit:* 55 – 100 chars
+* **Outcome Statement:** `I cut first-time campaign launch time by 83% across 25 production dashboards.` (76 chars) | *Limit:* 55 – 100 chars
 * **Metrics (3 Data Points):**
   * **Metric 1:** `−25m` | Label: `Time to first campaign` (22 chars) | *Limit:* 12 – 28 chars
   * **Metric 2:** `25` | Label: `Dashboards delivered` (20 chars) | *Limit:* 12 – 28 chars
   * **Metric 3:** `40+` | Label: `Reusable components` (19 chars) | *Limit:* 12 – 28 chars
-* **Impact Prose:** `Prototyping complex widgets unblocked development and proved feasibility on day one. By baking marketing expertise directly into the UI rather than asking users for it, we turned a 30-minute chore into a 5-minute review.` (220 chars) | *Limit:* 140 – 280 chars
+* **Impact Prose:** `Prototyping the widgets in code unblocked development and won engineering buy-in immediately. By embedding media expertise directly into the interface instead of demanding it from users, I turned a 30-minute chore into a 5-minute review.` (240 chars) | *Limit:* 140 – 280 chars
 
 ---
 
