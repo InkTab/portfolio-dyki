@@ -165,12 +165,19 @@
     </div>
   </section>
 
+  <!-- ============ 4a. process reveal ============ -->
+  <!-- the detailed process stays folded behind this line until asked for, so the
+       story reads problem -> impact first; mobile-ui.js unfolds it -->
+  <button class="cs__reveal" type="button" aria-expanded="false" aria-controls="track-product">
+    <span class="cs__reveal-label">Click for detailed process <span class="cs__reveal-plus" aria-hidden="true">+</span></span>
+  </button>
+
   <!-- ============ 4. the plan ============ -->
   <!-- Three tracks on one lane. Each box carries its own name and takes its span from
        position alone. The product design line holds the stage by default; pressing
        branding or marketing folds it away and unfolds that track's own steps in its
        place, so the chart never grows a second column of detail. -->
-  <section class="gt" id="track-product" aria-labelledby="cs-plan">
+  <section class="gt" id="track-product" aria-labelledby="cs-plan" hidden>
     <div class="cs__flow-header">
       <h2 class="cs__kicker" id="cs-plan">How it got built</h2>
       <span class="cs__flow-rule" aria-hidden="true"></span>
@@ -814,6 +821,12 @@
       </div>
     </div>
   </section>
+
+  <!-- ============ 4b. process close ============ -->
+  <!-- folds the process back into the strip it came out of -->
+  <button class="cs__reveal cs__reveal--close" type="button" aria-expanded="true" aria-controls="track-product" hidden>
+    <span class="cs__reveal-label">Click to close process <span class="cs__reveal-plus" aria-hidden="true">&minus;</span></span>
+  </button>
 
   <!-- ============ 5. the impact ============ -->
   <section class="cs__block cs__block--impact" aria-labelledby="cs-impact">

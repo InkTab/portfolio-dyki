@@ -167,9 +167,16 @@
     </div>
   </section>
 
+  <!-- ============ 4a. process reveal ============ -->
+  <!-- the detailed process stays folded behind this line until asked for, so the
+       story reads problem -> impact first; mobile-ui.js unfolds it -->
+  <button class="cs__reveal" type="button" aria-expanded="false" aria-controls="cs-process">
+    <span class="cs__reveal-label">Click for detailed process <span class="cs__reveal-plus" aria-hidden="true">+</span></span>
+  </button>
+
   <!-- ============ 4. the timeline ============ -->
   <!-- each step is its own hover target; the artwork arrives from the right without moving the column -->
-  <section class="cs__flow" aria-labelledby="cs-flow">
+  <section class="cs__flow" id="cs-process" aria-labelledby="cs-flow" hidden>
     <div class="cs__flow-header">
       <h2 class="cs__kicker" id="cs-flow">How it got solved</h2>
       <span class="cs__flow-rule" aria-hidden="true"></span>
@@ -177,7 +184,7 @@
     </div>
 
     <ol class="cs__steps">
-      <li class="cs__step is-active" tabindex="0" aria-describedby="cs-shot-1">
+      <li class="cs__step" tabindex="0" aria-describedby="cs-shot-1">
         <span class="cs__step-num">01</span>
         <div class="cs__step-body">
           <h3 class="cs__step-title">Decoded the quantum chemistry</h3>
@@ -373,6 +380,12 @@
       </li>
     </ol>
   </section>
+
+  <!-- ============ 4b. process close ============ -->
+  <!-- folds the process back into the strip it came out of -->
+  <button class="cs__reveal cs__reveal--close" type="button" aria-expanded="true" aria-controls="cs-process" hidden>
+    <span class="cs__reveal-label">Click to close process <span class="cs__reveal-plus" aria-hidden="true">&minus;</span></span>
+  </button>
 
   <!-- ============ 5. the impact ============ -->
   <section class="cs__block cs__block--impact" aria-labelledby="cs-impact">

@@ -62,6 +62,8 @@
      Blur runs tighter than --shadow-art's because a silhouette shadow has no
      spread to pull it back in. */
   --shadow-cut: drop-shadow(0 1px 1px rgba(17,19,22,.06)) drop-shadow(0 7px 14px rgba(17,19,22,.11));
+  --strip: #EFEEF7;        /* process reveal strip, a shade under --paper */
+  --strip-hover: #E7E6F0;
 }
 
 :root[data-theme="dark"],
@@ -70,6 +72,8 @@
   /* Dark mode palette (photographic negative) */
   --paper: #111316;
   --ink: #FFFFFF;
+  --strip: #0B0C0E;
+  --strip-hover: #060708;
   --ghost: #C5C7CC;        /* reading copy — 11.0:1 WCAG AAA */
   --ghost-link: #E8E8E8;   /* link at rest — 15.2:1 WCAG AAA */
   --rule-link: #5F6368;    /* step lines & borders — 3.1:1 WCAG AA */
@@ -520,6 +524,57 @@ a { color: inherit; }
 }
 .cs__scroll-rule { display: block; width: clamp(34px, 5vw, 64px); height: 0.5px; background: var(--rule-deco); }
 .cs__scroll-arrow { font-size: 13px; line-height: 1; margin-left: -6px; }
+
+/* 4a. process reveal. The detailed process is folded behind a strip a shade
+   under the paper, with its label set up it the way the rail sets its links. The
+   hidden attribute alone would lose to the display the sections set themselves,
+   so it is restated here. */
+.cs__flow[hidden], .gt[hidden], .cs__reveal[hidden] { display: none; }
+.cs__reveal {
+  position: relative; z-index: 2;
+  flex: 0 0 auto; height: 100%;
+  width: clamp(76px, 7vw, 108px);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0; padding: var(--pad-y) 0;
+  border: 0;
+  background: var(--strip); color: var(--tag); cursor: pointer;
+  font: inherit;
+  transition: background-color .3s ease;
+}
+.cs__reveal:hover, .cs__reveal:focus-visible { background: var(--strip-hover); }
+/* a strip is its own edge, so the section that follows the process drops its
+   hairline -- it always meets one strip or the other */
+.cs__reveal--close + * { border-left: 0; border-top: 0; }
+.cs__reveal-label {
+  position: relative; isolation: isolate;
+  writing-mode: vertical-rl;
+  padding: 6px 0;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 12px; font-weight: 400; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--tag); white-space: nowrap;
+  transition: color .14s ease;
+}
+.cs__reveal-plus { display: inline-block; margin-block-start: 8px; font-size: 15px; letter-spacing: 0; }
+/* the same marker stroke the rail links take, drawn up the label */
+.cs__reveal-label::before {
+  content: ""; position: absolute; z-index: -1; inset: 0 -5px;
+  background: var(--marker-v);
+  border-radius: 3px 9px 4px 7px;
+  transform-origin: bottom;
+  transform: rotate(-.45deg) skewY(-2.5deg) scaleY(0);
+  transition: transform .3s cubic-bezier(.2,.7,.3,1);
+}
+.cs__reveal:hover .cs__reveal-label, .cs__reveal:focus-visible .cs__reveal-label {
+  color: var(--marker-ink, #111316);
+  transition: color .1s ease .18s;
+}
+.cs__reveal:hover .cs__reveal-label::before,
+.cs__reveal:focus-visible .cs__reveal-label::before {
+  transform: rotate(-.45deg) skewY(-2.5deg) scaleY(1);
+}
+.cs__reveal:focus-visible { outline: none; }
+/* the heading only takes focus so a keyboard reader lands inside what opened */
+.cs__flow .cs__kicker:focus, .gt .cs__kicker:focus { outline: none; }
 
 /* 2 & 3. client, problem, impact */
 .cs__block { width: min(88vw, 680px); }
@@ -3606,6 +3661,21 @@ a { color: inherit; }
   }
   .cs__scroll { display: none; }
   .cs__block, .cs__flow, .cs__next, .gt { border-left: 0; border-top: 0.5px solid var(--rule-deco); }
+  /* stacked, the strip lies down and the label reads along it */
+  .cs__reveal {
+    width: 100%; height: auto;
+    padding: clamp(28px, 5vh, 48px) var(--gutter);
+  }
+  .cs__reveal-label { writing-mode: horizontal-tb; padding: 0 6px; }
+  .cs__reveal-plus { margin-block-start: 0; margin-inline-start: 8px; }
+  .cs__reveal-label::before {
+    inset: -3px 0;
+    background: var(--marker);
+    transform-origin: left;
+    transform: rotate(-.6deg) scaleX(0);
+  }
+  .cs__reveal:hover .cs__reveal-label::before,
+  .cs__reveal:focus-visible .cs__reveal-label::before { transform: rotate(-.6deg) scaleX(1); }
   .cs__symptom { grid-template-columns: minmax(0, 1fr); gap: 6px; }
   .cs__symptom-key { padding-top: 0; }
   .cs__metrics { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 24px; }
