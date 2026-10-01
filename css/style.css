@@ -7,10 +7,10 @@
 /* ============ 1. Design Tokens ============ */
 :root {
   /* Layout */
-  --rail-w: clamp(56px, 5vw, 66px);
+  --rail-w: 0px;
   /* The bottom offset a wide-canvas composition must stay above to clear the
      fixed privacy link (.legal): the link's inset, its 16.5px line (11px x 1.5),
-     and a gap. The rail's counterpart on the bottom edge. */
+     and a gap. */
   --legal-clear: calc(clamp(20px, 3vh, 32px) + 16.5px + clamp(18px, 3vh, 28px));
 
   /* Light mode palette */
@@ -135,19 +135,36 @@ a { color: inherit; }
 
 /* ============ 3. Theme Toggle Component ============ */
 .theme-toggle {
-  position: fixed; z-index: 10;
-  top: clamp(20px, 3vh, 32px); left: clamp(20px, 3vw, 40px);
+  position: fixed; z-index: 20;
+  bottom: clamp(20px, 3vh, 32px); right: clamp(20px, 3vw, 40px);
+  top: auto; left: auto;
   width: 32px; height: 32px;
   display: grid; place-items: center;
   padding: 0; border: none; border-radius: 4px;
   background: transparent; color: var(--tag);
   cursor: pointer;
-  transition: color .2s cubic-bezier(.2,.7,.3,1),
-             transform .2s cubic-bezier(.2,.7,.3,1);
+  isolation: isolate;
+  transition: color .14s ease;
 }
-.theme-toggle:hover {
-  color: var(--ink);
-  transform: scale(1.15);
+.theme-toggle::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0px;
+  background: var(--marker);
+  border-radius: 3px 9px 4px 7px;
+  transform-origin: right;
+  transform: rotate(-.45deg) skewX(-2.5deg) scaleX(0);
+  transition: transform .3s cubic-bezier(.2,.7,.3,1);
+}
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  color: var(--marker-ink, #111316);
+  transition: color .1s ease .18s;
+}
+.theme-toggle:hover::before,
+.theme-toggle:focus-visible::before {
+  transform: rotate(-.45deg) skewX(-2.5deg) scaleX(1);
 }
 .theme-toggle:focus-visible {
   outline: 2px solid var(--ink); outline-offset: 3px;
@@ -163,92 +180,299 @@ a { color: inherit; }
 [data-theme="dark"] .theme-toggle__icon--sun { display: block; }
 [data-theme="dark"] .theme-toggle__icon--moon { display: none; }
 
-/* ============ 4. Persistent Navigation Rail (.rail & .ia__rail) ============ */
+/* ============ 4. Persistent Top Navigation (.nav & legacy aliases) ============ */
+.nav,
 .rail,
 .ia__rail {
-  position: fixed; z-index: 5;
-  top: 0; bottom: 0; right: 0; width: var(--rail-w);
-  display: grid; grid-template-rows: 1fr auto 1fr; justify-items: center;
-  background: var(--ink); color: var(--paper);
-  padding: clamp(18px, 3vh, 30px) clamp(17px, 1.6vw, 23px);
+  position: fixed; z-index: 50;
+  top: 0; left: 0; right: 0; width: 100%;
+  height: clamp(52px, 6.5vh, 62px);
+  padding: 0 clamp(20px, 3.5vw, 44px);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  background: rgba(248, 247, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: none;
   isolation: isolate;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
 }
+[data-theme="dark"] .nav,
 [data-theme="dark"] .rail,
 [data-theme="dark"] .ia__rail {
-  background: #0D0E11; color: #FFFFFF;
-  border-left: 1px solid var(--rule-link, #5F6368);
-}
-.rail__main,
-.ia__rail-main {
-  grid-row: 2; align-self: center;
-  display: flex; flex-direction: column; align-items: center;
-  gap: clamp(14px, 2.2vh, 22px);
-}
-.rail__cv,
-.ia__rail-cv {
-  grid-row: 3; align-self: end;
-  display: flex; flex-direction: column; align-items: center; gap: 9px;
-}
-.rail__cv:focus-visible,
-.ia__rail-cv:focus-visible { outline-color: var(--paper); }
-[data-theme="dark"] .rail__cv:focus-visible,
-[data-theme="dark"] .ia__rail-cv:focus-visible { outline-color: #FFFFFF; }
-.rail__cv-label,
-.ia__rail-cv-label { margin-right: -.2em; }
-.rail__cv-icon,
-.ia__rail-cv-icon { transition: transform .26s cubic-bezier(.2,.7,.3,1); }
-.rail__cv:hover .rail__cv-icon, .rail__cv:focus-visible .rail__cv-icon,
-.ia__rail-cv:hover .ia__rail-cv-icon, .ia__rail-cv:focus-visible .ia__rail-cv-icon {
-  transform: translateY(2px);
+  background: rgba(17, 19, 22, 0.92);
+  border: none;
 }
 
-.rail__link, .rail__cv,
-.ia__rail-link, .ia__rail-cv {
+.nav__left {
+  justify-self: start;
+  display: flex;
+  align-items: center;
+}
+
+.nav__center {
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2.5vw, 28px);
+}
+
+.nav__right {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.8vw, 18px);
+}
+
+.nav__home,
+.nav__contact {
   position: relative;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 13px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--paper); text-decoration: none;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  color: var(--ghost-link);
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
   transition: color .14s ease;
 }
-[data-theme="dark"] .rail__link,
-[data-theme="dark"] .rail__cv,
-[data-theme="dark"] .ia__rail-link,
-[data-theme="dark"] .ia__rail-cv {
-  color: #FFFFFF;
-}
-.rail__link,
-.ia__rail-link { writing-mode: vertical-rl; }
-.rail__link::before, .rail__cv::before,
-.ia__rail-link::before, .ia__rail-cv::before {
-  content: ""; position: absolute; z-index: -1; inset: -3px -5px;
-  background: var(--marker-v);
+.nav__home::before,
+.nav__contact::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 2px;
+  background: var(--marker);
   border-radius: 3px 9px 4px 7px;
-  transform-origin: bottom;
-  transform: rotate(-.45deg) skewY(-2.5deg) scaleY(0);
+  transform-origin: right;
+  transform: rotate(-.45deg) skewX(-2.5deg) scaleX(0);
   transition: transform .3s cubic-bezier(.2,.7,.3,1);
 }
-.rail__link:hover, .rail__link:focus-visible,
-.rail__cv:hover, .rail__cv:focus-visible,
-.ia__rail-link:hover, .ia__rail-link:focus-visible,
-.ia__rail-cv:hover, .ia__rail-cv:focus-visible {
+.nav__home:hover,
+.nav__contact:hover,
+.nav__home:focus-visible,
+.nav__contact:focus-visible {
   color: var(--marker-ink, #111316);
   transition: color .1s ease .18s;
 }
-.rail__link:hover::before, .rail__link:focus-visible::before,
-.rail__cv:hover::before, .rail__cv:focus-visible::before,
-.ia__rail-link:hover::before, .ia__rail-link:focus-visible::before,
-.ia__rail-cv:hover::before, .ia__rail-cv:focus-visible::before {
-  transform: rotate(-.45deg) skewY(-2.5deg) scaleY(1);
+.nav__home:hover::before,
+.nav__contact:hover::before,
+.nav__home:focus-visible::before,
+.nav__contact:focus-visible::before {
+  transform: rotate(-.45deg) skewX(-2.5deg) scaleX(1);
 }
-.rail__link:focus-visible,
-.ia__rail-link:focus-visible { outline-color: var(--paper); }
-[data-theme="dark"] .rail__link:focus-visible,
-[data-theme="dark"] .ia__rail-link:focus-visible { outline-color: #FFFFFF; }
+.nav__home:focus-visible,
+.nav__contact:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+.nav__home.is-active,
+.nav__contact.is-active,
+.nav__home[aria-current="page"],
+.nav__contact[aria-current="page"] {
+  color: var(--ink);
+}
 
-.rail__rule,
-.ia__rail-rule {
-  width: 1px; height: clamp(18px, 3vh, 30px); background: rgba(255,255,255,.4);
+.nav__icon {
+  width: 17px;
+  height: 17px;
+  stroke: currentColor;
+  pointer-events: none;
+}
+
+.nav__link--about,
+.nav__dropdown-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--ghost-link);
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  padding: 6px 4px;
+  cursor: pointer;
+  transition: color .14s ease;
+}
+[data-theme="dark"] .nav__link--about,
+[data-theme="dark"] .nav__dropdown-btn {
+  color: var(--ghost-link);
+}
+
+.nav__link--about::before,
+.nav__dropdown-btn::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -2px -6px;
+  background: var(--marker);
+  border-radius: 3px 9px 4px 7px;
+  transform-origin: right;
+  transform: rotate(-.45deg) skewX(-2.5deg) scaleX(0);
+  transition: transform .3s cubic-bezier(.2,.7,.3,1);
+}
+
+.nav__link--about:hover,
+.nav__link--about:focus-visible,
+.nav__dropdown-btn:hover,
+.nav__dropdown-btn:focus-visible,
+.nav__dropdown.is-open .nav__dropdown-btn {
+  color: var(--marker-ink, #111316);
+  transition: color .1s ease .18s;
+}
+
+.nav__link--about:hover::before,
+.nav__link--about:focus-visible::before,
+.nav__dropdown-btn:hover::before,
+.nav__dropdown-btn:focus-visible::before,
+.nav__dropdown.is-open .nav__dropdown-btn::before {
+  transform: rotate(-.45deg) skewX(-2.5deg) scaleX(1);
+}
+
+.nav__link--about:focus-visible,
+.nav__dropdown-btn:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.nav__link--about.is-active,
+.nav__link--about[aria-current="page"] {
+  color: var(--ink);
+}
+
+.nav__dropdown {
+  position: relative;
+}
+
+.nav__dropdown-caret {
+  transition: transform .25s cubic-bezier(.2,.7,.3,1);
+}
+.nav__dropdown.is-open .nav__dropdown-caret {
+  transform: rotate(180deg);
+}
+
+.nav__dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  min-width: 250px;
+  background: var(--paper);
+  border: 1px solid var(--rule-deco);
+  border-radius: 4px;
+  padding: 6px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s cubic-bezier(.2,.7,.3,1), visibility .2s;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  z-index: 100;
+}
+[data-theme="dark"] .nav__dropdown-menu {
+  border-color: var(--rule-link);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+}
+
+.nav__dropdown.is-open .nav__dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav__dropdown-link {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px;
+  text-decoration: none;
+  border-radius: 2px;
+  color: var(--ghost-link);
+  transition: background-color .15s ease, color .15s ease;
+}
+
+.nav__dropdown-name {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.nav__dropdown-meta {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  color: var(--tag);
+}
+
+.nav__dropdown-link:hover,
+.nav__dropdown-link:focus-visible {
+  background: var(--marker);
+  color: var(--marker-ink, #111316);
+  outline: none;
+}
+.nav__dropdown-link:hover .nav__dropdown-name,
+.nav__dropdown-link:hover .nav__dropdown-meta,
+.nav__dropdown-link:focus-visible .nav__dropdown-name,
+.nav__dropdown-link:focus-visible .nav__dropdown-meta {
+  color: var(--marker-ink, #111316);
+}
+
+.nav__cv {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ghost-link);
+  text-decoration: none;
+  padding: 4px 6px;
+  border-radius: 2px;
+  transition: color .14s ease;
+}
+.nav__cv::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -1px -3px;
+  background: var(--marker);
+  border-radius: 3px 9px 4px 7px;
+  transform-origin: right;
+  transform: rotate(-.45deg) skewX(-2.5deg) scaleX(0);
+  transition: transform .3s cubic-bezier(.2,.7,.3,1);
+}
+.nav__cv:hover,
+.nav__cv:focus-visible {
+  color: var(--marker-ink, #111316);
+  transition: color .1s ease .18s;
+}
+.nav__cv:hover::before,
+.nav__cv:focus-visible::before {
+  transform: rotate(-.45deg) skewX(-2.5deg) scaleX(1);
+}
+.nav__cv:hover .nav__icon--cv {
+  transform: translateY(2px);
+}
+.nav__icon--cv {
+  transition: transform .2s ease;
 }
 
 /* ============ 5. Intro Section (.ia) ============ */
@@ -257,8 +481,8 @@ a { color: inherit; }
   background: var(--paper); color: var(--ink);
   font-family: "IBM Plex Sans", system-ui, sans-serif;
   align-content: center;
-  padding: clamp(56px, 9vh, 110px) clamp(18px, 3vw, 56px);
-  padding-right: clamp(92px, 7vw, 124px);   /* clearance for fixed rail */
+  padding: max(clamp(56px, 9vh, 110px), 80px) clamp(18px, 3vw, 56px) clamp(56px, 9vh, 110px);
+  padding-right: clamp(18px, 3vw, 56px);
   transition: background-color .3s ease, color .3s ease;
 }
 .ia__stage {
@@ -337,7 +561,33 @@ a { color: inherit; }
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--tag);
 }
-.ia__slot { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -50%); z-index: 2; }
+
+@keyframes iaSlotEnter {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 22px));
+    pointer-events: none;
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    pointer-events: auto;
+  }
+}
+
+.ia__slot {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  animation: iaSlotEnter .75s cubic-bezier(.2,.7,.3,1) var(--enter-d, 1.0s) both;
+}
+.ia__slot:nth-child(2) { --enter-d: 1.0s; }
+.ia__slot:nth-child(3) { --enter-d: 1.22s; }
+.ia__slot:nth-child(4) { --enter-d: 1.44s; }
+.ia__slot:nth-child(5) { --enter-d: 1.66s; }
+
 .ia__slot:hover, .ia__slot:focus-within { z-index: 4; }
 .ia__drift {
   animation: iaDriftA var(--dur, 15s) var(--delay, 0s) ease-in-out infinite alternate;
@@ -1620,7 +1870,7 @@ a { color: inherit; }
   position: fixed;
   z-index: 4;
   bottom: clamp(20px, 3.2vh, 32px);
-  right: calc(var(--rail-w) + clamp(16px, 2.5vw, 32px));
+  right: calc(clamp(20px, 3vw, 40px) + 44px);
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 10px;
   letter-spacing: .16em;
@@ -3522,67 +3772,35 @@ a { color: inherit; }
      rail margin of 16px, so the menu sat at a different inset on every page. */
   :root { --gutter: clamp(18px, 5vw, 40px); }
 
-  /* Rail layout */
+  /* Navigation mobile layout */
+  .nav,
   .rail,
   .ia__rail {
-    /* Spans the full gutter width, so the bar shares both edges with the copy
-       beneath it rather than sitting as a shrink-wrapped block on the left. */
-    position: static; width: auto;
-    max-width: 100%;
-    display: flex; flex-direction: row; flex-wrap: wrap;
-    align-items: center;
-    gap: clamp(10px, 2.5vw, 16px);
-    /* Top clearance tracks the theme toggle's own offset plus its 44px touch
-       target and a gap, so the toggle's tap area never lands on the bar — a
-       flat 8.5vh let them collide at 667px-tall viewports. */
-    margin: calc(clamp(20px, 3vh, 32px) + 52px) var(--gutter) clamp(20px, 3vh, 32px);
-    padding: clamp(9px, 1.5vh, 13px) clamp(12px, 3vw, 18px);
+    position: fixed; top: 0; left: 0; right: 0; width: 100%;
+    height: clamp(50px, 6vh, 58px);
+    margin: 0;
+    padding: 0 var(--gutter);
   }
-  [data-theme="dark"] .rail,
-  [data-theme="dark"] .ia__rail {
-    border-left: none;
-    border: 1px solid var(--rule-link, #5F6368);
+  .nav__center {
+    gap: clamp(8px, 2vw, 16px);
   }
-  .rail__link,
-  .ia__rail-link {
-    writing-mode: horizontal-tb;
-    font-size: clamp(11px, 2.8vw, 13px);
+  .nav__link--about,
+  .nav__dropdown-btn {
+    font-size: clamp(11px, 2.6vw, 12px);
+    letter-spacing: .16em;
+    padding: 4px 2px;
   }
-  /* Takes the whole bar and spreads the routes across it, so the run of links
-     reads edge to edge instead of clustering in the middle. */
-  .rail__main,
-  .ia__rail-main {
-    flex: 1;
-    flex-direction: row; flex-wrap: wrap; justify-content: space-between;
-    gap: clamp(10px, 2.5vw, 16px);
+  .nav__cv {
+    display: none;
   }
-  /* Mono tracking reserves trailing space after the final glyph; letting these
-     shrink would clip it, so they hold their intrinsic width and wrap instead. */
-  .rail__link, .rail__rule,
-  .ia__rail-link, .ia__rail-rule { flex-shrink: 0; }
-  /* The CV download is dropped on mobile at the owner's request. Note this
-     leaves no route to the CV below 960px — the desktop rail is its only home. */
-  .rail__cv,
-  .ia__rail-cv { display: none; }
-  .rail__link::before, .rail__cv::before,
-  .ia__rail-link::before, .ia__rail-cv::before {
-    background: var(--marker);
-    inset: -4px -6px;
-    transform-origin: right;
-    transform: rotate(-.45deg) skewX(-2.5deg) scaleX(0);
+  .theme-toggle {
+    bottom: var(--gutter);
+    right: var(--gutter);
   }
-  .rail__link:hover::before, .rail__link:focus-visible::before,
-  .rail__cv:hover::before, .rail__cv:focus-visible::before,
-  .ia__rail-link:hover::before, .ia__rail-link:focus-visible::before,
-  .ia__rail-cv:hover::before, .ia__rail-cv:focus-visible::before {
-    transform: rotate(-.45deg) skewX(-2.5deg) scaleX(1);
+  .totop {
+    bottom: calc(var(--gutter) + 42px);
+    right: var(--gutter);
   }
-  .rail__rule,
-  .ia__rail-rule { width: clamp(10px, 2vw, 18px); height: 1px; }
-  /* The intro's rail is nested inside .ia, so the section padding already
-     supplies its inset; its own side margin on top of that would inset it a
-     second time and break alignment with the body-level .rail. */
-  .ia__rail { margin-inline: 0; }
 
   /* Intro Section */
   /* min-width:0 because the names below hold one line: a grid item's automatic
@@ -3595,11 +3813,9 @@ a { color: inherit; }
   .ia__hint { display: none; }
   .ia {
     padding-inline: var(--gutter);
-    /* The rail's own top margin supplies the toggle clearance here, so the
-       section's centring padding would only stack a second empty band. */
-    padding-top: 0;
+    padding-top: max(clamp(52px, 6.5vh, 62px) + 24px, 84px);
     /* The ideas become a document-flow list that outgrows the 100vh minimum;
-       centring it then bleeds the rail off the top edge, where overflow:hidden
+       centring it then bleeds the nav off the top edge, where overflow:hidden
        would clip it. Anchor the flow to the top instead. */
     align-content: start;
   }
@@ -3613,12 +3829,25 @@ a { color: inherit; }
     -webkit-box-decoration-break: clone; box-decoration-break: clone;
   }
   .ia__lead { font-size: clamp(1.75rem, 7.4vw, 2.6rem); line-height: 1.06; }
-  /* justify-items:start on the stage aligns these rows left, and in block
-     layout that also shrink-wraps each one to its own text. A name then has no
-     column to overrun, so nothing could ever be measured as too long for the
-     screen. Stretching the row back to full width restores the track without
-     moving a single glyph -- every row is left-aligned either way. */
-  .ia__slot { position: static; transform: none; margin: 0 0 26px; justify-self: stretch; }
+  @keyframes iaSlotEnterMobile {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+      pointer-events: none;
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+  }
+  .ia__slot {
+    position: static;
+    transform: none;
+    margin: 0 0 26px;
+    justify-self: stretch;
+    animation: iaSlotEnterMobile .75s cubic-bezier(.2,.7,.3,1) var(--enter-d, 1.0s) both;
+  }
   .ia__drift { animation: none; }
   .ia__idea {
     /* One size for every name. The per-instance --s scale exists to compose the
@@ -3760,8 +3989,7 @@ a { color: inherit; }
     /* The rail lies down into a bar at the top of the document here, so the
        trailing clearance the wide canvas reserved is no longer needed. */
     padding-right: var(--gutter);
-    /* The rail's own top margin already supplies the theme-toggle clearance. */
-    padding-top: 0;
+    padding-top: max(clamp(52px, 6.5vh, 62px) + 24px, 84px);
     align-content: start;
     gap: clamp(30px, 5vh, 44px);
   }
@@ -3784,8 +4012,7 @@ a { color: inherit; }
     /* The rail lies down into a bar at the top of the document here, so the
        trailing clearance the wide canvas reserved is no longer needed. */
     padding-right: var(--gutter);
-    /* The rail's own top margin already supplies the theme-toggle clearance. */
-    padding-top: 0;
+    padding-top: max(clamp(52px, 6.5vh, 62px) + 24px, 84px);
     align-content: start;
   }
   .ct__stage { min-height: 0; display: block; justify-items: start; }
@@ -4071,6 +4298,7 @@ body.is-zoomed .totop { display: none; }
   }
   .ia__drift, .ct__drift { animation: none !important; }
   .ia__word { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .ia__slot { animation: none !important; opacity: 1 !important; }
   /* The block above collapses durations but not delays, and this one gates a
      panel's tab stops -- left at .26s it would hold an off-screen control
      focusable after the fade it was waiting on had already finished. */

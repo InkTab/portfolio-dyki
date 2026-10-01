@@ -54,7 +54,7 @@
       window.scrollTo({ top: 0, behavior: STILL.matches ? 'auto' : 'smooth' });
       /* Sending focus back to the top of the document as well, so the control
          is not just a visual return trip for a keyboard or screen reader. */
-      var first = document.querySelector('.rail__link, .ia__rail-link');
+      var first = document.querySelector('.nav__home, .nav__dropdown-btn, .nav__link, .rail__link, .ia__rail-link');
       if (first) { first.focus({ preventScroll: true }); }
     });
   })();
@@ -91,7 +91,7 @@
         return { from: Math.max(0, -box.top),
                  to: Math.min(box.height, window.innerHeight - box.top) };
       }
-      var rail = document.querySelector('.rail');
+      var rail = document.querySelector('.rail:not(.nav)');
       var edge = window.innerWidth - (rail ? rail.offsetWidth : 0);
       return { from: Math.max(0, -box.left), to: Math.min(box.width, edge - box.left) };
     }
@@ -731,5 +731,51 @@
        mapping the last frame was drawn from. */
     window.addEventListener('scroll', hide, { passive: true, capture: true });
     window.addEventListener('resize', hide, { passive: true });
+  })();
+
+  /* ---------------- Navigation dropdown controller ---------------- */
+  (function () {
+    var dropdown = document.querySelector('.nav__dropdown');
+    if (!dropdown) return;
+
+    var btn = dropdown.querySelector('.nav__dropdown-btn');
+    var menu = dropdown.querySelector('.nav__dropdown-menu');
+    if (!btn || !menu) return;
+
+    function open() {
+      dropdown.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+
+    function close() {
+      dropdown.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+
+    function toggle() {
+      if (dropdown.classList.contains('is-open')) {
+        close();
+      } else {
+        open();
+      }
+    }
+
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      toggle();
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!dropdown.contains(e.target)) {
+        close();
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && dropdown.classList.contains('is-open')) {
+        close();
+        btn.focus();
+      }
+    });
   })();
 })();
