@@ -597,6 +597,10 @@ a { color: inherit; }
   100% { opacity: 1; transform: translate(-50%, -50%); pointer-events: auto; }
 }
 
+/* --x is set inline as min()/max() of a percentage and a px floor: the
+   percentage holds the four links out toward the canvas corners, and the floor
+   stops a narrow window pulling a link so near the edge that its outermost
+   hover word (label half-width + spark) runs off the screen. */
 .ia__slot {
   position: absolute;
   left: var(--x);
@@ -627,7 +631,68 @@ a { color: inherit; }
 }
 .ia__idea:hover { color: var(--woke); transform: scale(1.05); }
 .ia__idea--link { cursor: pointer; color: var(--ghost-link); font-weight: 400; }
-.ia__idea--link:hover, .ia__idea--link:focus-visible { color: var(--ink); transform: scale(1.05); }
+.ia__idea--link:hover, .ia__idea--link:focus-visible, .ia__card:hover + .ia__idea--link { color: var(--ink); transform: scale(1.05); }
+
+/* A product card stood above its case study link. It is positioned off the
+   link rather than stacked in flow with it, so the slot stays centred on the
+   name at its --x / --y and the card only borrows the empty canvas overhead.
+   It lives inside the drift wrapper so it floats with the name it belongs to.
+
+   The export is a sheet in its own right -- opaque to its rounded edge,
+   transparent only in the corners outside it -- so it takes --shadow-cut cast
+   from its own silhouette, not a frame or --shadow-art (rule 5).
+
+   The tilt follows the cursor: the script writes --rx / --ry each frame and
+   eases them itself, so the transform carries no transition of its own, which
+   would only lag behind the pointer. Wide canvas with a fine pointer only --
+   below 960px it is hidden, and without hover there is no cursor to follow. */
+/* The card's box, published on the drift wrapper so the link's hover words --
+   siblings of the card, not children -- can be placed around it. --cs (scale)
+   and --ar (the export's height / width) are passed inline per slot; --lh is
+   the link's own line box, which sits between the card and the label's centre
+   that every word is positioned from. */
+.ia__drift {
+  --cw: calc(var(--cs, 1) * clamp(170px, 14vw, 230px));
+  --ch: calc(var(--cw) * var(--ar, .7));
+  --lh: calc(1.2 * clamp(.95rem, 1.5vw, 1.2rem));
+  /* Centre of the card relative to the label's centre: above it by default
+     (10px gap), below it on the bottom row (12px gap). */
+  --cy: calc(-1 * (var(--lh) / 2 + 10px + var(--ch) / 2));
+}
+.ia__drift:has(> .ia__card--below) {
+  --cy: calc(var(--lh) / 2 + 12px + var(--ch) / 2);
+}
+
+.ia__card {
+  position: absolute; left: 50%; bottom: 100%;
+  /* Just clears the label's 3px underline padding: close enough that the
+     picture reads as belonging to that name, not as a separate object. */
+  margin-bottom: 10px;
+  /* --cs scales one card against the others, passed inline for an export
+     whose content is small for its frame and reads too fine at the base size. */
+  width: var(--cw);
+  display: block; cursor: pointer;
+  transform: translateX(-50%) perspective(700px)
+    rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(var(--rs, 1));
+  will-change: transform;
+}
+/* The bottom row hangs its card below the name instead, so each card reaches
+   toward its own corner of the canvas and away from the headline. */
+.ia__card--below { bottom: auto; top: 100%; margin-bottom: 0; margin-top: 12px; }
+/* With the card tight under the name, the "Case study" tag that reveals
+   there on hover would land on the picture -- so on the bottom row it reveals
+   above the name instead, mirroring the top row. Wide canvas only: below
+   960px the tag is a static block in flow and the card is gone. */
+@media (min-width: 961px) {
+  .ia__card--below + .ia__idea .ia__tag { top: auto; bottom: 100%; margin: 0 0 8px; }
+}
+.ia__card-img {
+  display: block; width: 100%; height: auto;
+  filter: var(--shadow-cut);
+}
+@media (max-width: 960px) {
+  .ia__card { display: none; }
+}
 
 .ia__label { border-bottom: 1px solid transparent; padding-bottom: 3px; transition: border-color .3s; }
 .ia__idea--link .ia__label {
@@ -638,13 +703,13 @@ a { color: inherit; }
   transition: border-color .3s, background-size .3s cubic-bezier(.2,.7,.3,1);
 }
 .ia__idea--link:hover .ia__label,
-.ia__idea--link:focus-visible .ia__label {
+.ia__idea--link:focus-visible .ia__label, .ia__card:hover + .ia__idea--link .ia__label {
   background-size: 100% 86%;
   border-bottom-color: var(--marker-ink, #111316);
   color: var(--marker-ink, #111316);
 }
 .ia__idea--link:hover .ia__tag,
-.ia__idea--link:focus-visible .ia__tag { color: var(--ink); }
+.ia__idea--link:focus-visible .ia__tag, .ia__card:hover + .ia__idea--link .ia__tag { color: var(--ink); }
 
 .ia__tag {
   position: absolute; top: 100%; left: 50%; margin-top: 8px;
@@ -653,7 +718,7 @@ a { color: inherit; }
   padding-left: .2em; color: var(--tag); opacity: 0; transform: translate(-50%, -5px);
   transition: opacity .3s, transform .3s;
 }
-.ia__idea:hover .ia__tag, .ia__idea:focus-visible .ia__tag { opacity: 1; transform: translate(-50%, 0); }
+.ia__idea:hover .ia__tag, .ia__idea:focus-visible .ia__tag, .ia__card:hover + .ia__idea .ia__tag { opacity: 1; transform: translate(-50%, 0); }
 
 .ia__spark {
   position: absolute;
@@ -681,24 +746,43 @@ a { color: inherit; }
   transform: translate(calc(var(--sx, 0px) - 8px), calc(-50% + var(--sy, 0px)));
 }
 .ia__word:hover .ia__spark, .ia__word:focus .ia__spark,
-.ia__idea:hover .ia__spark, .ia__idea:focus-visible .ia__spark {
+.ia__idea:hover .ia__spark, .ia__idea:focus-visible .ia__spark, .ia__card:hover + .ia__idea .ia__spark {
   opacity: 1; transition-delay: var(--d, 0s);
 }
 .ia__word:hover .ia__spark--a, .ia__word:focus .ia__spark--a,
-.ia__idea:hover .ia__spark--a, .ia__idea:focus-visible .ia__spark--a {
+.ia__idea:hover .ia__spark--a, .ia__idea:focus-visible .ia__spark--a, .ia__card:hover + .ia__idea .ia__spark--a {
   transform: translate(calc(-50% + var(--sx, 0px)), calc(0px - var(--sy, 0px)));
 }
 .ia__word:hover .ia__spark--b, .ia__word:focus .ia__spark--b,
-.ia__idea:hover .ia__spark--b, .ia__idea:focus-visible .ia__spark--b {
+.ia__idea:hover .ia__spark--b, .ia__idea:focus-visible .ia__spark--b, .ia__card:hover + .ia__idea .ia__spark--b {
   transform: translate(calc(-50% + var(--sx, 0px)), var(--sy, 0px));
 }
 .ia__word:hover .ia__spark--l, .ia__word:focus .ia__spark--l,
-.ia__idea:hover .ia__spark--l, .ia__idea:focus-visible .ia__spark--l {
+.ia__idea:hover .ia__spark--l, .ia__idea:focus-visible .ia__spark--l, .ia__card:hover + .ia__idea .ia__spark--l {
   transform: translate(calc(0px - var(--sx, 0px)), calc(-50% + var(--sy, 0px)));
 }
 .ia__word:hover .ia__spark--r, .ia__word:focus .ia__spark--r,
-.ia__idea:hover .ia__spark--r, .ia__idea:focus-visible .ia__spark--r {
+.ia__idea:hover .ia__spark--r, .ia__idea:focus-visible .ia__spark--r, .ia__card:hover + .ia__idea .ia__spark--r {
   transform: translate(var(--sx, 0px), calc(-50% + var(--sy, 0px)));
+}
+/* A word placed around the card rather than around the label, so a block's
+   words spread over the whole picture-and-name instead of crowding the name.
+   --kx / --ky locate it on the card's perimeter in half-card units from its
+   centre (-1 = left / top edge, 1 = right / bottom), pushed 14px clear of that
+   edge; --ka is how much of the word's own width sits on the near side
+   (100% for a word left of the card, 0% right of it, 50% centred), and --kv
+   the same for its height (0% for a word below the card). It enters
+   along that same outward vector, 8px, like every other word. */
+.ia__spark--k {
+  left: 50%; top: 50%;
+  transform: translate(
+    calc(var(--kx, 0) * (var(--cw) / 2 + 14px) - var(--ka, 50%)),
+    calc(var(--cy) + var(--ky, 0) * (var(--ch) / 2 + 14px) - var(--kv, 50%)));
+  translate: calc(var(--kx, 0) * -8px) calc(var(--ky, 0) * -8px);
+  transition: opacity .34s ease, translate .34s cubic-bezier(.2,.7,.3,1);
+}
+.ia__idea:hover .ia__spark--k, .ia__idea:focus-visible .ia__spark--k, .ia__card:hover + .ia__idea .ia__spark--k {
+  translate: 0 0;
 }
 
 @keyframes iaDriftA {

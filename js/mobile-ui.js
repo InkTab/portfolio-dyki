@@ -34,6 +34,84 @@
     };
   }
 
+  /* ---------------- Homepage card tilt ---------------- */
+
+  /* Every card turns its face toward the cursor wherever it is on the page:
+     the edge nearest the pointer dips away, so the card appears to look at it.
+     The lean grows with distance -- a pointer far across the canvas tips the
+     card fully, and one that comes close straightens it, until under the
+     pointer it lies flat and lifts. Pointer events only record where the
+     cursor is; one rAF loop derives every card's target from that and eases
+     the live angles toward it, so the motion stays smooth however unevenly the
+     pointer reports. The loop stops once every card has arrived. */
+  (function () {
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.ia__card'));
+    if (!cards.length) return;
+
+    var MAX = 14;        // degrees, reached as the pointer moves far away
+    var FALL = 260;      // px from the card's edge to ~63% of MAX
+    var LIFT = 1.04;     // under the pointer; under the 1.05 hover-scale ceiling
+    var EASE = 0.1;      // fraction of the remaining distance closed per frame
+    var state = cards.map(function () { return { x: 0, y: 0, s: 1 }; });
+    var ptr = null;      // last cursor position, null when it has left the page
+    var running = false;
+
+    function live() { return FINE.matches && !MOBILE.matches && !STILL.matches; }
+
+    function target(card) {
+      if (!ptr || !live()) return { x: 0, y: 0, s: 1 };
+      /* The centre of the transformed box is the card's own centre whatever
+         its tilt, so reading it mid-lean cannot feed the angle back into
+         itself. The half-sizes come from the untransformed layout box for the
+         same reason. */
+      var r = card.getBoundingClientRect();
+      var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      var dx = ptr.x - cx, dy = ptr.y - cy;
+      var len = Math.sqrt(dx * dx + dy * dy) || 1;
+      var ox = Math.max(0, Math.abs(dx) - card.offsetWidth / 2);
+      var oy = Math.max(0, Math.abs(dy) - card.offsetHeight / 2);
+      var edge = Math.sqrt(ox * ox + oy * oy);
+      var lean = MAX * (1 - Math.exp(-edge / FALL));
+      return { x: -(dy / len) * lean, y: (dx / len) * lean, s: edge === 0 ? LIFT : 1 };
+    }
+
+    function step() {
+      var done = true;
+      cards.forEach(function (card, i) {
+        var t = target(card), c = state[i];
+        c.x += (t.x - c.x) * EASE;
+        c.y += (t.y - c.y) * EASE;
+        c.s += (t.s - c.s) * EASE;
+        card.style.setProperty('--rx', c.x.toFixed(3) + 'deg');
+        card.style.setProperty('--ry', c.y.toFixed(3) + 'deg');
+        card.style.setProperty('--rs', c.s.toFixed(4));
+        if (Math.abs(t.x - c.x) > 0.01 || Math.abs(t.y - c.y) > 0.01 ||
+          Math.abs(t.s - c.s) > 0.0005) done = false;
+      });
+      if (done) { running = false; return; }
+      requestAnimationFrame(step);
+    }
+    function kick() {
+      if (running) return;
+      running = true;
+      requestAnimationFrame(step);
+    }
+
+    // Mouse only: a pen or touch has no resting position to look at.
+    document.addEventListener('pointermove', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      ptr = { x: e.clientX, y: e.clientY };
+      kick();
+    }, { passive: true });
+    // Leaving the window settles every card back flat.
+    document.documentElement.addEventListener('pointerleave', function () {
+      ptr = null;
+      kick();
+    });
+    onMediaChange(STILL, kick);
+    onMediaChange(MOBILE, kick);
+  })();
+
   /* ---------------- Back to top ---------------- */
 
   (function () {
