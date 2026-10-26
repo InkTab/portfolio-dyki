@@ -430,7 +430,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 ---
 
 ### Section 1: The Hook
-* **Eyebrow:** `Case study — 01` (15 chars) | *Limit:* 12 – 24 chars
+* **Eyebrow:** `Case study — Supplement` (23 chars) | *Limit:* 12 – 24 chars
 * **Hook Line (H1):** `Why killing an 80% sales funnel actually saved this supplement brand.` (69 chars) | *Limit:* 55 – 90 chars
 * **Hook Subtitle:** `When a premium brand blamed design for falling sales, I dug into their Shopify data and traced a 90% return rate to a hidden subscription.` (138 chars) | *Limit:* 100 – 170 chars
 * **Metadata Facts:**
@@ -510,7 +510,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 
 ### Section 6: Next Case Study Link
 * **Eyebrow:** `Next case study` (15 chars)
-* **Next Project Title:** `MX2 AI Marketing` (16 chars) | *Limit:* 20 – 45 chars
+* **Next Project Title:** `Marketing AI Service` (20 chars) | *Limit:* 20 – 45 chars
 
 ---
 
@@ -524,7 +524,7 @@ This document compiles **every user-facing text element across all 8 pages of th
 ### Section 1: The Hook
 *Screen 1: Opening thesis statement, meta facts, and scroll prompt.*
 
-* **Eyebrow:** `Case study — 01` (15 chars) | *Limit:* 12 – 24 chars
+* **Eyebrow:** `Case study — MX2` (16 chars) | *Limit:* 12 – 24 chars
 * **Hook Line (H1):** `Why 25 analytics dashboards are useless without guided decisions.` (70 chars) | *Limit:* 55 – 90 chars
 * **Hook Subtitle:** `Users spent 30 minutes struggling to launch one campaign. I replaced manual form-filling with automated review and a 25-dashboard system, cutting setup by 25 minutes.` (167 chars) | *Limit:* 110 – 175 chars
 * **Metadata Facts:**
