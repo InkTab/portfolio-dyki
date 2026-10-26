@@ -122,28 +122,7 @@
   <header class="cs__hook">
     <p class="cs__eyebrow">Case study &mdash; Supplement</p>
 
-    <h1 class="cs__hook-line" id="cs-title">Why killing an 80% sales funnel actually saved this supplement brand.</h1>
-
-    <p class="cs__hook-sub">When a premium brand blamed design for falling sales, I dug into their Shopify data and traced a 90% return rate to a hidden subscription.</p>
-
-    <dl class="cs__meta">
-      <div class="cs__meta-pair">
-        <dt class="cs__meta-key">Role</dt>
-        <dd class="cs__meta-val">UI/UX Designer</dd>
-      </div>
-      <div class="cs__meta-pair">
-        <dt class="cs__meta-key">Year</dt>
-        <dd class="cs__meta-val">2023</dd>
-      </div>
-      <div class="cs__meta-pair">
-        <dt class="cs__meta-key">Duration</dt>
-        <dd class="cs__meta-val">4 months</dd>
-      </div>
-      <div class="cs__meta-pair">
-        <dt class="cs__meta-key">Team</dt>
-        <dd class="cs__meta-val">1 designer, 2 devs</dd>
-      </div>
-    </dl>
+    <h1 class="cs__hook-line" id="cs-title">Why I let orders drop 80% to save a supplement brand.</h1>
 
     <p class="cs__scroll" aria-hidden="true">
       <span class="cs__scroll-label">Scroll</span>
@@ -151,6 +130,48 @@
       <span class="cs__scroll-arrow">&rarr;</span>
     </p>
   </header>
+
+  <!-- ============ 1b. the summary band ============ -->
+  <!-- what was done here, for a reader with thirty seconds: fixed along the bottom
+       edge on the wide canvas, directly under the title once the page stacks -->
+  <aside class="sb" aria-label="Summary">
+    <div>
+      <p class="sb__key">Role</p>
+      <p class="sb__role">UI/UX Designer</p>
+    </div>
+    <p class="sb__sum">Hired for a visual refresh, I traced a 90% return rate to a hidden subscription and rebuilt checkout around opt-in, cutting returns to 10%.</p>
+    <div>
+      <h2 class="sb__key">What I owned</h2>
+      <ul class="sb__owned"><li>UI redesign</li><li>Data analysis</li><li>Checkout UX</li><li>Transparent pricing</li><li>Stakeholder management</li><li>P&amp;L framing</li></ul>
+    </div>
+    <dl class="sb__facts">
+      <dt><span data-icon="calendar" aria-hidden="true"></span><span class="sb__vh">Year</span></dt><dd>2023</dd>
+      <dt><span data-icon="clock" aria-hidden="true"></span><span class="sb__vh">Duration</span></dt><dd>4 months</dd>
+      <dt><span data-icon="users" aria-hidden="true"></span><span class="sb__vh">Team</span></dt><dd>1 designer, 2 devs</dd>
+    </dl>
+  </aside>
+  <script>
+    /* The band's height decides the scroll area above it and lifts the corner
+       chrome clear of it (DESIGN --band-h). Measured here, before first paint,
+       and again whenever its copy reflows; the page's own measuring scripts are
+       told by a resize. Stacked below 960px it is in flow and counts as nothing. */
+    (function () {
+      var band = document.currentScript.previousElementSibling;
+      var root = document.documentElement;
+      var last;
+      function measure() {
+        var h = getComputedStyle(band).position === 'fixed' ? band.offsetHeight : 0;
+        if (h === last) return;
+        var first = last === undefined;
+        last = h;
+        root.style.setProperty('--band-h', h + 'px');
+        if (!first) window.dispatchEvent(new Event('resize'));
+      }
+      measure();
+      if (window.ResizeObserver) new ResizeObserver(measure).observe(band);
+      window.addEventListener('resize', measure);
+    })();
+  </script>
 
   <!-- ============ 2. the client ============ -->
   <section class="cs__block" aria-labelledby="cs-client">
@@ -221,7 +242,6 @@
         <div class="cs__step-body">
           <h3 class="cs__step-title">Redesigned the catalogue</h3>
           <p class="cs__step-text">I built the requested educational pages first. It improved the promise but didn't stop the returns.</p>
-          <p class="cs__step-tags">UI Redesign &middot; Product Pages</p>
         </div>
         <figure class="cs__shot cs__shot--span-3 cs__shot--tall" id="cs-shot-1" role="tooltip" style="--nat-h:785px;--nat-ratio:1.2166">
           <img class="cs__shot-img" src="assets/supplement-step-01.webp" alt="Redesigned catalogue: a six-product grid, each pack shot paired with a one-line health claim and its own view-product button" width="955" height="785" loading="lazy" decoding="async">
@@ -234,7 +254,6 @@
         <div class="cs__step-body">
           <h3 class="cs__step-title">Uncovered the real P&amp;L issue</h3>
           <p class="cs__step-text">I dug into their Shopify data and session recordings. I found a 90% return rate tied to the trial.</p>
-          <p class="cs__step-tags">Data Analysis &middot; Session Replays</p>
         </div>
         <figure class="cs__shot cs__shot--span-3" id="cs-shot-2" role="tooltip">
           <!-- Card grid: three 280-wide cards on a 1020 lane with a 70 gap, so the 20
@@ -342,7 +361,6 @@
         <div class="cs__step-body">
           <h3 class="cs__step-title">Rebuilt for opt-in transparency</h3>
           <p class="cs__step-text">I redesigned the checkout to require active subscription opt-in and added a one-time purchase option.</p>
-          <p class="cs__step-tags">Checkout UX &middot; Transparent Pricing</p>
         </div>
         <figure class="cs__shot cs__shot--span-3 cs__shot--tall" id="cs-shot-3" role="tooltip" style="--nat-h:578px;--nat-ratio:1.7543">
           <img class="cs__shot-img" src="assets/supplement-step-03.webp" alt="Rebuilt product page offering Subscribe and Save at 24,99 euro beside an equally weighted one-time purchase at 49,99 euro, with the recurring charge and cancel-anytime terms stated up front" width="1014" height="578" loading="lazy" decoding="async">
@@ -355,7 +373,6 @@
         <div class="cs__step-body">
           <h3 class="cs__step-title">Argued the case with evidence</h3>
           <p class="cs__step-text">Order volume fell 80%, causing client concern. I walked the CEO through unit economics to show net profit gains.</p>
-          <p class="cs__step-tags">Stakeholder Mgmt &middot; P&amp;L Framing</p>
         </div>
         <figure class="cs__shot cs__shot--span-3" id="cs-shot-4" role="tooltip">
           <!-- Same card grid as step 02, re-proportioned for a ledger: two 395-wide
@@ -454,8 +471,7 @@
         <span class="cs__step-num">05</span>
         <div class="cs__step-body">
           <h3 class="cs__step-title">I stood by the honest checkout</h3>
-          <p class="cs__step-text">When they reverted the catalog redesign, I protected the transparent checkout. Net retained customers surged by 80%.</p>
-          <p class="cs__step-tags">Compromise &middot; Final Launch</p>
+          <p class="cs__step-text">When they reverted the catalog redesign, I protected the transparent checkout. Net kept orders grew 80%.</p>
         </div>
         <figure class="cs__shot cs__shot--span-3 cs__shot--tall" id="cs-shot-5" role="tooltip" style="--nat-h:644px;--nat-ratio:1.4627">
           <img class="cs__shot-img" src="assets/supplement-step-05.webp" alt="Ingredient education page in the reverted catalogue styling, explaining that the active ingredient is the paper-thin membrane beneath the eggshell, annotated with collagen, elastin and hyaluronic acid" width="942" height="644" loading="lazy" decoding="async">
@@ -475,7 +491,7 @@
   <section class="cs__block cs__block--impact" aria-labelledby="cs-impact">
     <h2 class="cs__kicker" id="cs-impact">The impact</h2>
     <div class="cs__block-body">
-      <p class="cs__statement">By killing deceptive checkout logic, I boosted net kept orders by 80%.</p>
+      <p class="cs__statement">Orders fell 80%, but returns dropped from 90% to 10%, so net kept orders grew 80%.</p>
       
       <dl class="cs__metrics">
         <div class="cs__metric">
@@ -488,11 +504,11 @@
         </div>
         <div class="cs__metric">
           <dt class="cs__metric-num">+80%</dt>
-          <dd class="cs__metric-label">Retained customers</dd>
+          <dd class="cs__metric-label">Net kept orders</dd>
         </div>
       </dl>
 
-      <p class="cs__prose">By killing deceptive checkout tricks, I stopped an unsustainable bleed of return shipping fees, merchant chargebacks, and angry support calls. It proved my core design conviction: user experience problems are almost always business unit economics in disguise.</p>
+      <p class="cs__prose">By making the subscription opt-in, I stopped an unsustainable bleed of return shipping fees, merchant chargebacks, and angry support calls. It proved my core design conviction: user experience problems are almost always business unit economics in disguise.</p>
     </div>
   </section>
 
@@ -712,5 +728,32 @@
 </button>
 
 <script src="js/mobile-ui.min.js" defer></script>
+<script type="module">
+  /* Year, duration and team in the summary band (.sb) are keyed by Lucide icons
+     (ISC, pinned at 0.460.0). Each placeholder is swapped for the icon Lucide's own
+     createElement builds from its unmodified icon node -- the site carries no path
+     data of its own for them. Inline, with absolute URLs, so it runs wherever the
+     page is opened: a module file loaded by relative path is refused from file://
+     and from a saved or previewed copy. The icons take the site's spec: 16px, a 2.4
+     stroke on Lucide's 24-unit grid rendering the 1.6px line the site's own icons
+     draw. If this never loads, the values still read and the hidden labels still
+     name them. */
+  import createElement from 'https://unpkg.com/lucide@0.460.0/dist/esm/createElement.js';
+  import calendar from 'https://unpkg.com/lucide@0.460.0/dist/esm/icons/calendar.js';
+  import clock from 'https://unpkg.com/lucide@0.460.0/dist/esm/icons/clock.js';
+  import users from 'https://unpkg.com/lucide@0.460.0/dist/esm/icons/users.js';
+
+  const icons = { calendar, clock, users };
+  document.querySelectorAll('.sb [data-icon]').forEach((slot) => {
+    const node = icons[slot.dataset.icon];
+    if (!node) return;
+    const [tag, attrs, children] = node;
+    slot.replaceWith(createElement([tag, {
+      ...attrs,
+      width: 16, height: 16, 'stroke-width': 2.4,
+      class: 'sb__icon', 'aria-hidden': 'true', focusable: 'false'
+    }, children]));
+  });
+</script>
 </body>
 </html>
