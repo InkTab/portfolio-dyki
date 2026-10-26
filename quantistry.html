@@ -125,34 +125,54 @@
 
     <h1 class="cs__hook-line" id="cs-title">Designing for PhD chemists when you don't speak quantum chemistry.</h1>
 
-    <p class="cs__hook-sub">I translated complex quantum simulation into an investor-ready platform, turning months of wet-lab friction into days of simulation to anchor enterprise sales and Series A.</p>
-
-    <!-- the facts a recruiter scans for before reading a word of prose -->
-    <dl class="cs__meta">
-      <div class="cs__meta-pair">
-        <dt class="cs__meta-key">Role</dt>
-        <dd class="cs__meta-val">Product Designer</dd>
-      </div>
-      <div class="cs__meta-pair">
-        <dt class="cs__meta-key">Year</dt>
-        <dd class="cs__meta-val">2025</dd>
-      </div>
-      <div class="cs__meta-pair">
-        <dt class="cs__meta-key">Duration</dt>
-        <dd class="cs__meta-val">2 months</dd>
-      </div>
-      <div class="cs__meta-pair">
-        <dt class="cs__meta-key">Team</dt>
-        <dd class="cs__meta-val">1 designer, client, 2 engineers</dd>
-      </div>
-    </dl>
-
     <p class="cs__scroll" aria-hidden="true">
       <span class="cs__scroll-label">Scroll</span>
       <span class="cs__scroll-rule"></span>
       <span class="cs__scroll-arrow">&rarr;</span>
     </p>
   </header>
+
+  <!-- ============ 1b. the summary band ============ -->
+  <!-- what was done here, for a reader with thirty seconds: fixed along the bottom
+       edge on the wide canvas, directly under the title once the page stacks -->
+  <aside class="sb" aria-label="Summary">
+    <div>
+      <p class="sb__key">Role</p>
+      <p class="sb__role">Product &amp; Brand Designer</p>
+    </div>
+    <p class="sb__sum">I rebuilt Quantistry&rsquo;s brand and website in 8 weeks, giving the founders proof of their enterprise traction for their sales calls and Series A pitches.</p>
+    <div>
+      <h2 class="sb__key">What I owned</h2>
+      <ul class="sb__owned"><li>Domain research</li><li>Pitch strategy</li><li>Brand identity</li><li>Design system</li><li>Motion direction</li><li>Content strategy</li></ul>
+    </div>
+    <dl class="sb__facts">
+      <dt><span data-icon="calendar" aria-hidden="true"></span><span class="sb__vh">Year</span></dt><dd>2025</dd>
+      <dt><span data-icon="clock" aria-hidden="true"></span><span class="sb__vh">Duration</span></dt><dd>2 months</dd>
+      <dt><span data-icon="users" aria-hidden="true"></span><span class="sb__vh">Team</span></dt><dd>1 designer, client, 2 engineers</dd>
+    </dl>
+  </aside>
+  <script>
+    /* The band's height decides the scroll area above it and lifts the corner
+       chrome clear of it (DESIGN --band-h). Measured here, before first paint,
+       and again whenever its copy reflows; the page's own measuring scripts are
+       told by a resize. Stacked below 960px it is in flow and counts as nothing. */
+    (function () {
+      var band = document.currentScript.previousElementSibling;
+      var root = document.documentElement;
+      var last;
+      function measure() {
+        var h = getComputedStyle(band).position === 'fixed' ? band.offsetHeight : 0;
+        if (h === last) return;
+        var first = last === undefined;
+        last = h;
+        root.style.setProperty('--band-h', h + 'px');
+        if (!first) window.dispatchEvent(new Event('resize'));
+      }
+      measure();
+      if (window.ResizeObserver) new ResizeObserver(measure).observe(band);
+      window.addEventListener('resize', measure);
+    })();
+  </script>
 
   <!-- ============ 2. the client ============ -->
   <section class="cs__block" aria-labelledby="cs-client">
@@ -226,7 +246,6 @@
         <div class="cs__step-body">
           <h3 class="cs__step-title">I decoded the quantum chemistry</h3>
           <p class="cs__step-text">I interviewed the founders and engineers to isolate their real value: not algorithmic nuance, but raw speed to market.</p>
-          <p class="cs__step-tags">Team interviews &middot; Domain research</p>
         </div>
         <figure class="cs__shot cs__shot--span-3" id="cs-shot-1" role="tooltip">
           <svg class="cs__shot-img cs__shot-diagram" viewBox="0 0 980 230" width="980" height="230" preserveAspectRatio="xMinYMid meet" role="img" aria-label="Horizontal conversion diagram: technical jargon tags feeding into Months to Days speed to market block">
@@ -319,7 +338,6 @@
         <div class="cs__step-body">
           <h3 class="cs__step-title">I aligned two distinct audiences</h3>
           <p class="cs__step-text">I mapped the pitch to solve R&amp;D managers' daily friction. Proving concrete lab value made the upside obvious to investors.</p>
-          <p class="cs__step-tags">Audience mapping &middot; Pitch strategy</p>
         </div>
         <figure class="cs__shot cs__shot--span-3" id="cs-shot-2" role="tooltip">
           <svg class="cs__shot-img cs__shot-diagram" viewBox="0 0 980 230" width="980" height="230" preserveAspectRatio="xMinYMid meet" role="img" aria-label="Venn intersection diagram aligning scientists and investors around a unified core pitch">
@@ -382,7 +400,6 @@
         <div class="cs__step-body">
           <h3 class="cs__step-title">I grounded the identity in science</h3>
           <p class="cs__step-text">I paired scientific deep-blue with high-energy orange accents, signaling modern AI speed without sacrificing credibility.</p>
-          <p class="cs__step-tags">Brand identity &middot; Design system</p>
         </div>
         <figure class="cs__shot cs__shot--span-3 cs__shot--tall" id="cs-shot-3" role="tooltip" style="--nat-h:345px;--nat-ratio:3.1884">
           <img class="cs__shot-img" src="assets/quantistry-step-03.webp" alt="Logo mark before and after: unbalanced stroke widths and poor legibility at small sizes, redrawn with balanced strokes and an orange motion accent" width="1100" height="345" loading="lazy" decoding="async">
@@ -395,7 +412,6 @@
         <div class="cs__step-body">
           <h3 class="cs__step-title">I visualized the speed advantage</h3>
           <p class="cs__step-text">I animated how simulation eliminates months of physical lab rounds, making time savings palpable in seconds.</p>
-          <p class="cs__step-tags">Motion direction &middot; UI wireframing</p>
         </div>
         <figure class="cs__shot cs__shot--span-3 cs__shot--tall cs__shot--seated" id="cs-shot-4" role="tooltip" style="--nat-h:669px;--nat-ratio:1.7025">
           <img class="cs__shot-img" src="assets/quantistry-step-04.webp" alt="Motion storyboard comparing traditional R&D, one hypothesis per round over six days, against the Quantistry flow: unlimited hypotheses, parameters in minutes, optimized modelling in the cloud" width="1139" height="669" loading="lazy" decoding="async">
@@ -408,7 +424,6 @@
         <div class="cs__step-body">
           <h3 class="cs__step-title">I anchored the site in proof</h3>
           <p class="cs__step-text">I structured every page around enterprise case studies and customer logos, partnering with dev to ship in 8 weeks.</p>
-          <p class="cs__step-tags">Content strategy &middot; Dev handoff</p>
         </div>
         <figure class="cs__shot cs__shot--span-3 cs__shot--tall cs__shot--cut" id="cs-shot-5" role="tooltip" style="--nat-h:603px;--nat-ratio:1.6716">
           <img class="cs__shot-img" src="assets/quantistry-step-05.webp" alt="Shipped homepage: hero reading The Future of Materials, Engineered by Design, above a customer strip naming sectors from batteries to aerospace" width="1008" height="603" loading="lazy" decoding="async">
@@ -437,7 +452,7 @@
         </div>
       </dl>
 
-      <p class="cs__prose">I gave Quantistry instant credibility at deeptech summits and enterprise demos. By translating quantum mechanics into clear commercial ROI, I handed the founders a sharp, defensible story that closed sales and raised capital.</p>
+      <p class="cs__prose">By translating quantum mechanics into clear commercial ROI, I gave the founders a sharp, credible story to take to deeptech summits and enterprise demos.</p>
 
       <p class="cs__prose">
         <a class="cs__link" href="https://quantistry.ai" target="_blank" rel="noopener noreferrer">
@@ -670,5 +685,32 @@
 </button>
 
 <script src="js/mobile-ui.min.js" defer></script>
+<script type="module">
+  /* Year, duration and team in the summary band (.sb) are keyed by Lucide icons
+     (ISC, pinned at 0.460.0). Each placeholder is swapped for the icon Lucide's own
+     createElement builds from its unmodified icon node -- the site carries no path
+     data of its own for them. Inline, with absolute URLs, so it runs wherever the
+     page is opened: a module file loaded by relative path is refused from file://
+     and from a saved or previewed copy. The icons take the site's spec: 16px, a 2.4
+     stroke on Lucide's 24-unit grid rendering the 1.6px line the site's own icons
+     draw. If this never loads, the values still read and the hidden labels still
+     name them. */
+  import createElement from 'https://unpkg.com/lucide@0.460.0/dist/esm/createElement.js';
+  import calendar from 'https://unpkg.com/lucide@0.460.0/dist/esm/icons/calendar.js';
+  import clock from 'https://unpkg.com/lucide@0.460.0/dist/esm/icons/clock.js';
+  import users from 'https://unpkg.com/lucide@0.460.0/dist/esm/icons/users.js';
+
+  const icons = { calendar, clock, users };
+  document.querySelectorAll('.sb [data-icon]').forEach((slot) => {
+    const node = icons[slot.dataset.icon];
+    if (!node) return;
+    const [tag, attrs, children] = node;
+    slot.replaceWith(createElement([tag, {
+      ...attrs,
+      width: 16, height: 16, 'stroke-width': 2.4,
+      class: 'sb__icon', 'aria-hidden': 'true', focusable: 'false'
+    }, children]));
+  });
+</script>
 </body>
 </html>
