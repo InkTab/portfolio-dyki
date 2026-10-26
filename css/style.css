@@ -369,19 +369,17 @@ a { color: inherit; }
   transform: translateX(-50%) translateY(4px);
   min-width: 250px;
   background: var(--paper);
-  border: 1px solid var(--rule-deco);
+  /* A plane over the page is separated by a rule, not a shadow (DESIGN 1.5),
+     and an overlay's edge is a UI border, so it takes the 3:1 --rule-link
+     rather than the decorative --rule-deco. */
+  border: 1px solid var(--rule-link);
   border-radius: 4px;
   padding: 6px;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity .2s ease, transform .2s cubic-bezier(.2,.7,.3,1), visibility .2s;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   z-index: 100;
-}
-[data-theme="dark"] .nav__dropdown-menu {
-  border-color: var(--rule-link);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.5);
 }
 
 .nav__dropdown.is-open .nav__dropdown-menu {
@@ -392,6 +390,8 @@ a { color: inherit; }
 }
 
 .nav__dropdown-link {
+  position: relative;
+  isolation: isolate;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -400,7 +400,21 @@ a { color: inherit; }
   text-decoration: none;
   border-radius: 2px;
   color: var(--ghost-link);
-  transition: background-color .15s ease, color .15s ease;
+  transition: color .14s ease;
+}
+/* Menu items are nav links, so they take the bar's own stroke rather than a
+   flat fill: single-line rows, so the ::before form, the row's box as its
+   footprint the way the theme toggle's is. */
+.nav__dropdown-link::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: var(--marker);
+  border-radius: 3px 9px 4px 7px;
+  transform-origin: right;
+  transform: rotate(-.45deg) skewX(-2.5deg) scaleX(0);
+  transition: transform .3s cubic-bezier(.2,.7,.3,1);
 }
 
 .nav__dropdown-name {
@@ -408,6 +422,7 @@ a { color: inherit; }
   font-size: 13px;
   font-weight: 400;
   color: var(--ink);
+  transition: color .14s ease;
 }
 
 .nav__dropdown-meta {
@@ -416,19 +431,25 @@ a { color: inherit; }
   text-transform: uppercase;
   letter-spacing: .16em;
   color: var(--tag);
+  transition: color .14s ease;
 }
 
 .nav__dropdown-link:hover,
 .nav__dropdown-link:focus-visible {
-  background: var(--marker);
   color: var(--marker-ink, #111316);
   outline: none;
 }
+.nav__dropdown-link:hover::before,
+.nav__dropdown-link:focus-visible::before {
+  transform: rotate(-.45deg) skewX(-2.5deg) scaleX(1);
+}
+/* the children set their own colour, so the lag behind the stroke is theirs */
 .nav__dropdown-link:hover .nav__dropdown-name,
 .nav__dropdown-link:hover .nav__dropdown-meta,
 .nav__dropdown-link:focus-visible .nav__dropdown-name,
 .nav__dropdown-link:focus-visible .nav__dropdown-meta {
   color: var(--marker-ink, #111316);
+  transition: color .1s ease .18s;
 }
 
 .nav__cv {
@@ -534,13 +555,13 @@ a { color: inherit; }
    introduction: it is an instruction about the page, not part of who the
    introduction says Taya is. Centred on the bottom edge at the theme toggle's
    own inset, so it sits between the fixed privacy link and the toggle without
-   meeting either. Faded to 30% opacity so it reads as a quiet aside under the
-   composition rather than a second heading. */
+   meeting either. Set in --tag, the palette's hint token, so it reads as a quiet
+   aside under the composition rather than a second heading without leaving the
+   calibrated greys -- faded ink would be an uncalibrated grey under 4.5:1. */
 .ia__foot {
   position: absolute; left: 50%; bottom: clamp(20px, 3vh, 32px); transform: translateX(-50%);
   z-index: 3; margin: 0; white-space: nowrap;
-  font-size: clamp(.95rem, 1.3vw, 1.06rem); font-weight: 400; color: var(--ink);
-  opacity: .3;
+  font-size: clamp(.95rem, 1.3vw, 1.06rem); font-weight: 400; color: var(--tag);
 }
 .ia__core:has(.ia__word:hover) .ia__name,
 .ia__core:has(.ia__word:focus) .ia__name { opacity: 0; }
@@ -1038,7 +1059,9 @@ a { color: inherit; }
   border-radius: 50%; background: var(--rule-link);
   transition: background-color .3s;
 }
-.cs__step:hover::before, .cs__step:focus-visible::before, .cs__step.is-active::before { background: var(--ink); }
+/* a step is a control, not a link or heading, so its mark stops at the --woke
+   ceiling (DESIGN 1.2), as the .gt chart's active marks do */
+.cs__step:hover::before, .cs__step:focus-visible::before, .cs__step.is-active::before { background: var(--woke); }
 
 .cs__step-num {
   display: inline-block; color: var(--tag);
